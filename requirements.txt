@@ -1,0 +1,3 @@
+# -- PYTHON PACKAGE REQUIREMENTS:
+# USE: pip install -r <THIS_FILE>
+pytest-mock
