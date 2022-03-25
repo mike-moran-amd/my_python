@@ -10,30 +10,30 @@ class Table:
     [('row', 'col', 'val')]
     >>> list(t.tup_gen(title='mt'))
     [(0, 0, 'mt'), (0, 1, 'col'), (1, 0, 'row'), (1, 1, 'val')]
-    >>> t.pformat()
+    >>> t.pf()
     'val'
     >>> mt = Table(t.tup_gen(title='mt'))
-    >>> print(mt.pformat())
+    >>> print(mt.pf())
     mt  | col
     row | val
-    >>> print(mt.pformat(title='mmt'))
+    >>> print(mt.pf(title='mmt'))
     mmt |   0 |   1
       0 | mt  | col
       1 | row | val
     >>> mmt = Table(mt.tup_gen(title='mmt'))
-    >>> print(mmt.pformat())
+    >>> print(mmt.pf())
     mmt |   0 |   1
       0 | mt  | col
       1 | row | val
     """
 
-    def __init__(self, tups):
+    def __init__(self, tuple_list):
         """
         Create a new Table with the given tuple list
-        :param tups: list(tuple(row, col, val)) - can be empty or sparse
+        :param tuple_list: list(tuple(row, col, val)) - can be empty or sparse
         """
         self.__od = OrderedDict()
-        for tup in tups:
+        for tup in tuple_list:
             row, col, val = tup
             self.__od[row, col] = val
 
@@ -95,7 +95,12 @@ class Table:
                 ret_dict[col] = max(width, len(str(val)))
         return ret_dict
 
-    def pformat(self, csep=' | ', rsep='\n', rows=None, cols=None, title=None):
+    def pf(self,
+           column_separator=' | ',
+           row_separator='\n',
+           rows=None,  # only valid with title
+           cols=None,  # only valid with title
+           title=None):
         t = self if title is None else Table(self.tup_gen(rows=rows, cols=cols, title=title))
         widths = t.col_widths(cols)
         rows = []
@@ -107,5 +112,5 @@ class Table:
                 cell = f'{val:{widths[col]}}'
                 # TODO: add heights - left for future programmer
                 cols.append(cell)
-            rows.append(csep.join(cols))
-        return rsep.join(rows)
+            rows.append(column_separator.join(cols))
+        return row_separator.join(rows)
