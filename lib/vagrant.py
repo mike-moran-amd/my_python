@@ -65,6 +65,14 @@ class Vagrant:
         'Vagrant commands from any directory. For example:'
         '"vagrant destroy 1a2b3c4d"'
         ''
+
+        >>> for line in Vagrant().invoke(['box', 'list']).split(NL):
+        ...     print(repr(line))
+        'generic/centos8    (virtualbox, 3.6.8)'
+        'generic/ubuntu2004 (virtualbox, 3.6.8)'
+        'generic/ubuntu2010 (virtualbox, 3.6.8)'
+        ''
+
         """
         command_list = [self.__which]
         command_list.extend(args_list)
