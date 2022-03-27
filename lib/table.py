@@ -203,3 +203,11 @@ class Table:
             if row not in row_list:
                 new_od[key] = val
         self.__od = new_od
+
+    def del_cols(self, col_list):
+        new_od = OrderedDict()
+        for key, val in self.__od.items():
+            row, col = key
+            if col not in col_list:
+                new_od[key] = val
+        self.__od = new_od
