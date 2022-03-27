@@ -14,10 +14,18 @@ NL = '\n'  # doctests hate newlines in the source
 
 class Vagrant:
     def __init__(self):
+        """
+        #>>> for k, v in vars(Vagrant()).items():
+        ...     print(repr(k), '=', repr(v))
+        '_Vagrant__which' = '/usr/local/bin/vagrant'
+        '_Vagrant__version' = 'Installed Version: 2.2.19'
+
+        """
         self.__which = shutil.which("vagrant")
         if not self.__which:
             # It is good to know this before hand, yes?
             raise RuntimeError("Which vagrant?")
+        self.__version = self.invoke(['version']).split('\n')[0]
 
     def global_status_table(self):
         """
