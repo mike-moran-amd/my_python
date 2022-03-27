@@ -4,6 +4,7 @@
 
 
 """
+import re
 import shutil
 import subprocess
 import lib
@@ -69,3 +70,24 @@ class Vagrant:
         command_list.extend(args_list)
         raw_bytes = subprocess.check_output(command_list)
         return raw_bytes.decode(encoding='UTF-8')
+
+    def box_list_table(self):
+        """
+
+        >>> for line in Vagrant().box_list_table().pf(title='box list').split(NL):
+        ...     print(repr(line))
+        'box list | name               | provider   | version'
+        '       1 | generic/centos8    | virtualbox | 3.6.8  '
+        '       2 | generic/ubuntu2004 | virtualbox | 3.6.8  '
+        '       3 | generic/ubuntu2010 | virtualbox | 3.6.8  '
+        """
+        output = self.invoke(['box', 'list'])
+        t = lib.Table([])
+        row_ndx = 0
+        for name, provider, version in re.findall('(.+?) +\((.+?), +(.+?)\)', output):
+            row_ndx += 1
+            t.set_val(row_ndx, 'name', name)
+            t.set_val(row_ndx, 'provider', provider)
+            t.set_val(row_ndx, 'version', version)
+
+        return t
