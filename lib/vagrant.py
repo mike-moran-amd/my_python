@@ -16,7 +16,7 @@ NL = '\n'  # doctests hate newlines in the source
 class Vagrant:
     def __init__(self):
         """
-        #>>> for k, v in vars(Vagrant()).items():
+        >>> for k, v in vars(Vagrant()).items():
         ...     print(repr(k), '=', repr(v))
         '_Vagrant__which' = '/usr/local/bin/vagrant'
         '_Vagrant__version' = 'Installed Version: 2.2.19'
@@ -30,7 +30,7 @@ class Vagrant:
 
     def global_status_table(self):
         """
-        #>>> for line in Vagrant().global_status_table().pf(title='STATUS').split(NL):
+        >>> for line in Vagrant().global_status_table().pf(title='STATUS').split(NL):
         ...     print(repr(line))
         'STATUS | id      | name    | provider   | state   | directory                  '
         '     1 | 2d9d7d5 | default | virtualbox | running | /Users/mfm/vagrant         '
@@ -46,7 +46,7 @@ class Vagrant:
 
     def invoke(self, args_list):
         """
-        #>>> for line in Vagrant().invoke(['global-status']).split(NL):
+        >>> for line in Vagrant().invoke(['global-status']).split(NL):
         ...     print(repr(line))
         'id       name    provider   state   directory                           '
         '------------------------------------------------------------------------'
@@ -73,8 +73,7 @@ class Vagrant:
 
     def box_list_table(self):
         """
-
-        #>>> for line in Vagrant().box_list_table().pf(title='box list').split(NL):
+        >>> for line in Vagrant().box_list_table().pf(title='box list').split(NL):
         ...     print(repr(line))
         'box list | name               | provider   | version'
         '       1 | generic/centos8    | virtualbox | 3.6.8  '
