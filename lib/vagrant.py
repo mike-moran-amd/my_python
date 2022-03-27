@@ -30,15 +30,15 @@ class Vagrant:
 
     def global_status_table(self):
         """
-        #>>> for line in Vagrant().global_status_table().pf(title='BOXES').split(NL):
+        #>>> for line in Vagrant().global_status_table().pf(title='STATUS').split(NL):
         ...     print(repr(line))
-        'BOXES | id      | name    | provider   | state   | directory                  '
-        '    1 | 2d9d7d5 | default | virtualbox | running | /Users/mfm/vagrant         '
-        '    2 | fe8bcba | default | virtualbox | running | /Users/mfm/vagrant/U2010   '
-        '    3 | ea0bb41 | default | virtualbox | running | /Users/mfm/vagrant/C8S     '
-        '    4 | d11e797 | default | virtualbox | running | /Users/mfm/vagrant/centos/8'
-        '    5 | a4d9a67 | default | virtualbox | running | /Users/mfm/vagrant/centos  '
-        '    6 | b25e420 | default | virtualbox | running | /Users/mfm/vagrant/centos8 '
+        'STATUS | id      | name    | provider   | state   | directory                  '
+        '     1 | 2d9d7d5 | default | virtualbox | running | /Users/mfm/vagrant         '
+        '     2 | fe8bcba | default | virtualbox | running | /Users/mfm/vagrant/U2010   '
+        '     3 | ea0bb41 | default | virtualbox | running | /Users/mfm/vagrant/C8S     '
+        '     4 | d11e797 | default | virtualbox | running | /Users/mfm/vagrant/centos/8'
+        '     5 | a4d9a67 | default | virtualbox | running | /Users/mfm/vagrant/centos  '
+        '     6 | b25e420 | default | virtualbox | running | /Users/mfm/vagrant/centos8 '
         """
         ss = self.invoke(['global-status']).split('\n \n')
         # the first part is a table frame to decode
@@ -74,7 +74,7 @@ class Vagrant:
     def box_list_table(self):
         """
 
-        >>> for line in Vagrant().box_list_table().pf(title='box list').split(NL):
+        #>>> for line in Vagrant().box_list_table().pf(title='box list').split(NL):
         ...     print(repr(line))
         'box list | name               | provider   | version'
         '       1 | generic/centos8    | virtualbox | 3.6.8  '
