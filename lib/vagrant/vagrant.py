@@ -25,7 +25,7 @@ class Vagrant:
         '_Vagrant__version' = 'Installed Version: 2.2.19'
 
         """
-        self.__which = shutil.which("vagrant")
+        self.__which = shutil.which("")
         if not self.__which:
             # It is good to know this before hand, yes?
             raise RuntimeError("Which vagrant?")
@@ -115,7 +115,7 @@ class Vagrant:
         else:
             path = os.getcwd()
 
-        filepath = pathlib.Path(path, 'Vagrantfile')
+        filepath = pathlib.Path(path, '../Vagrantfile')
         if not force and filepath.exists():
             raise RuntimeError(f'A Vagrantfile already exists in {path}, use force=True to overwrite')
 
@@ -165,5 +165,12 @@ the comments in the Vagrantfile as well as documentation on
                 'returncode': 1,
                 'stderr': None}:  # noqa
                 # we already know base box does not exist, so what is this?
+                # you may see this in the log:
+                '''An error occurred while downloading the remote file. The error
+message, if any, is reproduced below. Please fix this error and try
+again.
+
+Couldn't open file /Users/mfm/my_python/lib/base
+'''
                 raise
         return result, path  # TODO return a class instance

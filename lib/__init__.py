@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # encoding=UTF-8
 import datetime
-from table import Table
+from .table import Table
 
 
 def dt_str(dt=None):
