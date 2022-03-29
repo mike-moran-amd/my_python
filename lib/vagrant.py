@@ -4,9 +4,12 @@
 
 
 """
+import os
+import pathlib
 import re
 import shutil
 import subprocess
+# local imports
 import lib
 
 
@@ -91,10 +94,44 @@ class Vagrant:
         output = self.invoke(['box', 'list'])
         t = lib.Table([])
         row_ndx = 0
-        for name, provider, version in re.findall('(.+?) +\((.+?), +(.+?)\)', output):
+        for name, provider, version in re.findall('(.+?) +\((.+?), +(.+?)\)', output):  # noqa
             row_ndx += 1
             t.set_val(row_ndx, 'name', name)
             t.set_val(row_ndx, 'provider', provider)
             t.set_val(row_ndx, 'version', version)
-
         return t
+
+    def init(self, path=None, force=False):
+        """
+        # This doctest will create a Vagrantfile in this directory, it is the default.
+        # By running this unit test it will replace the file.
+        # If it changed, your IDE should flag the file has changed and be able to show the diffs
+        >>> Vagrant().init(force=True)
+        """
+        if path:
+            os.chdir(path)
+        else:
+            path = os.getcwd()
+
+        filepath = pathlib.Path(path, 'Vagrantfile')
+        if not force and filepath.exists():
+            raise RuntimeError(f'A Vagrantfile already exists in {path}, use force=True to overwrite')
+
+        command_args = ['init']
+        if force:
+            command_args.append('-f')
+        result = self.invoke(command_args)
+
+        if result != '''A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+''':
+            raise ValueError(result)
+
+        if not filepath.exists():
+            raise RuntimeError(f'Vagrantfile not found: {filepath}')
+
+        return filepath
+
+
