@@ -6,12 +6,12 @@
 """
 import os
 import pathlib
+import pprint
 import re
 import shutil
 import subprocess
 # local imports
 import lib
-
 
 NL = '\n'  # doctests hate newlines in the source
 
@@ -136,4 +136,34 @@ the comments in the Vagrantfile as well as documentation on
 
         return filepath
 
+    def up(self, path=None):
+        """
+        >>> try:
+        ...   Vagrant().up()
+        ... except subprocess.CalledProcessError as cpe:  # noqa
+        ...   pprint.pprint(vars(cpe), width=100)
+        (None, '/Users/mfm/my_python/lib')
 
+        """
+        if path:
+            os.chdir(path)
+        else:
+            path = os.getcwd()
+
+        command_args = ['up']
+        result = None
+        try:
+            result = self.invoke(command_args)
+        except subprocess.CalledProcessError as cpe:
+            if vars(cpe) != {
+                'cmd': ['/usr/local/bin/vagrant', 'up'],
+                'output': b"Bringing machine 'default' up with 'virtualbox' provider...\n==> default: Box 'base' "
+                          b'could not be found. Attempting to find and install...\n    default: Box Provider: vir'
+                          b'tualbox\n    default: Box Version: >= 0\n==> default: Box file was not detected as met'
+                          b"adata. Adding it directly...\n==> default: Adding box 'base' (v0) for provider: virtu"
+                          b'albox\n    default: Downloading: base\n\r\x1b[K',
+                'returncode': 1,
+                'stderr': None}:  # noqa
+                # we already know base box does not exist, so what is this?
+                raise
+        return result, path  # TODO return a class instance
