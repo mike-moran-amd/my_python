@@ -105,8 +105,10 @@ class Vagrant:
         """
         # This doctest will create a Vagrantfile in this directory, it is the default.
         # By running this unit test it will replace the file.
-        # If it changed, your IDE should flag the file has changed and be able to show the diffs
+        # If it changed, git will notice and can show the diffs.
         >>> Vagrant().init(force=True)
+        PosixPath('/Users/mfm/my_python/lib/Vagrantfile')
+
         """
         if path:
             os.chdir(path)
