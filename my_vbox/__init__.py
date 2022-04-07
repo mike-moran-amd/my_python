@@ -801,15 +801,17 @@ class MyBox:
 
     def createvm(self,
                  name,
-                 basefolder=pathlib.Path(__file__).parent,
-                 ostype="Debian_64",
+                 basefolder=pathlib.Path(pathlib.Path(__file__).parent, 'vbii'),
+                 ostype="Ubuntu_64",
                  register=True):
         """
-        >>> for line in MyBox().createvm(f'createvm{lib.dt_str()}').split(NL):
+        >>> for line in MyBox().createvm('U20044').split(NL):
+        ...     if line.startswith('UUID: '):
+        ...         uuid = line[len('UUID: '):].strip()  # this is the key for modifyvm
+        ...         continue  # this will always change, so do not print in doctest
         ...     print(line.strip())
-        Virtual machine 'createvm220406034829727347' is created and registered.
-        UUID: 4390100b-b933-46b9-825c-fb6e1f006f8d
-        Settings file: '/Users/mfm/my_python/my_vbox/createvm220406034829727347/createvm220406034829727347.vbox'
+        Virtual machine 'U20044' is created and registered.
+        Settings file: '/Users/mfm/my_python/my_vbox/vbii/U20044/U20044.vbox'
         <BLANKLINE>
         """
         word_list = [ self.__vbox_path, 'createvm', '--name', name]
