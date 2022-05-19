@@ -212,7 +212,7 @@ class Table:
                 new_od[key] = val
         self.__od = new_od
 
-    def split_dynamic_static(self, dynamic_table=None, static_table=None):
+    def split_static(self, dynamic_table=None, static_table=None):
         # add to existing table if provided, or create new ones
         dynamic_table = dynamic_table or Table()
         static_table = static_table or Table()
@@ -236,4 +236,4 @@ class Table:
                 # all the other cells will be put in the dynamic table
                 for x in self.tup_gen(cols=[col]):
                     dynamic_table.set_val(*x)
-        return static_table, dynamic_table
+        return dynamic_table, static_table

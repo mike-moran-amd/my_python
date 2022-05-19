@@ -7,7 +7,7 @@ import table
 
 def from_text(text):
     # parse the text (assumed to be the output of 'cat /proc/cpuinfo') and return a new table with the data
-    ret = CpuDetailsTable()
+    ret = CpuInfoTable()
     # the cpu text blocks are separated by a newline
     blocks = text.split('\n\n')
     row_counter = -1
@@ -27,7 +27,7 @@ def from_file(filepath='/proc/cpuinfo'):
     return from_text(text)
 
 
-class CpuDetailsTable(table.Table):
+class CpuInfoTable(table.Table):
     def __init__(self):
         super().__init__()
     # TODO add cpuinfo specific methods here ...

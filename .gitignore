@@ -1,3 +1,5 @@
 .idea/
 venv/
 logs/
+.pytest_cache
+my_vbox/vbii/

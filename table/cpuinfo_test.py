@@ -9,7 +9,7 @@ def test_cpuinfo_from_file():
     t = cpuinfo.from_file(fp)
     print('\n')
     print(t.pf(title='TABLE'))
-    s, d = t.split_dynamic_static()
+    d, s = t.split_static()
     print(s.pf(title='STATIC'))
     print(d.pf(title='DELTA*'))
     pass

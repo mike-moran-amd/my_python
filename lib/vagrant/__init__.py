@@ -25,10 +25,10 @@ class Vagrant:
         '_Vagrant__version' = 'Installed Version: 2.2.19'
 
         """
-        self.__which = shutil.which("vagrant")
+        self.__which = shutil.which('vagrant')  # TODO or shutil.which('vagrant.exe')
         if not self.__which:
             # It is good to know this before hand, yes?
-            raise RuntimeError("Which vagrant?")
+            raise RuntimeError('Which vagrant?')
         self.__version = self.invoke(['version']).split('\n')[0]
 
     def global_status_table(self):
@@ -142,7 +142,7 @@ the comments in the Vagrantfile as well as documentation on
         ...   Vagrant().up()
         ... except subprocess.CalledProcessError as cpe:  # noqa
         ...   pprint.pprint(vars(cpe), width=100)
-        (None, '/Users/mfm/my_python/lib/vagrant')
+        '/Users/mfm/my_python/lib/vagrant'
 
         """
         if path:
@@ -164,7 +164,6 @@ the comments in the Vagrantfile as well as documentation on
                           b'albox\n    default: Downloading: base\n\r\x1b[K',
                 'returncode': 1,
                 'stderr': None}:  # noqa
-                # we already know base box does not exist, so what is this?
                 # you may see this in the log:
                 '''An error occurred while downloading the remote file. The error
 message, if any, is reproduced below. Please fix this error and try
@@ -172,5 +171,30 @@ again.
 
 Couldn't open file /Users/mfm/my_python/lib/base
 '''
+                # we already know 'base' box does not exist, so what is this?
                 raise
-        return result, path  # TODO return a class instance
+        # TODO  check result
+        return path
+
+    def new_generic_box(self, box_name, generic_vb_name,
+
+            ):
+        init_text = f'''# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/{generic_vb_name}"
+  config.vm.box_check_update = false
+  config.vm.hostname = "{generic_vb_name}.local"
+  config.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = false
+    vb.name = "{generic_vb_name}"
+    vb.memory = "2048"
+    vb.cpus = 2
+    vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
+    vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional'] 
+    vb.customize ["modifyvm", :id, "--vram", "32"]
+  end
+end
+'''
