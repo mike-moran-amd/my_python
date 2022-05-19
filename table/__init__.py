@@ -31,7 +31,7 @@ class Table:
       1 | row | val
     """
 
-    def __init__(self, tuple_list):
+    def __init__(self, tuple_list=()):
         """
         Create a new Table with the given tuple list
         :param tuple_list: list(tuple(row, col, val)) - can be empty or sparse
@@ -118,7 +118,7 @@ class Table:
                 val = t.get_val(row, col, default=empty_cell)
                 # left justify strings, numbers to the right
                 cell = f'{val:{widths[col]}}'
-                # TODO: add heights - left for future programmer
+                # add heights? - left for future programmer
                 cols.append(cell)
             rows.append(column_separator.join(cols))
         return row_separator.join(rows)
@@ -165,7 +165,7 @@ class Table:
             if not c.isspace():
                 col_name += c
             elif col_name:
-                # the beginning offset of this column, row name is arbitrary but we need to remove it later
+                # the beginning offset of this column, row name is arbitrary, but we need to remove it later
                 t.set_val('start', col_name, ndx - len(col_name))
                 if last_col_name is not None:
                     t.set_val('end', last_col_name, ndx - len(col_name) - 1)
@@ -211,3 +211,29 @@ class Table:
             if col not in col_list:
                 new_od[key] = val
         self.__od = new_od
+
+    def split_dynamic_static(self, dynamic_table=None, static_table=None):
+        # add to existing table if provided, or create new ones
+        dynamic_table = dynamic_table or Table()
+        static_table = static_table or Table()
+        for col in self.col_gen():
+            # if any column has the same value for every row, it is "static" and will be added to the static table
+            static_val = None
+            is_static = True
+            for row in self.row_gen():
+                val = self.get_val(row, col)
+                if val != static_val:
+                    if static_val is None:
+                        static_val = val
+                        continue
+                    # not all the columns have the same value. this is a dynamic (not static) column
+                    is_static = False
+                    break
+            # end for row ...
+            if is_static:
+                static_table.set_val(0, col, static_val)
+            else:
+                # all the other cells will be put in the dynamic table
+                for x in self.tup_gen(cols=[col]):
+                    dynamic_table.set_val(*x)
+        return static_table, dynamic_table
