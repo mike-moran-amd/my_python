@@ -3,6 +3,8 @@
 """
 Prime number generator function written in Python
 """
+import argparse
+import datetime
 
 
 def generator():
@@ -33,7 +35,7 @@ def generator():
         n += 2  # next odd number
 
 
-def nth_prime(limit):
+def nth_prime(nth):
     """
     >>> for ndx in range(10):
     ...    print(f'nth_prime({ndx}) = {nth_prime(ndx)}')
@@ -70,9 +72,50 @@ def nth_prime(limit):
     179424673
 
     """
-    if limit > 0:
-        counter = 1
+    if nth > 0:
+        count = 0
         for prime in generator():
-            counter += 1
-            if counter > limit:
+            count += 1
+            if count >= nth:
                 return prime
+
+
+def timed_prime(seconds):
+    now = datetime.datetime.now()
+    then = now + datetime.timedelta(seconds=seconds)
+    prime = None
+    for prime in generator():
+        now = datetime.datetime.now()
+        if now >= then:
+            break
+    return prime
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Description of your program')
+    parser.add_argument(
+        '-n',
+        '--nth',
+        help='Limit at nth prime',
+        required=False)
+    parser.add_argument(
+        '-s',
+        '--seconds',
+        help='Limit by number of seconds to run',
+        required=False)
+
+    args = vars(parser.parse_args())
+
+    nth = args['nth']
+    if nth is not None:
+        nth = int(nth)
+        return nth_prime(nth=nth)
+
+    seconds = args['seconds']
+    seconds = int(seconds)
+    if seconds is not None:
+        return timed_prime(seconds)
+
+
+if __name__ == '__main__':
+    print(main())
