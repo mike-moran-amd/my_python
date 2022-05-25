@@ -1,0 +1,480 @@
+Microsoft Windows [Version 10.0.19044.1645]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@139.178.82.67
+The authenticity of host '139.178.82.67 (139.178.82.67)' can't be established.
+ECDSA key fingerprint is SHA256:nrJd5OBxnt5+d4laeSyLiHGd/y/4YMQmSkY1m9zyrI8.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '139.178.82.67' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-41-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed May 25 16:52:26 UTC 2022
+
+  System load:            0.04
+  Usage of /:             0.7% of 438.11GB
+  Memory usage:           1%
+  Swap usage:             0%
+  Temperature:            37.0 C
+  Processes:              195
+  Users logged in:        0
+  IPv4 address for bond0: 139.178.82.67
+  IPv6 address for bond0: 2604:1380:4641:3b00::d
+
+8 updates can be applied immediately.
+8 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@mm17:~# apt install hwloc
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  fontconfig-config fonts-dejavu-core libcairo2 libfontconfig1 libhwloc-plugins libhwloc15 libpciaccess0 libpixman-1-0
+  libxcb-render0 libxcb-shm0 libxnvctrl0 libxrender1 ocl-icd-libopencl1
+Suggested packages:
+  libhwloc-contrib-plugins opencl-icd
+The following NEW packages will be installed:
+  fontconfig-config fonts-dejavu-core hwloc libcairo2 libfontconfig1 libhwloc-plugins libhwloc15 libpciaccess0
+  libpixman-1-0 libxcb-render0 libxcb-shm0 libxnvctrl0 libxrender1 ocl-icd-libopencl1
+0 upgraded, 14 newly installed, 0 to remove and 4 not upgraded.
+Need to get 2415 kB of archives.
+After this operation, 7101 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://archive.ubuntu.com/ubuntu focal/main amd64 fonts-dejavu-core all 2.37-1 [1041 kB]
+Get:2 http://archive.ubuntu.com/ubuntu focal/main amd64 fontconfig-config all 2.13.1-2ubuntu3 [28.8 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal/main amd64 libfontconfig1 amd64 2.13.1-2ubuntu3 [114 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal/main amd64 libpixman-1-0 amd64 0.38.4-0ubuntu1 [227 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal/main amd64 libxcb-render0 amd64 1.14-2 [14.8 kB]
+Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 libxcb-shm0 amd64 1.14-2 [5584 B]
+Get:7 http://archive.ubuntu.com/ubuntu focal/main amd64 libxrender1 amd64 1:0.9.10-1 [18.7 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal/main amd64 libcairo2 amd64 1.16.0-4ubuntu1 [583 kB]
+Get:9 http://archive.ubuntu.com/ubuntu focal/universe amd64 libhwloc15 amd64 2.1.0+dfsg-4 [134 kB]
+Get:10 http://archive.ubuntu.com/ubuntu focal/main amd64 libpciaccess0 amd64 0.16-0ubuntu1 [17.9 kB]
+Get:11 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libxnvctrl0 amd64 470.57.01-0ubuntu0.20.04.3 [10.9 kB]
+Get:12 http://archive.ubuntu.com/ubuntu focal/universe amd64 hwloc amd64 2.1.0+dfsg-4 [174 kB]
+Get:13 http://archive.ubuntu.com/ubuntu focal/main amd64 ocl-icd-libopencl1 amd64 2.2.11-1ubuntu1 [30.3 kB]
+Get:14 http://archive.ubuntu.com/ubuntu focal/universe amd64 libhwloc-plugins amd64 2.1.0+dfsg-4 [14.4 kB]
+Fetched 2415 kB in 2s (1248 kB/s)
+Selecting previously unselected package fonts-dejavu-core.
+(Reading database ... 102121 files and directories currently installed.)
+Preparing to unpack .../00-fonts-dejavu-core_2.37-1_all.deb ...
+Unpacking fonts-dejavu-core (2.37-1) ...
+Selecting previously unselected package fontconfig-config.
+Preparing to unpack .../01-fontconfig-config_2.13.1-2ubuntu3_all.deb ...
+Unpacking fontconfig-config (2.13.1-2ubuntu3) ...
+Selecting previously unselected package libfontconfig1:amd64.
+Preparing to unpack .../02-libfontconfig1_2.13.1-2ubuntu3_amd64.deb ...
+Unpacking libfontconfig1:amd64 (2.13.1-2ubuntu3) ...
+Selecting previously unselected package libpixman-1-0:amd64.
+Preparing to unpack .../03-libpixman-1-0_0.38.4-0ubuntu1_amd64.deb ...
+Unpacking libpixman-1-0:amd64 (0.38.4-0ubuntu1) ...
+Selecting previously unselected package libxcb-render0:amd64.
+Preparing to unpack .../04-libxcb-render0_1.14-2_amd64.deb ...
+Unpacking libxcb-render0:amd64 (1.14-2) ...
+Selecting previously unselected package libxcb-shm0:amd64.
+Preparing to unpack .../05-libxcb-shm0_1.14-2_amd64.deb ...
+Unpacking libxcb-shm0:amd64 (1.14-2) ...
+Selecting previously unselected package libxrender1:amd64.
+Preparing to unpack .../06-libxrender1_1%3a0.9.10-1_amd64.deb ...
+Unpacking libxrender1:amd64 (1:0.9.10-1) ...
+Selecting previously unselected package libcairo2:amd64.
+Preparing to unpack .../07-libcairo2_1.16.0-4ubuntu1_amd64.deb ...
+Unpacking libcairo2:amd64 (1.16.0-4ubuntu1) ...
+Selecting previously unselected package libhwloc15:amd64.
+Preparing to unpack .../08-libhwloc15_2.1.0+dfsg-4_amd64.deb ...
+Unpacking libhwloc15:amd64 (2.1.0+dfsg-4) ...
+Selecting previously unselected package libpciaccess0:amd64.
+Preparing to unpack .../09-libpciaccess0_0.16-0ubuntu1_amd64.deb ...
+Unpacking libpciaccess0:amd64 (0.16-0ubuntu1) ...
+Selecting previously unselected package libxnvctrl0:amd64.
+Preparing to unpack .../10-libxnvctrl0_470.57.01-0ubuntu0.20.04.3_amd64.deb ...
+Unpacking libxnvctrl0:amd64 (470.57.01-0ubuntu0.20.04.3) ...
+Selecting previously unselected package hwloc.
+Preparing to unpack .../11-hwloc_2.1.0+dfsg-4_amd64.deb ...
+Unpacking hwloc (2.1.0+dfsg-4) ...
+Selecting previously unselected package ocl-icd-libopencl1:amd64.
+Preparing to unpack .../12-ocl-icd-libopencl1_2.2.11-1ubuntu1_amd64.deb ...
+Unpacking ocl-icd-libopencl1:amd64 (2.2.11-1ubuntu1) ...
+Selecting previously unselected package libhwloc-plugins:amd64.
+Preparing to unpack .../13-libhwloc-plugins_2.1.0+dfsg-4_amd64.deb ...
+Unpacking libhwloc-plugins:amd64 (2.1.0+dfsg-4) ...
+Setting up libpixman-1-0:amd64 (0.38.4-0ubuntu1) ...
+Setting up libpciaccess0:amd64 (0.16-0ubuntu1) ...
+Setting up libxrender1:amd64 (1:0.9.10-1) ...
+Setting up libxcb-render0:amd64 (1.14-2) ...
+Setting up libxcb-shm0:amd64 (1.14-2) ...
+Setting up libxnvctrl0:amd64 (470.57.01-0ubuntu0.20.04.3) ...
+Setting up libhwloc15:amd64 (2.1.0+dfsg-4) ...
+Setting up fonts-dejavu-core (2.37-1) ...
+Setting up ocl-icd-libopencl1:amd64 (2.2.11-1ubuntu1) ...
+Setting up fontconfig-config (2.13.1-2ubuntu3) ...
+Setting up libhwloc-plugins:amd64 (2.1.0+dfsg-4) ...
+Setting up libfontconfig1:amd64 (2.13.1-2ubuntu3) ...
+Setting up libcairo2:amd64 (1.16.0-4ubuntu1) ...
+Setting up hwloc (2.1.0+dfsg-4) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for mime-support (3.64ubuntu1) ...
+root@mm17:~# lstopo-no-graphics --no-io --no-legend --of txt
+┌────────────────────────────────────────────────────────────────┐
+│ Machine (31GB total)                                           │
+│                                                                │
+│ ┌────────────────────────────────────────────────────────────┐ │
+│ │ Package L#0                                                │ │
+│ │                                                            │ │
+│ │ ┌────────────────────────────────────────────────────────┐ │ │
+│ │ │ NUMANode L#0 P#0 (31GB)                                │ │ │
+│ │ └────────────────────────────────────────────────────────┘ │ │
+│ │                                                            │ │
+│ │ ┌────────────────────────────────────────────────────────┐ │ │
+│ │ │ L3 (16MB)                                              │ │ │
+│ │ └────────────────────────────────────────────────────────┘ │ │
+│ │                                                            │ │
+│ │ ┌────────────┐  ┌────────────┐              ┌────────────┐ │ │
+│ │ │ L2 (256KB) │  │ L2 (256KB) │  ├┤  ├┤  ├┤  │ L2 (256KB) │ │ │
+│ │ └────────────┘  └────────────┘              └────────────┘ │ │
+│ │                                  8x total                  │ │
+│ │ ┌────────────┐  ┌────────────┐              ┌────────────┐ │ │
+│ │ │ L1d (32KB) │  │ L1d (32KB) │              │ L1d (32KB) │ │ │
+│ │ └────────────┘  └────────────┘              └────────────┘ │ │
+│ │                                                            │ │
+│ │ ┌────────────┐  ┌────────────┐              ┌────────────┐ │ │
+│ │ │ L1i (32KB) │  │ L1i (32KB) │              │ L1i (32KB) │ │ │
+│ │ └────────────┘  └────────────┘              └────────────┘ │ │
+│ │                                                            │ │
+│ │ ┌────────────┐  ┌────────────┐              ┌────────────┐ │ │
+│ │ │ Core L#0   │  │ Core L#1   │              │ Core L#7   │ │ │
+│ │ │            │  │            │              │            │ │ │
+│ │ │ ┌────────┐ │  │ ┌────────┐ │              │ ┌────────┐ │ │ │
+│ │ │ │ PU L#0 │ │  │ │ PU L#1 │ │              │ │ PU L#7 │ │ │ │
+│ │ │ │        │ │  │ │        │ │              │ │        │ │ │ │
+│ │ │ │  P#0   │ │  │ │  P#1   │ │              │ │  P#7   │ │ │ │
+│ │ │ └────────┘ │  │ └────────┘ │              │ └────────┘ │ │ │
+│ │ └────────────┘  └────────────┘              └────────────┘ │ │
+│ └────────────────────────────────────────────────────────────┘ │
+└────────────────────────────────────────────────────────────────┘
+root@mm17:~# lstopo
+Machine (31GB total)
+  Package L#0
+    NUMANode L#0 (P#0 31GB)
+    L3 L#0 (16MB)
+      L2 L#0 (256KB) + L1d L#0 (32KB) + L1i L#0 (32KB) + Core L#0 + PU L#0 (P#0)
+      L2 L#1 (256KB) + L1d L#1 (32KB) + L1i L#1 (32KB) + Core L#1 + PU L#1 (P#1)
+      L2 L#2 (256KB) + L1d L#2 (32KB) + L1i L#2 (32KB) + Core L#2 + PU L#2 (P#2)
+      L2 L#3 (256KB) + L1d L#3 (32KB) + L1i L#3 (32KB) + Core L#3 + PU L#3 (P#3)
+      L2 L#4 (256KB) + L1d L#4 (32KB) + L1i L#4 (32KB) + Core L#4 + PU L#4 (P#4)
+      L2 L#5 (256KB) + L1d L#5 (32KB) + L1i L#5 (32KB) + Core L#5 + PU L#5 (P#5)
+      L2 L#6 (256KB) + L1d L#6 (32KB) + L1i L#6 (32KB) + Core L#6 + PU L#6 (P#6)
+      L2 L#7 (256KB) + L1d L#7 (32KB) + L1i L#7 (32KB) + Core L#7 + PU L#7 (P#7)
+  HostBridge
+    PCIBridge
+      PCI 01:00.0 (Ethernet)
+        Net "enp1s0f0"
+        OpenFabrics "mlx5_bond_0"
+      PCI 01:00.1 (Ethernet)
+        Net "enp1s0f1"
+    PCI 00:17.0 (SATA)
+      Block(Disk) "sdb"
+      Block(Disk) "sda"
+    PCIBridge
+      PCI 03:00.0 (Ethernet)
+        Net "eno1"
+    PCIBridge
+      PCI 04:00.0 (Ethernet)
+        Net "eno2"
+    PCIBridge
+      PCIBridge
+        PCI 07:00.0 (VGA)
+root@mm17:~# cat /proc/cpuinfo
+processor       : 0
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 158
+model name      : Intel(R) Xeon(R) E-2278G CPU @ 3.40GHz
+stepping        : 13
+microcode       : 0xea
+cpu MHz         : 3400.000
+cache size      : 16384 KB
+physical id     : 0
+siblings        : 8
+core id         : 0
+cpu cores       : 8
+apicid          : 0
+initial apicid  : 0
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 22
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+vmx flags       : vnmi preemption_timer invvpid ept_x_only ept_ad ept_1gb flexpriority tsc_offset vtpr mtf vapic ept vpid unrestricted_guest ple shadow_vmcs pml ept_mode_based_exec
+bugs            : spectre_v1 spectre_v2 spec_store_bypass swapgs taa itlb_multihit srbds
+bogomips        : 6799.81
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 39 bits physical, 48 bits virtual
+power management:
+
+processor       : 1
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 158
+model name      : Intel(R) Xeon(R) E-2278G CPU @ 3.40GHz
+stepping        : 13
+microcode       : 0xea
+cpu MHz         : 800.107
+cache size      : 16384 KB
+physical id     : 0
+siblings        : 8
+core id         : 1
+cpu cores       : 8
+apicid          : 2
+initial apicid  : 2
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 22
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+vmx flags       : vnmi preemption_timer invvpid ept_x_only ept_ad ept_1gb flexpriority tsc_offset vtpr mtf vapic ept vpid unrestricted_guest ple shadow_vmcs pml ept_mode_based_exec
+bugs            : spectre_v1 spectre_v2 spec_store_bypass swapgs taa itlb_multihit srbds
+bogomips        : 6799.81
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 39 bits physical, 48 bits virtual
+power management:
+
+processor       : 2
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 158
+model name      : Intel(R) Xeon(R) E-2278G CPU @ 3.40GHz
+stepping        : 13
+microcode       : 0xea
+cpu MHz         : 2045.577
+cache size      : 16384 KB
+physical id     : 0
+siblings        : 8
+core id         : 2
+cpu cores       : 8
+apicid          : 4
+initial apicid  : 4
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 22
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+vmx flags       : vnmi preemption_timer invvpid ept_x_only ept_ad ept_1gb flexpriority tsc_offset vtpr mtf vapic ept vpid unrestricted_guest ple shadow_vmcs pml ept_mode_based_exec
+bugs            : spectre_v1 spectre_v2 spec_store_bypass swapgs taa itlb_multihit srbds
+bogomips        : 6799.81
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 39 bits physical, 48 bits virtual
+power management:
+
+processor       : 3
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 158
+model name      : Intel(R) Xeon(R) E-2278G CPU @ 3.40GHz
+stepping        : 13
+microcode       : 0xea
+cpu MHz         : 3400.000
+cache size      : 16384 KB
+physical id     : 0
+siblings        : 8
+core id         : 3
+cpu cores       : 8
+apicid          : 6
+initial apicid  : 6
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 22
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+vmx flags       : vnmi preemption_timer invvpid ept_x_only ept_ad ept_1gb flexpriority tsc_offset vtpr mtf vapic ept vpid unrestricted_guest ple shadow_vmcs pml ept_mode_based_exec
+bugs            : spectre_v1 spectre_v2 spec_store_bypass swapgs taa itlb_multihit srbds
+bogomips        : 6799.81
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 39 bits physical, 48 bits virtual
+power management:
+
+processor       : 4
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 158
+model name      : Intel(R) Xeon(R) E-2278G CPU @ 3.40GHz
+stepping        : 13
+microcode       : 0xea
+cpu MHz         : 1699.040
+cache size      : 16384 KB
+physical id     : 0
+siblings        : 8
+core id         : 4
+cpu cores       : 8
+apicid          : 8
+initial apicid  : 8
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 22
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+vmx flags       : vnmi preemption_timer invvpid ept_x_only ept_ad ept_1gb flexpriority tsc_offset vtpr mtf vapic ept vpid unrestricted_guest ple shadow_vmcs pml ept_mode_based_exec
+bugs            : spectre_v1 spectre_v2 spec_store_bypass swapgs taa itlb_multihit srbds
+bogomips        : 6799.81
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 39 bits physical, 48 bits virtual
+power management:
+
+processor       : 5
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 158
+model name      : Intel(R) Xeon(R) E-2278G CPU @ 3.40GHz
+stepping        : 13
+microcode       : 0xea
+cpu MHz         : 3400.000
+cache size      : 16384 KB
+physical id     : 0
+siblings        : 8
+core id         : 5
+cpu cores       : 8
+apicid          : 10
+initial apicid  : 10
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 22
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+vmx flags       : vnmi preemption_timer invvpid ept_x_only ept_ad ept_1gb flexpriority tsc_offset vtpr mtf vapic ept vpid unrestricted_guest ple shadow_vmcs pml ept_mode_based_exec
+bugs            : spectre_v1 spectre_v2 spec_store_bypass swapgs taa itlb_multihit srbds
+bogomips        : 6799.81
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 39 bits physical, 48 bits virtual
+power management:
+
+processor       : 6
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 158
+model name      : Intel(R) Xeon(R) E-2278G CPU @ 3.40GHz
+stepping        : 13
+microcode       : 0xea
+cpu MHz         : 3400.000
+cache size      : 16384 KB
+physical id     : 0
+siblings        : 8
+core id         : 6
+cpu cores       : 8
+apicid          : 12
+initial apicid  : 12
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 22
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+vmx flags       : vnmi preemption_timer invvpid ept_x_only ept_ad ept_1gb flexpriority tsc_offset vtpr mtf vapic ept vpid unrestricted_guest ple shadow_vmcs pml ept_mode_based_exec
+bugs            : spectre_v1 spectre_v2 spec_store_bypass swapgs taa itlb_multihit srbds
+bogomips        : 6799.81
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 39 bits physical, 48 bits virtual
+power management:
+
+processor       : 7
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 158
+model name      : Intel(R) Xeon(R) E-2278G CPU @ 3.40GHz
+stepping        : 13
+microcode       : 0xea
+cpu MHz         : 3400.000
+cache size      : 16384 KB
+physical id     : 0
+siblings        : 8
+core id         : 7
+cpu cores       : 8
+apicid          : 14
+initial apicid  : 14
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 22
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+vmx flags       : vnmi preemption_timer invvpid ept_x_only ept_ad ept_1gb flexpriority tsc_offset vtpr mtf vapic ept vpid unrestricted_guest ple shadow_vmcs pml ept_mode_based_exec
+bugs            : spectre_v1 spectre_v2 spec_store_bypass swapgs taa itlb_multihit srbds
+bogomips        : 6799.81
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 39 bits physical, 48 bits virtual
+power management:
+
+root@mm17:~# cat /proc/meminfo
+MemTotal:       32775248 kB
+MemFree:        31623512 kB
+MemAvailable:   31873724 kB
+Buffers:           24884 kB
+Cached:           574024 kB
+SwapCached:            0 kB
+Active:           245932 kB
+Inactive:         414136 kB
+Active(anon):       1368 kB
+Inactive(anon):    65968 kB
+Active(file):     244564 kB
+Inactive(file):   348168 kB
+Unevictable:       18532 kB
+Mlocked:           18532 kB
+SwapTotal:       1996796 kB
+SwapFree:        1996796 kB
+Dirty:               148 kB
+Writeback:             0 kB
+AnonPages:         79772 kB
+Mapped:            72384 kB
+Shmem:              1460 kB
+KReclaimable:      49700 kB
+Slab:             139640 kB
+SReclaimable:      49700 kB
+SUnreclaim:        89940 kB
+KernelStack:        3888 kB
+PageTables:         2256 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    18384420 kB
+Committed_AS:     567756 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:       22572 kB
+VmallocChunk:          0 kB
+Percpu:             7456 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:      238148 kB
+DirectMap2M:     4902912 kB
+DirectMap1G:    28311552 kB
+root@mm17:~#
+root@mm17:~#
