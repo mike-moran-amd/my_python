@@ -1,9 +1,10 @@
-import lib
+#!python3
+# encoding=UTF-8
 import pathlib
 from table import cpuinfo
 
 
-def get_table(name='cpuinfo_test_epyc_7502p_32'):
+def get_table(name='cpuinfo_test_epyc_7513'):
     fp = pathlib.Path(__file__).parent
     fp = pathlib.Path(fp, name)
     t = cpuinfo.from_file(fp)

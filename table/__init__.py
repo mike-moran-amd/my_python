@@ -90,7 +90,7 @@ class Table:
                 col_ndx += 1
             row_ndx += 1
 
-    def col_widths(self, cols_mask):
+    def col_widths(self, cols_mask=None):
         ret_dict = {}
         for k, val in self.__od.items():
             row, col = k
@@ -103,14 +103,15 @@ class Table:
         return ret_dict
 
     def pf(self,
+           title=None,
            column_separator=DEFAULT_COL_SEP,
            row_separator=DEFAULT_ROW_SEP,
            empty_cell='',  # default cell display if None
            rows=None,  # only valid with title
            cols=None,  # only valid with title
-           title=None):
-        t = self if title is None else Table(self.tup_gen(rows=rows, cols=cols, title=title))
-        widths = t.col_widths(cols)
+           ):
+        t = self if title is None else Table(self.tup_gen(title=title, rows=rows, cols=cols))
+        widths = t.col_widths()
         rows = []
         for row in t.row_gen():
             cols = []
