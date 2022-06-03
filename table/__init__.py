@@ -118,8 +118,11 @@ class Table:
             for col in t.col_gen():
                 val = t.get_val(row, col, default=empty_cell)
                 # left justify strings, numbers to the right
-                cell = f'{val:{widths[col]}}'
-                # add heights? - left for future programmer
+                try:
+                    cell = f'{val:{widths[col]}}'
+                except TypeError as exc:
+                    # val could be a list
+                    cell = f'{str(val):{widths[col]}}'
                 cols.append(cell)
             rows.append(column_separator.join(cols))
         return row_separator.join(rows)
