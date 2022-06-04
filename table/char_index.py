@@ -4,6 +4,7 @@ from table import list_index
 
 
 NL = '\n'
+ORD_COL_LABEL = 'ORD'
 
 
 class CharIndexTable(list_index.ListIndexTable):
@@ -21,7 +22,16 @@ class CharIndexTable(list_index.ListIndexTable):
         t = cls()
         for row in lit.row_gen():
             # This forces the column order of the final table, not required, but is a good example.
-            t.set_val(row, 'ORD', ord(row))
+            t.set_val(row, ORD_COL_LABEL, ord(row))
         t.extend(lit.tup_gen())
         return t
 
+    def ord_from_row(self,
+                     row,
+                     ord_col_label=ORD_COL_LABEL):
+        """
+        >>> CharIndexTable.from_string('cabcbc').ord_from_row('b')  # noqa
+        98
+        """
+        val = self.get_val(row, ord_col_label)
+        return val
