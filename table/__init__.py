@@ -37,6 +37,9 @@ class Table:
         :param tuple_list: list(tuple(row, col, val)) - can be empty or sparse
         """
         self.__od = OrderedDict()
+        self.extend(tuple_list)
+
+    def extend(self, tuple_list):
         for tup in tuple_list:
             row, col, val = tup
             self.__od[row, col] = val

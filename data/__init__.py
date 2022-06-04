@@ -1,7 +1,6 @@
 #!python3
 # encoding=UTF-8
 import pathlib
-import random
 import table
 
 NL = '\n'
@@ -54,31 +53,6 @@ def string_from(file, path=pathlib.Path(__file__).parent):
         return fp.read()
 
 
-class CharTable(table.Table):
-    @classmethod
-    def from_string(cls, s: str):
-        """
-        # FIXME >>> print(CharTable.from_string('abbccc').pf(title='char'))
-
-        >>> ct = CharTable.from_string('abbccc')
-        >>> for char in ct.row_gen():
-        ...     print(char, ct.get_val(char, 'Indexes'))
-        a [0]
-        b [1, 2]
-        c [3, 4, 5]
-        """
-        t = cls()
-        counter = -1
-        for char in s:
-            counter += 1
-            val = t.get_val(char, 'Indexes')
-            if val is None:
-                t.set_val(char, 'Indexes', [counter])
-            else:
-                val.append(counter)
-        return t
-
-
 class LineTable(table.Table):
     @classmethod
     def from_string(cls, s: str, sep=NL):
@@ -88,10 +62,6 @@ class LineTable(table.Table):
           0 |  1 |  0 |  first line |  11 |    2
           1 |  0 |  1 | line # 2    |   9 |    3
           2 |  2 |  0 |             |   2 |    0
-
-
-
-        >>> _ = LineTable.from_string(string_from(random.choice(list(path_gen(is_dir=False)))))  # random file table
         """
         t = cls()
         row = -1
