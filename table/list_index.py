@@ -7,13 +7,13 @@ INDEX_COL_LABEL = 'NDX_LIST'
 NL = '\n'
 
 
-class IndexTable(table.Table):
+class ListIndexTable(table.Table):
     @classmethod
     def from_list(cls, from_list: list, index_col_label=INDEX_COL_LABEL):
         """
         "bucketizes" the items in a list and returns a table
 
-        >>> for line in IndexTable.from_list(list('cabcbc')).pf('').split(NL):  # noqa
+        >>> for line in ListIndexTable.from_list(list('cabcbc')).pf('').split(NL):  # noqa
         ...     print(repr(line))
         '  | NDX_LIST '
         'c | [0, 3, 5]'
@@ -37,7 +37,7 @@ class IndexTable(table.Table):
                      row,
                      index_col_label=INDEX_COL_LABEL):
         """
-        >>> IndexTable.from_list(list('cabcbc')).ndx_from_row('b')  # noqa
+        >>> ListIndexTable.from_list(list('cabcbc')).ndx_from_row('b')  # noqa
         [2, 4]
         """
         val = self.get_val(row, index_col_label)
