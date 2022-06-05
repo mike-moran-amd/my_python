@@ -22,24 +22,6 @@ def path_gen(
             yield path
 
 
-def leading_isspace(s):
-    count = 0
-    for char in s:
-        if not char.isspace():
-            break
-        count += 1
-    return count
-
-
-def trailing_isspace(s):
-    count = 0
-    for char in s[::-1]:
-        if not char.isspace():
-            break
-        count += 1
-    return count
-
-
 def string_from(file, path=pathlib.Path(__file__).parent):
     """
     return a string read from the given file path
@@ -51,31 +33,6 @@ def string_from(file, path=pathlib.Path(__file__).parent):
         file = pathlib.Path(path, file)
     with open(file, "r", encoding='UTF-8') as fp:
         return fp.read()
-
-
-class LineTable(table.Table):
-    @classmethod
-    def from_string(cls, s: str, sep=NL):
-        """
-        >>> print(LineTable.from_string(' first line'+NL+'line # 2 '+NL+'  ').pf(title='row'))
-        row | LS | TS | LINE        | LEN | WORD
-          0 |  1 |  0 |  first line |  11 |    2
-          1 |  0 |  1 | line # 2    |   9 |    3
-          2 |  2 |  0 |             |   2 |    0
-        """
-        t = cls()
-        row = -1
-        for line in s.split(sep):
-            row += 1
-            t.set_val(row, 'LS', leading_isspace(line))
-            t.set_val(row, 'TS', trailing_isspace(line))
-            t.set_val(row, 'LINE', line)
-            t.set_val(row, 'LEN', len(line))
-            t.set_val(row, 'WORD', len(line.split()))
-            if int(t.get_val(row, 'LS')) + int(t.get_val(row, 'TS')) > len(line):
-                # the line is all isspace(), and TS has recounted the space, reset TS to 0
-                t.set_val(row, 'TS', 0)
-        return t
 
 
 TEXT_BEFORE_PROMPT = '''Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
@@ -90,7 +47,7 @@ def find_prompt(text, bbp=TEXT_BEFORE_PROMPT):
         if ss[1].startswith('root@'):
             ndx = ss[1].index(':')
             if ndx != -1:
-                prompt = ss[1][:ndx+1]
+                prompt = ss[1][:ndx + 1]
                 return prompt
 
 
