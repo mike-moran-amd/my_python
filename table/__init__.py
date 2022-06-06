@@ -37,6 +37,9 @@ class Table:
         :param tuple_list: list(tuple(row, col, val)) - can be empty or sparse
         """
         self.__od = OrderedDict()
+        self.extend(tuple_list)
+
+    def extend(self, tuple_list):
         for tup in tuple_list:
             row, col, val = tup
             self.__od[row, col] = val
@@ -118,8 +121,11 @@ class Table:
             for col in t.col_gen():
                 val = t.get_val(row, col, default=empty_cell)
                 # left justify strings, numbers to the right
-                cell = f'{val:{widths[col]}}'
-                # add heights? - left for future programmer
+                try:
+                    cell = f'{val:{widths[col]}}'
+                except TypeError as exc:
+                    # val could be a list
+                    cell = f'{str(val):{widths[col]}}'
                 cols.append(cell)
             rows.append(column_separator.join(cols))
         return row_separator.join(rows)
