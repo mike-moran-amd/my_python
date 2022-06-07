@@ -4,58 +4,10 @@
 import data
 import lib
 import table
+from table.line import LineTable
 
 
-def from_text(text):
-    # parse the text (assumed to be the output of 'cat /proc/cpuinfo') and return a new table with the data
-    ret = CpuInfoTable()
-    # the cpu text blocks are separated by a newline
-    blocks = text.split('\n\n')
-    row_counter = -1
-    for row in blocks:
-        row_counter += 1
-        for line in row.split('\n'):
-            if line == '':
-                continue
-            try:
-                col, val = line.split(': ')
-            except ValueError as err:
-                continue  # the line has no value after the colon (we will call it None)
-
-            ret.set_val(row_counter, col.strip(), val)
-    return ret
-
-
-
-class CpuInfoTable(table.Table):
-    def __init__(self):
-        super().__init__()
-
-    def topology_table(self):
-        tt = TopologyTable()
-        for row in self.row_gen():
-
-            pid = self.get_val(row, 'processor')
-            pid = int(pid)
-            tt.set_val(row, 'PID', pid)
-
-            core_id = self.get_val(row, 'core id')
-            core_id = int(core_id)
-            tt.set_val(row, 'CoreID', core_id)
-
-            socket_id = self.get_val(row, 'physical id')
-            socket_id = int(socket_id)
-            tt.set_val(row, 'SocketID', socket_id)
-
-            # TODO where do we find NUMA node definition
-            tt.set_val(row, 'NUMANodeID', 0)
-
-            # TODO where do we find uncore cache definition
-            tt.set_val(row, 'UnCoreCacheID', 0)
-        return tt
-
-
-def from_command(cls):
+def from_system():
     # return a CpuDetailsTable from text in the given filepath, or this system
     text = lib.invoke_subprocess(['lstopo'])
     # TODO check to see if the command (will fail) because hwloc is not installed using which and install
@@ -63,17 +15,87 @@ def from_command(cls):
 
 
 class LsTopoTable(table.Table):
+    def __init__(self):
+        super().__init__()
+        self.numanodeid = 0
+        self.uncorecacheid = 0
+        self.socketid = 0
+        self.coreid = 0
+
+
     @classmethod
     def from_text(cls, text):
-        lt = data.LineTable(text)
-        indent = 0
+        retval = cls()
+        lt = LineTable.from_string(text)
+        indent = -1
         for row in lt.row_gen():
-            new_indent = 0
-            for char in lt.get_val(row, 'line'):
-                if not char.isspace():
-                    break
-                new_indent += 1
+            line = lt.line_from_row(row)
+            new_indent = lt.leading_spaces_from_row(row)
+            if indent == -1:
+                if not line.startswith('Machine' or new_indent != 0):
+                    raise ValueError(f'EXPECTED: {line}')
+                indent = new_indent
+            if indent > 0 and new_indent == 0:
+                break  # end of lstopo output
+            retval.parse_line(line.strip())
+        return retval
 
+    def parse_line(self, line):
+        for blob in line.split(' + '):
+            ss = blob.split(' ')
+            thing = ss[0]
+            if thing == 'Machine':
+                pass
+            elif thing == 'Package':
+                if not ss[1].startswith('L#'):
+                    raise ValueError(f'UNEXPECTED: {ss}')
+                val = ss[1][2:]
+                self.socketid = int(val)
+            elif thing == 'NUMANode':
+                if not ss[1].startswith('L#'):
+                    raise ValueError(f'UNEXPECTED: {ss}')
+                val = ss[1][2:]
+                self.numanodeid = int(val)
+            elif thing == 'L3':
+                if not ss[1].startswith('L#'):
+                    raise ValueError(f'UNEXPECTED: {ss}')
+            elif thing == 'L2':
+                if not ss[1].startswith('L#'):
+                    raise ValueError(f'UNEXPECTED: {ss}')
+            elif thing == 'L1d':
+                if not ss[1].startswith('L#'):
+                    raise ValueError(f'UNEXPECTED: {ss}')
+            elif thing == 'L1i':
+                if not ss[1].startswith('L#'):
+                    raise ValueError(f'UNEXPECTED: {ss}')
+            elif thing == 'Core':
+                if not ss[1].startswith('L#'):
+                    raise ValueError(f'UNEXPECTED: {ss}')
+                val = ss[1][2:]
+                self.coreid = int(val)
+            elif thing == 'PU':
+                current_row = len(list(self.row_gen()))
+                if not ss[1].startswith('L#'):
+                    raise ValueError(f'UNEXPECTED: {ss}')
+                if not ss[2].startswith('(P#') or not ss[2].endswith(')'):
+                    raise ValueError(f'UNEXPECTED: {ss}')
+                val = ss[2][3:-1]
+                self.set_val(current_row, 'PID', int(val))
+                self.set_val(current_row, 'CoreID', self.coreid)
+                self.set_val(current_row, 'SocketID', self.socketid)
+                self.set_val(current_row, 'NUMANodeID', self.numanodeid)
+                self.set_val(current_row, 'UnCoreCacheID', self.uncorecacheid)
+            else:
+                if thing not in (
+                    'HostBridge',
+                    'PCIBridge',
+                    'PCI',
+                    'Net',
+                    'OpenFabrics',
+                    'Block(Disk)',
+                    '',
+                ):
+                    raise ValueError(f'UNEXPECTED: {thing}')
 
     def print_golang_struct(self, name):
         print(f'    {name} = &topology.CPUTopology' + '{')
@@ -112,6 +134,6 @@ class LsTopoTable(table.Table):
     def count_numa_nodes(self):
         d = {}
         for row in self.row_gen():
-            core_id = self.get_val(row, 'CoreID')
+            core_id = self.get_val(row, 'NUMANodeID')
             d[core_id] = None
         return len(d.keys())
