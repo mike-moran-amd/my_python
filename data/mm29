@@ -1,0 +1,1046 @@
+Microsoft Windows [Version 10.0.19044.1708]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@139.178.83.26
+The authenticity of host '139.178.83.26 (139.178.83.26)' can't be established.
+ECDSA key fingerprint is SHA256:gHmt6dJYebhCH+pqSuygZqExBoGfO4np3XM+8/ItEkw.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '139.178.83.26' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-113-generic aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Jun  7 19:42:13 UTC 2022
+
+  System load:            0.49
+  Usage of /:             0.3% of 870.81GB
+  Memory usage:           0%
+  Swap usage:             0%
+  Processes:              879
+  Users logged in:        0
+  IPv4 address for bond0: 139.178.83.26
+  IPv6 address for bond0: 2604:1380:4641:3b00::13
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@mm29:~# uname -a
+Linux mm29 5.4.0-113-generic #127-Ubuntu SMP Wed May 18 14:34:18 UTC 2022 aarch64 aarch64 aarch64 GNU/Linux
+root@mm29:~# apt install -y hwloc
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  fontconfig-config fonts-dejavu-core libcairo2 libfontconfig1 libhwloc-plugins libhwloc15 libpciaccess0 libpixman-1-0
+  libxcb-render0 libxcb-shm0 libxnvctrl0 libxrender1 ocl-icd-libopencl1
+Suggested packages:
+  opencl-icd
+The following NEW packages will be installed:
+  fontconfig-config fonts-dejavu-core hwloc libcairo2 libfontconfig1 libhwloc-plugins libhwloc15 libpciaccess0
+  libpixman-1-0 libxcb-render0 libxcb-shm0 libxnvctrl0 libxrender1 ocl-icd-libopencl1
+0 upgraded, 14 newly installed, 0 to remove and 0 not upgraded.
+Need to get 2227 kB of archives.
+After this operation, 6536 kB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 fonts-dejavu-core all 2.37-1 [1041 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 fontconfig-config all 2.13.1-2ubuntu3 [28.8 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 libfontconfig1 arm64 2.13.1-2ubuntu3 [111 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 libpixman-1-0 arm64 0.38.4-0ubuntu1 [130 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 libxcb-render0 arm64 1.14-2 [14.7 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 libxcb-shm0 arm64 1.14-2 [5560 B]
+Get:7 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 libxrender1 arm64 1:0.9.10-1 [16.1 kB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 libcairo2 arm64 1.16.0-4ubuntu1 [538 kB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports focal/universe arm64 libhwloc15 arm64 2.1.0+dfsg-4 [116 kB]
+Get:10 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 libpciaccess0 arm64 0.16-0ubuntu1 [17.1 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports focal-updates/main arm64 libxnvctrl0 arm64 470.57.01-0ubuntu0.20.04.3 [10.6 kB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports focal/universe arm64 hwloc arm64 2.1.0+dfsg-4 [157 kB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports focal/main arm64 ocl-icd-libopencl1 arm64 2.2.11-1ubuntu1 [29.2 kB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports focal/universe arm64 libhwloc-plugins arm64 2.1.0+dfsg-4 [13.8 kB]
+Fetched 2227 kB in 2s (1423 kB/s)
+Selecting previously unselected package fonts-dejavu-core.
+(Reading database ... 105964 files and directories currently installed.)
+Preparing to unpack .../00-fonts-dejavu-core_2.37-1_all.deb ...
+Unpacking fonts-dejavu-core (2.37-1) ...
+Selecting previously unselected package fontconfig-config.
+Preparing to unpack .../01-fontconfig-config_2.13.1-2ubuntu3_all.deb ...
+Unpacking fontconfig-config (2.13.1-2ubuntu3) ...
+Selecting previously unselected package libfontconfig1:arm64.
+Preparing to unpack .../02-libfontconfig1_2.13.1-2ubuntu3_arm64.deb ...
+Unpacking libfontconfig1:arm64 (2.13.1-2ubuntu3) ...
+Selecting previously unselected package libpixman-1-0:arm64.
+Preparing to unpack .../03-libpixman-1-0_0.38.4-0ubuntu1_arm64.deb ...
+Unpacking libpixman-1-0:arm64 (0.38.4-0ubuntu1) ...
+Selecting previously unselected package libxcb-render0:arm64.
+Preparing to unpack .../04-libxcb-render0_1.14-2_arm64.deb ...
+Unpacking libxcb-render0:arm64 (1.14-2) ...
+Selecting previously unselected package libxcb-shm0:arm64.
+Preparing to unpack .../05-libxcb-shm0_1.14-2_arm64.deb ...
+Unpacking libxcb-shm0:arm64 (1.14-2) ...
+Selecting previously unselected package libxrender1:arm64.
+Preparing to unpack .../06-libxrender1_1%3a0.9.10-1_arm64.deb ...
+Unpacking libxrender1:arm64 (1:0.9.10-1) ...
+Selecting previously unselected package libcairo2:arm64.
+Preparing to unpack .../07-libcairo2_1.16.0-4ubuntu1_arm64.deb ...
+Unpacking libcairo2:arm64 (1.16.0-4ubuntu1) ...
+Selecting previously unselected package libhwloc15:arm64.
+Preparing to unpack .../08-libhwloc15_2.1.0+dfsg-4_arm64.deb ...
+Unpacking libhwloc15:arm64 (2.1.0+dfsg-4) ...
+Selecting previously unselected package libpciaccess0:arm64.
+Preparing to unpack .../09-libpciaccess0_0.16-0ubuntu1_arm64.deb ...
+Unpacking libpciaccess0:arm64 (0.16-0ubuntu1) ...
+Selecting previously unselected package libxnvctrl0:arm64.
+Preparing to unpack .../10-libxnvctrl0_470.57.01-0ubuntu0.20.04.3_arm64.deb ...
+Unpacking libxnvctrl0:arm64 (470.57.01-0ubuntu0.20.04.3) ...
+Selecting previously unselected package hwloc.
+Preparing to unpack .../11-hwloc_2.1.0+dfsg-4_arm64.deb ...
+Unpacking hwloc (2.1.0+dfsg-4) ...
+Selecting previously unselected package ocl-icd-libopencl1:arm64.
+Preparing to unpack .../12-ocl-icd-libopencl1_2.2.11-1ubuntu1_arm64.deb ...
+Unpacking ocl-icd-libopencl1:arm64 (2.2.11-1ubuntu1) ...
+Selecting previously unselected package libhwloc-plugins:arm64.
+Preparing to unpack .../13-libhwloc-plugins_2.1.0+dfsg-4_arm64.deb ...
+Unpacking libhwloc-plugins:arm64 (2.1.0+dfsg-4) ...
+Setting up libpixman-1-0:arm64 (0.38.4-0ubuntu1) ...
+Setting up libpciaccess0:arm64 (0.16-0ubuntu1) ...
+Setting up libxrender1:arm64 (1:0.9.10-1) ...
+Setting up libxcb-render0:arm64 (1.14-2) ...
+Setting up libxcb-shm0:arm64 (1.14-2) ...
+Setting up libxnvctrl0:arm64 (470.57.01-0ubuntu0.20.04.3) ...
+Setting up libhwloc15:arm64 (2.1.0+dfsg-4) ...
+Setting up fonts-dejavu-core (2.37-1) ...
+Setting up ocl-icd-libopencl1:arm64 (2.2.11-1ubuntu1) ...
+Setting up fontconfig-config (2.13.1-2ubuntu3) ...
+Setting up libhwloc-plugins:arm64 (2.1.0+dfsg-4) ...
+Setting up libfontconfig1:arm64 (2.13.1-2ubuntu3) ...
+Setting up libcairo2:arm64 (1.16.0-4ubuntu1) ...
+Setting up hwloc (2.1.0+dfsg-4) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for mime-support (3.64ubuntu1) ...
+root@mm29:~# lstopo
+Machine (251GB total)
+  Package L#0
+    NUMANode L#0 (P#0 251GB)
+    Die L#0 + L2 L#0 (1024KB) + L1d L#0 (64KB) + L1i L#0 (64KB) + Core L#0 + PU L#0 (P#0)
+    Die L#1 + L2 L#1 (1024KB) + L1d L#1 (64KB) + L1i L#1 (64KB) + Core L#1 + PU L#1 (P#1)
+    Die L#2 + L2 L#2 (1024KB) + L1d L#2 (64KB) + L1i L#2 (64KB) + Core L#2 + PU L#2 (P#2)
+    Die L#3 + L2 L#3 (1024KB) + L1d L#3 (64KB) + L1i L#3 (64KB) + Core L#3 + PU L#3 (P#3)
+    Die L#4 + L2 L#4 (1024KB) + L1d L#4 (64KB) + L1i L#4 (64KB) + Core L#4 + PU L#4 (P#4)
+    Die L#5 + L2 L#5 (1024KB) + L1d L#5 (64KB) + L1i L#5 (64KB) + Core L#5 + PU L#5 (P#5)
+    Die L#6 + L2 L#6 (1024KB) + L1d L#6 (64KB) + L1i L#6 (64KB) + Core L#6 + PU L#6 (P#6)
+    Die L#7 + L2 L#7 (1024KB) + L1d L#7 (64KB) + L1i L#7 (64KB) + Core L#7 + PU L#7 (P#7)
+    Die L#8 + L2 L#8 (1024KB) + L1d L#8 (64KB) + L1i L#8 (64KB) + Core L#8 + PU L#8 (P#8)
+    Die L#9 + L2 L#9 (1024KB) + L1d L#9 (64KB) + L1i L#9 (64KB) + Core L#9 + PU L#9 (P#9)
+    Die L#10 + L2 L#10 (1024KB) + L1d L#10 (64KB) + L1i L#10 (64KB) + Core L#10 + PU L#10 (P#10)
+    Die L#11 + L2 L#11 (1024KB) + L1d L#11 (64KB) + L1i L#11 (64KB) + Core L#11 + PU L#11 (P#11)
+    Die L#12 + L2 L#12 (1024KB) + L1d L#12 (64KB) + L1i L#12 (64KB) + Core L#12 + PU L#12 (P#12)
+    Die L#13 + L2 L#13 (1024KB) + L1d L#13 (64KB) + L1i L#13 (64KB) + Core L#13 + PU L#13 (P#13)
+    Die L#14 + L2 L#14 (1024KB) + L1d L#14 (64KB) + L1i L#14 (64KB) + Core L#14 + PU L#14 (P#14)
+    Die L#15 + L2 L#15 (1024KB) + L1d L#15 (64KB) + L1i L#15 (64KB) + Core L#15 + PU L#15 (P#15)
+    Die L#16 + L2 L#16 (1024KB) + L1d L#16 (64KB) + L1i L#16 (64KB) + Core L#16 + PU L#16 (P#16)
+    Die L#17 + L2 L#17 (1024KB) + L1d L#17 (64KB) + L1i L#17 (64KB) + Core L#17 + PU L#17 (P#17)
+    Die L#18 + L2 L#18 (1024KB) + L1d L#18 (64KB) + L1i L#18 (64KB) + Core L#18 + PU L#18 (P#18)
+    Die L#19 + L2 L#19 (1024KB) + L1d L#19 (64KB) + L1i L#19 (64KB) + Core L#19 + PU L#19 (P#19)
+    Die L#20 + L2 L#20 (1024KB) + L1d L#20 (64KB) + L1i L#20 (64KB) + Core L#20 + PU L#20 (P#20)
+    Die L#21 + L2 L#21 (1024KB) + L1d L#21 (64KB) + L1i L#21 (64KB) + Core L#21 + PU L#21 (P#21)
+    Die L#22 + L2 L#22 (1024KB) + L1d L#22 (64KB) + L1i L#22 (64KB) + Core L#22 + PU L#22 (P#22)
+    Die L#23 + L2 L#23 (1024KB) + L1d L#23 (64KB) + L1i L#23 (64KB) + Core L#23 + PU L#23 (P#23)
+    Die L#24 + L2 L#24 (1024KB) + L1d L#24 (64KB) + L1i L#24 (64KB) + Core L#24 + PU L#24 (P#24)
+    Die L#25 + L2 L#25 (1024KB) + L1d L#25 (64KB) + L1i L#25 (64KB) + Core L#25 + PU L#25 (P#25)
+    Die L#26 + L2 L#26 (1024KB) + L1d L#26 (64KB) + L1i L#26 (64KB) + Core L#26 + PU L#26 (P#26)
+    Die L#27 + L2 L#27 (1024KB) + L1d L#27 (64KB) + L1i L#27 (64KB) + Core L#27 + PU L#27 (P#27)
+    Die L#28 + L2 L#28 (1024KB) + L1d L#28 (64KB) + L1i L#28 (64KB) + Core L#28 + PU L#28 (P#28)
+    Die L#29 + L2 L#29 (1024KB) + L1d L#29 (64KB) + L1i L#29 (64KB) + Core L#29 + PU L#29 (P#29)
+    Die L#30 + L2 L#30 (1024KB) + L1d L#30 (64KB) + L1i L#30 (64KB) + Core L#30 + PU L#30 (P#30)
+    Die L#31 + L2 L#31 (1024KB) + L1d L#31 (64KB) + L1i L#31 (64KB) + Core L#31 + PU L#31 (P#31)
+    Die L#32 + L2 L#32 (1024KB) + L1d L#32 (64KB) + L1i L#32 (64KB) + Core L#32 + PU L#32 (P#32)
+    Die L#33 + L2 L#33 (1024KB) + L1d L#33 (64KB) + L1i L#33 (64KB) + Core L#33 + PU L#33 (P#33)
+    Die L#34 + L2 L#34 (1024KB) + L1d L#34 (64KB) + L1i L#34 (64KB) + Core L#34 + PU L#34 (P#34)
+    Die L#35 + L2 L#35 (1024KB) + L1d L#35 (64KB) + L1i L#35 (64KB) + Core L#35 + PU L#35 (P#35)
+    Die L#36 + L2 L#36 (1024KB) + L1d L#36 (64KB) + L1i L#36 (64KB) + Core L#36 + PU L#36 (P#36)
+    Die L#37 + L2 L#37 (1024KB) + L1d L#37 (64KB) + L1i L#37 (64KB) + Core L#37 + PU L#37 (P#37)
+    Die L#38 + L2 L#38 (1024KB) + L1d L#38 (64KB) + L1i L#38 (64KB) + Core L#38 + PU L#38 (P#38)
+    Die L#39 + L2 L#39 (1024KB) + L1d L#39 (64KB) + L1i L#39 (64KB) + Core L#39 + PU L#39 (P#39)
+    Die L#40 + L2 L#40 (1024KB) + L1d L#40 (64KB) + L1i L#40 (64KB) + Core L#40 + PU L#40 (P#40)
+    Die L#41 + L2 L#41 (1024KB) + L1d L#41 (64KB) + L1i L#41 (64KB) + Core L#41 + PU L#41 (P#41)
+    Die L#42 + L2 L#42 (1024KB) + L1d L#42 (64KB) + L1i L#42 (64KB) + Core L#42 + PU L#42 (P#42)
+    Die L#43 + L2 L#43 (1024KB) + L1d L#43 (64KB) + L1i L#43 (64KB) + Core L#43 + PU L#43 (P#43)
+    Die L#44 + L2 L#44 (1024KB) + L1d L#44 (64KB) + L1i L#44 (64KB) + Core L#44 + PU L#44 (P#44)
+    Die L#45 + L2 L#45 (1024KB) + L1d L#45 (64KB) + L1i L#45 (64KB) + Core L#45 + PU L#45 (P#45)
+    Die L#46 + L2 L#46 (1024KB) + L1d L#46 (64KB) + L1i L#46 (64KB) + Core L#46 + PU L#46 (P#46)
+    Die L#47 + L2 L#47 (1024KB) + L1d L#47 (64KB) + L1i L#47 (64KB) + Core L#47 + PU L#47 (P#47)
+    Die L#48 + L2 L#48 (1024KB) + L1d L#48 (64KB) + L1i L#48 (64KB) + Core L#48 + PU L#48 (P#48)
+    Die L#49 + L2 L#49 (1024KB) + L1d L#49 (64KB) + L1i L#49 (64KB) + Core L#49 + PU L#49 (P#49)
+    Die L#50 + L2 L#50 (1024KB) + L1d L#50 (64KB) + L1i L#50 (64KB) + Core L#50 + PU L#50 (P#50)
+    Die L#51 + L2 L#51 (1024KB) + L1d L#51 (64KB) + L1i L#51 (64KB) + Core L#51 + PU L#51 (P#51)
+    Die L#52 + L2 L#52 (1024KB) + L1d L#52 (64KB) + L1i L#52 (64KB) + Core L#52 + PU L#52 (P#52)
+    Die L#53 + L2 L#53 (1024KB) + L1d L#53 (64KB) + L1i L#53 (64KB) + Core L#53 + PU L#53 (P#53)
+    Die L#54 + L2 L#54 (1024KB) + L1d L#54 (64KB) + L1i L#54 (64KB) + Core L#54 + PU L#54 (P#54)
+    Die L#55 + L2 L#55 (1024KB) + L1d L#55 (64KB) + L1i L#55 (64KB) + Core L#55 + PU L#55 (P#55)
+    Die L#56 + L2 L#56 (1024KB) + L1d L#56 (64KB) + L1i L#56 (64KB) + Core L#56 + PU L#56 (P#56)
+    Die L#57 + L2 L#57 (1024KB) + L1d L#57 (64KB) + L1i L#57 (64KB) + Core L#57 + PU L#57 (P#57)
+    Die L#58 + L2 L#58 (1024KB) + L1d L#58 (64KB) + L1i L#58 (64KB) + Core L#58 + PU L#58 (P#58)
+    Die L#59 + L2 L#59 (1024KB) + L1d L#59 (64KB) + L1i L#59 (64KB) + Core L#59 + PU L#59 (P#59)
+    Die L#60 + L2 L#60 (1024KB) + L1d L#60 (64KB) + L1i L#60 (64KB) + Core L#60 + PU L#60 (P#60)
+    Die L#61 + L2 L#61 (1024KB) + L1d L#61 (64KB) + L1i L#61 (64KB) + Core L#61 + PU L#61 (P#61)
+    Die L#62 + L2 L#62 (1024KB) + L1d L#62 (64KB) + L1i L#62 (64KB) + Core L#62 + PU L#62 (P#62)
+    Die L#63 + L2 L#63 (1024KB) + L1d L#63 (64KB) + L1i L#63 (64KB) + Core L#63 + PU L#63 (P#63)
+    Die L#64 + L2 L#64 (1024KB) + L1d L#64 (64KB) + L1i L#64 (64KB) + Core L#64 + PU L#64 (P#64)
+    Die L#65 + L2 L#65 (1024KB) + L1d L#65 (64KB) + L1i L#65 (64KB) + Core L#65 + PU L#65 (P#65)
+    Die L#66 + L2 L#66 (1024KB) + L1d L#66 (64KB) + L1i L#66 (64KB) + Core L#66 + PU L#66 (P#66)
+    Die L#67 + L2 L#67 (1024KB) + L1d L#67 (64KB) + L1i L#67 (64KB) + Core L#67 + PU L#67 (P#67)
+    Die L#68 + L2 L#68 (1024KB) + L1d L#68 (64KB) + L1i L#68 (64KB) + Core L#68 + PU L#68 (P#68)
+    Die L#69 + L2 L#69 (1024KB) + L1d L#69 (64KB) + L1i L#69 (64KB) + Core L#69 + PU L#69 (P#69)
+    Die L#70 + L2 L#70 (1024KB) + L1d L#70 (64KB) + L1i L#70 (64KB) + Core L#70 + PU L#70 (P#70)
+    Die L#71 + L2 L#71 (1024KB) + L1d L#71 (64KB) + L1i L#71 (64KB) + Core L#71 + PU L#71 (P#71)
+    Die L#72 + L2 L#72 (1024KB) + L1d L#72 (64KB) + L1i L#72 (64KB) + Core L#72 + PU L#72 (P#72)
+    Die L#73 + L2 L#73 (1024KB) + L1d L#73 (64KB) + L1i L#73 (64KB) + Core L#73 + PU L#73 (P#73)
+    Die L#74 + L2 L#74 (1024KB) + L1d L#74 (64KB) + L1i L#74 (64KB) + Core L#74 + PU L#74 (P#74)
+    Die L#75 + L2 L#75 (1024KB) + L1d L#75 (64KB) + L1i L#75 (64KB) + Core L#75 + PU L#75 (P#75)
+    Die L#76 + L2 L#76 (1024KB) + L1d L#76 (64KB) + L1i L#76 (64KB) + Core L#76 + PU L#76 (P#76)
+    Die L#77 + L2 L#77 (1024KB) + L1d L#77 (64KB) + L1i L#77 (64KB) + Core L#77 + PU L#77 (P#77)
+    Die L#78 + L2 L#78 (1024KB) + L1d L#78 (64KB) + L1i L#78 (64KB) + Core L#78 + PU L#78 (P#78)
+    Die L#79 + L2 L#79 (1024KB) + L1d L#79 (64KB) + L1i L#79 (64KB) + Core L#79 + PU L#79 (P#79)
+  HostBridge
+    PCIBridge
+      PCI 0001:01:00.0 (Ethernet)
+        Net "enP1p1s0f0"
+        OpenFabrics "mlx5_bond_0"
+      PCI 0001:01:00.1 (Ethernet)
+        Net "enP1p1s0f1"
+  HostBridge
+    PCIBridge
+      PCI 0003:03:00.0 (Ethernet)
+        Net "eno1"
+      PCI 0003:03:00.1 (Ethernet)
+        Net "eno2"
+  HostBridge
+    PCIBridge
+      PCIBridge
+        PCI 0004:02:00.0 (VGA)
+  HostBridge
+    PCIBridge
+      PCI 0005:03:00.0 (NVMExp)
+        Block(Disk) "nvme0n1"
+    PCIBridge
+      PCI 0005:04:00.0 (NVMExp)
+        Block(Disk) "nvme1n1"
+root@mm29:~# cat /proc/cpuinfo
+processor       : 0
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 1
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 2
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 3
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 4
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 5
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 6
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 7
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 8
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 9
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 10
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 11
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 12
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 13
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 14
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 15
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 16
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 17
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 18
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 19
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 20
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 21
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 22
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 23
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 24
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 25
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 26
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 27
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 28
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 29
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 30
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 31
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 32
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 33
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 34
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 35
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 36
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 37
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 38
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 39
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 40
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 41
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 42
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 43
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 44
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 45
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 46
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 47
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 48
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 49
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 50
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 51
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 52
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 53
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 54
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 55
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 56
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 57
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 58
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 59
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 60
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 61
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 62
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 63
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 64
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 65
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 66
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 67
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 68
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 69
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 70
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 71
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 72
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 73
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 74
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 75
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 76
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 77
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 78
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+processor       : 79
+BogoMIPS        : 50.00
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x3
+CPU part        : 0xd0c
+CPU revision    : 1
+
+root@mm29:~# cat /proc/cpuinfolscpu
+cat: /proc/cpuinfolscpu: No such file or directory
+root@mm29:~# cat /proc/meminfo
+MemTotal:       262953688 kB
+MemFree:        260854572 kB
+MemAvailable:   259581044 kB
+Buffers:           43124 kB
+Cached:           514204 kB
+SwapCached:            0 kB
+Active:           314132 kB
+Inactive:         308772 kB
+Active(anon):      69072 kB
+Inactive(anon):      340 kB
+Active(file):     245060 kB
+Inactive(file):   308432 kB
+Unevictable:       16820 kB
+Mlocked:           16820 kB
+SwapTotal:       9376920 kB
+SwapFree:        9376920 kB
+Dirty:                 4 kB
+Writeback:             0 kB
+AnonPages:         82580 kB
+Mapped:            66460 kB
+Shmem:              2652 kB
+KReclaimable:     122568 kB
+Slab:             607520 kB
+SReclaimable:     122568 kB
+SUnreclaim:       484952 kB
+KernelStack:       16448 kB
+PageTables:         2372 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    140853764 kB
+Committed_AS:     998216 kB
+VmallocTotal:   135290159040 kB
+VmallocUsed:       33704 kB
+VmallocChunk:          0 kB
+Percpu:            63360 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+CmaTotal:          32768 kB
+CmaFree:            3600 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+root@mm29:~# lscpu
+Architecture:                    aarch64
+CPU op-mode(s):                  32-bit, 64-bit
+Byte Order:                      Little Endian
+CPU(s):                          80
+On-line CPU(s) list:             0-79
+Thread(s) per core:              1
+Core(s) per socket:              80
+Socket(s):                       1
+NUMA node(s):                    1
+Vendor ID:                       ARM
+Model:                           1
+Model name:                      Neoverse-N1
+Stepping:                        r3p1
+CPU max MHz:                     3000.0000
+CPU min MHz:                     1000.0000
+BogoMIPS:                        50.00
+L1d cache:                       5 MiB
+L1i cache:                       5 MiB
+L2 cache:                        80 MiB
+NUMA node0 CPU(s):               0-79
+Vulnerability Itlb multihit:     Not affected
+Vulnerability L1tf:              Not affected
+Vulnerability Mds:               Not affected
+Vulnerability Meltdown:          Not affected
+Vulnerability Spec store bypass: Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:        Mitigation; __user pointer sanitization
+Vulnerability Spectre v2:        Mitigation; CSV2, BHB
+Vulnerability Srbds:             Not affected
+Vulnerability Tsx async abort:   Not affected
+Flags:                           fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dc
+                                 pop asimddp ssbs
+root@mm29:~#
