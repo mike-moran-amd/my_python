@@ -56,7 +56,8 @@ def test_test():
     #name = 'mm22'  #  AMD_EPYC_7443P_24_Core_Processor
     #name = 'mm27'  #  Intel_R__Xeon_R__E_2378G_CPU___2_80GHz
     #name = 'mm28'  #  REPEAT AMD_EPYC_7402P_24_Core_Processor
-    name = 'mm29'  #
+    #name = 'mm29'  #  FIXME
+    name = 'mm30'  # Intel_R__Xeon_R__Gold_5120_CPU___2_20GHz
     session_data = data.string_from(name)
     st = data.SessionData(session_data).session_table()
     print(st.pf(title='block', cols=['cwd', 'command', 'count']))

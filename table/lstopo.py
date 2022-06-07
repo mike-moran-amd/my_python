@@ -59,6 +59,8 @@ class LsTopoTable(table.Table):
             elif thing == 'L3':
                 if not ss[1].startswith('L#'):
                     raise ValueError(f'UNEXPECTED: {ss}')
+                val = ss[1][2:]
+                self.uncorecacheid = int(val)
             elif thing == 'L2':
                 if not ss[1].startswith('L#'):
                     raise ValueError(f'UNEXPECTED: {ss}')
