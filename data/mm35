@@ -1,0 +1,1616 @@
+Microsoft Windows [Version 10.0.19044.1708]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@145.40.81.45
+The authenticity of host '145.40.81.45 (145.40.81.45)' can't be established.
+ECDSA key fingerprint is SHA256:XTiiBCfYHF0LsAf7PWB3WL4pu1qYU/z0geLpiWbbcBQ.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '145.40.81.45' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Thu Jun 16 17:00:32 UTC 2022
+
+  System load:            0.31
+  Usage of /:             1.5% of 218.06GB
+  Memory usage:           0%
+  Swap usage:             0%
+  Processes:              322
+  Users logged in:        0
+  IPv4 address for bond0: 145.40.81.45
+  IPv6 address for bond0: 2604:1380:4641:3b00::d
+
+8 updates can be applied immediately.
+8 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@mm35:~# apt install -y hwloc
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  fontconfig-config fonts-dejavu-core libcairo2 libfontconfig1 libhwloc-plugins libhwloc15 libpciaccess0 libpixman-1-0
+  libxcb-render0 libxcb-shm0 libxnvctrl0 libxrender1 ocl-icd-libopencl1
+Suggested packages:
+  libhwloc-contrib-plugins opencl-icd
+The following NEW packages will be installed:
+  fontconfig-config fonts-dejavu-core hwloc libcairo2 libfontconfig1 libhwloc-plugins libhwloc15 libpciaccess0
+  libpixman-1-0 libxcb-render0 libxcb-shm0 libxnvctrl0 libxrender1 ocl-icd-libopencl1
+0 upgraded, 14 newly installed, 0 to remove and 4 not upgraded.
+Need to get 2415 kB of archives.
+After this operation, 7101 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal/main amd64 fonts-dejavu-core all 2.37-1 [1041 kB]
+Get:2 http://archive.ubuntu.com/ubuntu focal/main amd64 fontconfig-config all 2.13.1-2ubuntu3 [28.8 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal/main amd64 libfontconfig1 amd64 2.13.1-2ubuntu3 [114 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal/main amd64 libpixman-1-0 amd64 0.38.4-0ubuntu1 [227 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal/main amd64 libxcb-render0 amd64 1.14-2 [14.8 kB]
+Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 libxcb-shm0 amd64 1.14-2 [5584 B]
+Get:7 http://archive.ubuntu.com/ubuntu focal/main amd64 libxrender1 amd64 1:0.9.10-1 [18.7 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal/main amd64 libcairo2 amd64 1.16.0-4ubuntu1 [583 kB]
+Get:9 http://archive.ubuntu.com/ubuntu focal/universe amd64 libhwloc15 amd64 2.1.0+dfsg-4 [134 kB]
+Get:10 http://archive.ubuntu.com/ubuntu focal/main amd64 libpciaccess0 amd64 0.16-0ubuntu1 [17.9 kB]
+Get:11 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libxnvctrl0 amd64 470.57.01-0ubuntu0.20.04.3 [10.9 kB]
+Get:12 http://archive.ubuntu.com/ubuntu focal/universe amd64 hwloc amd64 2.1.0+dfsg-4 [174 kB]
+Get:13 http://archive.ubuntu.com/ubuntu focal/main amd64 ocl-icd-libopencl1 amd64 2.2.11-1ubuntu1 [30.3 kB]
+Get:14 http://archive.ubuntu.com/ubuntu focal/universe amd64 libhwloc-plugins amd64 2.1.0+dfsg-4 [14.4 kB]
+Fetched 2415 kB in 1s (1870 kB/s)
+Selecting previously unselected package fonts-dejavu-core.
+(Reading database ... 102121 files and directories currently installed.)
+Preparing to unpack .../00-fonts-dejavu-core_2.37-1_all.deb ...
+Unpacking fonts-dejavu-core (2.37-1) ...
+Selecting previously unselected package fontconfig-config.
+Preparing to unpack .../01-fontconfig-config_2.13.1-2ubuntu3_all.deb ...
+Unpacking fontconfig-config (2.13.1-2ubuntu3) ...
+Selecting previously unselected package libfontconfig1:amd64.
+Preparing to unpack .../02-libfontconfig1_2.13.1-2ubuntu3_amd64.deb ...
+Unpacking libfontconfig1:amd64 (2.13.1-2ubuntu3) ...
+Selecting previously unselected package libpixman-1-0:amd64.
+Preparing to unpack .../03-libpixman-1-0_0.38.4-0ubuntu1_amd64.deb ...
+Unpacking libpixman-1-0:amd64 (0.38.4-0ubuntu1) ...
+Selecting previously unselected package libxcb-render0:amd64.
+Preparing to unpack .../04-libxcb-render0_1.14-2_amd64.deb ...
+Unpacking libxcb-render0:amd64 (1.14-2) ...
+Selecting previously unselected package libxcb-shm0:amd64.
+Preparing to unpack .../05-libxcb-shm0_1.14-2_amd64.deb ...
+Unpacking libxcb-shm0:amd64 (1.14-2) ...
+Selecting previously unselected package libxrender1:amd64.
+Preparing to unpack .../06-libxrender1_1%3a0.9.10-1_amd64.deb ...
+Unpacking libxrender1:amd64 (1:0.9.10-1) ...
+Selecting previously unselected package libcairo2:amd64.
+Preparing to unpack .../07-libcairo2_1.16.0-4ubuntu1_amd64.deb ...
+Unpacking libcairo2:amd64 (1.16.0-4ubuntu1) ...
+Selecting previously unselected package libhwloc15:amd64.
+Preparing to unpack .../08-libhwloc15_2.1.0+dfsg-4_amd64.deb ...
+Unpacking libhwloc15:amd64 (2.1.0+dfsg-4) ...
+Selecting previously unselected package libpciaccess0:amd64.
+Preparing to unpack .../09-libpciaccess0_0.16-0ubuntu1_amd64.deb ...
+Unpacking libpciaccess0:amd64 (0.16-0ubuntu1) ...
+Selecting previously unselected package libxnvctrl0:amd64.
+Preparing to unpack .../10-libxnvctrl0_470.57.01-0ubuntu0.20.04.3_amd64.deb ...
+Unpacking libxnvctrl0:amd64 (470.57.01-0ubuntu0.20.04.3) ...
+Selecting previously unselected package hwloc.
+Preparing to unpack .../11-hwloc_2.1.0+dfsg-4_amd64.deb ...
+Unpacking hwloc (2.1.0+dfsg-4) ...
+Selecting previously unselected package ocl-icd-libopencl1:amd64.
+Preparing to unpack .../12-ocl-icd-libopencl1_2.2.11-1ubuntu1_amd64.deb ...
+Unpacking ocl-icd-libopencl1:amd64 (2.2.11-1ubuntu1) ...
+Selecting previously unselected package libhwloc-plugins:amd64.
+Preparing to unpack .../13-libhwloc-plugins_2.1.0+dfsg-4_amd64.deb ...
+Unpacking libhwloc-plugins:amd64 (2.1.0+dfsg-4) ...
+Setting up libpixman-1-0:amd64 (0.38.4-0ubuntu1) ...
+Setting up libpciaccess0:amd64 (0.16-0ubuntu1) ...
+Setting up libxrender1:amd64 (1:0.9.10-1) ...
+Setting up libxcb-render0:amd64 (1.14-2) ...
+Setting up libxcb-shm0:amd64 (1.14-2) ...
+Setting up libxnvctrl0:amd64 (470.57.01-0ubuntu0.20.04.3) ...
+Setting up libhwloc15:amd64 (2.1.0+dfsg-4) ...
+Setting up fonts-dejavu-core (2.37-1) ...
+Setting up ocl-icd-libopencl1:amd64 (2.2.11-1ubuntu1) ...
+Setting up fontconfig-config (2.13.1-2ubuntu3) ...
+Setting up libhwloc-plugins:amd64 (2.1.0+dfsg-4) ...
+Setting up libfontconfig1:amd64 (2.13.1-2ubuntu3) ...
+Setting up libcairo2:amd64 (1.16.0-4ubuntu1) ...
+Setting up hwloc (2.1.0+dfsg-4) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for mime-support (3.64ubuntu1) ...
+root@mm35:~# uname -a
+Linux mm35 5.13.0-44-generic #49~20.04.1-Ubuntu SMP Wed May 18 18:44:28 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+root@mm35:~# lstopo
+Machine (62GB total)
+  Package L#0
+    NUMANode L#0 (P#0 62GB)
+    L3 L#0 (16MB)
+      L2 L#0 (512KB) + L1d L#0 (32KB) + L1i L#0 (32KB) + Core L#0 + PU L#0 (P#0)
+      L2 L#1 (512KB) + L1d L#1 (32KB) + L1i L#1 (32KB) + Core L#1 + PU L#1 (P#1)
+      L2 L#2 (512KB) + L1d L#2 (32KB) + L1i L#2 (32KB) + Core L#2 + PU L#2 (P#2)
+    L3 L#1 (16MB)
+      L2 L#3 (512KB) + L1d L#3 (32KB) + L1i L#3 (32KB) + Core L#3 + PU L#3 (P#3)
+      L2 L#4 (512KB) + L1d L#4 (32KB) + L1i L#4 (32KB) + Core L#4 + PU L#4 (P#4)
+      L2 L#5 (512KB) + L1d L#5 (32KB) + L1i L#5 (32KB) + Core L#5 + PU L#5 (P#5)
+    L3 L#2 (16MB)
+      L2 L#6 (512KB) + L1d L#6 (32KB) + L1i L#6 (32KB) + Core L#6 + PU L#6 (P#6)
+      L2 L#7 (512KB) + L1d L#7 (32KB) + L1i L#7 (32KB) + Core L#7 + PU L#7 (P#7)
+      L2 L#8 (512KB) + L1d L#8 (32KB) + L1i L#8 (32KB) + Core L#8 + PU L#8 (P#8)
+    L3 L#3 (16MB)
+      L2 L#9 (512KB) + L1d L#9 (32KB) + L1i L#9 (32KB) + Core L#9 + PU L#9 (P#9)
+      L2 L#10 (512KB) + L1d L#10 (32KB) + L1i L#10 (32KB) + Core L#10 + PU L#10 (P#10)
+      L2 L#11 (512KB) + L1d L#11 (32KB) + L1i L#11 (32KB) + Core L#11 + PU L#11 (P#11)
+    L3 L#4 (16MB)
+      L2 L#12 (512KB) + L1d L#12 (32KB) + L1i L#12 (32KB) + Core L#12 + PU L#12 (P#12)
+      L2 L#13 (512KB) + L1d L#13 (32KB) + L1i L#13 (32KB) + Core L#13 + PU L#13 (P#13)
+      L2 L#14 (512KB) + L1d L#14 (32KB) + L1i L#14 (32KB) + Core L#14 + PU L#14 (P#14)
+    L3 L#5 (16MB)
+      L2 L#15 (512KB) + L1d L#15 (32KB) + L1i L#15 (32KB) + Core L#15 + PU L#15 (P#15)
+      L2 L#16 (512KB) + L1d L#16 (32KB) + L1i L#16 (32KB) + Core L#16 + PU L#16 (P#16)
+      L2 L#17 (512KB) + L1d L#17 (32KB) + L1i L#17 (32KB) + Core L#17 + PU L#17 (P#17)
+    L3 L#6 (16MB)
+      L2 L#18 (512KB) + L1d L#18 (32KB) + L1i L#18 (32KB) + Core L#18 + PU L#18 (P#18)
+      L2 L#19 (512KB) + L1d L#19 (32KB) + L1i L#19 (32KB) + Core L#19 + PU L#19 (P#19)
+      L2 L#20 (512KB) + L1d L#20 (32KB) + L1i L#20 (32KB) + Core L#20 + PU L#20 (P#20)
+    L3 L#7 (16MB)
+      L2 L#21 (512KB) + L1d L#21 (32KB) + L1i L#21 (32KB) + Core L#21 + PU L#21 (P#21)
+      L2 L#22 (512KB) + L1d L#22 (32KB) + L1i L#22 (32KB) + Core L#22 + PU L#22 (P#22)
+      L2 L#23 (512KB) + L1d L#23 (32KB) + L1i L#23 (32KB) + Core L#23 + PU L#23 (P#23)
+  HostBridge
+    PCIBridge
+      PCI 01:00.0 (SAS)
+        Block(Disk) "sdd"
+        Block(Disk) "sdc"
+  HostBridge
+    PCIBridge
+      PCI 41:00.0 (Ethernet)
+        Net "ens3f0"
+      PCI 41:00.1 (Ethernet)
+        Net "ens3f1"
+  HostBridge
+    PCIBridge
+      PCI c3:00.0 (SATA)
+        Block(Disk) "sdb"
+        Block(Disk) "sda"
+    PCIBridge
+      PCIBridge
+        PCI c2:00.0 (VGA)
+root@mm35:~# lscpu
+Architecture:                    x86_64
+CPU op-mode(s):                  32-bit, 64-bit
+Byte Order:                      Little Endian
+Address sizes:                   43 bits physical, 48 bits virtual
+CPU(s):                          24
+On-line CPU(s) list:             0-23
+Thread(s) per core:              1
+Core(s) per socket:              24
+Socket(s):                       1
+NUMA node(s):                    1
+Vendor ID:                       AuthenticAMD
+CPU family:                      23
+Model:                           49
+Model name:                      AMD EPYC 7402P 24-Core Processor
+Stepping:                        0
+CPU MHz:                         2794.682
+BogoMIPS:                        5589.36
+Virtualization:                  AMD-V
+L1d cache:                       768 KiB
+L1i cache:                       768 KiB
+L2 cache:                        12 MiB
+L3 cache:                        128 MiB
+NUMA node0 CPU(s):               0-23
+Vulnerability Itlb multihit:     Not affected
+Vulnerability L1tf:              Not affected
+Vulnerability Mds:               Not affected
+Vulnerability Meltdown:          Not affected
+Vulnerability Spec store bypass: Mitigation; Speculative Store Bypass disabled via prctl and seccomp
+Vulnerability Spectre v1:        Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:        Mitigation; Retpolines, IBPB conditional, IBRS_FW, STIBP disabled, RSB filling
+Vulnerability Srbds:             Not affected
+Vulnerability Tsx async abort:   Not affected
+Flags:                           fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxs
+                                 r sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl n
+                                 onstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse
+                                 4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy ab
+                                 m sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_
+                                 nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcal
+                                 l fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveop
+                                 t xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf
+                                  xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_cle
+                                 an flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_c
+                                 trl umip rdpid overflow_recov succor smca sme sev sev_es
+root@mm35:~# cat /proc/cpuinfo
+processor       : 0
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 0
+cpu cores       : 24
+apicid          : 0
+initial apicid  : 0
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 1
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 1
+cpu cores       : 24
+apicid          : 1
+initial apicid  : 1
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 2
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 2
+cpu cores       : 24
+apicid          : 2
+initial apicid  : 2
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 3
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 4
+cpu cores       : 24
+apicid          : 4
+initial apicid  : 4
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 4
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 5
+cpu cores       : 24
+apicid          : 5
+initial apicid  : 5
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 5
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 6
+cpu cores       : 24
+apicid          : 6
+initial apicid  : 6
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 6
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 8
+cpu cores       : 24
+apicid          : 8
+initial apicid  : 8
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 7
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2016.136
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 9
+cpu cores       : 24
+apicid          : 9
+initial apicid  : 9
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 8
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 10
+cpu cores       : 24
+apicid          : 10
+initial apicid  : 10
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 9
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 12
+cpu cores       : 24
+apicid          : 12
+initial apicid  : 12
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 10
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 13
+cpu cores       : 24
+apicid          : 13
+initial apicid  : 13
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 11
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 14
+cpu cores       : 24
+apicid          : 14
+initial apicid  : 14
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 12
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 16
+cpu cores       : 24
+apicid          : 16
+initial apicid  : 16
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 13
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 17
+cpu cores       : 24
+apicid          : 17
+initial apicid  : 17
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 14
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 3317.165
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 18
+cpu cores       : 24
+apicid          : 18
+initial apicid  : 18
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 15
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 20
+cpu cores       : 24
+apicid          : 20
+initial apicid  : 20
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 16
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 21
+cpu cores       : 24
+apicid          : 21
+initial apicid  : 21
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 17
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 22
+cpu cores       : 24
+apicid          : 22
+initial apicid  : 22
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 18
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 24
+cpu cores       : 24
+apicid          : 24
+initial apicid  : 24
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 19
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 25
+cpu cores       : 24
+apicid          : 25
+initial apicid  : 25
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 20
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 26
+cpu cores       : 24
+apicid          : 26
+initial apicid  : 26
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 21
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 28
+cpu cores       : 24
+apicid          : 28
+initial apicid  : 28
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 22
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 29
+cpu cores       : 24
+apicid          : 29
+initial apicid  : 29
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+processor       : 23
+vendor_id       : AuthenticAMD
+cpu family      : 23
+model           : 49
+model name      : AMD EPYC 7402P 24-Core Processor
+stepping        : 0
+microcode       : 0x8301052
+cpu MHz         : 2794.682
+cache size      : 512 KB
+physical id     : 0
+siblings        : 24
+core id         : 30
+cpu cores       : 24
+apicid          : 30
+initial apicid  : 30
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 16
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sme sev sev_es
+bugs            : sysret_ss_attrs spectre_v1 spectre_v2 spec_store_bypass
+bogomips        : 5589.36
+TLB size        : 3072 4K pages
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 43 bits physical, 48 bits virtual
+power management: ts ttp tm hwpstate cpb eff_freq_ro [13] [14]
+
+root@mm35:~# cat /proc/meminfo
+MemTotal:       65445104 kB
+MemFree:        64297636 kB
+MemAvailable:   64322440 kB
+Buffers:           24200 kB
+Cached:           579280 kB
+SwapCached:            0 kB
+Active:           247584 kB
+Inactive:         414260 kB
+Active(anon):       3324 kB
+Inactive(anon):    66244 kB
+Active(file):     244260 kB
+Inactive(file):   348016 kB
+Unevictable:       21668 kB
+Mlocked:           18596 kB
+SwapTotal:       1996796 kB
+SwapFree:        1996796 kB
+Dirty:                 4 kB
+Writeback:             0 kB
+AnonPages:         80108 kB
+Mapped:            70412 kB
+Shmem:              6512 kB
+KReclaimable:      55588 kB
+Slab:             187464 kB
+SReclaimable:      55588 kB
+SUnreclaim:       131876 kB
+KernelStack:        6416 kB
+PageTables:         2304 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    34719348 kB
+Committed_AS:     704084 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:       27040 kB
+VmallocChunk:          0 kB
+Percpu:            34560 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:      267072 kB
+DirectMap2M:     4562944 kB
+DirectMap1G:    61865984 kB
+root@mm35:~# vi new_doit
+root@mm35:~# root@mm35:~# . new_doit
+Hit:1 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:2 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:4 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [1579 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:6 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [1924 kB]
+Get:7 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [268 kB]
+Get:8 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [10.6 kB]
+Get:9 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [1031 kB]
+Get:10 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [146 kB]
+Get:11 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 c-n-f Metadata [524 B]
+Get:12 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [708 kB]
+Get:13 http://archive.ubuntu.com/ubuntu focal-updates/main Translation-en [348 kB]
+Get:14 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 c-n-f Metadata [15.6 kB]
+Get:15 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [1093 kB]
+Get:16 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [127 kB]
+Get:17 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [14.6 kB]
+Get:18 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [22.2 kB]
+Get:19 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [512 B]
+Get:20 http://archive.ubuntu.com/ubuntu focal-updates/restricted Translation-en [156 kB]
+Get:21 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 c-n-f Metadata [524 B]
+Get:22 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [931 kB]
+Get:23 http://archive.ubuntu.com/ubuntu focal-updates/universe Translation-en [209 kB]
+Get:24 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [20.9 kB]
+Get:25 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [24.4 kB]
+Get:26 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [596 B]
+Get:27 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 Packages [44.8 kB]
+Get:28 http://archive.ubuntu.com/ubuntu focal-backports/main Translation-en [11.3 kB]
+Get:29 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 c-n-f Metadata [976 B]
+Get:30 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [23.7 kB]
+Get:31 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [860 B]
+Fetched 9048 kB in 2s (3811 kB/s)
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Calculating upgrade... Done
+The following packages have been kept back:
+  linux-generic-hwe-20.04 linux-headers-generic linux-headers-generic-hwe-20.04 linux-headers-virtual
+  linux-image-generic-hwe-20.04 linux-image-virtual linux-virtual
+The following packages will be upgraded:
+  apt apt-transport-https apt-utils ca-certificates cloud-init e2fsprogs intel-microcode kmod libapt-pkg6.0
+  libcom-err2 libext2fs2 libkeyutils1 libkmod2 libntfs-3g883 libss2 logsave ntfs-3g
+17 upgraded, 0 newly installed, 0 to remove and 7 not upgraded.
+8 standard security updates
+Need to get 8477 kB of archives.
+After this operation, 1204 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libapt-pkg6.0 amd64 2.0.9 [839 kB]
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 apt amd64 2.0.9 [1294 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 apt-utils amd64 2.0.9 [213 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 logsave amd64 1.45.5-2ubuntu1.1 [10.2 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libext2fs2 amd64 1.45.5-2ubuntu1.1 [183 kB]
+Get:6 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 e2fsprogs amd64 1.45.5-2ubuntu1.1 [527 kB]
+Get:7 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 ntfs-3g amd64 1:2017.3.23AR.3-3ubuntu1.2 [388 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libntfs-3g883 amd64 1:2017.3.23AR.3-3ubuntu1.2 [150 kB]
+Get:9 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libcom-err2 amd64 1.45.5-2ubuntu1.1 [9548 B]
+Get:10 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libss2 amd64 1.45.5-2ubuntu1.1 [11.3 kB]
+Get:11 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 ca-certificates all 20211016~20.04.1 [144 kB]
+Get:12 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 kmod amd64 27-1ubuntu2.1 [94.8 kB]
+Get:13 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libkmod2 amd64 27-1ubuntu2.1 [45.3 kB]
+Get:14 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libkeyutils1 amd64 1.6-6ubuntu1.1 [10.3 kB]
+Get:15 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 apt-transport-https all 2.0.9 [1704 B]
+Get:16 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 cloud-init all 22.2-0ubuntu1~20.04.2 [494 kB]
+Get:17 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 intel-microcode amd64 3.20220510.0ubuntu0.20.04.1 [4063 kB]
+Fetched 8477 kB in 2s (5475 kB/s)
+Preconfiguring packages ...
+(Reading database ... 102336 files and directories currently installed.)
+Preparing to unpack .../libapt-pkg6.0_2.0.9_amd64.deb ...
+Unpacking libapt-pkg6.0:amd64 (2.0.9) over (2.0.8) ...
+Setting up libapt-pkg6.0:amd64 (2.0.9) ...
+(Reading database ... 102336 files and directories currently installed.)
+Preparing to unpack .../archives/apt_2.0.9_amd64.deb ...
+Unpacking apt (2.0.9) over (2.0.8) ...
+Setting up apt (2.0.9) ...
+(Reading database ... 102336 files and directories currently installed.)
+Preparing to unpack .../apt-utils_2.0.9_amd64.deb ...
+Unpacking apt-utils (2.0.9) over (2.0.8) ...
+Preparing to unpack .../logsave_1.45.5-2ubuntu1.1_amd64.deb ...
+Unpacking logsave (1.45.5-2ubuntu1.1) over (1.45.5-2ubuntu1) ...
+Preparing to unpack .../libext2fs2_1.45.5-2ubuntu1.1_amd64.deb ...
+Unpacking libext2fs2:amd64 (1.45.5-2ubuntu1.1) over (1.45.5-2ubuntu1) ...
+Setting up libext2fs2:amd64 (1.45.5-2ubuntu1.1) ...
+(Reading database ... 102336 files and directories currently installed.)
+Preparing to unpack .../00-e2fsprogs_1.45.5-2ubuntu1.1_amd64.deb ...
+Unpacking e2fsprogs (1.45.5-2ubuntu1.1) over (1.45.5-2ubuntu1) ...
+Preparing to unpack .../01-ntfs-3g_1%3a2017.3.23AR.3-3ubuntu1.2_amd64.deb ...
+Unpacking ntfs-3g (1:2017.3.23AR.3-3ubuntu1.2) over (1:2017.3.23AR.3-3ubuntu1.1) ...
+Preparing to unpack .../02-libntfs-3g883_1%3a2017.3.23AR.3-3ubuntu1.2_amd64.deb ...
+Unpacking libntfs-3g883 (1:2017.3.23AR.3-3ubuntu1.2) over (1:2017.3.23AR.3-3ubuntu1.1) ...
+Preparing to unpack .../03-libcom-err2_1.45.5-2ubuntu1.1_amd64.deb ...
+Unpacking libcom-err2:amd64 (1.45.5-2ubuntu1.1) over (1.45.5-2ubuntu1) ...
+Preparing to unpack .../04-libss2_1.45.5-2ubuntu1.1_amd64.deb ...
+Unpacking libss2:amd64 (1.45.5-2ubuntu1.1) over (1.45.5-2ubuntu1) ...
+Preparing to unpack .../05-ca-certificates_20211016~20.04.1_all.deb ...
+Unpacking ca-certificates (20211016~20.04.1) over (20210119~20.04.2) ...
+Preparing to unpack .../06-kmod_27-1ubuntu2.1_amd64.deb ...
+Unpacking kmod (27-1ubuntu2.1) over (27-1ubuntu2) ...
+Preparing to unpack .../07-libkmod2_27-1ubuntu2.1_amd64.deb ...
+Unpacking libkmod2:amd64 (27-1ubuntu2.1) over (27-1ubuntu2) ...
+Preparing to unpack .../08-libkeyutils1_1.6-6ubuntu1.1_amd64.deb ...
+Unpacking libkeyutils1:amd64 (1.6-6ubuntu1.1) over (1.6-6ubuntu1) ...
+Preparing to unpack .../09-apt-transport-https_2.0.9_all.deb ...
+Unpacking apt-transport-https (2.0.9) over (2.0.8) ...
+Preparing to unpack .../10-cloud-init_22.2-0ubuntu1~20.04.2_all.deb ...
+Unpacking cloud-init (22.2-0ubuntu1~20.04.2) over (22.1-14-g2e17a0d6-0ubuntu1~20.04.3) ...
+Preparing to unpack .../11-intel-microcode_3.20220510.0ubuntu0.20.04.1_amd64.deb ...
+Unpacking intel-microcode (3.20220510.0ubuntu0.20.04.1) over (3.20210608.0ubuntu0.20.04.1) ...
+Setting up libkeyutils1:amd64 (1.6-6ubuntu1.1) ...
+Setting up cloud-init (22.2-0ubuntu1~20.04.2) ...
+
+Configuration file '/etc/cloud/cloud.cfg'
+ ==> Modified (by you or by a script) since installation.
+ ==> Package distributor has shipped an updated version.
+   What would you like to do about it ?  Your options are:
+    Y or I  : install the package maintainer's version
+    N or O  : keep your currently-installed version
+      D     : show the differences between the versions
+      Z     : start a shell to examine the situation
+ The default action is to keep your current version.
+*** cloud.cfg (Y/I/N/O/D/Z) [default=N] ? Installing new version of config file /etc/cloud/cloud.cfg ...
+Setting up apt-utils (2.0.9) ...
+Setting up apt-transport-https (2.0.9) ...
+Setting up intel-microcode (3.20220510.0ubuntu0.20.04.1) ...
+update-initramfs: deferring update (trigger activated)
+intel-microcode: microcode will be updated at next boot
+Setting up libntfs-3g883 (1:2017.3.23AR.3-3ubuntu1.2) ...
+Setting up libcom-err2:amd64 (1.45.5-2ubuntu1.1) ...
+Setting up ntfs-3g (1:2017.3.23AR.3-3ubuntu1.2) ...
+Setting up ca-certificates (20211016~20.04.1) ...
+Updating certificates in /etc/ssl/certs...
+rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+7 added, 8 removed; done.
+Setting up libss2:amd64 (1.45.5-2ubuntu1.1) ...
+Setting up logsave (1.45.5-2ubuntu1.1) ...
+Setting up libkmod2:amd64 (27-1ubuntu2.1) ...
+Setting up e2fsprogs (1.45.5-2ubuntu1.1) ...
+update-initramfs: deferring update (trigger activated)
+e2scrub_all.service is a disabled or a static unit not running, not starting it.
+Setting up kmod (27-1ubuntu2.1) ...
+update-initramfs: deferring update (trigger activated)
+Processing triggers for initramfs-tools (0.136ubuntu6.7) ...
+update-initramfs: Generating /boot/initrd.img-5.13.0-44-generic
+I: The initramfs will attempt to resume from /dev/sda2
+I: (UUID=01d15b68-c209-47b3-9e81-1480257f7198)
+I: Set the RESUME variable to override this.
+Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+Processing triggers for rsyslog (8.2001.0-1ubuntu1.3) ...
+Processing triggers for systemd (245.4-4ubuntu3.17) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for ca-certificates (20211016~20.04.1) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+ca-certificates is already the newest version (20211016~20.04.1).
+ca-certificates set to manually installed.
+curl is already the newest version (7.68.0-1ubuntu2.11).
+curl set to manually installed.
+software-properties-common is already the newest version (0.99.9.8).
+software-properties-common set to manually installed.
+apt-transport-https is already the newest version (2.0.9).
+The following additional packages will be installed:
+  binutils binutils-common binutils-x86-64-linux-gnu cpp cpp-9 dpkg-dev fakeroot g++ g++-9 gcc gcc-9 gcc-9-base
+  libalgorithm-diff-perl libalgorithm-diff-xs-perl libalgorithm-merge-perl libasan5 libatomic1 libbinutils
+  libc-dev-bin libc6-dev libcc1-0 libcrypt-dev libctf-nobfd0 libctf0 libdpkg-perl libfakeroot libfile-fcntllock-perl
+  libgcc-9-dev libgomp1 libisl22 libitm1 liblsan0 libmpc3 libquadmath0 libstdc++-9-dev libtsan0 libubsan1
+  linux-libc-dev make manpages-dev
+Suggested packages:
+  binutils-doc cpp-doc gcc-9-locales debian-keyring g++-multilib g++-9-multilib gcc-9-doc gcc-multilib autoconf
+  automake libtool flex bison gdb gcc-doc gcc-9-multilib glibc-doc bzr libstdc++-9-doc make-doc
+The following NEW packages will be installed:
+  binutils binutils-common binutils-x86-64-linux-gnu build-essential cpp cpp-9 dpkg-dev fakeroot g++ g++-9 gcc gcc-9
+  gcc-9-base gnupg2 libalgorithm-diff-perl libalgorithm-diff-xs-perl libalgorithm-merge-perl libasan5 libatomic1
+  libbinutils libc-dev-bin libc6-dev libcc1-0 libcrypt-dev libctf-nobfd0 libctf0 libdpkg-perl libfakeroot
+  libfile-fcntllock-perl libgcc-9-dev libgomp1 libisl22 libitm1 liblsan0 libmpc3 libquadmath0 libstdc++-9-dev libtsan0
+  libubsan1 linux-libc-dev make manpages-dev
+0 upgraded, 42 newly installed, 0 to remove and 7 not upgraded.
+Need to get 45.4 MB of archives.
+After this operation, 202 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 binutils-common amd64 2.34-6ubuntu1.3 [207 kB]
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libbinutils amd64 2.34-6ubuntu1.3 [474 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libctf-nobfd0 amd64 2.34-6ubuntu1.3 [47.4 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libctf0 amd64 2.34-6ubuntu1.3 [46.6 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 binutils-x86-64-linux-gnu amd64 2.34-6ubuntu1.3 [1613 kB]
+Get:6 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 binutils amd64 2.34-6ubuntu1.3 [3380 B]
+Get:7 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libc-dev-bin amd64 2.31-0ubuntu9.9 [71.8 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-libc-dev amd64 5.4.0-120.136 [1113 kB]
+Get:9 http://archive.ubuntu.com/ubuntu focal/main amd64 libcrypt-dev amd64 1:4.4.10-10ubuntu4 [104 kB]
+Get:10 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libc6-dev amd64 2.31-0ubuntu9.9 [2519 kB]
+Get:11 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 gcc-9-base amd64 9.4.0-1ubuntu1~20.04.1 [19.4 kB]
+Get:12 http://archive.ubuntu.com/ubuntu focal/main amd64 libisl22 amd64 0.22.1-1 [592 kB]
+Get:13 http://archive.ubuntu.com/ubuntu focal/main amd64 libmpc3 amd64 1.1.0-1 [40.8 kB]
+Get:14 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 cpp-9 amd64 9.4.0-1ubuntu1~20.04.1 [7500 kB]
+Get:15 http://archive.ubuntu.com/ubuntu focal/main amd64 cpp amd64 4:9.3.0-1ubuntu2 [27.6 kB]
+Get:16 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libcc1-0 amd64 10.3.0-1ubuntu1~20.04 [48.8 kB]
+Get:17 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libgomp1 amd64 10.3.0-1ubuntu1~20.04 [102 kB]
+Get:18 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libitm1 amd64 10.3.0-1ubuntu1~20.04 [26.2 kB]
+Get:19 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libatomic1 amd64 10.3.0-1ubuntu1~20.04 [9284 B]
+Get:20 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libasan5 amd64 9.4.0-1ubuntu1~20.04.1 [2751 kB]
+Get:21 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 liblsan0 amd64 10.3.0-1ubuntu1~20.04 [835 kB]
+Get:22 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libtsan0 amd64 10.3.0-1ubuntu1~20.04 [2009 kB]
+Get:23 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libubsan1 amd64 10.3.0-1ubuntu1~20.04 [784 kB]
+Get:24 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libquadmath0 amd64 10.3.0-1ubuntu1~20.04 [146 kB]
+Get:25 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libgcc-9-dev amd64 9.4.0-1ubuntu1~20.04.1 [2359 kB]
+Get:26 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 gcc-9 amd64 9.4.0-1ubuntu1~20.04.1 [8274 kB]
+Get:27 http://archive.ubuntu.com/ubuntu focal/main amd64 gcc amd64 4:9.3.0-1ubuntu2 [5208 B]
+Get:28 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libstdc++-9-dev amd64 9.4.0-1ubuntu1~20.04.1 [1722 kB]
+Get:29 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 g++-9 amd64 9.4.0-1ubuntu1~20.04.1 [8420 kB]
+Get:30 http://archive.ubuntu.com/ubuntu focal/main amd64 g++ amd64 4:9.3.0-1ubuntu2 [1604 B]
+Get:31 http://archive.ubuntu.com/ubuntu focal/main amd64 make amd64 4.2.1-1.2 [162 kB]
+Get:32 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libdpkg-perl all 1.19.7ubuntu3.2 [231 kB]
+Get:33 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 dpkg-dev all 1.19.7ubuntu3.2 [679 kB]
+Get:34 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 build-essential amd64 12.8ubuntu1.1 [4664 B]
+Get:35 http://archive.ubuntu.com/ubuntu focal/main amd64 libfakeroot amd64 1.24-1 [25.7 kB]
+Get:36 http://archive.ubuntu.com/ubuntu focal/main amd64 fakeroot amd64 1.24-1 [62.6 kB]
+Get:37 http://archive.ubuntu.com/ubuntu focal/main amd64 libalgorithm-diff-perl all 1.19.03-2 [46.6 kB]
+Get:38 http://archive.ubuntu.com/ubuntu focal/main amd64 libalgorithm-diff-xs-perl amd64 0.04-6 [11.3 kB]
+Get:39 http://archive.ubuntu.com/ubuntu focal/main amd64 libalgorithm-merge-perl all 0.08-3 [12.0 kB]
+Get:40 http://archive.ubuntu.com/ubuntu focal/main amd64 libfile-fcntllock-perl amd64 0.22-3build4 [33.1 kB]
+Get:41 http://archive.ubuntu.com/ubuntu focal/main amd64 manpages-dev all 5.05-1 [2266 kB]
+Get:42 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 gnupg2 all 2.2.19-3ubuntu2.1 [4584 B]
+Fetched 45.4 MB in 3s (16.0 MB/s)
+Extracting templates from packages: 100%
+Selecting previously unselected package binutils-common:amd64.
+(Reading database ... 102327 files and directories currently installed.)
+Preparing to unpack .../00-binutils-common_2.34-6ubuntu1.3_amd64.deb ...
+Unpacking binutils-common:amd64 (2.34-6ubuntu1.3) ...
+Selecting previously unselected package libbinutils:amd64.
+Preparing to unpack .../01-libbinutils_2.34-6ubuntu1.3_amd64.deb ...
+Unpacking libbinutils:amd64 (2.34-6ubuntu1.3) ...
+Selecting previously unselected package libctf-nobfd0:amd64.
+Preparing to unpack .../02-libctf-nobfd0_2.34-6ubuntu1.3_amd64.deb ...
+Unpacking libctf-nobfd0:amd64 (2.34-6ubuntu1.3) ...
+Selecting previously unselected package libctf0:amd64.
+Preparing to unpack .../03-libctf0_2.34-6ubuntu1.3_amd64.deb ...
+Unpacking libctf0:amd64 (2.34-6ubuntu1.3) ...
+Selecting previously unselected package binutils-x86-64-linux-gnu.
+Preparing to unpack .../04-binutils-x86-64-linux-gnu_2.34-6ubuntu1.3_amd64.deb ...
+Unpacking binutils-x86-64-linux-gnu (2.34-6ubuntu1.3) ...
+Selecting previously unselected package binutils.
+Preparing to unpack .../05-binutils_2.34-6ubuntu1.3_amd64.deb ...
+Unpacking binutils (2.34-6ubuntu1.3) ...
+Selecting previously unselected package libc-dev-bin.
+Preparing to unpack .../06-libc-dev-bin_2.31-0ubuntu9.9_amd64.deb ...
+Unpacking libc-dev-bin (2.31-0ubuntu9.9) ...
+Selecting previously unselected package linux-libc-dev:amd64.
+Preparing to unpack .../07-linux-libc-dev_5.4.0-120.136_amd64.deb ...
+Unpacking linux-libc-dev:amd64 (5.4.0-120.136) ...
+Selecting previously unselected package libcrypt-dev:amd64.
+Preparing to unpack .../08-libcrypt-dev_1%3a4.4.10-10ubuntu4_amd64.deb ...
+Unpacking libcrypt-dev:amd64 (1:4.4.10-10ubuntu4) ...
+Selecting previously unselected package libc6-dev:amd64.
+Preparing to unpack .../09-libc6-dev_2.31-0ubuntu9.9_amd64.deb ...
+Unpacking libc6-dev:amd64 (2.31-0ubuntu9.9) ...
+Selecting previously unselected package gcc-9-base:amd64.
+Preparing to unpack .../10-gcc-9-base_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking gcc-9-base:amd64 (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package libisl22:amd64.
+Preparing to unpack .../11-libisl22_0.22.1-1_amd64.deb ...
+Unpacking libisl22:amd64 (0.22.1-1) ...
+Selecting previously unselected package libmpc3:amd64.
+Preparing to unpack .../12-libmpc3_1.1.0-1_amd64.deb ...
+Unpacking libmpc3:amd64 (1.1.0-1) ...
+Selecting previously unselected package cpp-9.
+Preparing to unpack .../13-cpp-9_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking cpp-9 (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package cpp.
+Preparing to unpack .../14-cpp_4%3a9.3.0-1ubuntu2_amd64.deb ...
+Unpacking cpp (4:9.3.0-1ubuntu2) ...
+Selecting previously unselected package libcc1-0:amd64.
+Preparing to unpack .../15-libcc1-0_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libcc1-0:amd64 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libgomp1:amd64.
+Preparing to unpack .../16-libgomp1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libgomp1:amd64 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libitm1:amd64.
+Preparing to unpack .../17-libitm1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libitm1:amd64 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libatomic1:amd64.
+Preparing to unpack .../18-libatomic1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libatomic1:amd64 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libasan5:amd64.
+Preparing to unpack .../19-libasan5_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking libasan5:amd64 (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package liblsan0:amd64.
+Preparing to unpack .../20-liblsan0_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking liblsan0:amd64 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libtsan0:amd64.
+Preparing to unpack .../21-libtsan0_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libtsan0:amd64 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libubsan1:amd64.
+Preparing to unpack .../22-libubsan1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libubsan1:amd64 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libquadmath0:amd64.
+Preparing to unpack .../23-libquadmath0_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libquadmath0:amd64 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libgcc-9-dev:amd64.
+Preparing to unpack .../24-libgcc-9-dev_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking libgcc-9-dev:amd64 (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package gcc-9.
+Preparing to unpack .../25-gcc-9_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking gcc-9 (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package gcc.
+Preparing to unpack .../26-gcc_4%3a9.3.0-1ubuntu2_amd64.deb ...
+Unpacking gcc (4:9.3.0-1ubuntu2) ...
+Selecting previously unselected package libstdc++-9-dev:amd64.
+Preparing to unpack .../27-libstdc++-9-dev_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking libstdc++-9-dev:amd64 (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package g++-9.
+Preparing to unpack .../28-g++-9_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking g++-9 (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package g++.
+Preparing to unpack .../29-g++_4%3a9.3.0-1ubuntu2_amd64.deb ...
+Unpacking g++ (4:9.3.0-1ubuntu2) ...
+Selecting previously unselected package make.
+Preparing to unpack .../30-make_4.2.1-1.2_amd64.deb ...
+Unpacking make (4.2.1-1.2) ...
+Selecting previously unselected package libdpkg-perl.
+Preparing to unpack .../31-libdpkg-perl_1.19.7ubuntu3.2_all.deb ...
+Unpacking libdpkg-perl (1.19.7ubuntu3.2) ...
+Selecting previously unselected package dpkg-dev.
+Preparing to unpack .../32-dpkg-dev_1.19.7ubuntu3.2_all.deb ...
+Unpacking dpkg-dev (1.19.7ubuntu3.2) ...
+Selecting previously unselected package build-essential.
+Preparing to unpack .../33-build-essential_12.8ubuntu1.1_amd64.deb ...
+Unpacking build-essential (12.8ubuntu1.1) ...
+Selecting previously unselected package libfakeroot:amd64.
+Preparing to unpack .../34-libfakeroot_1.24-1_amd64.deb ...
+Unpacking libfakeroot:amd64 (1.24-1) ...
+Selecting previously unselected package fakeroot.
+Preparing to unpack .../35-fakeroot_1.24-1_amd64.deb ...
+Unpacking fakeroot (1.24-1) ...
+Selecting previously unselected package libalgorithm-diff-perl.
+Preparing to unpack .../36-libalgorithm-diff-perl_1.19.03-2_all.deb ...
+Unpacking libalgorithm-diff-perl (1.19.03-2) ...
+Selecting previously unselected package libalgorithm-diff-xs-perl.
+Preparing to unpack .../37-libalgorithm-diff-xs-perl_0.04-6_amd64.deb ...
+Unpacking libalgorithm-diff-xs-perl (0.04-6) ...
+Selecting previously unselected package libalgorithm-merge-perl.
+Preparing to unpack .../38-libalgorithm-merge-perl_0.08-3_all.deb ...
+Unpacking libalgorithm-merge-perl (0.08-3) ...
+Selecting previously unselected package libfile-fcntllock-perl.
+Preparing to unpack .../39-libfile-fcntllock-perl_0.22-3build4_amd64.deb ...
+Unpacking libfile-fcntllock-perl (0.22-3build4) ...
+Selecting previously unselected package manpages-dev.
+Preparing to unpack .../40-manpages-dev_5.05-1_all.deb ...
+Unpacking manpages-dev (5.05-1) ...
+Selecting previously unselected package gnupg2.
+Preparing to unpack .../41-gnupg2_2.2.19-3ubuntu2.1_all.deb ...
+Unpacking gnupg2 (2.2.19-3ubuntu2.1) ...
+Setting up manpages-dev (5.05-1) ...
+Setting up gnupg2 (2.2.19-3ubuntu2.1) ...
+Setting up libfile-fcntllock-perl (0.22-3build4) ...
+Setting up libalgorithm-diff-perl (1.19.03-2) ...
+Setting up binutils-common:amd64 (2.34-6ubuntu1.3) ...
+Setting up linux-libc-dev:amd64 (5.4.0-120.136) ...
+Setting up libctf-nobfd0:amd64 (2.34-6ubuntu1.3) ...
+Setting up libgomp1:amd64 (10.3.0-1ubuntu1~20.04) ...
+Setting up libfakeroot:amd64 (1.24-1) ...
+Setting up fakeroot (1.24-1) ...
+update-alternatives: using /usr/bin/fakeroot-sysv to provide /usr/bin/fakeroot (fakeroot) in auto mode
+Setting up make (4.2.1-1.2) ...
+Setting up libquadmath0:amd64 (10.3.0-1ubuntu1~20.04) ...
+Setting up libmpc3:amd64 (1.1.0-1) ...
+Setting up libatomic1:amd64 (10.3.0-1ubuntu1~20.04) ...
+Setting up libdpkg-perl (1.19.7ubuntu3.2) ...
+Setting up libubsan1:amd64 (10.3.0-1ubuntu1~20.04) ...
+Setting up libcrypt-dev:amd64 (1:4.4.10-10ubuntu4) ...
+Setting up libisl22:amd64 (0.22.1-1) ...
+Setting up libbinutils:amd64 (2.34-6ubuntu1.3) ...
+Setting up libc-dev-bin (2.31-0ubuntu9.9) ...
+Setting up libalgorithm-diff-xs-perl (0.04-6) ...
+Setting up libcc1-0:amd64 (10.3.0-1ubuntu1~20.04) ...
+Setting up liblsan0:amd64 (10.3.0-1ubuntu1~20.04) ...
+Setting up libitm1:amd64 (10.3.0-1ubuntu1~20.04) ...
+Setting up gcc-9-base:amd64 (9.4.0-1ubuntu1~20.04.1) ...
+Setting up libalgorithm-merge-perl (0.08-3) ...
+Setting up libtsan0:amd64 (10.3.0-1ubuntu1~20.04) ...
+Setting up libctf0:amd64 (2.34-6ubuntu1.3) ...
+Setting up libasan5:amd64 (9.4.0-1ubuntu1~20.04.1) ...
+Setting up cpp-9 (9.4.0-1ubuntu1~20.04.1) ...
+Setting up libc6-dev:amd64 (2.31-0ubuntu9.9) ...
+Setting up binutils-x86-64-linux-gnu (2.34-6ubuntu1.3) ...
+Setting up binutils (2.34-6ubuntu1.3) ...
+Setting up dpkg-dev (1.19.7ubuntu3.2) ...
+Setting up libgcc-9-dev:amd64 (9.4.0-1ubuntu1~20.04.1) ...
+Setting up cpp (4:9.3.0-1ubuntu2) ...
+Setting up gcc-9 (9.4.0-1ubuntu1~20.04.1) ...
+Setting up libstdc++-9-dev:amd64 (9.4.0-1ubuntu1~20.04.1) ...
+Setting up gcc (4:9.3.0-1ubuntu2) ...
+Setting up g++-9 (9.4.0-1ubuntu1~20.04.1) ...
+Setting up g++ (4:9.3.0-1ubuntu2) ...
+update-alternatives: using /usr/bin/g++ to provide /usr/bin/c++ (c++) in auto mode
+Setting up build-essential (12.8ubuntu1.1) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+OK
+Get:1 https://download.docker.com/linux/ubuntu focal InRelease [57.7 kB]
+Get:2 https://download.docker.com/linux/ubuntu focal/stable amd64 Packages [17.6 kB]
+Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Fetched 75.2 kB in 1s (143 kB/s)
+Reading package lists... Done
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:2 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Calculating upgrade... Done
+The following NEW packages will be installed:
+  linux-headers-5.13.0-51-generic linux-headers-5.4.0-120 linux-headers-5.4.0-120-generic
+  linux-hwe-5.13-headers-5.13.0-51 linux-image-5.13.0-51-generic linux-image-5.4.0-120-generic
+  linux-modules-5.13.0-51-generic linux-modules-5.4.0-120-generic linux-modules-extra-5.13.0-51-generic
+The following packages will be upgraded:
+  linux-generic-hwe-20.04 linux-headers-generic linux-headers-generic-hwe-20.04 linux-headers-virtual
+  linux-image-generic-hwe-20.04 linux-image-virtual linux-virtual
+7 upgraded, 9 newly installed, 0 to remove and 0 not upgraded.
+7 standard security updates
+Need to get 132 MB of archives.
+After this operation, 687 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-modules-5.13.0-51-generic amd64 5.13.0-51.58~20.04.1 [18.5 MB]
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-image-5.13.0-51-generic amd64 5.13.0-51.58~20.04.1 [10.0 MB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-modules-extra-5.13.0-51-generic amd64 5.13.0-51.58~20.04.1 [50.8 MB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-generic-hwe-20.04 amd64 5.13.0.51.58~20.04.31 [1932 B]
+Get:5 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-image-generic-hwe-20.04 amd64 5.13.0.51.58~20.04.31 [2500 B]
+Get:6 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-hwe-5.13-headers-5.13.0-51 all 5.13.0-51.58~20.04.1 [11.8 MB]
+Get:7 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-headers-5.13.0-51-generic amd64 5.13.0-51.58~20.04.1 [2551 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-headers-generic-hwe-20.04 amd64 5.13.0.51.58~20.04.31 [2396 B]
+Get:9 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-headers-5.4.0-120 all 5.4.0-120.136 [11.0 MB]
+Get:10 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-headers-5.4.0-120-generic amd64 5.4.0-120.136 [1393 kB]
+Get:11 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-modules-5.4.0-120-generic amd64 5.4.0-120.136 [15.0 MB]
+Get:12 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-image-5.4.0-120-generic amd64 5.4.0-120.136 [10.5 MB]
+Get:13 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-virtual amd64 5.4.0.120.121 [1876 B]
+Get:14 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-image-virtual amd64 5.4.0.120.121 [2520 B]
+Get:15 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-headers-virtual amd64 5.4.0.120.121 [1840 B]
+Get:16 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 linux-headers-generic amd64 5.4.0.120.121 [2416 B]
+Fetched 132 MB in 6s (22.7 MB/s)
+Selecting previously unselected package linux-modules-5.13.0-51-generic.
+(Reading database ... 107954 files and directories currently installed.)
+Preparing to unpack .../00-linux-modules-5.13.0-51-generic_5.13.0-51.58~20.04.1_amd64.deb ...
+Unpacking linux-modules-5.13.0-51-generic (5.13.0-51.58~20.04.1) ...
+Selecting previously unselected package linux-image-5.13.0-51-generic.
+Preparing to unpack .../01-linux-image-5.13.0-51-generic_5.13.0-51.58~20.04.1_amd64.deb ...
+Unpacking linux-image-5.13.0-51-generic (5.13.0-51.58~20.04.1) ...
+Selecting previously unselected package linux-modules-extra-5.13.0-51-generic.
+Preparing to unpack .../02-linux-modules-extra-5.13.0-51-generic_5.13.0-51.58~20.04.1_amd64.deb ...
+Unpacking linux-modules-extra-5.13.0-51-generic (5.13.0-51.58~20.04.1) ...
+Preparing to unpack .../03-linux-generic-hwe-20.04_5.13.0.51.58~20.04.31_amd64.deb ...
+Unpacking linux-generic-hwe-20.04 (5.13.0.51.58~20.04.31) over (5.13.0.44.49~20.04.28) ...
+Preparing to unpack .../04-linux-image-generic-hwe-20.04_5.13.0.51.58~20.04.31_amd64.deb ...
+Unpacking linux-image-generic-hwe-20.04 (5.13.0.51.58~20.04.31) over (5.13.0.44.49~20.04.28) ...
+Selecting previously unselected package linux-hwe-5.13-headers-5.13.0-51.
+Preparing to unpack .../05-linux-hwe-5.13-headers-5.13.0-51_5.13.0-51.58~20.04.1_all.deb ...
+Unpacking linux-hwe-5.13-headers-5.13.0-51 (5.13.0-51.58~20.04.1) ...
+Selecting previously unselected package linux-headers-5.13.0-51-generic.
+Preparing to unpack .../06-linux-headers-5.13.0-51-generic_5.13.0-51.58~20.04.1_amd64.deb ...
+Unpacking linux-headers-5.13.0-51-generic (5.13.0-51.58~20.04.1) ...
+Preparing to unpack .../07-linux-headers-generic-hwe-20.04_5.13.0.51.58~20.04.31_amd64.deb ...
+Unpacking linux-headers-generic-hwe-20.04 (5.13.0.51.58~20.04.31) over (5.13.0.44.49~20.04.28) ...
+Selecting previously unselected package linux-headers-5.4.0-120.
+Preparing to unpack .../08-linux-headers-5.4.0-120_5.4.0-120.136_all.deb ...
+Unpacking linux-headers-5.4.0-120 (5.4.0-120.136) ...
+Selecting previously unselected package linux-headers-5.4.0-120-generic.
+Preparing to unpack .../09-linux-headers-5.4.0-120-generic_5.4.0-120.136_amd64.deb ...
+Unpacking linux-headers-5.4.0-120-generic (5.4.0-120.136) ...
+Selecting previously unselected package linux-modules-5.4.0-120-generic.
+Preparing to unpack .../10-linux-modules-5.4.0-120-generic_5.4.0-120.136_amd64.deb ...
+Unpacking linux-modules-5.4.0-120-generic (5.4.0-120.136) ...
+Selecting previously unselected package linux-image-5.4.0-120-generic.
+Preparing to unpack .../11-linux-image-5.4.0-120-generic_5.4.0-120.136_amd64.deb ...
+Unpacking linux-image-5.4.0-120-generic (5.4.0-120.136) ...
+Preparing to unpack .../12-linux-virtual_5.4.0.120.121_amd64.deb ...
+Unpacking linux-virtual (5.4.0.120.121) over (5.4.0.109.113) ...
+Preparing to unpack .../13-linux-image-virtual_5.4.0.120.121_amd64.deb ...
+Unpacking linux-image-virtual (5.4.0.120.121) over (5.4.0.109.113) ...
+Preparing to unpack .../14-linux-headers-virtual_5.4.0.120.121_amd64.deb ...
+Unpacking linux-headers-virtual (5.4.0.120.121) over (5.4.0.109.113) ...
+Preparing to unpack .../15-linux-headers-generic_5.4.0.120.121_amd64.deb ...
+Unpacking linux-headers-generic (5.4.0.120.121) over (5.4.0.109.113) ...
+Setting up linux-hwe-5.13-headers-5.13.0-51 (5.13.0-51.58~20.04.1) ...
+Setting up linux-modules-5.4.0-120-generic (5.4.0-120.136) ...
+Setting up linux-headers-5.4.0-120 (5.4.0-120.136) ...
+Setting up linux-headers-5.13.0-51-generic (5.13.0-51.58~20.04.1) ...
+Setting up linux-image-5.4.0-120-generic (5.4.0-120.136) ...
+I: /boot/vmlinuz.old is now a symlink to vmlinuz-5.13.0-44-generic
+I: /boot/initrd.img.old is now a symlink to initrd.img-5.13.0-44-generic
+I: /boot/vmlinuz is now a symlink to vmlinuz-5.4.0-120-generic
+I: /boot/initrd.img is now a symlink to initrd.img-5.4.0-120-generic
+Setting up linux-headers-5.4.0-120-generic (5.4.0-120.136) ...
+Setting up linux-headers-generic (5.4.0.120.121) ...
+Setting up linux-headers-generic-hwe-20.04 (5.13.0.51.58~20.04.31) ...
+Setting up linux-image-virtual (5.4.0.120.121) ...
+Setting up linux-headers-virtual (5.4.0.120.121) ...
+Setting up linux-virtual (5.4.0.120.121) ...
+Setting up linux-image-5.13.0-51-generic (5.13.0-51.58~20.04.1) ...
+I: /boot/vmlinuz.old is now a symlink to vmlinuz-5.4.0-120-generic
+I: /boot/vmlinuz is now a symlink to vmlinuz-5.13.0-51-generic
+I: /boot/initrd.img is now a symlink to initrd.img-5.13.0-51-generic
+Setting up linux-modules-extra-5.13.0-51-generic (5.13.0-51.58~20.04.1) ...
+Setting up linux-modules-5.13.0-51-generic (5.13.0-51.58~20.04.1) ...
+Setting up linux-image-generic-hwe-20.04 (5.13.0.51.58~20.04.31) ...
+Setting up linux-generic-hwe-20.04 (5.13.0.51.58~20.04.31) ...
+Processing triggers for linux-image-5.4.0-120-generic (5.4.0-120.136) ...
+/etc/kernel/postinst.d/initramfs-tools:
+update-initramfs: Generating /boot/initrd.img-5.4.0-120-generic
+I: The initramfs will attempt to resume from /dev/sda2
+I: (UUID=01d15b68-c209-47b3-9e81-1480257f7198)
+I: Set the RESUME variable to override this.
+/etc/kernel/postinst.d/zz-update-grub:
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/50-cloudimg-settings.cfg'
+Sourcing file `/etc/default/grub.d/init-select.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-5.13.0-51-generic
+Found linux image: /boot/vmlinuz-5.13.0-44-generic
+Found initrd image: /boot/initrd.img-5.13.0-44-generic
+Found linux image: /boot/vmlinuz-5.4.0-120-generic
+Found initrd image: /boot/initrd.img-5.4.0-120-generic
+Found linux image: /boot/vmlinuz-5.4.0-109-generic
+Found initrd image: /boot/initrd.img-5.4.0-109-generic
+done
+Processing triggers for linux-image-5.13.0-51-generic (5.13.0-51.58~20.04.1) ...
+/etc/kernel/postinst.d/initramfs-tools:
+update-initramfs: Generating /boot/initrd.img-5.13.0-51-generic
+I: The initramfs will attempt to resume from /dev/sda2
+I: (UUID=01d15b68-c209-47b3-9e81-1480257f7198)
+I: Set the RESUME variable to override this.
+/etc/kernel/postinst.d/zz-update-grub:
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/50-cloudimg-settings.cfg'
+Sourcing file `/etc/default/grub.d/init-select.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-5.13.0-51-generic
+Found initrd image: /boot/initrd.img-5.13.0-51-generic
+Found linux image: /boot/vmlinuz-5.13.0-44-generic
+Found initrd image: /boot/initrd.img-5.13.0-44-generic
+Found linux image: /boot/vmlinuz-5.4.0-120-generic
+Found initrd image: /boot/initrd.img-5.4.0-120-generic
+Found linux image: /boot/vmlinuz-5.4.0-109-generic
+Found initrd image: /boot/initrd.img-5.4.0-109-generic
+done
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  linux-headers-5.4.0-109 linux-headers-5.4.0-109-generic linux-image-5.4.0-109-generic
+  linux-modules-5.4.0-109-generic
+Use 'apt autoremove' to remove them.
+The following additional packages will be installed:
+  docker-ce-cli docker-ce-rootless-extras docker-scan-plugin pigz slirp4netns
+Suggested packages:
+  aufs-tools cgroupfs-mount | cgroup-lite
+The following NEW packages will be installed:
+  containerd.io docker-ce docker-ce-cli docker-ce-rootless-extras docker-scan-plugin pigz slirp4netns
+0 upgraded, 7 newly installed, 0 to remove and 0 not upgraded.
+Need to get 102 MB of archives.
+After this operation, 422 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu focal/stable amd64 containerd.io amd64 1.6.6-1 [28.1 MB]
+Get:2 http://archive.ubuntu.com/ubuntu focal/universe amd64 pigz amd64 2.4-1 [57.4 kB]
+Get:3 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce-cli amd64 5:20.10.17~3-0~ubuntu-focal [40.6 MB]
+Get:4 http://archive.ubuntu.com/ubuntu focal/universe amd64 slirp4netns amd64 0.4.3-1 [74.3 kB]
+Get:5 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce amd64 5:20.10.17~3-0~ubuntu-focal [21.0 MB]
+Get:6 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-ce-rootless-extras amd64 5:20.10.17~3-0~ubuntu-focal [8171 kB]
+Get:7 https://download.docker.com/linux/ubuntu focal/stable amd64 docker-scan-plugin amd64 0.17.0~ubuntu-focal [3521 kB]
+Fetched 102 MB in 1s (84.0 MB/s)
+Selecting previously unselected package pigz.
+(Reading database ... 174019 files and directories currently installed.)
+Preparing to unpack .../0-pigz_2.4-1_amd64.deb ...
+Unpacking pigz (2.4-1) ...
+Selecting previously unselected package containerd.io.
+Preparing to unpack .../1-containerd.io_1.6.6-1_amd64.deb ...
+Unpacking containerd.io (1.6.6-1) ...
+Selecting previously unselected package docker-ce-cli.
+Preparing to unpack .../2-docker-ce-cli_5%3a20.10.17~3-0~ubuntu-focal_amd64.deb ...
+Unpacking docker-ce-cli (5:20.10.17~3-0~ubuntu-focal) ...
+Selecting previously unselected package docker-ce.
+Preparing to unpack .../3-docker-ce_5%3a20.10.17~3-0~ubuntu-focal_amd64.deb ...
+Unpacking docker-ce (5:20.10.17~3-0~ubuntu-focal) ...
+Selecting previously unselected package docker-ce-rootless-extras.
+Preparing to unpack .../4-docker-ce-rootless-extras_5%3a20.10.17~3-0~ubuntu-focal_amd64.deb ...
+Unpacking docker-ce-rootless-extras (5:20.10.17~3-0~ubuntu-focal) ...
+Selecting previously unselected package docker-scan-plugin.
+Preparing to unpack .../5-docker-scan-plugin_0.17.0~ubuntu-focal_amd64.deb ...
+Unpacking docker-scan-plugin (0.17.0~ubuntu-focal) ...
+Selecting previously unselected package slirp4netns.
+Preparing to unpack .../6-slirp4netns_0.4.3-1_amd64.deb ...
+Unpacking slirp4netns (0.4.3-1) ...
+Setting up slirp4netns (0.4.3-1) ...
+Setting up docker-scan-plugin (0.17.0~ubuntu-focal) ...
+Setting up containerd.io (1.6.6-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Setting up docker-ce-cli (5:20.10.17~3-0~ubuntu-focal) ...
+Setting up pigz (2.4-1) ...
+Setting up docker-ce-rootless-extras (5:20.10.17~3-0~ubuntu-focal) ...
+Setting up docker-ce (5:20.10.17~3-0~ubuntu-focal) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for systemd (245.4-4ubuntu3.17) ...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    80  100    80    0     0   1379      0 --:--:-- --:--:-- --:--:--  1379
+100    75  100    75    0     0    342      0 --:--:-- --:--:-- --:--:--   342
+100  135M  100  135M    0     0   226M      0 --:--:-- --:--:-- --:--:--  226M
+Cloning into 'kubernetes'...
+remote: Enumerating objects: 1336228, done.
+remote: Counting objects: 100% (181/181), done.
+remote: Compressing objects: 100% (120/120), done.
+remote: Total 1336228 (delta 80), reused 64 (delta 61), pack-reused 1336047
+Receiving objects: 100% (1336228/1336228), 844.41 MiB | 43.46 MiB/s, done.
+Resolving deltas: 100% (963637/963637), done.
+Updating files: 100% (23233/23233), done.
+Downloading https://github.com/coreos/etcd/releases/download/v3.5.4/etcd-v3.5.4-linux-amd64.tar.gz succeed
+etcd v3.5.4 installed. To use:
+export PATH="/root/go/src/k8s.io/kubernetes/third_party/etcd:${PATH}"
+go: downloading golang.org/x/tools/gopls v0.8.4
+go: downloading golang.org/x/tools v0.1.11
+go: downloading golang.org/x/tools v0.1.11-0.20220513164230-dfee1649af67
+go: downloading mvdan.cc/xurls/v2 v2.4.0
+go: downloading mvdan.cc/gofumpt v0.3.0
+go: downloading golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4
+go: downloading golang.org/x/vuln v0.0.0-20220503210553-a5481fb0c8be
+go: downloading honnef.co/go/tools v0.3.0
+go: downloading github.com/sergi/go-diff v1.1.0
+go: downloading github.com/google/go-cmp v0.5.7
+go: downloading golang.org/x/exp/typeparams v0.0.0-20220218215828-6cf2b201936e
+go: downloading github.com/BurntSushi/toml v1.0.0
+go: downloading golang.org/x/sys v0.0.0-20220209214540-3681064d5158
+go: downloading golang.org/x/text v0.3.7
+go: downloading golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
+root@mm35:~/go/src/k8s.io/kubernetes/hack# cd ..
+root@mm35:~/go/src/k8s.io/kubernetes# git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+root@mm35:~/go/src/k8s.io/kubernetes# git checkout uncore
+Branch 'uncore' set up to track remote branch 'uncore' from 'origin'.
+Switched to a new branch 'uncore'
+root@mm35:~/go/src/k8s.io/kubernetes# git pull
+Already up to date.
+root@mm35:~/go/src/k8s.io/kubernetes# uptime
+ 18:42:47 up  1:45,  1 user,  load average: 0.00, 0.00, 0.00
+root@mm35:~/go/src/k8s.io/kubernetes#
