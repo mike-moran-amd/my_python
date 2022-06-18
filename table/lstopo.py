@@ -1,10 +1,9 @@
 #!python3
 # encoding=UTF-8
 
-import data
 import lib
 import table
-from table.line import LineTable
+from table.text import TextTable
 
 
 def from_system():
@@ -22,18 +21,17 @@ class LsTopoTable(table.Table):
         self.socketid = 0
         self.coreid = 0
 
-
     @classmethod
     def from_text(cls, text):
         retval = cls()
-        lt = LineTable.from_string(text)
+        tt = TextTable.from_string(text)
         indent = -1
-        for row in lt.row_gen():
-            line = lt.line_from_row(row)
-            new_indent = lt.leading_spaces_from_row(row)
+        for row in tt.row_gen():
+            line = tt.line_from_row(row)
+            new_indent = tt.leading_spaces_from_row(row)
             if indent == -1:
                 if not line.startswith('Machine' or new_indent != 0):
-                    raise ValueError(f'EXPECTED: {line}')
+                    raise ValueError(f'UNEXPECTED: {line}')
                 indent = new_indent
             if indent > 0 and new_indent == 0:
                 break  # end of lstopo output
@@ -42,7 +40,7 @@ class LsTopoTable(table.Table):
 
     def parse_line(self, line):
         for blob in line.split(' + '):
-            ss = blob.split(' ')
+            ss = blob.split(' ')  # TODO literal space or can we use default here?
             thing = ss[0]
             if thing == 'Machine':
                 pass

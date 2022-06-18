@@ -15,14 +15,14 @@ def path_gen(
     generate paths from (default here)
 
     >>> len(list(path_gen()))
-    22
+    35
     """
     for path in path.rglob(rglob_pattern):
         if is_file and path.is_file() or is_dir and path.is_dir():
             yield path
 
 
-def string_from(file, path=pathlib.Path(__file__).parent):
+def text_from(file, path=pathlib.Path(__file__).parent):
     """
     return a string read from the given file path
 
@@ -54,7 +54,7 @@ def find_prompt(text, bbp=TEXT_BEFORE_PROMPT):
 class SessionData:
     def __init__(self, text):
         """
-        >>> SessionData(string_from('mm18')).prompt
+        >>> SessionData(text_from('mm18')).prompt
         'root@mm18:'
         """
         prompt = find_prompt(text)
@@ -71,7 +71,7 @@ class SessionData:
 
     def session_table(self):
         """
-        >>> st = SessionData(string_from('mm18')).session_table()
+        >>> st = SessionData(text_from('mm18')).session_table()
         >>> print(st.pf(title='block', cols=['cwd', 'command', 'count']))  # omit "lines" (its huge)
         block | cwd | command                                         | count
             1 | ~   | uname -a                                        |     2

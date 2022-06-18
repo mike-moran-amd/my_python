@@ -9,17 +9,27 @@
 
 >>> tt.get_val(0, Columns.LEADING_SPACES.value)
 1
+>>> tt.leading_spaces_from_row(0)
+1
 
 >>> tt.get_val(1, Columns.TRAILING_SPACES.value)
+1
+>>> tt.trailing_spaces_from_row(1)
 1
 
 >>> tt.get_val(0, Columns.LINE.value)
 ' first line'
+>>> tt.line_from_row(0)
+' first line'
 
 >>> tt.get_val(2, Columns.LEN.value)
 2
+>>> tt.len_from_row(2)
+2
 
 >>> tt.get_val(1, Columns.WORD_COUNT.value)
+3
+>>> tt.word_count_from_row(1)
 3
 
 """
@@ -89,3 +99,23 @@ class TextTable(table.Table):
             self.set_val(row, Columns.TRAILING_SPACES.value, tail_space)
             self.set_val(row, Columns.LEN.value, line_len)
             self.set_val(row, Columns.WORD_COUNT.value, len(val.split()))
+
+    def line_from_row(self, row):
+        line = self.get_val(row, Columns.LINE.value)
+        return line
+
+    def leading_spaces_from_row(self, row):
+        ls = self.get_val(row, Columns.LEADING_SPACES.value)
+        return ls
+
+    def trailing_spaces_from_row(self, row):
+        ts = self.get_val(row, Columns.TRAILING_SPACES.value)
+        return ts
+
+    def len_from_row(self, row):
+        len = self.get_val(row, Columns.LEN.value)
+        return len
+
+    def word_count_from_row(self, row):
+        wc = self.get_val(row, Columns.WORD_COUNT.value)
+        return wc

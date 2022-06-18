@@ -5,7 +5,7 @@ import table
 
 
 def test_test():
-    text = data.string_from('mm17')
+    text = data.text_from('mm17')
     len_text = len(text)
     assert len_text == 25603
 

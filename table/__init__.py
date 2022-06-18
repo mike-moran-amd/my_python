@@ -1,5 +1,74 @@
 #!/usr/bin/python
 # encoding=UTF-8
+"""
+Interestingly there is no "table" module in the standard python library.
+This is a good first stab at it.
+
+DOCTEST EXAMPLES:
+
+>>> t = Table([('row', 'col', 'val')])
+>>> list(t.tup_gen())
+[('row', 'col', 'val')]
+
+>>> list(t.tup_gen(title='mt'))
+[(0, 0, 'mt'), (0, 1, 'col'), (1, 0, 'row'), (1, 1, 'val')]
+
+>>> print(t.pf())
+val
+
+>>> mt = Table(t.tup_gen(title='mt'))
+>>> print(mt.pf())
+mt  | col
+row | val
+
+>>> print(mt.pf(title='mmt'))
+mmt |   0 |   1
+  0 | mt  | col
+  1 | row | val
+
+>>> mmt = Table(mt.tup_gen(title='mmt'))
+>>> print(mmt.pf())
+mmt |   0 |   1
+  0 | mt  | col
+  1 | row | val
+
+>>> a_frame_str = 'id       name    provider   state   directory                           ' + \
+DEFAULT_ROW_SEP + '------------------------------------------------------------------------' + \
+DEFAULT_ROW_SEP + '2d9d7d5  default virtualbox running /Users/mfm/vagrant                  ' + \
+DEFAULT_ROW_SEP + 'fe8bcba  default virtualbox running /Users/mfm/vagrant/U2010            ' + \
+DEFAULT_ROW_SEP + 'ea0bb41  default virtualbox running /Users/mfm/vagrant/C8S              ' + \
+DEFAULT_ROW_SEP + 'd11e797  default virtualbox running /Users/mfm/vagrant/centos/8         ' + \
+DEFAULT_ROW_SEP + 'a4d9a67  default virtualbox running /Users/mfm/vagrant/centos           ' + \
+DEFAULT_ROW_SEP + 'b25e420  default virtualbox running /Users/mfm/vagrant/centos8          ' # noqa
+
+>>> ft = Table.from_frame(a_frame_str)
+>>> for x in ft.pf(title='BOXES').split(DEFAULT_ROW_SEP):
+...     print(repr(x))
+'BOXES | id      | name    | provider   | state   | directory                  '
+'    1 | 2d9d7d5 | default | virtualbox | running | /Users/mfm/vagrant         '
+'    2 | fe8bcba | default | virtualbox | running | /Users/mfm/vagrant/U2010   '
+'    3 | ea0bb41 | default | virtualbox | running | /Users/mfm/vagrant/C8S     '
+'    4 | d11e797 | default | virtualbox | running | /Users/mfm/vagrant/centos/8'
+'    5 | a4d9a67 | default | virtualbox | running | /Users/mfm/vagrant/centos  '
+'    6 | b25e420 | default | virtualbox | running | /Users/mfm/vagrant/centos8 '
+
+>>> static_table, dynamic_table = ft.split_static()
+>>> for line in static_table.pf('').split(DEFAULT_ROW_SEP):
+...     print(repr(line))
+'  | id      | directory                  '
+'1 | 2d9d7d5 | /Users/mfm/vagrant         '
+'2 | fe8bcba | /Users/mfm/vagrant/U2010   '
+'3 | ea0bb41 | /Users/mfm/vagrant/C8S     '
+'4 | d11e797 | /Users/mfm/vagrant/centos/8'
+'5 | a4d9a67 | /Users/mfm/vagrant/centos  '
+'6 | b25e420 | /Users/mfm/vagrant/centos8 '
+
+>>> for line in dynamic_table.pf('').split(DEFAULT_ROW_SEP):
+...     print(repr(line))
+'  | name    | provider   | state  '
+'0 | default | virtualbox | running'
+
+"""
 from collections import OrderedDict
 
 
@@ -8,28 +77,6 @@ DEFAULT_COL_SEP = ' | '
 
 
 class Table:
-    """
-    >>> t = Table([('row', 'col', 'val')])
-    >>> list(t.tup_gen())
-    [('row', 'col', 'val')]
-    >>> list(t.tup_gen(title='mt'))
-    [(0, 0, 'mt'), (0, 1, 'col'), (1, 0, 'row'), (1, 1, 'val')]
-    >>> t.pf()
-    'val'
-    >>> mt = Table(t.tup_gen(title='mt'))
-    >>> print(mt.pf())
-    mt  | col
-    row | val
-    >>> print(mt.pf(title='mmt'))
-    mmt |   0 |   1
-      0 | mt  | col
-      1 | row | val
-    >>> mmt = Table(mt.tup_gen(title='mmt'))
-    >>> print(mmt.pf())
-    mmt |   0 |   1
-      0 | mt  | col
-      1 | row | val
-    """
 
     def __init__(self, tuple_list=()):
         """
@@ -93,7 +140,7 @@ class Table:
                 col_ndx += 1
             row_ndx += 1
 
-    def col_widths(self, cols_mask=None):
+    def col_widths(self, cols_mask=()):
         ret_dict = {}
         for k, val in self.__od.items():
             row, col = k
@@ -138,26 +185,6 @@ class Table:
         :param frame_str: A string with equal length rows
         :param row_sep: A string that separates the rows in the frame (default DEFAULT_ROW_SEP (newline))
         :return: Table
-
-        >>> a_frame_str = 'id       name    provider   state   directory                           ' + \
-        DEFAULT_ROW_SEP + '------------------------------------------------------------------------' + \
-        DEFAULT_ROW_SEP + '2d9d7d5  default virtualbox running /Users/mfm/vagrant                  ' + \
-        DEFAULT_ROW_SEP + 'fe8bcba  default virtualbox running /Users/mfm/vagrant/U2010            ' + \
-        DEFAULT_ROW_SEP + 'ea0bb41  default virtualbox running /Users/mfm/vagrant/C8S              ' + \
-        DEFAULT_ROW_SEP + 'd11e797  default virtualbox running /Users/mfm/vagrant/centos/8         ' + \
-        DEFAULT_ROW_SEP + 'a4d9a67  default virtualbox running /Users/mfm/vagrant/centos           ' + \
-        DEFAULT_ROW_SEP + 'b25e420  default virtualbox running /Users/mfm/vagrant/centos8          '  # noqa
-
-        >>> for x in Table.from_frame(a_frame_str).pf(title='BOXES').split(DEFAULT_ROW_SEP):
-        ...     print(repr(x))
-        'BOXES | id      | name    | provider   | state   | directory                  '
-        '    1 | 2d9d7d5 | default | virtualbox | running | /Users/mfm/vagrant         '
-        '    2 | fe8bcba | default | virtualbox | running | /Users/mfm/vagrant/U2010   '
-        '    3 | ea0bb41 | default | virtualbox | running | /Users/mfm/vagrant/C8S     '
-        '    4 | d11e797 | default | virtualbox | running | /Users/mfm/vagrant/centos/8'
-        '    5 | a4d9a67 | default | virtualbox | running | /Users/mfm/vagrant/centos  '
-        '    6 | b25e420 | default | virtualbox | running | /Users/mfm/vagrant/centos8 '
-
         """
         t = cls([])
         row_lines = frame_str.split(row_sep)
