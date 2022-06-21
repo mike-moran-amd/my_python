@@ -1,0 +1,307 @@
+Microsoft Windows [Version 10.0.19044.1708]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh mmoran@147.75.47.173
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Jun 21 18:40:00 UTC 2022
+
+  System load:                      0.0
+  Usage of /:                       3.8% of 218.06GB
+  Memory usage:                     19%
+  Swap usage:                       0%
+  Processes:                        598
+  Users logged in:                  1
+  IPv4 address for bond0:           147.75.47.173
+  IPv6 address for bond0:           2604:1380:4641:3b00::d
+  IPv4 address for br-98399800ab87: 172.18.0.1
+  IPv4 address for docker0:         172.17.0.1
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Jun 21 18:40:00 UTC 2022
+
+  System load:                      0.0
+  Usage of /:                       3.8% of 218.06GB
+  Memory usage:                     19%
+  Swap usage:                       0%
+  Processes:                        598
+  Users logged in:                  1
+  IPv4 address for bond0:           147.75.47.173
+  IPv6 address for bond0:           2604:1380:4641:3b00::d
+  IPv4 address for br-98399800ab87: 172.18.0.1
+  IPv4 address for docker0:         172.17.0.1
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+mmoran@mm37:~$ ls
+jenkins
+mmoran@mm37:~$ cd jenkins/
+mmoran@mm37:~/jenkins$ ll
+total 12
+drwxr-xr-x 2 mmoran mmoran 4096 Jun 21 17:20 ./
+drwxr-xr-x 5 mmoran mmoran 4096 Jun 21 18:40 ../
+-rw-r--r-- 1 mmoran mmoran  577 Jun 21 17:20 Dockerfile
+mmoran@mm37:~/jenkins$ docker ps
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json": dial unix /var/run/docker.sock: connect: permission denied
+mmoran@mm37:~/jenkins$ sudo docker ps
+[sudo] password for mmoran:
+CONTAINER ID   IMAGE                           COMMAND                  CREATED             STATUS             PORTS                                                                                            NAMES
+60c8fa5d8cac   myjenkins-blueocean:2.332.3-1   "/sbin/tini -- /usr/…"   About an hour ago   Up About an hour   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 0.0.0.0:50000->50000/tcp, :::50000->50000/tcp         jenkins-blueocean
+14a3febffd6b   docker:dind                     "dockerd-entrypoint.…"   About an hour ago   Up About an hour   0.0.0.0:2376->2376/tcp, :::2376->2376/tcp, 2375/tcp, 0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   jenkins-docker
+mmoran@mm37:~/jenkins$ mkdir GitHub
+mmoran@mm37:~/jenkins$ cd GitHub/
+mmoran@mm37:~/jenkins/GitHub$ git clone https://github.com/mike-moran-amd/simple-python-pyinstaller-app
+Cloning into 'simple-python-pyinstaller-app'...
+remote: Enumerating objects: 36, done.
+remote: Total 36 (delta 0), reused 0 (delta 0), pack-reused 36
+Unpacking objects: 100% (36/36), 6.25 KiB | 2.08 MiB/s, done.
+mmoran@mm37:~/jenkins/GitHub$ ls
+simple-python-pyinstaller-app
+mmoran@mm37:~/jenkins/GitHub$ cd simple-python-pyinstaller-app/
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ ll
+total 32
+drwxrwxr-x 5 mmoran mmoran 4096 Jun 21 18:47 ./
+drwxrwxr-x 3 mmoran mmoran 4096 Jun 21 18:47 ../
+drwxrwxr-x 8 mmoran mmoran 4096 Jun 21 18:47 .git/
+-rw-rw-r-- 1 mmoran mmoran   65 Jun 21 18:47 .gitattributes
+-rw-rw-r-- 1 mmoran mmoran 1159 Jun 21 18:47 .gitignore
+-rw-rw-r-- 1 mmoran mmoran 1085 Jun 21 18:47 README.md
+drwxrwxr-x 2 mmoran mmoran 4096 Jun 21 18:47 jenkins/
+drwxrwxr-x 2 mmoran mmoran 4096 Jun 21 18:47 sources/
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ cat README.md
+# simple-python-pyinstaller-app
+
+This repository is for the
+[Build a Python app with PyInstaller](https://jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/)
+tutorial in the [Jenkins User Documentation](https://jenkins.io/doc/).
+
+The repository contains a simple Python application which is a command line tool "add2vals" that outputs the addition of two values. If at least one of the
+values is a string, "add2vals" treats both values as a string and instead
+concatenates the values. The "add2" function in the "calc" library (which
+"add2vals" imports) is accompanied by a set of unit tests. These are tested with pytest to check that this function works as expected and the results are saved
+to a JUnit XML report.
+
+The delivery of the "add2vals" tool through PyInstaller converts this tool into
+a standalone executable file for Linux, which you can download through Jenkins
+and execute at the command line on Linux machines without Python.
+
+The `jenkins` directory contains an example of the `Jenkinsfile` (i.e. Pipeline)
+you'll be creating yourself during the tutorial.
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ cd jenkins/
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app/jenkins$ ll
+total 12
+drwxrwxr-x 2 mmoran mmoran 4096 Jun 21 18:47 ./
+drwxrwxr-x 5 mmoran mmoran 4096 Jun 21 18:47 ../
+-rw-rw-r-- 1 mmoran mmoran 1126 Jun 21 18:47 Jenkinsfile
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app/jenkins$ cat Jenkinsfile
+pipeline {
+    agent none
+    stages {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'python:2-alpine'
+                }
+            }
+            steps {
+                sh 'python -m py_compile sources/add2vals.py sources/calc.py'
+            }
+        }
+        stage('Test') {
+            agent {
+                docker {
+                    image 'qnib/pytest'
+                }
+            }
+            steps {
+                sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
+            }
+            post {
+                always {
+                    junit 'test-reports/results.xml'
+                }
+            }
+        }
+        stage('Deliver') {
+            agent {
+                docker {
+                    image 'cdrx/pyinstaller-linux:python2'
+                }
+            }
+            steps {
+                sh 'pyinstaller --onefile sources/add2vals.py'
+            }
+            post {
+                success {
+                    archiveArtifacts 'dist/add2vals'
+                }
+            }
+        }
+    }
+}
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app/jenkins$
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app/jenkins$ cd ..
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ vi Jenkinsfile
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ cat Jenkinsfile
+pipeline {
+    agent none
+    stages {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'python:2-alpine'
+                }
+            }
+            steps {
+                sh 'python -m py_compile sources/add2vals.py sources/calc.py'
+                stash(name: 'compiled-results', includes: 'sources/*.py*')
+            }
+        }
+    }
+}
+
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        Jenkinsfile
+
+nothing added to commit but untracked files present (use "git add" to track)
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ git add .
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ git commit -m "Add initial Jenkinsfile"
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'mmoran@mm37.(none)')
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ git config --global user.email "mike.moran@amd.com"
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ git config --global user.name "Mike Moran"
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ git commit -m "Add initial Jenkinsfile"
+[master 3366fda] Add initial Jenkinsfile
+ 1 file changed, 17 insertions(+)
+ create mode 100644 Jenkinsfile
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ pwd
+/home/mmoran/jenkins/GitHub/simple-python-pyinstaller-app
+mmoran@mm37:~/jenkins/GitHub/simple-python-pyinstaller-app$ cd
+mmoran@mm37:~$ ls
+jenkins
+mmoran@mm37:~$ mkdir GitHub
+mmoran@mm37:~$ cd GitHub/
+mmoran@mm37:~/GitHub$ pwd
+/home/mmoran/GitHub
+mmoran@mm37:~/GitHub$ !git clone
+git commit -m "Add initial Jenkinsfile" clone
+fatal: not a git repository (or any of the parent directories): .git
+mmoran@mm37:~/GitHub$ git clone https://github.com/mike-moran-amd-simple-python-pyinstaller-app
+Cloning into 'mike-moran-amd-simple-python-pyinstaller-app'...
+remote: Not Found
+fatal: repository 'https://github.com/mike-moran-amd-simple-python-pyinstaller-app/' not found
+mmoran@mm37:~/GitHub$ git clone https://github.com/mike-moran-amd/simple-python-pyinstaller-app
+Cloning into 'simple-python-pyinstaller-app'...
+remote: Enumerating objects: 36, done.
+remote: Total 36 (delta 0), reused 0 (delta 0), pack-reused 36
+Unpacking objects: 100% (36/36), 6.25 KiB | 2.08 MiB/s, done.
+mmoran@mm37:~/GitHub$ ls
+simple-python-pyinstaller-app
+mmoran@mm37:~/GitHub$ cd simple-python-pyinstaller-app/
+mmoran@mm37:~/GitHub/simple-python-pyinstaller-app$ vi Jenkinsfile
+mmoran@mm37:~/GitHub/simple-python-pyinstaller-app$ mmoran@mm37:~/GitHub/simple-python-pyinstaller-app$ cat Jenkinsfile
+pipeline {
+    agent none
+    stages {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'python:2-alpine'
+                }
+            }
+            steps {
+                sh 'python -m py_compile sources/add2vals.py sources/calc.py'
+                stash(name: 'compiled-results', includes: 'sources/*.py*')
+            }
+        }
+    }
+}
+mmoran@mm37:~/GitHub/simple-python-pyinstaller-app$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        Jenkinsfile
+
+nothing added to commit but untracked files present (use "git add" to track)
+mmoran@mm37:~/GitHub/simple-python-pyinstaller-app$ git add .
+mmoran@mm37:~/GitHub/simple-python-pyinstaller-app$ git commit -m "Add initial Jenkinsfile"
+[master 7c2bf93] Add initial Jenkinsfile
+ 1 file changed, 16 insertions(+)
+ create mode 100644 Jenkinsfile
+mmoran@mm37:~/GitHub/simple-python-pyinstaller-app$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+mmoran@mm37:~/GitHub/simple-python-pyinstaller-app$ git push
+Username for 'https://github.com': mike-moran-amd
+Password for 'https://mike-moran-amd@github.com':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 48 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 453 bytes | 453.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/mike-moran-amd/simple-python-pyinstaller-app
+   128e9ba..7c2bf93  master -> master
+mmoran@mm37:~/GitHub/simple-python-pyinstaller-app$
