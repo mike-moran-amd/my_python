@@ -52,8 +52,8 @@ DEFAULT_ROW_SEP + 'b25e420  default virtualbox running /Users/mfm/vagrant/centos
 '    5 | a4d9a67 | default | virtualbox | running | /Users/mfm/vagrant/centos  '
 '    6 | b25e420 | default | virtualbox | running | /Users/mfm/vagrant/centos8 '
 
->>> static_table, dynamic_table = ft.split_static()
->>> for line in static_table.pf('').split(DEFAULT_ROW_SEP):
+>>> dynamic_table, static_table = ft.split_static()
+>>> for line in dynamic_table.pf('').split(DEFAULT_ROW_SEP):
 ...     print(repr(line))
 '  | id      | directory                  '
 '1 | 2d9d7d5 | /Users/mfm/vagrant         '
@@ -63,10 +63,16 @@ DEFAULT_ROW_SEP + 'b25e420  default virtualbox running /Users/mfm/vagrant/centos
 '5 | a4d9a67 | /Users/mfm/vagrant/centos  '
 '6 | b25e420 | /Users/mfm/vagrant/centos8 '
 
->>> for line in dynamic_table.pf('').split(DEFAULT_ROW_SEP):
+>>> for line in static_table.pf('').split(DEFAULT_ROW_SEP):
 ...     print(repr(line))
 '  | name    | provider   | state  '
 '0 | default | virtualbox | running'
+
+>>> dynamic_table.count_unique_col('id')
+6
+
+>>> static_table.count_unique_col('name')
+1
 
 """
 from collections import OrderedDict
@@ -170,8 +176,8 @@ class Table:
                 # left justify strings, numbers to the right
                 try:
                     cell = f'{val:{widths[col]}}'
-                except TypeError as exc:
-                    # val could be a list
+                except TypeError:
+                    # val is not a builtin type, render as str
                     cell = f'{str(val):{widths[col]}}'
                 cols.append(cell)
             rows.append(column_separator.join(cols))
@@ -271,3 +277,10 @@ class Table:
                 for x in self.tup_gen(cols=[col]):
                     dynamic_table.set_val(*x)
         return dynamic_table, static_table
+
+    def count_unique_col(self, col):
+        d = {}
+        for row in self.row_gen():
+            val = self.get_val(row, col)
+            d[val] = None
+        return len(d.keys())

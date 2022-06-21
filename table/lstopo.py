@@ -85,10 +85,10 @@ class LsTopoTable(table.Table):
 
     def print_golang_struct(self, name):
         print(f'    {name} = &topology.CPUTopology' + '{')
-        print(f'        NumCPUs:      {self.count(ColumnEnum.PU.value)},')
-        print(f'        NumCores:     {self.count(ColumnEnum.Core.value)},')
-        print(f'        NumSockets:   {self.count(ColumnEnum.Package.value)},')
-        print(f'        NumNUMANodes: {self.count(ColumnEnum.NUMANode.value)},')
+        print(f'        NumCPUs:      {self.count_unique_col(ColumnEnum.PU.value)},')
+        print(f'        NumCores:     {self.count_unique_col(ColumnEnum.Core.value)},')
+        print(f'        NumSockets:   {self.count_unique_col(ColumnEnum.Package.value)},')
+        print(f'        NumNUMANodes: {self.count_unique_col(ColumnEnum.NUMANode.value)},')
         print('        CPUDetails: map[int]topology.CPUInfo{')
         for row in self.row_gen():
             pid = self.get_val(row, ColumnEnum.PU.value)
@@ -100,10 +100,3 @@ class LsTopoTable(table.Table):
                 pid, cid, sid, nid, uid))
         print('        },')
         print('    }')
-
-    def count(self, col):
-        d = {}
-        for row in self.row_gen():
-            val = self.get_val(row, col)
-            d[val] = None
-        return len(d.keys())
