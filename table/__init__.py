@@ -188,9 +188,9 @@ class Table:
                    frame_str,
                    row_sep=DEFAULT_ROW_SEP):
         """
-        :param frame_str: A string with equal length rows
-        :param row_sep: A string that separates the rows in the frame (default DEFAULT_ROW_SEP (newline))
-        :return: Table
+        param frame_str: A string with equal length rows
+        param row_sep: A string that separates the rows in the frame (default DEFAULT_ROW_SEP (newline))
+        return: Table
         """
         t = cls([])
         row_lines = frame_str.split(row_sep)
