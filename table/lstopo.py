@@ -100,3 +100,23 @@ class LsTopoTable(table.Table):
                 pid, cid, sid, nid, uid))
         print('        },')
         print('    }')
+
+    def pf_golang_struct(self, name):
+        tt = table.text.TextTable()
+        tt.add_line(f'    {name} = &topology.CPUTopology' + '{')
+        print(f'    {name} = &topology.CPUTopology' + '{')
+        print(f'        NumCPUs:      {self.count_unique_col(ColumnEnum.PU.value)},')
+        print(f'        NumCores:     {self.count_unique_col(ColumnEnum.Core.value)},')
+        print(f'        NumSockets:   {self.count_unique_col(ColumnEnum.Package.value)},')
+        print(f'        NumNUMANodes: {self.count_unique_col(ColumnEnum.NUMANode.value)},')
+        print('        CPUDetails: map[int]topology.CPUInfo{')
+        for row in self.row_gen():
+            pid = self.get_val(row, ColumnEnum.PU.value)
+            cid = self.get_val(row, ColumnEnum.Core.value)
+            sid = self.get_val(row, ColumnEnum.Package.value)
+            nid = self.get_val(row, ColumnEnum.NUMANode.value)
+            uid = self.get_val(row, ColumnEnum.L3.value)
+            print('            %s: {CoreID: %s, SocketID: %s, NUMANodeID: %s, UnCoreCacheID: %s},' % (
+                pid, cid, sid, nid, uid))
+        print('        },')
+        print('    }')
