@@ -1,9 +1,31 @@
-#!python3
 # encoding=UTF-8
+"""
+>>> st = SessionTable.from_text(text_from('mm36'))
+
+"""
+import lib
 import pathlib
+import re
 import table
 
 NL = '\n'
+
+
+class SessionTable(table.Table):
+    @classmethod
+    def from_text(cls, text):
+        # pattern = '(.+?) +\((.+?), +(.+?)\)'
+        # "^.+?@.+?:.+?# .+\n.*"gm
+        # root@mm36:~# lscpu
+        st = cls()
+        for tup in re.findall('^(.+?)@(.+?):(.+?)# (.+$)', text):
+            st.set_val('row', 'tup', tup)
+            #st.set_val('row', 'hostname', hostname)
+            #st.set_val('row', 'cwd', cwd)
+            #st.set_val('row', 'command_response', command_response)
+        return st
+
+
 
 
 def path_gen(
@@ -102,3 +124,17 @@ class SessionData:
             st.set_val(counter, 'lines', lines)
 
         return st
+
+
+def save_text(file, text, path=pathlib.Path(__file__).parent, rename_old=True):
+    if path is not None:
+        file = pathlib.Path(path, file)
+    if rename_old and file.exists():
+        old_text = text_from(file, path)
+        if old_text == text:
+            return
+        # rename to a unique timestamp filename in the same directory
+        new_path = pathlib.Path(path, file.name + '_' + lib.dt_str()[:12])
+        file.rename(new_path)
+    with open(file, 'w') as fp:
+        fp.write(text)
