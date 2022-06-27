@@ -13,12 +13,12 @@ class Columns(enum.Enum):
     A_VALUE = 'a_value'  # raw text sans key=value attributes which are added as columns in table
 
     @staticmethod
-    def table_update_val(at, row, col, val):
+    def table_updated(at, row, col, val):
         # spread side effects
         if col == Columns.A or col == Columns.A.value:
 
             # update A_UNQUOTE
-            at.set_val(row, Columns.A_UNQUOTE, parse.unquote(val))
+            at.set_val(row, Columns.A_UNQUOTE.value, parse.unquote(val))
             # get initial A_VALUE
             a_value = val
             for k, v in re.findall('(.+?)="(.+?)"', val):
@@ -29,7 +29,7 @@ class Columns(enum.Enum):
                 a_value = a_value.replace(remove_me, '')
 
             # update A_VALUE sans findall matches above
-            at.set_val(row, Columns.A_VALUE, a_value)
+            at.set_val(row, Columns.A_VALUE.value, a_value)
 
 
 class ATable(table.Table):
@@ -40,11 +40,17 @@ class ATable(table.Table):
         # use regex to find all non-overlapping "a" tags in the given text string
         for a_ref in re.findall('<a (.+?)</a>', text):
             row += 1
-            at.set_val(row, Columns.A, a_ref)
+            at.set_val(row, Columns.A.value, a_ref)
         return at
 
     def set_val(self, row, col, val):
         # Do what we usually do (set the value)
         super(ATable, self).set_val(row, col, val)
         # Then update dependant columns
-        Columns.table_update_val(self, row, col, val)
+        Columns.table_updated(self, row, col, val)
+
+    def get_a(self, row):
+        return self.get_val(row, Columns.A.value)
+
+    def get_a_value(self, row):
+        return self.get_val(row, Columns.A_VALUE.value)

@@ -8,9 +8,13 @@ from table import a
 JENKINS_ROOT_HTML = 'JENKINS_ROOT.htm'  # a suspect HTML that necessitated ATable (notice A_VALUE ">" prefix)
 
 
-def test_test():
+def test_from_text():
     text = data.text_from(JENKINS_ROOT_HTML)
-    t = a.ATable.from_text(text)
+    at = a.ATable.from_text(text)
     print()
-    print(t.pf('t'))
-    print(list(t.col_gen()))
+    print(at.pf('at'))
+    n = 0
+    for col in at.col_gen():
+        n += 1
+        print(n, col)
+    assert n == 25
