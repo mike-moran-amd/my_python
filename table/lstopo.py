@@ -39,8 +39,8 @@ class LsTopoTable(table.Table):
         indent = -1
         tally = {}
         for row in tt.row_gen():
-            line = tt.line_from_row(row)
-            new_indent = tt.leading_spaces_from_row(row)
+            line = tt.line(row)
+            new_indent = tt.line_leading_spaces(row)
             if indent == -1:
                 if not line.startswith('Machine' or new_indent != 0):
                     raise ValueError(f'UNEXPECTED: {line}')

@@ -2,34 +2,34 @@
 """
 >>> tt = TextTable.from_string(' first line'+NL+'line # 2 '+NL+'  ')  # a simple example line table
 >>> print(tt.pf(title=''))
-  | LINE        | LS | TS | LEN | WORD
-0 |  first line |  1 |  0 |  11 |    2
-1 | line # 2    |  0 |  1 |   9 |    3
-2 |             |  2 |  0 |   2 |    0
+  | LINE        | leading_isspace(LINE) | trailing_isspace(LINE) | len(LINE) | len(LINE.split())
+1 |  first line |                     1 |                      0 |        11 |                 2
+2 | line # 2    |                     0 |                      1 |         9 |                 3
+3 |             |                     2 |                      0 |         2 |                 0
 
->>> tt.get_val(0, Columns.LEADING_SPACES.value)
+>>> tt.get_val(1, Columns.LINE_LEADING_SPACES.value)
 1
->>> tt.leading_spaces_from_row(0)
-1
-
->>> tt.get_val(1, Columns.TRAILING_SPACES.value)
-1
->>> tt.trailing_spaces_from_row(1)
+>>> tt.line_leading_spaces(1)
 1
 
->>> tt.get_val(0, Columns.LINE.value)
+>>> tt.get_val(2, Columns.LINE_TRAILING_SPACES.value)
+1
+>>> tt.line_trailing_spaces(2)
+1
+
+>>> tt.get_val(1, Columns.LINE.value)
 ' first line'
->>> tt.line_from_row(0)
+>>> tt.line(1)
 ' first line'
 
->>> tt.get_val(2, Columns.LEN.value)
+>>> tt.get_val(3, Columns.LINE_LEN.value)
 2
->>> tt.len_from_row(2)
+>>> tt.line_len(3)
 2
 
->>> tt.get_val(1, Columns.WORD_COUNT.value)
+>>> tt.get_val(2, Columns.LINE_WORD_COUNT.value)
 3
->>> tt.word_count_from_row(1)
+>>> tt.line_word_count(2)
 3
 
 """
@@ -59,15 +59,31 @@ def trailing_isspace(s: str):
 
 
 class Columns(enum.Enum):
-    LEADING_SPACES = 'LS'
-    LEN = 'LEN'
     LINE = 'LINE'
-    TRAILING_SPACES = 'TS'
-    WORD_COUNT = 'WORD'
+    LINE_LEADING_SPACES = 'leading_isspace(LINE)'
+    LINE_LEN = 'len(LINE)'
+    LINE_TRAILING_SPACES = 'trailing_isspace(LINE)'
+    LINE_WORD_COUNT = 'len(LINE.split())'
 
     @staticmethod
     def is_line(col):
         return col == Columns.LINE or col == Columns.LINE.value
+
+    @staticmethod
+    def table_updated(tt, row, col, val):
+        # spread side effects
+        if col == Columns.LINE or col == Columns.LINE.value:
+            # dependant cols need to be recalculated
+            lead_space = leading_isspace(val)
+            tail_space = trailing_isspace(val)
+            line_len = len(val)
+            if lead_space + tail_space > line_len:
+                # the line is all space(s)
+                tail_space = 0
+            tt.set_val(row, Columns.LINE_LEADING_SPACES.value, lead_space)
+            tt.set_val(row, Columns.LINE_TRAILING_SPACES.value, tail_space)
+            tt.set_val(row, Columns.LINE_LEN.value, line_len)
+            tt.set_val(row, Columns.LINE_WORD_COUNT.value, len(val.split()))
 
 
 class TextTable(table.Table):
@@ -75,7 +91,7 @@ class TextTable(table.Table):
     @classmethod
     def from_string(cls, s: str, sep=NL):
         t = cls()
-        row = -1
+        row = 0
         for line in s.split(sep):
             row += 1
             t.set_row_line(row, line)
@@ -87,35 +103,25 @@ class TextTable(table.Table):
     def set_val(self, row, col, val):
         # Overload super to recalculate dependant fields if LINE changes value
         super(TextTable, self).set_val(row, col, val)
-        if Columns.is_line(col):
-            # dependant cols need to be recalculated
-            lead_space = leading_isspace(val)
-            tail_space = trailing_isspace(val)
-            line_len = len(val)
-            if lead_space + tail_space > line_len:
-                # the line is all space(s)
-                tail_space = 0
-            self.set_val(row, Columns.LEADING_SPACES.value, lead_space)
-            self.set_val(row, Columns.TRAILING_SPACES.value, tail_space)
-            self.set_val(row, Columns.LEN.value, line_len)
-            self.set_val(row, Columns.WORD_COUNT.value, len(val.split()))
+        # Then update dependant columns
+        Columns.table_updated(self, row, col, val)
 
-    def line_from_row(self, row):
+    def line(self, row):
         line = self.get_val(row, Columns.LINE.value)
         return line
 
-    def leading_spaces_from_row(self, row):
-        ls = self.get_val(row, Columns.LEADING_SPACES.value)
+    def line_leading_spaces(self, row):
+        ls = self.get_val(row, Columns.LINE_LEADING_SPACES.value)
         return ls
 
-    def trailing_spaces_from_row(self, row):
-        ts = self.get_val(row, Columns.TRAILING_SPACES.value)
+    def line_trailing_spaces(self, row):
+        ts = self.get_val(row, Columns.LINE_TRAILING_SPACES.value)
         return ts
 
-    def len_from_row(self, row):
-        len = self.get_val(row, Columns.LEN.value)
-        return len
+    def line_len(self, row):
+        n = self.get_val(row, Columns.LINE_LEN.value)
+        return n
 
-    def word_count_from_row(self, row):
-        wc = self.get_val(row, Columns.WORD_COUNT.value)
+    def line_word_count(self, row):
+        wc = self.get_val(row, Columns.LINE_WORD_COUNT.value)
         return wc
