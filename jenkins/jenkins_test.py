@@ -6,6 +6,10 @@ import jenkins
 import os
 import re
 import table
+from table.a import ATable
+from table.href import HrefTable
+from table.text import TextTable
+from jenkins import JobTable
 from urllib import parse
 
 
@@ -22,41 +26,33 @@ def xtest_get_from_server():
 
 def test_href_table_from_root():
     text = data.text_from(JENKINS_ROOT_HTML)
+    tt = TextTable.from_string(text)
+    print()
+    print(tt.pf(''))
+    assert len(list(tt.row_gen())) == 74
     pass
 
 
 def test_test():
     text = data.text_from(JENKINS_ROOT_HTML)
-    pattern = '<a '
-    t = table.Table()
-    t_row = 0
-    for a_tag in re.findall('<a (.+?)</a>', text):
-        t_row += 1
-        unquote_a_tag = parse.unquote(a_tag)
-        t.set_val(t_row, 'unquote_a_tag', unquote_a_tag)
-        non_attrib = unquote_a_tag
-        for attrib, value in re.findall('(.+?)="(.+?)"', unquote_a_tag):
-            t.set_val(t_row, attrib, value)
-            rep = f'{attrib}="{value}"'
-            non_attrib = non_attrib.replace(rep, '')
-        t.set_val(t_row, 'non_attrib', non_attrib)
-        href = t.get_val(t_row, 'href')
-        if href and href.startswith('job/'):
-            ss = href.split('/')
-            t.set_val(t_row, 'job_name', ss[1])
-            t.set_val(t_row, 'job_item', ss[2])
-
+    #t = ATable.from_text(text)
+    href_table = HrefTable.from_text(text, href_starts_with='job/')
     scrape_table = table.Table()
-    for t_row in t.row_gen():
-        job_name = t.get_val(t_row, 'job_name')
-        if job_name and job_name.lower()[-5:] == 'guest':
-            job_item = t.get_val(t_row, 'job_item')
+    for href_table_row in href_table.row_gen():
+        href = href_table.get_href(href_table_row)
+
+        # TODO JenkinsJobTable...
+
+        ss = href.split('/')
+        assert ss[0] == 'job'
+        job_name = parse.unquote(ss[1])
+        job_item = ss[2]
+        if job_name and job_name.lower().endswith('guest'):
             if job_item in ['lastSuccessfulBuild', 'lastFailedBuild']:
-                value = t.get_val(t_row, 'non_attrib')
+                value = href_table.get_href_value(href_table_row)
                 if value.startswith('>#'):
                     value = value[2:]
                 scrape_table.set_val(job_name, job_item, int(value))
-
     print()
     print(scrape_table.pf('scrape_table'))
 
@@ -94,3 +90,9 @@ def test_test():
     print()
     print(ht.pf(''))
     pass
+
+
+def test_job_table():
+    jt = JobTable.from_text(data.text_from(JENKINS_ROOT_HTML))
+    print()
+    print(jt.pf('jt'))

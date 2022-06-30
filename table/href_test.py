@@ -12,7 +12,7 @@ JENKINS_ROOT_HTML = 'JENKINS_ROOT.htm'  # a suspect HTML that necessitated ATabl
 def test_from_a_table():
     text = data.text_from(JENKINS_ROOT_HTML)
     at = ATable.from_text(text)
-    ht = HrefTable.from_atable(at, href_starts_with='job/')
+    ht = HrefTable.from_a_table(at, href_starts_with='job/')
     print()
     print(ht.pf('ht'))
 

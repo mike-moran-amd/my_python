@@ -101,9 +101,7 @@ class TextTable(table.Table):
         self.set_val(row, Columns.LINE.value, line)
 
     def set_val(self, row, col, val):
-        # Overload super to recalculate dependant fields if LINE changes value
         super(TextTable, self).set_val(row, col, val)
-        # Then update dependant columns
         Columns.table_updated(self, row, col, val)
 
     def line(self, row):

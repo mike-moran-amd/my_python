@@ -19,7 +19,7 @@ class Columns(enum.Enum):
 
 class HrefTable(table.Table):
     @classmethod
-    def from_atable(cls, at, href_starts_with=None):
+    def from_a_table(cls, at, href_starts_with=None):
         ht = cls()
         row = 0
         # use regex to find all non-overlapping "a" tags in the given text string
@@ -39,7 +39,7 @@ class HrefTable(table.Table):
     @classmethod
     def from_text(cls, text, href_starts_with=None):
         at = ATable.from_text(text)
-        return HrefTable.from_atable(at, href_starts_with=href_starts_with)
+        return HrefTable.from_a_table(at, href_starts_with=href_starts_with)
 
     def set_val(self, row, col, val):
         # Do what we usually do (set the value)

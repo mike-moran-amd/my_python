@@ -11,7 +11,7 @@ Bucketizes items in a list
 'a | [1]       '
 'b | [2, 4]    '
 
->>> lit.list_index_from_row('b')
+>>> lit.list_index('b')
 [2, 4]
 """
 import enum
@@ -41,6 +41,6 @@ class ListIndexTable(table.Table):
                 val.append(counter)
         return t
 
-    def list_index_from_row(self, row):
+    def list_index(self, row):
         val = self.get_val(row, Columns.LIST_INDEX.value)
         return val

@@ -44,9 +44,7 @@ class ATable(table.Table):
         return at
 
     def set_val(self, row, col, val):
-        # Do what we usually do (set the value)
         super(ATable, self).set_val(row, col, val)
-        # Then update dependant columns
         Columns.table_updated(self, row, col, val)
 
     def get_a(self, row):
