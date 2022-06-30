@@ -3,6 +3,16 @@
 """
 import os
 import requests
+import table
+from table.href import HrefTable
+
+JENKINS_HOST_URL = 'JENKINS_HOST_URL'  # the environment variable that has URL to Jenkins server
+
+
+def get_host_url():
+    # this environment variable should have been set in Dockerfile
+    host_url = os.environ.get(JENKINS_HOST_URL, None)
+    return host_url
 
 
 def get_response_text(url):
@@ -13,11 +23,34 @@ def get_response_text(url):
 
 
 class JenkinsHost:
-    def __init__(self, url=os.environ.get('JENKINS_HOST_URL', None)):
+    def __init__(self, url=get_host_url()):
         if not url:
-            raise RuntimeError('pass in host url or set environment variable "JENKINS_HOST_URL" to point to host root')
+            raise RuntimeError(f'Set environment variable "{JENKINS_HOST_URL}", for example "http://127.0.0.1:8080/"')
         self.__url = url
 
     def get_text(self, local_url):
         url = self.__url + '/' + local_url
         return get_response_text(url)
+
+
+class JobTable(table.Table):
+
+    @classmethod
+    def from_jenking_host(cls, jh=JenkinsHost()):
+        text = jh.get_text('')
+        return JobTable.from_text(text)
+
+    @classmethod
+    def from_text(cls, text, href_starts_with='job/'):
+        ht = HrefTable.from_text(text, href_starts_with=href_starts_with)
+        jt = cls()
+        for ht_row in ht.row_gen():
+            href = ht.get_href(ht_row)
+            ss = href.split('/')
+            if len(ss) < 3:
+                continue
+            job_name = ss[1]
+            job_item = ss[2]
+            job_value = ht.get_href_value(ht_row)
+            jt.set_val(job_name, job_item, job_value)
+        return jt
