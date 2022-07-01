@@ -54,3 +54,32 @@ class JobTable(table.Table):
             job_value = ht.get_href_value(ht_row)
             jt.set_val(job_name, job_item, job_value)
         return jt
+
+    def last_failed_build(self, job_name, col_label='lastFailedBuild'):
+        val = self.get_val(job_name, col_label)
+        if not val:
+            return 0
+        if val.startswith('>#'):
+            val = val[2:]
+        return int(val)
+
+    def last_successful_build(self, job_name, col_label='lastSuccessfulBuild'):
+        val = self.get_val(job_name, col_label)
+        if not val:
+            return 0
+        if val.startswith('>#'):
+            val = val[2:]
+        return int(val)
+
+    def passed(self, job_name):
+        f = self.last_failed_build(job_name)
+        p = self.last_successful_build(job_name)
+        if not f:
+            return True
+        return p > f
+
+    def last_build_number(self, job_name):
+        if self.passed(job_name):
+            return self.last_successful_build(job_name)
+        return self.last_failed_build(job_name)
+
