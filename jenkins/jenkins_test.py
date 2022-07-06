@@ -23,7 +23,7 @@ def test_href_table_from_root():
     tt = TextTable.from_string(text)
     print()
     print(tt.pf(''))
-    assert len(list(tt.row_gen())) == 74
+    assert len(list(tt.row_gen())) == 138
     pass
 
 
