@@ -11,7 +11,7 @@ async def get_root():
 
 @APP.get("/jenkins_dashboard")
 async def jenkins_dashboard():
-    jt = JobTable.from_jenking_host()
+    jt = JobTable.from_jenkins_host()
     dt = DashboardTable.from_job_table(jt)
     html = ''.join(list(dt.html_gen()))
     return html

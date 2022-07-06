@@ -36,7 +36,7 @@ class JenkinsHost:
 class JobTable(table.Table):
 
     @classmethod
-    def from_jenking_host(cls, jh=JenkinsHost()):
+    def from_jenkins_host(cls, jh=JenkinsHost()):
         text = jh.get_text('')
         return JobTable.from_text(text)
 
@@ -82,4 +82,3 @@ class JobTable(table.Table):
         if self.passed(job_name):
             return self.last_successful_build(job_name)
         return self.last_failed_build(job_name)
-

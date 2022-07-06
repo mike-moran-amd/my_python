@@ -5,14 +5,14 @@ MAINTAINER Mike Moran, mike.moran@amd.com
 ENV APP_PATH=/opt
 ENV APP_PORT=8000
 
-COPY requirements.txt $APP_PATH/.
+COPY * $APP_PATH/.
+WORKDIR $APP_PATH
 RUN apt-get update \
  && apt-get -y install python python-pip \
  && python -m pip install --upgrade pip \
- && pip install -r $APP_PATH/requirements.txt
+ && pip install -r requirements.txt
 
-COPY my_python $APP_PATH/.
-WORKDIR $APP_PATH
 EXPOSE $APP_PORT
+# TODO add: ENV JENKINS_HOST_URL=http://your.own.ip.address:port/
 CMD ["gunicorn", "--bind", "127.0.0.1:$APP_PORT", "fastapi_main:APP"]
 
