@@ -10,8 +10,8 @@ JENKINS_HOST_URL = 'JENKINS_HOST_URL'  # the environment variable that has URL t
 
 
 def get_host_url():
-    # this environment variable should have been set in Dockerfile
-    host_url = os.environ.get(JENKINS_HOST_URL, None)
+    # this should be set in Dockerfile e.g. ENV JENKINS_HOST_URL=http://IP.ADD.RE.SS:PORT/
+    host_url = os.environ.get(JENKINS_HOST_URL)
     return host_url
 
 
@@ -23,22 +23,26 @@ def get_response_text(url):
 
 
 class JenkinsHost:
-    def __init__(self, url=get_host_url()):
+    def __init__(self, url=None):
+        url = url or get_host_url()
         if not url:
             raise RuntimeError(f'Set environment variable "{JENKINS_HOST_URL}", for example "http://127.0.0.1:8080/"')
         self.__url = url
 
     def get_text(self, local_url):
         url = self.__url + '/' + local_url
-        return get_response_text(url)
+        text = get_response_text(url)
+        return text
 
 
 class JobTable(table.Table):
 
     @classmethod
-    def from_jenkins_host(cls, jh=JenkinsHost()):
+    def from_jenkins_host(cls, jh=None):
+        jh = jh or JenkinsHost()
         text = jh.get_text('')
-        return JobTable.from_text(text)
+        jt = JobTable.from_text(text)
+        return jt
 
     @classmethod
     def from_text(cls, text, href_starts_with='job/'):

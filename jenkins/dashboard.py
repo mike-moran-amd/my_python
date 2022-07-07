@@ -2,6 +2,8 @@
 """
 """
 import os
+
+import jenkins
 import table
 from urllib import parse
 
@@ -13,7 +15,7 @@ class DashboardTable(table.Table):
     @classmethod
     def from_job_table(cls, jt, split_char=SPLIT_CHAR):
         t = cls()
-        jenkins_url = os.environ.get('JENKINS_HOST_URL')
+        jenkins_url = jenkins.get_host_url()
         for job_name in sorted(list(jt.row_gen())):
             quote_job_name = parse.quote(job_name)
             last_build_number = jt.last_build_number(job_name)
