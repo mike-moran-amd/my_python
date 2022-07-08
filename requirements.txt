@@ -1,7 +1,8 @@
 # -- PYTHON PACKAGE REQUIREMENTS:
 # USE: pip install -r <THIS_FILE>
-pytest-mock
-requests
 fastapi
 gunicorn
 pydantic
+pytest-mock
+requests
+uvicorn[standard]

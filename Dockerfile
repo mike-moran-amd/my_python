@@ -3,7 +3,7 @@ FROM python:3.7.8-buster
 MAINTAINER Mike Moran, mike.moran@amd.com
 
 ENV APP_PATH=/opt
-ENV APP_PORT=8000
+ENV APP_PORT=4230
 
 COPY * $APP_PATH/.
 WORKDIR $APP_PATH

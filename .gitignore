@@ -3,3 +3,4 @@ venv/
 logs/
 .pytest_cache
 my_vbox/vbii/
+*__pycache__/

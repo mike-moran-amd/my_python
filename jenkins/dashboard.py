@@ -33,7 +33,7 @@ class DashboardTable(table.Table):
         # end for job_name
         return t
 
-    def html_gen(self):
+    def html_gen(self, split_char=SPLIT_CHAR):
         yield '<!DOCTYPE html>'
         yield '<html>'
         yield '<head>'
@@ -44,12 +44,12 @@ class DashboardTable(table.Table):
         yield '<tr>'
         yield '<th>HOST</th>'
         yield '<th>GUEST</th>'
-        for col in self.col_gen():
-            yield f'<th>{col}</th>'
+        for component in self.col_gen():
+            yield f'<th>{component}</th>'
         last_host = None
-        for row in self.row_gen():
+        for host_guest in self.row_gen():
             yield '<tr>'
-            ss = row.split('~')
+            ss = host_guest.split(split_char)
             host = ss[0]
             if host == last_host:
                 host = ''
@@ -58,10 +58,11 @@ class DashboardTable(table.Table):
             guest = ss[1]
             yield f'<td>{host}</td>'
             yield f'<td>{guest}</td>'
-            for col in self.col_gen():
-                ss = self.get_val(row, col).split('~')
+            for component in self.col_gen():
+                val = self.get_val(host_guest, component)
+                ss = val.split('~')
                 link_text = ss[0]
-                href = ss[1]
+                href = split_char.join(ss[1:])
                 if link_text == 'FAIL':
                     style = 'style="color:red;" '
                 else:
