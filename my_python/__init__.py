@@ -1,23 +1,13 @@
 import pathlib
 VERSION = '0.1'
-PARENT_PATH = pathlib.Path(__file__).parent
+PARENT_PATH = pathlib.Path(__file__).parent.parent
 
 
 def py_modules():
     """
     >>> for name in py_modules():
     ...     print(name)
-    __init__
-    data
-    fastapi_main
-    jenkins
-    lib
-    my_vbox
-    prime
-    prime_test
-    setup
-    ssh
-    table
+    my_python
 
     """
     ret_list = []

@@ -1,16 +1,15 @@
 FROM python:3.7.8-buster
 
-MAINTAINER Mike Moran, mike.moran@amd.com
+RUN apt-get update
+RUN apt-get -y install python python-pip
+RUN python -m pip install --upgrade pip
 
 ENV APP_PATH=/opt
-
-COPY my_python $APP_PATH/.
+COPY my_python $APP_PATH/my_python
 WORKDIR $APP_PATH
-RUN apt-get update \
- && apt-get -y install python python-pip \
- && python -m pip install --upgrade pip \
- && pip install -r my_python/requirements.txt
+RUN pip install -r $APP_PATH/my_python/requirements.txt
 
-EXPOSE 4230
-#ENV JENKINS_HOST_URL=http://145.40.81.55:8080
-CMD ["gunicorn", "--bind", "127.0.0.1:4230", "my_python.fastapi_main:APP"]
+EXPOSE 8000
+ENV JENKINS_HOST_URL "$JENKINS_HOST_URL"
+#CMD ["gunicorn", "--bind", "127.0.0.1:8000", "my_python.fastapi_main:APP"]
+CMD ["uvicorn", "my_python.fastapi_main:APP", "--reload"]

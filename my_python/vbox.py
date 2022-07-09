@@ -800,7 +800,7 @@ class MyBox:
 
     def createvm(self,
                  name,
-                 basefolder=pathlib.Path(pathlib.Path(__file__).parent, 'vbii'),
+                 basefolder=pathlib.Path(pathlib.Path(__file__).parent, '../my_vbox/vbii'),
                  ostype="Ubuntu_64",
                  register=True):
         """
