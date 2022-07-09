@@ -1,8 +1,3 @@
-# encoding=UTF-8
-"""
-"""
-import os
-
 import jenkins
 import table
 from urllib import parse

@@ -4,3 +4,5 @@ logs/
 .pytest_cache
 my_vbox/vbii/
 *__pycache__/
+dist/*
+my_python.egg-info/*

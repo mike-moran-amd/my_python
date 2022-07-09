@@ -1,8 +1,3 @@
-# encoding=UTF-8
-"""
->>> st = SessionTable.from_text(text_from('mm36'))
-
-"""
 import lib
 import pathlib
 import re
@@ -14,7 +9,7 @@ NL = '\n'
 class SessionTable(table.Table):
     @classmethod
     def from_text(cls, text):
-        # pattern = '(.+?) +\((.+?), +(.+?)\)'
+        #pattern = '(.+?) +\((.+?), +(.+?)\)'
         # "^.+?@.+?:.+?# .+\n.*"gm
         # root@mm36:~# lscpu
         st = cls()
@@ -27,7 +22,6 @@ class SessionTable(table.Table):
 
 
 
-
 def path_gen(
         rglob_pattern='*',
         path=pathlib.Path(__file__).parent,
@@ -37,7 +31,7 @@ def path_gen(
     generate paths from (default here)
 
     >>> len(list(path_gen()))
-    35
+    39
     """
     for path in path.rglob(rglob_pattern):
         if is_file and path.is_file() or is_dir and path.is_dir():
