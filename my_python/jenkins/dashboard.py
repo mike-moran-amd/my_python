@@ -1,5 +1,4 @@
-import jenkins
-import table
+from my_python import jenkins, table
 from urllib import parse
 
 SPLIT_CHAR = '~'

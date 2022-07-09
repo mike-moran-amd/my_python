@@ -34,8 +34,7 @@
 
 """
 import enum
-import table
-
+from my_python import table
 
 NL = '\n'
 

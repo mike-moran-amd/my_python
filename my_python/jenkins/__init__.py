@@ -3,8 +3,8 @@
 """
 import os
 import requests
-import table
-from table.href import HrefTable
+from my_python import table
+from my_python.table.href import HrefTable
 
 JENKINS_HOST_URL = 'JENKINS_HOST_URL'  # the environment variable that has URL to Jenkins server
 

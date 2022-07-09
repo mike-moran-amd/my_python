@@ -1,7 +1,7 @@
 #!python3
 # encoding=UTF-8
 import pathlib
-from table import cpuinfo
+from my_python.table import cpuinfo
 
 
 def get_table(name='cpuinfo_test_epyc_7513'):

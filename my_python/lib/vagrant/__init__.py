@@ -11,7 +11,7 @@ import re
 import shutil
 import subprocess
 # local imports
-import lib
+from my_python import lib
 
 NL = '\n'  # doctests hate newlines in the source
 

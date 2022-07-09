@@ -1,7 +1,6 @@
 # encoding=UTF-8
-import data
-from table import lstopo, cpuinfo
-
+from my_python import data
+from my_python.table import lstopo, cpuinfo
 
 TOPO_LABEL = '48 AMD EPYC 7402P 24-Core Processor'
 DATA = '''Machine (62GB total)

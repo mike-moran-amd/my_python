@@ -4,8 +4,7 @@
 
 """
 import pathlib
-import lib
-
+from my_python import lib
 
 NL = '\n'
 

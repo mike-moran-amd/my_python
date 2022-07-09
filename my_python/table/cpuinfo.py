@@ -1,8 +1,7 @@
 #!python3
 # encoding=UTF-8
 
-import lib
-import table
+from my_python import table, lib
 
 
 def from_text(text):

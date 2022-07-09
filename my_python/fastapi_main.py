@@ -1,7 +1,7 @@
 import fastapi
 from fastapi.responses import HTMLResponse
-from jenkins.dashboard import DashboardTable
-from jenkins import JobTable
+from my_python.jenkins.dashboard import DashboardTable
+from my_python.jenkins import JobTable
 APP = fastapi.FastAPI()
 
 

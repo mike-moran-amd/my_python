@@ -3,7 +3,7 @@
 """
 import enum
 import re
-import table
+from my_python import table
 from urllib import parse
 
 

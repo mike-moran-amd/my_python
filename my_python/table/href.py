@@ -2,9 +2,9 @@
 """
 """
 import enum
-import table
+from my_python import table
 from urllib import parse
-from table.a import ATable
+from my_python.table.a import ATable
 
 
 class Columns(enum.Enum):

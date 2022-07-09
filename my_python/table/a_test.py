@@ -1,9 +1,8 @@
 # encoding=UTF-8
 """
 """
-import data
-from table import a
-
+from my_python import data
+from my_python.table import a
 
 JENKINS_ROOT_HTML = 'JENKINS_ROOT.htm'  # a suspect HTML that necessitated ATable (notice A_VALUE ">" prefix)
 

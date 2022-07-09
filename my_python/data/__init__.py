@@ -1,7 +1,6 @@
-import lib
 import pathlib
 import re
-import table
+from my_python import table, lib
 
 NL = '\n'
 

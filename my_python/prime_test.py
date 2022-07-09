@@ -2,7 +2,7 @@
 # encoding=utf-8
 import datetime
 
-import prime
+from my_python import prime
 
 
 class FakeArgs:

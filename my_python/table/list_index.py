@@ -15,8 +15,7 @@ Bucketizes items in a list
 [2, 4]
 """
 import enum
-import table
-
+from my_python import table
 
 NL = '\n'
 

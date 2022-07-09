@@ -2,9 +2,8 @@
 # encoding=UTF-8
 
 import enum
-import lib
-import table
-from table.text import TextTable
+from my_python import table, lib
+from my_python.table.text import TextTable
 
 
 def from_system():
@@ -102,7 +101,7 @@ class LsTopoTable(table.Table):
         print('    }')
 
     def pf_golang_struct(self, name):
-        tt = table.text.TextTable()
+        tt = my_python.table.text.TextTable()
         tt.add_line(f'    {name} = &topology.CPUTopology' + '{')
         print(f'    {name} = &topology.CPUTopology' + '{')
         print(f'        NumCPUs:      {self.count_unique_col(ColumnEnum.PU.value)},')

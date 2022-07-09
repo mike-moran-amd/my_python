@@ -16,8 +16,7 @@ Similar to a list_index, a string is a list, so this is a table of characters an
 
 """
 import enum
-from table import list_index
-
+from my_python.table import list_index
 
 NL = '\n'
 

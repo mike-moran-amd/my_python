@@ -1,10 +1,9 @@
 # encoding=UTF-8
 """
 """
-import data
-import jenkins
-from table.text import TextTable
-from jenkins import JobTable
+from my_python import jenkins, data
+from my_python.table.text import TextTable
+from my_python.jenkins import JobTable
 
 
 JENKINS_ROOT_HTML = 'JENKINS_ROOT.htm'
