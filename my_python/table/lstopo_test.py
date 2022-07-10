@@ -172,18 +172,18 @@ def test_generate_topology():
 
 def test_test():
     print()
-    #name = 'mm15'  # AMD_EPYC_7402P_24_Core_Processor
-    #name = 'mm16'  # AMD_EPYC_7502P_32_Core_Processor
-    #name = 'mm17'  # Intel_R__Xeon_R__E_2278G_CPU___3_40GHz
-    #name = 'mm18'  #  Intel_R__Xeon_R__Silver_4214_CPU___2_20GHz
-    #name = 'mm19'  # AMD_EPYC_7513_32_Core_Processor
-    #name = 'mm20'  #  REPEAT AMD_EPYC_7502P_32_Core_Processor
-    #name = 'mm21'  #  REPEAT Intel_R__Xeon_R__E_2278G_CPU___3_40GHz
-    #name = 'mm22'  #  AMD_EPYC_7443P_24_Core_Processor
-    #name = 'mm27'  #  Intel_R__Xeon_R__E_2378G_CPU___2_80GHz
-    #name = 'mm28'  #  REPEAT AMD_EPYC_7402P_24_Core_Processor
-    #name = 'mm29'  #  FIXME
-    #name = 'mm30'  # Intel_R__Xeon_R__Gold_5120_CPU___2_20GHz
+    # name = 'mm15'  # AMD_EPYC_7402P_24_Core_Processor
+    # name = 'mm16'  # AMD_EPYC_7502P_32_Core_Processor
+    # name = 'mm17'  # Intel_R__Xeon_R__E_2278G_CPU___3_40GHz
+    # name = 'mm18'  #  Intel_R__Xeon_R__Silver_4214_CPU___2_20GHz
+    # name = 'mm19'  # AMD_EPYC_7513_32_Core_Processor
+    # name = 'mm20'  #  REPEAT AMD_EPYC_7502P_32_Core_Processor
+    # name = 'mm21'  #  REPEAT Intel_R__Xeon_R__E_2278G_CPU___3_40GHz
+    # name = 'mm22'  #  AMD_EPYC_7443P_24_Core_Processor
+    # name = 'mm27'  #  Intel_R__Xeon_R__E_2378G_CPU___2_80GHz
+    # name = 'mm28'  #  REPEAT AMD_EPYC_7402P_24_Core_Processor
+    # name = 'mm29'  #  FIXME
+    # name = 'mm30'  # Intel_R__Xeon_R__Gold_5120_CPU___2_20GHz
     name = 'mm36'  # AMD_EPYC_7502P_32_Core_Processor
     session_data = data.text_from(name)
     st = data.SessionData(session_data).session_table()
@@ -197,27 +197,27 @@ def test_test():
         if st.get_val(row, 'command') == 'cat /proc/cpuinfo':
             last_cpuinfo_row = row
 
-    if last_lstopo_row and last_cpuinfo_row:
+    if last_cpuinfo_row:
         cpu_lines = st.get_val(last_cpuinfo_row, 'lines')
         cpu_table = cpuinfo.from_text('\n'.join(cpu_lines))
-        cpu_pf = cpu_table.topology_table().pf(name)
+        cpu_pf = cpu_table.topology_table().pf('cpu_pf')
         print()
         print(cpu_pf)
 
+    if last_lstopo_row:
         lstopo_lines = st.get_val(last_lstopo_row, 'lines')
         lstopo_table = lstopo.LsTopoTable.from_text('\n'.join(lstopo_lines))
-        lstopo_pf = lstopo_table.pf(name)
+        lstopo_pf = lstopo_table.pf('lstopo_pf')
         print()
         print(lstopo_pf)
 
-        print()
-        model_name = cpu_table.get_val(0, 'model name')
+        model_name = cpu_table.get_val(0, 'model name') if last_cpuinfo_row else 'UNKNOWN'
         model_name = model_name.replace(' ', '_')
         model_name = model_name.replace('-', '_')
         model_name = model_name.replace('(', '_')
         model_name = model_name.replace(')', '_')
         model_name = model_name.replace('@', '_')
         model_name = model_name.replace('.', '_')
+        print()
         print(model_name)
         lstopo_table.print_golang_struct(model_name)
-        assert lstopo_pf == cpu_pf

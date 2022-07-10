@@ -1,5 +1,5 @@
 from distutils.core import setup
-from __init__ import PARENT_PATH, VERSION, py_modules
+from my_python import PARENT_PATH, VERSION, py_modules
 
 
 setup(name=PARENT_PATH.name,

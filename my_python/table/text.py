@@ -122,3 +122,7 @@ class TextTable(table.Table):
     def line_word_count(self, row):
         wc = self.get_val(row, Columns.LINE_WORD_COUNT.value)
         return wc
+
+    def add_line(self, line):
+        row = max(list(self.row_gen())) + 1
+        self.set_row_line(row, line)
