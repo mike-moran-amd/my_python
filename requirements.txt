@@ -1,7 +1,6 @@
 # -- PYTHON PACKAGE REQUIREMENTS:
 # USE: pip install -r <THIS_FILE>
 fastapi
-gunicorn
 pydantic
 pytest-mock
 requests
