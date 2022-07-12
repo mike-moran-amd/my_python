@@ -48,5 +48,6 @@ def invoke_subprocess(word_list, encoding='UTF-8'):
     '6.1.32r149290'
 
     """
-    raw_bytes = subprocess.check_output(word_list)
+    # TODO where do we get stderr (below)?
+    raw_bytes = subprocess.check_output(word_list, stderr=subprocess.PIPE)
     return raw_bytes.decode(encoding=encoding)
