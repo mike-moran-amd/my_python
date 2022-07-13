@@ -1,8 +1,6 @@
 import pathlib
-
-from my_python import lib, jenkins, table, VERSION
 from urllib import parse
-
+from my_python import lib, jenkins, table, VERSION
 SPLIT_CHAR = '~'
 
 
@@ -72,7 +70,13 @@ class DashboardTable(table.Table):
         yield '</html>'
 
 
-def run_in_docker(jenkins_url, host_port=80, docker_port=4230, is_detached=True, tag='jenkins_dashboard', version=VERSION, work_dir='/opt'):
+def run_in_docker(jenkins_url,
+                  host_port=80,
+                  docker_port=4230,
+                  is_detached=True,
+                  tag='jenkins_dashboard',
+                  version=VERSION,
+                  work_dir='/opt'):
     cmd_list = [lib.path_for_command('docker'), 'build']
     image_name = ':'.join([tag, version])
     cmd_list.extend(['-t', image_name])
@@ -90,8 +94,9 @@ def run_in_docker(jenkins_url, host_port=80, docker_port=4230, is_detached=True,
             f'CMD ["uvicorn", "my_python.fastapi_main:APP", "--host", "0.0.0.0", "--port", "{docker_port}"]\n',
         ]
         df.writelines(lines)
-    build_output = lib.invoke_subprocess(cmd_list)
-    assert build_output == ''
+    build_output = lib.invoke_subprocess(cmd_list)  # noqa
+    # TODO error checking, we assume now that if the command above had non-zero exit code that it failed
+
     # Dockerfile contains confidential info, toast when done!
     dockerfile_path.unlink(missing_ok=False)
     cmd_list = [lib.path_for_command('docker'), 'run']
