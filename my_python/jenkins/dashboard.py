@@ -93,7 +93,7 @@ def run_in_docker(jenkins_url, host_port=80, docker_port=4230, is_detached=True,
     build_output = lib.invoke_subprocess(cmd_list)
     assert build_output == ''
     # Dockerfile contains confidential info, toast when done!
-    dockerfile_path.unlink(missing_ok=False)
+    dockerfile_path.unlink()
     cmd_list = [lib.path_for_command('docker'), 'run']
     cmd_list.extend(['-p', f'{host_port}:{docker_port}'])
     if is_detached:
