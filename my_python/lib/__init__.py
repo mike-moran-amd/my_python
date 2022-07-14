@@ -1,5 +1,3 @@
-#!python3
-# encoding=UTF-8
 import datetime
 import shutil
 import subprocess

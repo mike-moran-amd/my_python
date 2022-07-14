@@ -1,11 +1,6 @@
-# encoding=UTF-8
-"""
-"""
 from my_python import data
 from my_python.table.href import HrefTable
 from my_python.table.a import ATable
-
-
 JENKINS_ROOT_HTML = 'JENKINS_ROOT.htm'  # a suspect HTML that necessitated ATable (notice A_VALUE ">" prefix)
 
 
@@ -33,3 +28,4 @@ def test_get_href_and_value():
         href_value = ht.get_href_value(row)
         if href.endswith('lastSuccessfulBuild/') or href.endswith('lastFailedBuild/'):
             print(href_value[2:], href.split('/')[1:3])
+    pass  # PASS/FAIL can be determined from the greatest build number of Failed vs Successful job href_value
