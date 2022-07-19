@@ -54,14 +54,16 @@ class DashboardTable(table.Table):
             yield f'<td>{guest}</td>'
             for component in self.col_gen():
                 val = self.get_val(host_guest, component)
-                ss = val.split('~')
-                link_text = ss[0]
-                href = split_char.join(ss[1:])
-                if link_text == 'FAIL':
-                    style = 'style="color:red;" '
-                else:
-                    style = ''
-                a_ref = f'<a {style}href={href}>{link_text}</a>'
+                a_ref = ''
+                if val is not None:
+                    ss = val.split('~')
+                    link_text = ss[0]
+                    href = split_char.join(ss[1:])
+                    if link_text == 'FAIL':
+                        style = 'style="color:red;" '
+                    else:
+                        style = ''
+                    a_ref = f'<a {style}href={href}>{link_text}</a>'
                 yield f'<td>{a_ref}</td>'
             yield '</tr>'
         # end for row
@@ -71,7 +73,7 @@ class DashboardTable(table.Table):
 
 
 def run_in_docker(jenkins_url,
-                  host_port=80,
+                  host_port=4230,
                   docker_port=4230,
                   is_detached=True,
                   tag='jenkins_dashboard',
