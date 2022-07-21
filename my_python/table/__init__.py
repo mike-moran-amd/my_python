@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# encoding=UTF-8
 """
 Interestingly there is no "table" module in the standard python library.
 This is a good first stab at it.
@@ -42,8 +40,7 @@ DEFAULT_ROW_SEP + 'a4d9a67  default virtualbox running /Users/mfm/vagrant/centos
 DEFAULT_ROW_SEP + 'b25e420  default virtualbox running /Users/mfm/vagrant/centos8          ' # noqa
 
 >>> ft = Table.from_frame(a_frame_str)
->>> for x in ft.pf(title='BOXES').split(DEFAULT_ROW_SEP):
-...     print(repr(x))
+>>> ft.print_repr_lines(title='BOXES')
 'BOXES | id      | name    | provider   | state   | directory                  '
 '    1 | 2d9d7d5 | default | virtualbox | running | /Users/mfm/vagrant         '
 '    2 | fe8bcba | default | virtualbox | running | /Users/mfm/vagrant/U2010   '
@@ -53,8 +50,7 @@ DEFAULT_ROW_SEP + 'b25e420  default virtualbox running /Users/mfm/vagrant/centos
 '    6 | b25e420 | default | virtualbox | running | /Users/mfm/vagrant/centos8 '
 
 >>> dynamic_table, static_table = ft.split_static()
->>> for line in dynamic_table.pf('').split(DEFAULT_ROW_SEP):
-...     print(repr(line))
+>>> dynamic_table.print_repr_lines('')
 '  | id      | directory                  '
 '1 | 2d9d7d5 | /Users/mfm/vagrant         '
 '2 | fe8bcba | /Users/mfm/vagrant/U2010   '
@@ -63,8 +59,7 @@ DEFAULT_ROW_SEP + 'b25e420  default virtualbox running /Users/mfm/vagrant/centos
 '5 | a4d9a67 | /Users/mfm/vagrant/centos  '
 '6 | b25e420 | /Users/mfm/vagrant/centos8 '
 
->>> for line in static_table.pf('').split(DEFAULT_ROW_SEP):
-...     print(repr(line))
+>>> static_table.print_repr_lines('')
 '  | name    | provider   | state  '
 '0 | default | virtualbox | running'
 
@@ -284,3 +279,7 @@ class Table:
             val = self.get_val(row, col)
             d[val] = None
         return len(d.keys())
+
+    def print_repr_lines(self, title=None, row_separator=DEFAULT_ROW_SEP):
+        for line in self.pf(title=title, row_separator=DEFAULT_ROW_SEP).split(row_separator):
+            print(repr(line))

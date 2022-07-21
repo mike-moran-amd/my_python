@@ -1,15 +1,14 @@
-# encoding=UTF-8
-"""
-"""
-import enum
 from my_python import table
-NL = '\n'
 
 
 def allocation_gen(number):
+    """
+    >>> len(list(allocation_gen(17)))
+    65536
+    """
     # say you have a number of items, how would you distribute them (in groups), all possibilities
     yield [number]
-    # the first choice is to take all items, above, then choose a progressive number and recursively extend
+    # the first choice is to take all items (above), then choose a progressive number and recursively extend
     for n in range(number - 1, 0, -1):
         for rval in allocation_gen(number - n):
             l = [n]
@@ -21,8 +20,7 @@ class AllocationTable(table.Table):
     @classmethod
     def from_max_allocation(cls, max_allocation):
         """
-        >>> for line in AllocationTable.from_max_allocation(5).pf('MAX ALLOCATION(5)').split(NL):
-        ...     print(repr(line))
+        >>> AllocationTable.from_max_allocation(5).print_repr_lines('MAX ALLOCATION(5)')
         'MAX ALLOCATION(5) | 0 |    1 |    2 |    3 |    4'
         '                0 | 5 |      |      |      |     '
         '                1 | 4 |    1 |      |      |     '
