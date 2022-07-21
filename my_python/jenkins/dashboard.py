@@ -30,10 +30,8 @@ class DashboardTable(table.Table):
     def html_gen(self, split_char=SPLIT_CHAR):
         yield '<!DOCTYPE html>'
         yield '<html>'
-        yield '<head>'
-        yield '<title>Latest Jenkins Build Results</title>'
-        yield '</head>'
         yield '<body>'
+        yield '<h1>Latest Jenkins Build Results</h1>'
         yield '<style>table, th, td, p { border: 1px solid black; border-collapse: collapse; padding: 5px; text-align:center;"}</style>'  # noqa
         yield '<table>'
         yield '<tr>'
