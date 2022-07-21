@@ -68,7 +68,7 @@ class DashboardTable(table.Table):
                     else:
                         # style = 'style="background-color:grey;" '
                         bgColor = 'red'
-                    style = 'style="foreground-color:white;" '
+                    style = 'style="color:white;" '
                     a_ref = f'<a {style}href={href}>{link_text}</a>'
                     # a_ref = f'<a href={href}>{link_text}</a>'
                 yield f'<td bgcolor="{bgColor}">{a_ref}</td>'
