@@ -60,9 +60,11 @@ class DashboardTable(table.Table):
                     link_text = ss[0]
                     href = split_char.join(ss[1:])
                     if link_text == 'FAIL':
-                        style = 'style="color:red;" '
+                        style = 'style="backround-color:red;" '
+                    elif link_text == 'pass':
+                        style = 'style="background-color:green;" '
                     else:
-                        style = ''
+                        style = 'style="background-color:grey;" '
                     a_ref = f'<a {style}href={href}>{link_text}</a>'
                 yield f'<td>{a_ref}</td>'
             yield '</tr>'
