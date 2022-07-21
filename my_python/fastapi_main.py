@@ -10,7 +10,7 @@ async def get_root():
     return {"message": "Hello World"}
 
 
-@APP.get("/jenkins_dashboard", response_class=HTMLResponse)
+@APP.get("/SEV_Dashboard", response_class=HTMLResponse)
 async def get_jenkins_dashboard():
     jt = JobTable.from_jenkins_host()
     dt = DashboardTable.from_job_table(jt)

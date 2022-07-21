@@ -31,6 +31,7 @@ class DashboardTable(table.Table):
         yield '<!DOCTYPE html>'
         yield '<html>'
         yield '<head>'
+        yield '<title>Latest Jenkins Build Results</title>'
         yield '<style>table, th, td, p { border: 1px solid black; border-collapse: collapse; padding: 5px; text-align:center;"}</style>'  # noqa
         yield '</head>'
         yield '<body>'
@@ -55,18 +56,23 @@ class DashboardTable(table.Table):
             for component in self.col_gen():
                 val = self.get_val(host_guest, component)
                 a_ref = ''
+                bgColor = 'grey'
                 if val is not None:
                     ss = val.split('~')
                     link_text = ss[0]
                     href = split_char.join(ss[1:])
                     if link_text == 'FAIL':
                         style = 'style="backround-color:red;" '
+                        bgColor = 'red'
                     elif link_text == 'pass':
                         style = 'style="background-color:green;" '
+                        bgColor = 'green'
                     else:
                         style = 'style="background-color:grey;" '
-                    a_ref = f'<a {style}href={href}>{link_text}</a>'
-                yield f'<td>{a_ref}</td>'
+                        bgColor = 'red'
+                    #a_ref = f'<a {style}href={href}>{link_text}</a>'
+                    a_ref = f'<a href={href}>{link_text}</a>'
+                yield f'<td bgcolor="{bgColor}">{a_ref}</td>'
             yield '</tr>'
         # end for row
         yield '</table'
@@ -75,8 +81,8 @@ class DashboardTable(table.Table):
 
 
 def run_in_docker(jenkins_url,
-                  host_port=4230,
-                  docker_port=4230,
+                  host_port=4231,
+                  docker_port=4231,
                   is_detached=True,
                   tag='jenkins_dashboard',
                   version=VERSION,

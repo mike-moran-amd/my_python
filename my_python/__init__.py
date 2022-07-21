@@ -1,5 +1,5 @@
 import pathlib
-VERSION = '0.1'
+VERSION = '0.2'
 PARENT_PATH = pathlib.Path(__file__).parent.parent
 
 
