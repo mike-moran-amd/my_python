@@ -146,10 +146,7 @@ class Table:
         for k, val in self.__od.items():
             row, col = k
             if not cols_mask or col in cols_mask:
-                try:
-                    width = ret_dict[col]
-                except KeyError:
-                    width = 0
+                width = ret_dict.get(col, 0)
                 ret_dict[col] = max(width, len(str(val)))
         return ret_dict
 
