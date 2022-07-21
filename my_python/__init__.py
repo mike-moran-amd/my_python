@@ -16,3 +16,14 @@ def py_modules():
             ret_list.append(path.name)
         pass
     return sorted(ret_list)
+
+
+def license_text():
+    """
+    >>> len(license_text())
+    1060
+    """
+    with open(pathlib.Path(PARENT_PATH, 'LICENSE'), 'r') as fp:
+        return fp.read()
+
+
