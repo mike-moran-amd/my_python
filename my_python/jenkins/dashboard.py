@@ -33,8 +33,8 @@ class DashboardTable(table.Table):
         yield '<head>'
         yield '<title>Latest Jenkins Build Results</title>'
         yield '</head>'
-        yield '<style>table, th, td, p { border: 1px solid black; border-collapse: collapse; padding: 5px; text-align:center;"}</style>'  # noqa
         yield '<body>'
+        yield '<style>table, th, td, p { border: 1px solid black; border-collapse: collapse; padding: 5px; text-align:center;"}</style>'  # noqa
         yield '<table>'
         yield '<tr>'
         yield '<th>HOST</th>'
