@@ -1,9 +1,9 @@
-from distutils.core import setup
-from my_python import PARENT_PATH, VERSION, py_modules, license_text
+from setuptools import setup, find_packages
+from my_python import PARENT_PATH, VERSION, license_text
 
 
 setup(name=PARENT_PATH.name,
       version=VERSION,
-      py_modules=py_modules(),
+      packages=find_packages(),
       license=license_text(),
       )
