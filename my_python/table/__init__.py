@@ -7,6 +7,11 @@ DOCTEST EXAMPLES:
 >>> t = Table([('row', 'col', 'val')])
 >>> list(t.tup_gen())
 [('row', 'col', 'val')]
+>>> t.length
+1
+
+>>> t.width
+1
 
 >>> list(t.tup_gen(title='mt'))
 [(0, 0, 'mt'), (0, 1, 'col'), (1, 0, 'row'), (1, 1, 'val')]
@@ -19,6 +24,12 @@ val
 mt  | col
 row | val
 
+>>> mt.length
+2
+
+>>> mt.width
+2
+
 >>> print(mt.pf(title='mmt'))
 mmt |   0 |   1
   0 | mt  | col
@@ -29,6 +40,12 @@ mmt |   0 |   1
 mmt |   0 |   1
   0 | mt  | col
   1 | row | val
+
+>>> mmt.length
+3
+
+>>> mmt.width
+3
 
 >>> a_frame_str = 'id       name    provider   state   directory                           ' + \
 DEFAULT_ROW_SEP + '------------------------------------------------------------------------' + \
@@ -68,6 +85,16 @@ DEFAULT_ROW_SEP + 'b25e420  default virtualbox running /Users/mfm/vagrant/centos
 
 >>> static_table.count_unique_col('name')
 1
+
+>>> dynamic_table.right_pad_col('directory')
+>>> dynamic_table.print_repr_lines('')
+'  | id      | directory                  '
+'1 | 2d9d7d5 |          /Users/mfm/vagrant'
+'2 | fe8bcba |    /Users/mfm/vagrant/U2010'
+'3 | ea0bb41 |      /Users/mfm/vagrant/C8S'
+'4 | d11e797 | /Users/mfm/vagrant/centos/8'
+'5 | a4d9a67 |   /Users/mfm/vagrant/centos'
+'6 | b25e420 |  /Users/mfm/vagrant/centos8'
 
 """
 from collections import OrderedDict
@@ -277,6 +304,39 @@ class Table:
             d[val] = None
         return len(d.keys())
 
-    def print_repr_lines(self, title=None, row_separator=DEFAULT_ROW_SEP):
+    def print_repr_lines(self, title=None, row_separator=DEFAULT_ROW_SEP, row_min=None, row_max=None):
+        row_counter = -1
         for line in self.pf(title=title, row_separator=DEFAULT_ROW_SEP).split(row_separator):
+            row_counter += 1
+            if row_min and row_counter < row_min:
+                continue
+            if row_max and row_counter > row_max:
+                continue
             print(repr(line))
+
+    def right_pad_col(self, col, pad=' '):
+        # format to right of column by stripping and prepending with given padding
+        len_max = 0
+        new_values = {}
+        for row in self.row_gen():
+            val = self.get_val(row, col, pad)
+            try:
+                val = val.strip()
+            except AttributeError:
+                val = str(val)
+            len_max = max(len_max, len(val))
+            new_values[row] = val
+        for row in self.row_gen():
+            val = new_values[row]
+            delta = len_max - len(val)
+            new_padding = pad[0] * delta
+            new_val = new_padding + val
+            self.set_val(row, col, new_val)
+
+    @property
+    def length(self):
+        return len(list(self.row_gen()))
+
+    @property
+    def width(self):
+        return len(list(self.col_gen()))
