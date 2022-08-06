@@ -571,7 +571,9 @@ echo 'export GOBIN="$GOPATH/bin"' >> ~/.profile
 mkdir -p ~/go/src/k8s.io
 cd ~/go/src/k8s.io
 git clone https://github.com/mike-moran-amd/kubernetes.git
-cd kubernetes/hack/
+cd kubernetes
+git checkout uncore
+cd hack
 ./install-etcd.sh
 echo 'PATH=/root/go/src/k8s.io/kubernetes/third_party/etcd:${PATH}' >> ~/.bashrc
 . ~/.bashrc
