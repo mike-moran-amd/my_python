@@ -1,15 +1,6 @@
 
 
 class PersistentVolume:
-    """
-    >>> print(LocalPersistentVolume().to_yaml())
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
-    metadata:
-      name: local-storage
-    provisioner: kubernetes.io/no-provisioner
-    volumeBindingMode: WaitForFirstConsumer
-    """
     def __init__(self, **kwargs):
         kwargs = dict(kwargs)  # get our own shallow copy
         kwargs['kind'] = kwargs.get('kind') or 'StorageClass'
@@ -48,6 +39,13 @@ class PersistentVolume:
 class LocalPersistentVolume(PersistentVolume):
     """
     Example from: https://kubernetes.io/docs/concepts/storage/storage-classes/#local
+    >>> print(LocalPersistentVolume().to_yaml())
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
+      name: local-storage
+    provisioner: kubernetes.io/no-provisioner
+    volumeBindingMode: WaitForFirstConsumer
     """
     def __init__(self,
                  api_version="storage.k8s.io/v1",
