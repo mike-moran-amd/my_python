@@ -83,7 +83,7 @@ def run_in_docker(jenkins_url,
                   host_port=4231,
                   docker_port=4231,
                   is_detached=True,
-                  tag='jenkins_dashboard',
+                  tag='SEV_Dashboard',
                   version=VERSION,
                   work_dir='/opt'):
     cmd_list = [lib.path_for_command('docker'), 'build']
