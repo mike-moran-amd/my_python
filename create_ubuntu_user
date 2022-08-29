@@ -1,0 +1,4 @@
+useradd -s /bin/bash -d /home/ubuntu/ -m -G sudo ubuntu
+passwd ubuntu
+cp -r ~/.ssh /home/ubuntu/.ssh
+chown -R ubuntu:ubuntu /home/ubuntu/.ssh
