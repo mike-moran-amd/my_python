@@ -41,7 +41,7 @@ echo "" | tee -a $Z_DIR/ZOUT
 echo "BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT" | tee -a $Z_DIR/ZOUT
 
 
-./runWeathervane.pl --skipPvTest --configFile=weathervane.config.k8s.quickstart --outputDir $Z_DIR/outDir --tmpDir $Z_DIR/tmpDir 2>&1 | tee -a $Z_DIR/ZOUT
+~/weathervane/runWeathervane.pl --configFile=weathervane.config.k8s.quickstart --outputDir $Z_DIR/outDir --tmpDir $Z_DIR/tmpDir 2>&1 | tee -a $Z_DIR/ZOUT
 
 
 echo "" | tee -a $Z_DIR/ZOUT
