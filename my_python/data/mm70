@@ -1,0 +1,1844 @@
+Microsoft Windows [Version 10.0.19044.1826]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@147.75.47.185
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 16 18:59:50 UTC 2022
+
+  System load:              0.0
+  Usage of /:               6.6% of 218.06GB
+  Memory usage:             2%
+  Swap usage:               0%
+  Processes:                575
+  Users logged in:          0
+  IPv4 address for bond0:   147.75.47.185
+  IPv6 address for bond0:   2604:1380:4641:3b00::d
+  IPv4 address for cni0:    10.88.0.1
+  IPv6 address for cni0:    2001:4860:4860::1
+  IPv4 address for docker0: 172.17.0.1
+
+
+0 updates can be applied immediately.
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+Last login: Tue Aug 16 18:58:22 2022 from 165.204.78.25
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 16 18:59:50 UTC 2022
+
+  System load:              0.0
+  Usage of /:               6.6% of 218.06GB
+  Memory usage:             2%
+  Swap usage:               0%
+  Processes:                575
+  Users logged in:          0
+  IPv4 address for bond0:   147.75.47.185
+  IPv6 address for bond0:   2604:1380:4641:3b00::d
+  IPv4 address for cni0:    10.88.0.1
+  IPv6 address for cni0:    2001:4860:4860::1
+  IPv4 address for docker0: 172.17.0.1
+
+
+0 updates can be applied immediately.
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+Last login: Tue Aug 16 18:58:22 2022 from 165.204.78.25
+root@mm70:~# ll
+total 138640
+drwx------  8 root root      4096 Aug 16 18:59 ./
+drwxr-xr-x 23 root root      4096 Aug 16 16:15 ../
+-rw-------  1 root root      3838 Aug 16 18:59 .bash_history
+-rw-r--r--  1 root root      3223 Aug 16 17:44 .bashrc
+drwx------  3 root root      4096 Aug 16 16:04 .cache/
+drwxr-x---  3 root root      4096 Aug 16 16:10 .kube/
+-rw-r--r--  1 root root       279 Aug 16 16:03 .profile
+drwx------  2 root root      4096 Aug 16 15:54 .ssh/
+-rw-------  1 root root     14277 Aug 16 18:57 .viminfo
+-rw-r--r--  1 root root      1223 Aug 16 16:00 doit
+drwxr-xr-x  5 root root      4096 Aug 16 16:03 go/
+-rw-r--r--  1 root root 141699677 Aug 16 16:03 go1.18.1.linux-amd64.tar.gz
+-rw-r--r--  1 root root         0 Aug 16 18:59 screenlog.0
+-rw-r--r--  1 root root     16929 Aug 16 18:57 screenlog.1
+-rw-r--r--  1 root root     18474 Aug 16 18:57 screenlog.2
+-rw-r--r--  1 root root    102078 Aug 16 18:57 screenlog.3
+-rw-r--r--  1 root root     20335 Aug 16 18:57 screenlog.4
+-rw-r--r--  1 root root      2757 Aug 16 18:57 screenlog.5
+-rw-r--r--  1 root root     18392 Aug 16 18:58 screenlog.6
+drwx------  3 root root      4096 Aug 16 15:54 snap/
+drwxr-xr-x 17 root root      4096 Aug 16 18:57 weathervane/
+root@mm70:~# cat screenlog.*
+root@mm70:~# cd go/src/k8s.io/kubernetes/hack/
+root@mm70:~/go/src/k8s.io/kubernetes/hack# ./local-up-cluster.sh
+make: Entering directory '/root/go/src/k8s.io/kubernetes'
+make[1]: Entering directory '/root/go/src/k8s.io/kubernetes'
++++ [0816 17:20:33] Building go targets for linux/amd64
+    k8s.io/kubernetes/hack/make-rules/helpers/go2make (non-static)
+make[1]: Leaving directory '/root/go/src/k8s.io/kubernetes'
++++ [0816 17:20:37] Building go targets for linux/amd64
+    k8s.io/kubernetes/cmd/kubectl (static)
+    k8s.io/kubernetes/cmd/kube-apiserver (static)
+    k8s.io/kubernetes/cmd/kube-controller-manager (static)
+    k8s.io/kubernetes/cmd/cloud-controller-manager (non-static)
+    k8s.io/kubernetes/cmd/kubelet (non-static)
+    k8s.io/kubernetes/cmd/kube-proxy (static)
+    k8s.io/kubernetes/cmd/kube-scheduler (static)
+make: Leaving directory '/root/go/src/k8s.io/kubernetes'
+API SERVER secure port is free, proceeding...
+Unable to successfully run 'cfssl' from /root/go/src/k8s.io/kubernetes/third_party/etcd:/root/go/src/k8s.io/kubernetes/third_party/etcd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin; downloading instead...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 14.4M  100 14.4M    0     0  23.6M      0 --:--:-- --:--:-- --:--:-- 23.6M
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 9437k  100 9437k    0     0  7332k      0  0:00:01  0:00:01 --:--:-- 7332k
+Detected host and ready to start services.  Doing some housekeeping first...
+Using GO_OUT /root/go/src/k8s.io/kubernetes/_output/local/bin/linux/amd64
+Starting services now!
+Starting etcd
+etcd --advertise-client-urls http://127.0.0.1:2379 --data-dir /tmp/tmp.xfFGj6fsNP --listen-client-urls http://127.0.0.1:2379 --log-level=warn 2> "/tmp/etcd.log" >/dev/null
+Waiting for etcd to come up.
++++ [0816 17:20:56] On try 2, etcd: : {"health":"true","reason":""}
+{"header":{"cluster_id":"14841639068965178418","member_id":"10276657743932975437","revision":"2","raft_term":"2"}}Generating a RSA private key
+...............................................................................................+++++
+...............+++++
+writing new private key to '/var/run/kubernetes/server-ca.key'
+-----
+Generating a RSA private key
+.............................+++++
+..........................................+++++
+writing new private key to '/var/run/kubernetes/client-ca.key'
+-----
+Generating a RSA private key
+..+++++
+...................................+++++
+writing new private key to '/var/run/kubernetes/request-header-ca.key'
+-----
+2022/08/16 17:20:56 [INFO] generate received request
+2022/08/16 17:20:56 [INFO] received CSR
+2022/08/16 17:20:56 [INFO] generating key: rsa-2048
+2022/08/16 17:20:56 [INFO] encoded CSR
+2022/08/16 17:20:56 [INFO] signed certificate with serial number 564091602521747994247177799727963793816469879647
+2022/08/16 17:20:56 [INFO] generate received request
+2022/08/16 17:20:56 [INFO] received CSR
+2022/08/16 17:20:56 [INFO] generating key: rsa-2048
+2022/08/16 17:20:56 [INFO] encoded CSR
+2022/08/16 17:20:56 [INFO] signed certificate with serial number 463986024372324665126073908753774144311323936636
+2022/08/16 17:20:56 [INFO] generate received request
+2022/08/16 17:20:56 [INFO] received CSR
+2022/08/16 17:20:56 [INFO] generating key: rsa-2048
+2022/08/16 17:20:56 [INFO] encoded CSR
+2022/08/16 17:20:56 [INFO] signed certificate with serial number 623954445242416727669673981338512550389908617984
+2022/08/16 17:20:56 [INFO] generate received request
+2022/08/16 17:20:56 [INFO] received CSR
+2022/08/16 17:20:56 [INFO] generating key: rsa-2048
+2022/08/16 17:20:57 [INFO] encoded CSR
+2022/08/16 17:20:57 [INFO] signed certificate with serial number 583354741244775379212952090591667754800073399974
+2022/08/16 17:20:57 [INFO] generate received request
+2022/08/16 17:20:57 [INFO] received CSR
+2022/08/16 17:20:57 [INFO] generating key: rsa-2048
+2022/08/16 17:20:57 [INFO] encoded CSR
+2022/08/16 17:20:57 [INFO] signed certificate with serial number 719964865339637654755414873045798896708973738527
+2022/08/16 17:20:57 [INFO] generate received request
+2022/08/16 17:20:57 [INFO] received CSR
+2022/08/16 17:20:57 [INFO] generating key: rsa-2048
+2022/08/16 17:20:57 [INFO] encoded CSR
+2022/08/16 17:20:57 [INFO] signed certificate with serial number 606087204614954345743836587232028747260568320424
+2022/08/16 17:20:57 [INFO] generate received request
+2022/08/16 17:20:57 [INFO] received CSR
+2022/08/16 17:20:57 [INFO] generating key: rsa-2048
+2022/08/16 17:20:57 [INFO] encoded CSR
+2022/08/16 17:20:57 [INFO] signed certificate with serial number 673803354867946893838510218976826575426500449525
+2022/08/16 17:20:57 [INFO] generate received request
+2022/08/16 17:20:57 [INFO] received CSR
+2022/08/16 17:20:57 [INFO] generating key: rsa-2048
+2022/08/16 17:20:57 [INFO] encoded CSR
+2022/08/16 17:20:57 [INFO] signed certificate with serial number 193329940282511925549615990651264071531548629561
+Waiting for apiserver to come up
++++ [0816 17:21:01] On try 4, apiserver: : ok
+clusterrolebinding.rbac.authorization.k8s.io/kube-apiserver-kubelet-admin created
+clusterrolebinding.rbac.authorization.k8s.io/kubelet-csr created
+Cluster "local-up-cluster" set.
+use 'kubectl --kubeconfig=/var/run/kubernetes/admin-kube-aggregator.kubeconfig' to use the aggregated API server
+serviceaccount/coredns created
+clusterrole.rbac.authorization.k8s.io/system:coredns created
+clusterrolebinding.rbac.authorization.k8s.io/system:coredns created
+configmap/coredns created
+deployment.apps/coredns created
+service/kube-dns created
+coredns addon successfully deployed.
+Checking CNI Installation at /opt/cni/bin
+WARNING : The kubelet is configured to not fail even if swap is enabled; production deployments should disable swap unless testing NodeSwap feature.
+2022/08/16 17:21:02 [INFO] generate received request
+2022/08/16 17:21:02 [INFO] received CSR
+2022/08/16 17:21:02 [INFO] generating key: rsa-2048
+2022/08/16 17:21:02 [INFO] encoded CSR
+2022/08/16 17:21:02 [INFO] signed certificate with serial number 346081814111692582380565286514267383683719459402
+kubelet ( 203119 ) is running.
+wait kubelet ready
+No resources found
+No resources found
+No resources found
+No resources found
+No resources found
+No resources found
+No resources found
+127.0.0.1   NotReady   <none>   1s    v1.24.0-beta.0.2166+2bea4b24e24bf2
+2022/08/16 17:21:17 [INFO] generate received request
+2022/08/16 17:21:17 [INFO] received CSR
+2022/08/16 17:21:17 [INFO] generating key: rsa-2048
+2022/08/16 17:21:18 [INFO] encoded CSR
+2022/08/16 17:21:18 [INFO] signed certificate with serial number 314717546694294125194528779401804459270561175603
+Create default storage class for
+storageclass.storage.k8s.io/standard created
+Local Kubernetes cluster is running. Press Ctrl-C to shut it down.
+
+Logs:
+  /tmp/kube-apiserver.log
+  /tmp/kube-controller-manager.log
+
+  /tmp/kube-proxy.log
+  /tmp/kube-scheduler.log
+  /tmp/kubelet.log
+
+To start using your cluster, you can open up another terminal/tab and run:
+
+  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+  cluster/kubectl.sh
+
+Alternatively, you can write to the default kubeconfig:
+
+  export KUBERNETES_PROVIDER=local
+
+  cluster/kubectl.sh config set-cluster local --server=https://localhost:6443 --certificate-authority=/var/run/kubernetes/server-ca.crt
+  cluster/kubectl.sh config set-credentials myself --client-key=/var/run/kubernetes/client-admin.key --client-certificate=/var/run/kubernetes/client-admin.crt
+  cluster/kubectl.sh config set-context local --cluster=local --user=myself
+  cluster/kubectl.sh config use-context local
+  cluster/kubectl.sh
+^CCleaning up...
+
+root@mm70:~/go/src/k8s.io/kubernetes/hack# ./local-up-cluster.sh
+make: Entering directory '/root/go/src/k8s.io/kubernetes'
+make[1]: Entering directory '/root/go/src/k8s.io/kubernetes'
++++ [0816 18:24:37] Building go targets for linux/amd64
+    k8s.io/kubernetes/hack/make-rules/helpers/go2make (non-static)
+make[1]: Leaving directory '/root/go/src/k8s.io/kubernetes'
++++ [0816 18:24:42] Building go targets for linux/amd64
+    k8s.io/kubernetes/cmd/kubectl (static)
+    k8s.io/kubernetes/cmd/kube-apiserver (static)
+    k8s.io/kubernetes/cmd/kube-controller-manager (static)
+    k8s.io/kubernetes/cmd/cloud-controller-manager (non-static)
+    k8s.io/kubernetes/cmd/kubelet (non-static)
+    k8s.io/kubernetes/cmd/kube-proxy (static)
+    k8s.io/kubernetes/cmd/kube-scheduler (static)
+make: Leaving directory '/root/go/src/k8s.io/kubernetes'
+API SERVER secure port is free, proceeding...
+Unable to successfully run 'cfssl' from /root/go/src/k8s.io/kubernetes/third_party/etcd:/root/go/src/k8s.io/kubernetes/third_party/etcd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin; downloading instead...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 14.4M  100 14.4M    0     0  17.6M      0 --:--:-- --:--:-- --:--:-- 25.7M
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 9437k  100 9437k    0     0  11.1M      0 --:--:-- --:--:-- --:--:-- 23.4M
+Detected host and ready to start services.  Doing some housekeeping first...
+Using GO_OUT /root/go/src/k8s.io/kubernetes/_output/local/bin/linux/amd64
+Starting services now!
+Starting etcd
+etcd --advertise-client-urls http://127.0.0.1:2379 --data-dir /tmp/tmp.u5hM4Uji1w --listen-client-urls http://127.0.0.1:2379 --log-level=warn 2> "/tmp/etcd.log" >/dev/null
+Waiting for etcd to come up.
++++ [0816 18:25:01] On try 2, etcd: : {"health":"true","reason":""}
+{"header":{"cluster_id":"14841639068965178418","member_id":"10276657743932975437","revision":"2","raft_term":"2"}}Generating a RSA private key
+............+++++
+..........................+++++
+writing new private key to '/var/run/kubernetes/server-ca.key'
+-----
+Generating a RSA private key
+.........................................................................................+++++
+.................................+++++
+writing new private key to '/var/run/kubernetes/client-ca.key'
+-----
+Generating a RSA private key
+..................................+++++
+...................+++++
+writing new private key to '/var/run/kubernetes/request-header-ca.key'
+-----
+2022/08/16 18:25:01 [INFO] generate received request
+2022/08/16 18:25:01 [INFO] received CSR
+2022/08/16 18:25:01 [INFO] generating key: rsa-2048
+2022/08/16 18:25:01 [INFO] encoded CSR
+2022/08/16 18:25:01 [INFO] signed certificate with serial number 440514937512850654305023411566397718442611241177
+2022/08/16 18:25:01 [INFO] generate received request
+2022/08/16 18:25:01 [INFO] received CSR
+2022/08/16 18:25:01 [INFO] generating key: rsa-2048
+2022/08/16 18:25:01 [INFO] encoded CSR
+2022/08/16 18:25:01 [INFO] signed certificate with serial number 468115468268531296032033431788389329489952366564
+2022/08/16 18:25:01 [INFO] generate received request
+2022/08/16 18:25:01 [INFO] received CSR
+2022/08/16 18:25:01 [INFO] generating key: rsa-2048
+2022/08/16 18:25:01 [INFO] encoded CSR
+2022/08/16 18:25:01 [INFO] signed certificate with serial number 357897568091551939836915873638624507679878871008
+2022/08/16 18:25:01 [INFO] generate received request
+2022/08/16 18:25:01 [INFO] received CSR
+2022/08/16 18:25:01 [INFO] generating key: rsa-2048
+2022/08/16 18:25:02 [INFO] encoded CSR
+2022/08/16 18:25:02 [INFO] signed certificate with serial number 246116906614872492864827264736294400548241991588
+2022/08/16 18:25:02 [INFO] generate received request
+2022/08/16 18:25:02 [INFO] received CSR
+2022/08/16 18:25:02 [INFO] generating key: rsa-2048
+2022/08/16 18:25:02 [INFO] encoded CSR
+2022/08/16 18:25:02 [INFO] signed certificate with serial number 184482133227404100712855973744553094154555730313
+2022/08/16 18:25:02 [INFO] generate received request
+2022/08/16 18:25:02 [INFO] received CSR
+2022/08/16 18:25:02 [INFO] generating key: rsa-2048
+2022/08/16 18:25:02 [INFO] encoded CSR
+2022/08/16 18:25:02 [INFO] signed certificate with serial number 701308577608679682207428048712855151652003186551
+2022/08/16 18:25:02 [INFO] generate received request
+2022/08/16 18:25:02 [INFO] received CSR
+2022/08/16 18:25:02 [INFO] generating key: rsa-2048
+2022/08/16 18:25:02 [INFO] encoded CSR
+2022/08/16 18:25:02 [INFO] signed certificate with serial number 167766217617894114726064952053272191170700441937
+2022/08/16 18:25:02 [INFO] generate received request
+2022/08/16 18:25:02 [INFO] received CSR
+2022/08/16 18:25:02 [INFO] generating key: rsa-2048
+2022/08/16 18:25:02 [INFO] encoded CSR
+2022/08/16 18:25:02 [INFO] signed certificate with serial number 480650951385413352136356012173211322002528564388
+Waiting for apiserver to come up
++++ [0816 18:25:06] On try 4, apiserver: : ok
+clusterrolebinding.rbac.authorization.k8s.io/kube-apiserver-kubelet-admin created
+clusterrolebinding.rbac.authorization.k8s.io/kubelet-csr created
+Cluster "local-up-cluster" set.
+use 'kubectl --kubeconfig=/var/run/kubernetes/admin-kube-aggregator.kubeconfig' to use the aggregated API server
+serviceaccount/coredns created
+clusterrole.rbac.authorization.k8s.io/system:coredns created
+clusterrolebinding.rbac.authorization.k8s.io/system:coredns created
+configmap/coredns created
+deployment.apps/coredns created
+service/kube-dns created
+coredns addon successfully deployed.
+Checking CNI Installation at /opt/cni/bin
+WARNING : The kubelet is configured to not fail even if swap is enabled; production deployments should disable swap unless testing NodeSwap feature.
+2022/08/16 18:25:08 [INFO] generate received request
+2022/08/16 18:25:08 [INFO] received CSR
+2022/08/16 18:25:08 [INFO] generating key: rsa-2048
+2022/08/16 18:25:08 [INFO] encoded CSR
+2022/08/16 18:25:08 [INFO] signed certificate with serial number 350665266097946460025001867796895636145710428315
+kubelet ( 281656 ) is running.
+wait kubelet ready
+No resources found
+No resources found
+No resources found
+No resources found
+No resources found
+No resources found
+No resources found
+127.0.0.1   NotReady   <none>   1s    v1.24.0-beta.0.2166+2bea4b24e24bf2
+2022/08/16 18:25:23 [INFO] generate received request
+2022/08/16 18:25:23 [INFO] received CSR
+2022/08/16 18:25:23 [INFO] generating key: rsa-2048
+2022/08/16 18:25:23 [INFO] encoded CSR
+2022/08/16 18:25:23 [INFO] signed certificate with serial number 524705148830283525759565307978430074179283174072
+Create default storage class for
+storageclass.storage.k8s.io/standard created
+Local Kubernetes cluster is running. Press Ctrl-C to shut it down.
+
+Logs:
+  /tmp/kube-apiserver.log
+  /tmp/kube-controller-manager.log
+
+  /tmp/kube-proxy.log
+  /tmp/kube-scheduler.log
+  /tmp/kubelet.log
+
+To start using your cluster, you can open up another terminal/tab and run:
+
+  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+  cluster/kubectl.sh
+
+Alternatively, you can write to the default kubeconfig:
+
+  export KUBERNETES_PROVIDER=local
+
+  cluster/kubectl.sh config set-cluster local --server=https://localhost:6443 --certificate-authority=/var/run/kubernetes/server-ca.crt
+  cluster/kubectl.sh config set-credentials myself --client-key=/var/run/kubernetes/client-admin.key --client-certificate=/var/run/kubernetes/client-admin.crt
+  cluster/kubectl.sh config set-context local --cluster=local --user=myself
+  cluster/kubectl.sh config use-context local
+  cluster/kubectl.sh
+^CCleaning up...
+
+root@mm70:~/go/src/k8s.io/kubernetes/hack# exit
+root@mm70:~# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm70:~# cd weathervane/
+root@mm70:~/weathervane# ls
+BRANCHING.md        Notice.txt              build.gradle                doc                output             version.txt                        workloadConfiguration
+Branches.md         README.md               buildDockerImages.pl        dockerImages       runHarness         weathervane.config.k8s.micro       workloadDriver
+CODE-OF-CONDUCT.md  auctionApp              configFiles                 gradle             runWeathervane.pl  weathervane.config.k8s.quickstart
+CONTRIBUTING.md     auctionAppServerWarmer  create-persistent-vol.yaml  gradle.properties  runmany.sh         weathervane.config.k8s.small2
+ISSUES.md           auctionBidService       create-storage-class.yaml   gradlew            settings.gradle    weathervan~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                       ~                                                                                                                                                                                                                                              1"weathervane.config.k8s.quickstart" 19L, 552C written
+root@mm70:~/weathervane# ls
+BRANCHING.md        Notice.txt              build.gradle                doc                output             version.txt                        workloadConfiguration
+Branches.md         README.md               buildDockerImages.pl        dockerImages       runHarness         weathervane.config.k8s.micro       workloadDriver
+CODE-OF-CONDUCT.md  auctionApp              configFiles                 gradle             runWeathervane.pl  weathervane.config.k8s.quickstart
+CONTRIBUTING.md     auctionAppServerWarmer  create-persistent-vol.yaml  gradle.properties  runmany.sh         weathervane.config.k8s.small2
+ISSUES.md           auctionBidService       create-storage-class.yaml   gradlew            settings.gradle    weathervane.pl
+LICENSE.txt         auctionWeb              dbLoader                    gradlew.bat        testing            weathervaneResults.csv
+root@mm70:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+clusterName: local-up-clusterkubeconfigFileName /var/run/kubernetes/admin.kubeconfigkubeconfigContext cmd kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= delete pvc weathervane-test-claim 2>&1out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`out: persistentvolumeclaim/weathervane-test-claim created
+kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'Weathervane is unable to create a persistant volume using storage class standard in kubernetesCluster local-up-cluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+root@mm70:~/weathervane# jobs
+root@mm70:~/weathervane# ps -a
+    PID TTY          TIME CMD
+ 199049 pts/1    00:00:00 screen
+ 199068 pts/2    00:00:00 bash
+ 201918 pts/2    00:00:01 etcd
+ 202218 pts/2    00:00:10 kube-apiserver
+ 202795 pts/2    00:00:02 kube-controller
+ 202797 pts/2    00:00:00 kube-scheduler
+ 203119 pts/2    00:00:00 sudo
+ 203121 pts/2    00:00:02 kubelet
+ 204088 pts/2    00:00:00 sudo
+ 204092 pts/2    00:00:00 kube-proxy
+ 209860 pts/2    00:00:00 sleep
+ 209861 pts/3    00:00:00 ps
+root@mm70:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+clusterName: local-up-cluster
+kubeconfigFileName /var/run/kubernetes/admin.kubeconfig
+kubeconfigContext
+
+cmd kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'Weathervane is unable to create a persistant volume using storage class standard in kubernetesCluster local-up-cluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+root@mm70:~/weathervane#
+root@mm70:~/weathervane#
+root@mm70:~/weathervane#
+root@mm70:~/weathervane#
+root@mm70:~/weathervane#
+root@mm70:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+syntax error at ./runWeathervane.pl line 259, near ""cmd `echo "$pvcYamlStringCopy"
+Execution of ./runWeathervane.pl aborted due to compilation errors.
+root@mm70:~/weathervane#
+root@mm70:~/weathervane#
+root@mm70:~/weathervane#
+root@mm70:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+clusterName: local-up-cluster
+kubeconfigFileName /var/run/kubernetes/admin.kubeconfig
+kubeconfigContext
+
+cmd kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+out: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status Pending
+kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status Pending
+kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status Pending
+kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status Pending
+kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status Pending
+Weathervane is unable to create a persistant volume using storage class standard in kubernetesCluster local-up-cluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+root@mm70:~/weathervane#
+root@mm70:~/weathervane#
+root@mm70:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+clusterName: local-up-cluster
+kubeconfigFileName /var/run/kubernetes/admin.kubeconfig
+kubeconfigContext
+
+cmd kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+out: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/var/run/kubernetes/admin.kubeconfig --context= get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status Bound
+Starting Weathervane Run-Harness.  Pulling container image may take a few minutes.
+Tue Aug 16 17:42:45 2022: Weathervane Version 2.1.1
+Tue Aug 16 17:42:45 2022: Command-line parameters:
+Tue Aug 16 17:42:45 2022: Writing output to /root/weathervane/output/0
+Tue Aug 16 17:42:45 2022: Run Configuration has 1 workload(s).
+Tue Aug 16 17:42:45 2022: Workload  has 1 workload-driver nodes
+Tue Aug 16 17:42:45 2022: Workload  has 1 micro application instances:
+Tue Aug 16 17:42:45 2022:       1 CoordinationServers
+Tue Aug 16 17:42:45 2022:       1 WebServers
+Tue Aug 16 17:42:45 2022:       1 DbServers
+Tue Aug 16 17:42:45 2022:       1 NosqlServers
+Tue Aug 16 17:42:45 2022:       1 MsgServers
+Tue Aug 16 17:42:45 2022:       1 AppServers
+Tue Aug 16 17:42:45 2022:       0 AuctionBidServers
+Tue Aug 16 17:42:45 2022: Running Weathervane with Fixed Run Strategy using Full-Run RunProcedure.
+Tue Aug 16 17:42:45 2022: Fixed Run Strategy starting run.
+Tue Aug 16 17:42:45 2022: Stopping services from previous runs.
+Tue Aug 16 17:43:34 2022: Configuring and starting data services for appInstance 1 of workload .
+Tue Aug 16 17:54:29 2022: Couldn't bring to running all data services for appInstance 1 of workload 1.
+Tue Aug 16 17:54:30 2022: Couldn't start data services for appInstance 1 of workload .
+See the Troubleshooting section of the User's Guide for assistance.
+If this problem recurs, you can enable auto-remediation by setting "reloadOnFailure": true, in your configuration file.
+Tue Aug 16 17:55:34 2022: Could not properly start the data services for run 0-0.  Exiting.
+Exit code for Run-Harness container is 255.
+root@mm70:~/weathervane# ls
+BRANCHING.md        Notice.txt              build.gradle                doc                output             version.txt                        workloadConfiguration
+Branches.md         README.md               buildDockerImages.pl        dockerImages       runHarness         weathervane.config.k8s.micro       workloadDriver
+CODE-OF-CONDUCT.md  auctionApp              configFiles                 gradle             runWeathervane.pl  weathervane.config.k8s.quickstart
+CONTRIBUTING.md     auctionAppServerWarmer  create-persistent-vol.yaml  gradle.properties  runmany.sh         weathervane.config.k8s.small2
+ISSUES.md           auctionBidService       create-storage-class.yaml   gradlew            settings.gradle    weathervane.pl
+LICENSE.txt         auctionWeb              dbLoader                    gradlew.bat        testing            weathervaneResults.csv
+root@mm70:~/weathervane# exit
+root@mm70:~# cd weathervane/
+root@mm70:~/weathervane# vi weathervane.config.k8s.quickstart
+root@mm70:~/weathervane#
+root@mm70:~/weathervane# vi runWeathervane.pl
+root@mm70:~/weathervane# exit
+root@mm70:~# cd weathervane/
+root@mm70:~/weathervane# vi weathervane.config.k8s.quickstart
+root@mm70:~/weathervane# ls
+BRANCHING.md        Notice.txt              build.gradle                doc                output             version.txt                        workloadConfiguration
+Branches.md         README.md               buildDockerImages.pl        dockerImages       runHarness         weathervane.config.k8s.micro       workloadDriver
+CODE-OF-CONDUCT.md  auctionApp              configFiles                 gradle             runWeathervane.pl  weathervane.config.k8s.quickstart
+CONTRIBUTING.md     auctionAppServerWarmer  create-persistent-vol.yaml  gradle.properties  runmany.sh         weathervane.config.k8s.small2
+ISSUES.md           auctionBidService       create-storage-class.yaml   gradlew            settings.gradle    weathervane.pl
+LICENSE.txt         auctionWeb              dbLoader                    gradlew.bat        testing            weathervaneResults.csv
+root@mm70:~/weathervane# cat create-persistent-vol.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 400Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - pv0
+root@mm70:~/weathervane# kubectl describe node
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@mm70:~/weathervane# kube-system
+kube-system: command not found
+root@mm70:~/weathervane# kube-syste\export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+kube-systeexport: command not found
+root@mm70:~/weathervane# kube-system
+\kube-system: command not found
+root@mm70:~/weathervane# kubectl describe node
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@mm70:~/weathervane# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm70:~/weathervane# kubectl describe node
+Name:               127.0.0.1
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=127.0.0.1
+                    kubernetes.io/os=linux
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Tue, 16 Aug 2022 18:25:22 +0000
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  127.0.0.1
+  AcquireTime:     <unset>
+  RenewTime:       Tue, 16 Aug 2022 18:30:59 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:22 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:22 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:22 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:32 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  127.0.0.1
+  Hostname:    127.0.0.1
+Capacity:
+  cpu:                48
+  ephemeral-storage:  228651856Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65436548Ki
+  pods:               110
+Allocatable:
+  cpu:                48
+  ephemeral-storage:  210725550141
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65334148Ki
+  pods:               110
+System Info:
+  Machine ID:                 fee54e02eee248c380c398bdb13ed670
+  System UUID:                4c4c4544-0033-3210-8043-c7c04f324733
+  Boot ID:                    312537c6-ffeb-4699-af64-b7a99320ffb7
+  Kernel Version:             5.13.0-44-generic
+  OS Image:                   Ubuntu 20.04.4 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.7
+  Kubelet Version:            v1.24.0-beta.0.2166+2bea4b24e24bf2
+  Kube-Proxy Version:         v1.24.0-beta.0.2166+2bea4b24e24bf2
+Non-terminated Pods:          (1 in total)
+  Namespace                   Name                       CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                       ------------  ----------  ---------------  -------------  ---
+  kube-system                 coredns-85bc9d67b-wdc9c    100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     5m52s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests   Limits
+  --------           --------   ------
+  cpu                100m (0%)  0 (0%)
+  memory             70Mi (0%)  170Mi (0%)
+  ephemeral-storage  0 (0%)     0 (0%)
+  hugepages-1Gi      0 (0%)     0 (0%)
+  hugepages-2Mi      0 (0%)     0 (0%)
+Events:
+  Type    Reason                   Age                    From             Message
+  ----    ------                   ----                   ----             -------
+  Normal  Starting                 5m40s                  kube-proxy
+  Normal  NodeHasSufficientMemory  5m42s (x8 over 5m55s)  kubelet          Node 127.0.0.1 status is now: NodeHasSufficientMemory
+  Normal  RegisteredNode           5m38s                  node-controller  Node 127.0.0.1 event: Registered Node 127.0.0.1 in Controller
+root@mm70:~/weathervane# exit
+root@mm70:~# cat create-storage-class.yaml
+cat: create-storage-class.yaml: No such file or directory
+root@mm70:~# cd weathervane/
+root@mm70:~/weathervane# cd weathervane/
+bash: cd: weathervane/: No such file or directory
+root@mm70:~/weathervane# cat create-storage-class.yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
+root@mm70:~/weathervane# kubectl apply -f create-storage-class.yaml
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@mm70:~/weathervane# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm70:~/weathervane# kubectl apply -f create-storage-class.yaml
+storageclass.storage.k8s.io/local-storage created
+root@mm70:~/weathervane# kubectl get nodes --show-labels
+NAME        STATUS   ROLES    AGE   VERSION                              LABELS
+127.0.0.1   Ready    <none>   19m   v1.24.0-beta.0.2166+2bea4b24e24bf2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=127.0.0.1,kubernetes.io/os=linux
+root@mm70:~/weathervane# kubectl label nodes 127.0.0.1 node_label=pv0
+node/127.0.0.1 labeled
+root@mm70:~/weathervane# cat create-persistent-vol.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 400Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - pv0
+root@mm70:~/weathervane# kubectl apply -f create-persistent-vol.yaml
+persistentvolume/weathervane-pv created
+root@mm70:~/weathervane# kubectl get sc
+NAME                 PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage        kubernetes.io/no-provisioner   Delete          Immediate           false                  87s
+standard (default)   kubernetes.io/host-path        Delete          Immediate           false                  20m
+root@mm70:~/weathervane# kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv   400Gi      RWO            Retain           Available           local-storage            16s
+root@mm70:~/weathervane#
+root@mm70:~/weathervane# exit
+root@mm70:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+127.0.0.1   Ready    <none>   23m   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm70:~# kubectl get pods -o wide
+No resources found in default namespace.
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                        READY   STATUS             RESTARTS        AGE
+auctionw1i1   cassandra-0                 0/1     Pending            0               109s
+auctionw1i1   postgresql-0                0/1     Pending            0               109s
+auctionw1i1   rabbitmq-66d6b4d548-pmrnq   1/1     Running            0               109s
+auctionw1i1   zookeeper-0                 1/1     Running            0               109s
+kube-system   coredns-85bc9d67b-t4q4s     0/1     CrashLoopBackOff   9 (2m59s ago)   24m
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                        READY   STATUS             RESTARTS        AGE
+auctionw1i1   cassandra-0                 0/1     Pending            0               2m24s
+auctionw1i1   postgresql-0                0/1     Pending            0               2m24s
+auctionw1i1   rabbitmq-66d6b4d548-pmrnq   1/1     Running            0               2m24s
+auctionw1i1   zookeeper-0                 1/1     Running            0               2m24s
+kube-system   coredns-85bc9d67b-t4q4s     0/1     CrashLoopBackOff   9 (3m34s ago)   24m
+root@mm70:~# docker logs coredns-85bc9d67b-t4q4s
+Error: No such container: coredns-85bc9d67b-t4q4s
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                        READY   STATUS             RESTARTS         AGE
+auctionw1i1   cassandra-0                 0/1     Pending            0                8m37s
+auctionw1i1   postgresql-0                0/1     Pending            0                8m37s
+auctionw1i1   rabbitmq-66d6b4d548-pmrnq   1/1     Running            0                8m37s
+auctionw1i1   zookeeper-0                 1/1     Running            0                8m37s
+kube-system   coredns-85bc9d67b-t4q4s     0/1     CrashLoopBackOff   10 (4m38s ago)   31m
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s --all-containers
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# kubectl --namespace kube-system get pods
+NAME                      READY   STATUS             RESTARTS        AGE
+coredns-85bc9d67b-t4q4s   0/1     CrashLoopBackOff   11 (110s ago)   33m
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS             RESTARTS         AGE
+kube-system   coredns-85bc9d67b-t4q4s   0/1     CrashLoopBackOff   12 (4m45s ago)   41m
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS             RESTARTS         AGE
+kube-system   coredns-85bc9d67b-t4q4s   0/1     CrashLoopBackOff   15 (3m57s ago)   56m
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s -n kube-system
+.:53
+[INFO] plugin/reload: Running configuration SHA512 = 591cf328cccc12bc490481273e738df59329c62c0b729d94e8b61db9961c2fa5f046dd37f1cf888b953814040d180f52594972691cd6ff41be96639138a43908
+CoreDNS-1.9.3
+linux/amd64, go1.18.2, 45b0a11
+[FATAL] plugin/loop: Loop (127.0.0.1:35200 -> :53) detected for zone ".", see https://coredns.io/plugins/loop#troubleshooting. Query: "HINFO 9160846267254039783.8586855390597187315."
+root@mm70:~# kubectl describe node
+Name:               127.0.0.1
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=127.0.0.1
+                    kubernetes.io/os=linux
+                    node_label=pv0
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Tue, 16 Aug 2022 17:21:16 +0000
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  127.0.0.1
+  AcquireTime:     <unset>
+  RenewTime:       Tue, 16 Aug 2022 18:21:07 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:15 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:15 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:15 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:26 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  127.0.0.1
+  Hostname:    127.0.0.1
+Capacity:
+  cpu:                48
+  ephemeral-storage:  228651856Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65436548Ki
+  pods:               110
+Allocatable:
+  cpu:                48
+  ephemeral-storage:  210725550141
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65334148Ki
+  pods:               110
+System Info:
+  Machine ID:                 fee54e02eee248c380c398bdb13ed670
+  System UUID:                4c4c4544-0033-3210-8043-c7c04f324733
+  Boot ID:                    312537c6-ffeb-4699-af64-b7a99320ffb7
+root@mm70:~/weathervane# ls
+BRANCHING.md        Notice.txt              build.gradle                doc                output             version.txt                        workloadConfiguration
+Branches.md         README.md               buildDockerImages.pl        dockerImages       runHarness         weathervane.config.k8s.micro       workloadDriver
+CODE-OF-CONDUCT.md  auctionApp              configFiles                 gradle             runWeathervane.pl  weathervane.config.k8s.quickstart
+CONTRIBUTING.md     auctionAppServerWarmer  create-persistent-vol.yaml  gradle.properties  runmany.sh         weathervane.config.k8s.small2
+ISSUES.md           auctionBidService       create-storage-class.yaml   gradlew            settings.gradle    weathervane.pl
+LICENSE.txt         auctionWeb              dbLoader                    gradlew.bat        testing            weathervaneResults.csv
+root@mm70:~/weathervane# cat create-persistent-vol.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 400Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - pv0
+root@mm70:~/weathervane# kubectl describe node
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@mm70:~/weathervane# kube-system
+kube-system: command not found
+root@mm70:~/weathervane# kube-syste\export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+kube-systeexport: command not found
+root@mm70:~/weathervane# kube-system
+\kube-system: command not found
+root@mm70:~/weathervane# kubectl describe node
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@mm70:~/weathervane# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm70:~/weathervane# kubectl describe node
+Name:               127.0.0.1
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=127.0.0.1
+                    kubernetes.io/os=linux
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Tue, 16 Aug 2022 18:25:22 +0000
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  127.0.0.1
+  AcquireTime:     <unset>
+  RenewTime:       Tue, 16 Aug 2022 18:30:59 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:22 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:22 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:22 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:32 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  127.0.0.1
+  Hostname:    127.0.0.1
+Capacity:
+  cpu:                48
+  ephemeral-storage:  228651856Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65436548Ki
+  pods:               110
+Allocatable:
+  cpu:                48
+  ephemeral-storage:  210725550141
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65334148Ki
+  pods:               110
+System Info:
+  Machine ID:                 fee54e02eee248c380c398bdb13ed670
+  System UUID:                4c4c4544-0033-3210-8043-c7c04f324733
+  Boot ID:                    312537c6-ffeb-4699-af64-b7a99320ffb7
+  Kernel Version:             5.13.0-44-generic
+  OS Image:                   Ubuntu 20.04.4 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.7
+  Kubelet Version:            v1.24.0-beta.0.2166+2bea4b24e24bf2
+  Kube-Proxy Version:         v1.24.0-beta.0.2166+2bea4b24e24bf2
+Non-terminated Pods:          (1 in total)
+  Namespace                   Name                       CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                       ------------  ----------  ---------------  -------------  ---
+  kube-system                 coredns-85bc9d67b-wdc9c    100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     5m52s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests   Limits
+  --------           --------   ------
+  cpu                100m (0%)  0 (0%)
+  memory             70Mi (0%)  170Mi (0%)
+  ephemeral-storage  0 (0%)     0 (0%)
+  hugepages-1Gi      0 (0%)     0 (0%)
+  hugepages-2Mi      0 (0%)     0 (0%)
+Events:
+  Type    Reason                   Age                    From             Message
+  ----    ------                   ----                   ----             -------
+  Normal  Starting                 5m40s                  kube-proxy
+  Normal  NodeHasSufficientMemory  5m42s (x8 over 5m55s)  kubelet          Node 127.0.0.1 status is now: NodeHasSufficientMemory
+  Normal  RegisteredNode           5m38s                  node-controller  Node 127.0.0.1 event: Registered Node 127.0.0.1 in Controller
+root@mm70:~/weathervane# exit
+root@mm70:~# cat create-storage-class.yaml
+cat: create-storage-class.yaml: No such file or directory
+root@mm70:~# cd weathervane/
+root@mm70:~/weathervane# cd weathervane/
+bash: cd: weathervane/: No such file or directory
+root@mm70:~/weathervane# cat create-storage-class.yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
+root@mm70:~/weathervane# kubectl apply -f create-storage-class.yaml
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@mm70:~/weathervane# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm70:~/weathervane# kubectl apply -f create-storage-class.yaml
+storageclass.storage.k8s.io/local-storage created
+root@mm70:~/weathervane# kubectl get nodes --show-labels
+NAME        STATUS   ROLES    AGE   VERSION                              LABELS
+127.0.0.1   Ready    <none>   19m   v1.24.0-beta.0.2166+2bea4b24e24bf2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=127.0.0.1,kubernetes.io/os=linux
+root@mm70:~/weathervane# kubectl label nodes 127.0.0.1 node_label=pv0
+node/127.0.0.1 labeled
+root@mm70:~/weathervane# cat create-persistent-vol.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 400Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - pv0
+root@mm70:~/weathervane# kubectl apply -f create-persistent-vol.yaml
+persistentvolume/weathervane-pv created
+root@mm70:~/weathervane# kubectl get sc
+NAME                 PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage        kubernetes.io/no-provisioner   Delete          Immediate           false                  87s
+standard (default)   kubernetes.io/host-path        Delete          Immediate           false                  20m
+root@mm70:~/weathervane# kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv   400Gi      RWO            Retain           Available           local-storage            16s
+root@mm70:~/weathervane#
+root@mm70:~/weathervane# exit
+root@mm70:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+127.0.0.1   Ready    <none>   23m   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm70:~# kubectl get pods -o wide
+No resources found in default namespace.
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                        READY   STATUS             RESTARTS        AGE
+auctionw1i1   cassandra-0                 0/1     Pending            0               109s
+auctionw1i1   postgresql-0                0/1     Pending            0               109s
+auctionw1i1   rabbitmq-66d6b4d548-pmrnq   1/1     Running            0               109s
+auctionw1i1   zookeeper-0                 1/1     Running            0               109s
+kube-system   coredns-85bc9d67b-t4q4s     0/1     CrashLoopBackOff   9 (2m59s ago)   24m
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                        READY   STATUS             RESTARTS        AGE
+auctionw1i1   cassandra-0                 0/1     Pending            0               2m24s
+auctionw1i1   postgresql-0                0/1     Pending            0               2m24s
+auctionw1i1   rabbitmq-66d6b4d548-pmrnq   1/1     Running            0               2m24s
+auctionw1i1   zookeeper-0                 1/1     Running            0               2m24s
+kube-system   coredns-85bc9d67b-t4q4s     0/1     CrashLoopBackOff   9 (3m34s ago)   24m
+root@mm70:~# docker logs coredns-85bc9d67b-t4q4s
+Error: No such container: coredns-85bc9d67b-t4q4s
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                        READY   STATUS             RESTARTS         AGE
+auctionw1i1   cassandra-0                 0/1     Pending            0                8m37s
+auctionw1i1   postgresql-0                0/1     Pending            0                8m37s
+auctionw1i1   rabbitmq-66d6b4d548-pmrnq   1/1     Running            0                8m37s
+auctionw1i1   zookeeper-0                 1/1     Running            0                8m37s
+kube-system   coredns-85bc9d67b-t4q4s     0/1     CrashLoopBackOff   10 (4m38s ago)   31m
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s --all-containers
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# kubectl --namespace kube-system get pods
+NAME                      READY   STATUS             RESTARTS        AGE
+coredns-85bc9d67b-t4q4s   0/1     CrashLoopBackOff   11 (110s ago)   33m
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS             RESTARTS         AGE
+kube-system   coredns-85bc9d67b-t4q4s   0/1     CrashLoopBackOff   12 (4m45s ago)   41m
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS             RESTARTS         AGE
+kube-system   coredns-85bc9d67b-t4q4s   0/1     CrashLoopBackOff   15 (3m57s ago)   56m
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s -n kube-system
+.:53
+[INFO] plugin/reload: Running configuration SHA512 = 591cf328cccc12bc490481273e738df59329c62c0b729d94e8b61db9961c2fa5f046dd37f1cf888b953814040d180f52594972691cd6ff41be96639138a43908
+CoreDNS-1.9.3
+linux/amd64, go1.18.2, 45b0a11
+[FATAL] plugin/loop: Loop (127.0.0.1:35200 -> :53) detected for zone ".", see https://coredns.io/plugins/loop#troubleshooting. Query: "HINFO 9160846267254039783.8586855390597187315."
+root@mm70:~# kubectl describe node
+Name:               127.0.0.1
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=127.0.0.1
+                    kubernetes.io/os=linux
+                    node_label=pv0
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Tue, 16 Aug 2022 17:21:16 +0000
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  127.0.0.1
+  AcquireTime:     <unset>
+  RenewTime:       Tue, 16 Aug 2022 18:21:07 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:15 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:15 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:15 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:26 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  127.0.0.1
+  Hostname:    127.0.0.1
+Capacity:
+  cpu:                48
+  ephemeral-storage:  228651856Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65436548Ki
+  pods:               110
+Allocatable:
+  cpu:                48
+  ephemeral-storage:  210725550141
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65334148Ki
+  pods:               110
+System Info:
+  Machine ID:                 fee54e02eee248c380c398bdb13ed670
+  System UUID:                4c4c4544-0033-3210-8043-c7c04f324733
+  Boot ID:                    312537c6-ffeb-4699-af64-b7a99320ffb7
+  Kernel Version:             5.13.0-44-generic
+  OS Image:                   Ubuntu 20.04.4 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.7
+  Kubelet Version:            v1.24.0-beta.0.2166+2bea4b24e24bf2
+  Kube-Proxy Version:         v1.24.0-beta.0.2166+2bea4b24e24bf2
+Non-terminated Pods:          (1 in total)
+  Namespace                   Name                       CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                       ------------  ----------  ---------------  -------------  ---
+  kube-system                 coredns-85bc9d67b-t4q4s    100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     60m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests   Limits
+  --------           --------   ------
+  cpu                100m (0%)  0 (0%)
+  memory             70Mi (0%)  170Mi (0%)
+  ephemeral-storage  0 (0%)     0 (0%)
+  hugepages-1Gi      0 (0%)     0 (0%)
+  hugepages-2Mi      0 (0%)     0 (0%)
+Events:
+  Type    Reason                   Age                From             Message
+  ----    ------                   ----               ----             -------
+  Normal  Starting                 59m                kube-proxy
+  Normal  NodeHasSufficientMemory  60m (x8 over 60m)  kubelet          Node 127.0.0.1 status is now: NodeHasSufficientMemory
+  Normal  RegisteredNode           59m                node-controller  Node 127.0.0.1 event: Registered Node 127.0.0.1 in Controller
+root@mm70:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+127.0.0.1   Ready    <none>   61m   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm70:~# history
+    1  cd weathervane/
+    2  vi weathervane.config.k8s.quickstart
+    3  cd weathervane/
+    4  ls
+    5  vi runWeathervane.pl
+    6  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    7  cd /usr/local/bin/
+    8  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    9  chmod +x kubectl
+   10  cd
+   11  kubectl get nodes
+   12  kubectl label nodes 127.0.0.1 node_label=pv0
+   13  kubectl get nodes --show-labels
+   14  mkdir -p /k8s/weathervane/vol
+   15  chmod -R 777 /k8s
+   16  git clone http://github.com/vmware/weathervane
+   17  cd weathervane/
+   18  cat > create-persistent-vol.yaml << EOF
+   19  apiVersion: v1
+   20  kind: PersistentVolume
+   21  metadata:
+   22    name: weathervane-pv
+   23  spec:
+   24    capacity:
+   25      storage: 400Gi
+   26    accessModes:
+   27    - ReadWriteOnce
+   28    persistentVolumeReclaimPolicy: Retain
+   29    storageClassName: local-storage
+   30    local:
+   31      path: /k8s/weathervane/vol
+   32    nodeAffinity:
+   33      required:
+   34        nodeSelectorTerms:
+   35        - matchExpressions:
+   36          - key: kubernetes.io/hostname
+   37            operator: In
+   38            values:
+   39            - pv0
+   40  EOF
+   41  kubectl apply -f create-persistent-vol.yaml
+   42  ubectl get pv
+   43  kubectl get pv
+   44  cat > create-storage-class.yaml << EOF
+   45  kind: StorageClass
+   46  apiVersion: storage.k8s.io/v1
+   47  metadata:
+   48    name: local-storage
+   49  provisioner: kubernetes.io/no-provisioner
+   50  volumeBindingMode: Immediate
+   51  EOF
+   52  kubectl apply -f create-storage-class.yaml
+   53  kubectl get sc
+   54  cat $KUBECONFIG
+   55  vi /var/run/kubernetes/admin.kubeconfig
+   56  cat > weathervane.config.k8s.quickstart << EOF
+   57  {
+   58    "description" : "micro",
+   59    "configurationSize": "micro",
+   60    "runStrategy" : "fixed",
+   61    "dockerNamespace" : "mikemoranamd",
+   62    "kubernetesClusters" : [
+   63      {
+   64        "name" : "appCluster",
+   65        "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+   66        "kubeconfigContext" : "",
+   67      },
+   68      {
+   69        "name" : "driverCluster",
+   70        "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+   71        "kubeconfigContext" : "",
+   72      },
+   73    ],
+   74    "driverCluster" : "driverCluster",
+   75    "appInstanceCluster" : "appCluster",
+   76    "appIngressMethod" : "clusterip",
+   77    "cassandraDataStorageClass" : "local-storage",
+   78    "postgresqlStorageClass" : "local-storage",
+   79    "nginxCacheStorageClass" : "local-storage",
+   80  }
+   81  EOF
+   82  cat create-persistent-vol.yaml
+   83  cat create-storage-class.yaml
+   84  cat weathervane.config.k8s.quickstart
+   85  # ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   86  history
+   87  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   88  vi doit
+   89  . doit
+   90  ./local-up-cluster.sh
+   91  uname -a
+   92  screen -LU
+   93  ll
+   94  cd weathervane/
+   95  ls
+   96  vi runWeathervane.pl
+   97  ps
+   98  ls
+   99  history
+  100  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+  101  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+  102  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+  103  ps
+  104  exit
+  105  fg
+  106  jobs
+  107  ps
+  108  exit
+  109  kubectl get nodes
+  110  kubectl get pods -o wide
+  111  kubectl get pods --all-namespaces
+  112  docker logs coredns-85bc9d67b-t4q4s
+  113  kubectl logs coredns-85bc9d67b-t4q4s
+  114  kubectl get pods --all-namespaces
+  115  kubectl logs coredns-85bc9d67b-t4q4s --all-containers
+  116  kubectl --namespace kube-system get pods
+  117  kubectl logs coredns-85bc9d67b-t4q4s
+  118  docker ps
+  119  kubectl get pods --all-namespaces
+  120  kubectl logs coredns-85bc9d67b-t4q4s
+  121  kubectl logs coredns-85bc9d67b-t4q4s -n kube-system
+  122  kubectl describe node
+  123  kubectl get nodes
+  124  history
+root@mm70:~# !115
+kubectl logs coredns-85bc9d67b-t4q4s --all-containers
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# !119
+kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS             RESTARTS        AGE
+kube-system   coredns-85bc9d67b-t4q4s   0/1     CrashLoopBackOff   16 (5m2s ago)   62m
+root@mm70:~# !111
+kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS   RESTARTS         AGE
+kube-system   coredns-85bc9d67b-t4q4s   0/1     Error    17 (5m11s ago)   62m
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS             RESTARTS      AGE
+kube-system   coredns-85bc9d67b-wdc9c   0/1     CrashLoopBackOff   3 (25s ago)   102s
+root@mm70:~# kubectl describe pod coredns-85bc9d67b-wdc9c
+Error from server (NotFound): pods "coredns-85bc9d67b-wdc9c" not found
+root@mm70:~# kubectl describe pod coredns-85bc9d67b-wdc9c -n kube-system
+Name:                 coredns-85bc9d67b-wdc9c
+Namespace:            kube-system
+Priority:             2000000000
+Priority Class Name:  system-cluster-critical
+Node:                 127.0.0.1/127.0.0.1
+Start Time:           Tue, 16 Aug 2022 18:25:32 +0000
+Labels:               k8s-app=kube-dns
+                      pod-template-hash=85bc9d67b
+Annotations:          <none>
+Status:               Running
+IP:                   10.88.0.6
+IPs:
+  IP:           10.88.0.6
+  IP:           2001:4860:4860::6
+Controlled By:  ReplicaSet/coredns-85bc9d67b
+Containers:
+  coredns:
+    Container ID:  containerd://afd60f380c58625ee3696ad4351b3f857add6f7f37164f6bde7635cc5d6381b8
+    Image:         registry.k8s.io/coredns/coredns:v1.9.3
+    Image ID:      registry.k8s.io/coredns/coredns@sha256:8e352a029d304ca7431c6507b56800636c321cb52289686a581ab70aaa8a2e2a
+    Ports:         53/UDP, 53/TCP, 9153/TCP
+    Host Ports:    0/UDP, 0/TCP, 0/TCP
+    Args:
+      -conf
+      /etc/coredns/Corefile
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Tue, 16 Aug 2022 18:27:10 +0000
+      Finished:     Tue, 16 Aug 2022 18:27:10 +0000
+    Ready:          False
+    Restart Count:  4
+    Limits:
+      memory:  170Mi
+    Requests:
+      cpu:        100m
+      memory:     70Mi
+    Liveness:     http-get http://:8080/health delay=60s timeout=5s period=10s #success=1 #failure=5
+    Readiness:    http-get http://:8181/ready delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /etc/coredns from config-volume (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-xlp59 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  config-volume:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      coredns
+    Optional:  false
+  kube-api-access-xlp59:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              kubernetes.io/os=linux
+Tolerations:                 CriticalAddonsOnly op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age                  From               Message
+  ----     ------            ----                 ----               -------
+  Warning  FailedScheduling  2m31s                default-scheduler  no nodes available to schedule pods
+  Warning  FailedScheduling  2m20s                default-scheduler  0/1 nodes are available: 1 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+  Normal   Scheduled         2m11s                default-scheduler  Successfully assigned kube-system/coredns-85bc9d67b-wdc9c to 127.0.0.1
+  Normal   Pulled            74s (x4 over 2m9s)   kubelet            Container image "registry.k8s.io/coredns/coredns:v1.9.3" already present on machine
+  Normal   Created           74s (x4 over 2m9s)   kubelet            Created container coredns
+  Normal   Started           74s (x4 over 2m9s)   kubelet            Started container coredns
+  Warning  BackOff           47s (x13 over 2m7s)  kubelet            Back-off restarting failed container
+root@mm70:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE     VERSION
+127.0.0.1   Ready    <none>   3m20s   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm70:~# kubectl get nodes -o wide
+NAME        STATUS   ROLES    AGE     VERSION                              INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+127.0.0.1   Ready    <none>   3m32s   v1.24.0-beta.0.2166+2bea4b24e24bf2   127.0.0.1     <none>        Ubuntu 20.04.4 LTS   5.13.0-44-generic   containerd://1.6.7
+root@mm70:~# ls
+doit  go  go1.18.1.linux-amd64.tar.gz  screenlog.0  screenlog.1  screenlog.2  screenlog.3  screenlog.4  screenlog.5  screenlog.6  snap  weathervane
+root@mm70:~# ps -a
+    PID TTY          TIME CMD
+ 199049 pts/1    00:00:00 screen
+ 309564 pts/7    00:00:00 ps
+root@mm70:~# kill 199049
+root@mm70:~/weathervane# ls
+BRANCHING.md        Notice.txt              build.gradle                doc                output             version.txt                        workloadConfiguration
+Branches.md         README.md               buildDockerImages.pl        dockerImages       runHarness         weathervane.config.k8s.micro       workloadDriver
+CODE-OF-CONDUCT.md  auctionApp              configFiles                 gradle             runWeathervane.pl  weathervane.config.k8s.quickstart
+CONTRIBUTING.md     auctionAppServerWarmer  create-persistent-vol.yaml  gradle.properties  runmany.sh         weathervane.config.k8s.small2
+ISSUES.md           auctionBidService       create-storage-class.yaml   gradlew            settings.gradle    weathervane.pl
+LICENSE.txt         auctionWeb              dbLoader                    gradlew.bat        testing            weathervaneResults.csv
+root@mm70:~/weathervane# cat create-persistent-vol.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 400Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - pv0
+root@mm70:~/weathervane# kubectl describe node
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@mm70:~/weathervane# kube-system
+kube-system: command not found
+root@mm70:~/weathervane# kube-syste\export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+kube-systeexport: command not found
+root@mm70:~/weathervane# kube-system
+\kube-system: command not found
+root@mm70:~/weathervane# kubectl describe node
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@mm70:~/weathervane# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm70:~/weathervane# kubectl describe node
+Name:               127.0.0.1
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=127.0.0.1
+                    kubernetes.io/os=linux
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Tue, 16 Aug 2022 18:25:22 +0000
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  127.0.0.1
+  AcquireTime:     <unset>
+  RenewTime:       Tue, 16 Aug 2022 18:30:59 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:22 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:22 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:22 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Tue, 16 Aug 2022 18:30:37 +0000   Tue, 16 Aug 2022 18:25:32 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  127.0.0.1
+  Hostname:    127.0.0.1
+Capacity:
+  cpu:                48
+  ephemeral-storage:  228651856Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65436548Ki
+  pods:               110
+Allocatable:
+  cpu:                48
+  ephemeral-storage:  210725550141
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65334148Ki
+  pods:               110
+System Info:
+  Machine ID:                 fee54e02eee248c380c398bdb13ed670
+  System UUID:                4c4c4544-0033-3210-8043-c7c04f324733
+  Boot ID:                    312537c6-ffeb-4699-af64-b7a99320ffb7
+  Kernel Version:             5.13.0-44-generic
+  OS Image:                   Ubuntu 20.04.4 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.7
+  Kubelet Version:            v1.24.0-beta.0.2166+2bea4b24e24bf2
+  Kube-Proxy Version:         v1.24.0-beta.0.2166+2bea4b24e24bf2
+Non-terminated Pods:          (1 in total)
+  Namespace                   Name                       CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                       ------------  ----------  ---------------  -------------  ---
+  kube-system                 coredns-85bc9d67b-wdc9c    100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     5m52s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests   Limits
+  --------           --------   ------
+  cpu                100m (0%)  0 (0%)
+  memory             70Mi (0%)  170Mi (0%)
+  ephemeral-storage  0 (0%)     0 (0%)
+  hugepages-1Gi      0 (0%)     0 (0%)
+  hugepages-2Mi      0 (0%)     0 (0%)
+Events:
+  Type    Reason                   Age                    From             Message
+  ----    ------                   ----                   ----             -------
+  Normal  Starting                 5m40s                  kube-proxy
+  Normal  NodeHasSufficientMemory  5m42s (x8 over 5m55s)  kubelet          Node 127.0.0.1 status is now: NodeHasSufficientMemory
+  Normal  RegisteredNode           5m38s                  node-controller  Node 127.0.0.1 event: Registered Node 127.0.0.1 in Controller
+root@mm70:~/weathervane# exit
+root@mm70:~# cat create-storage-class.yaml
+cat: create-storage-class.yaml: No such file or directory
+root@mm70:~# cd weathervane/
+root@mm70:~/weathervane# cd weathervane/
+bash: cd: weathervane/: No such file or directory
+root@mm70:~/weathervane# cat create-storage-class.yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
+root@mm70:~/weathervane# kubectl apply -f create-storage-class.yaml
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@mm70:~/weathervane# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm70:~/weathervane# kubectl apply -f create-storage-class.yaml
+storageclass.storage.k8s.io/local-storage created
+root@mm70:~/weathervane# kubectl get nodes --show-labels
+NAME        STATUS   ROLES    AGE   VERSION                              LABELS
+127.0.0.1   Ready    <none>   19m   v1.24.0-beta.0.2166+2bea4b24e24bf2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=127.0.0.1,kubernetes.io/os=linux
+root@mm70:~/weathervane# kubectl label nodes 127.0.0.1 node_label=pv0
+node/127.0.0.1 labeled
+root@mm70:~/weathervane# cat create-persistent-vol.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 400Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - pv0
+root@mm70:~/weathervane# kubectl apply -f create-persistent-vol.yaml
+persistentvolume/weathervane-pv created
+root@mm70:~/weathervane# kubectl get sc
+NAME                 PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage        kubernetes.io/no-provisioner   Delete          Immediate           false                  87s
+standard (default)   kubernetes.io/host-path        Delete          Immediate           false                  20m
+root@mm70:~/weathervane# kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv   400Gi      RWO            Retain           Available           local-storage            16s
+root@mm70:~/weathervane#
+root@mm70:~/weathervane# exit
+root@mm70:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+127.0.0.1   Ready    <none>   23m   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm70:~# kubectl get pods -o wide
+No resources found in default namespace.
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                        READY   STATUS             RESTARTS        AGE
+auctionw1i1   cassandra-0                 0/1     Pending            0               109s
+auctionw1i1   postgresql-0                0/1     Pending            0               109s
+auctionw1i1   rabbitmq-66d6b4d548-pmrnq   1/1     Running            0               109s
+auctionw1i1   zookeeper-0                 1/1     Running            0               109s
+kube-system   coredns-85bc9d67b-t4q4s     0/1     CrashLoopBackOff   9 (2m59s ago)   24m
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                        READY   STATUS             RESTARTS        AGE
+auctionw1i1   cassandra-0                 0/1     Pending            0               2m24s
+auctionw1i1   postgresql-0                0/1     Pending            0               2m24s
+auctionw1i1   rabbitmq-66d6b4d548-pmrnq   1/1     Running            0               2m24s
+auctionw1i1   zookeeper-0                 1/1     Running            0               2m24s
+kube-system   coredns-85bc9d67b-t4q4s     0/1     CrashLoopBackOff   9 (3m34s ago)   24m
+root@mm70:~# docker logs coredns-85bc9d67b-t4q4s
+Error: No such container: coredns-85bc9d67b-t4q4s
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                        READY   STATUS             RESTARTS         AGE
+auctionw1i1   cassandra-0                 0/1     Pending            0                8m37s
+auctionw1i1   postgresql-0                0/1     Pending            0                8m37s
+auctionw1i1   rabbitmq-66d6b4d548-pmrnq   1/1     Running            0                8m37s
+auctionw1i1   zookeeper-0                 1/1     Running            0                8m37s
+kube-system   coredns-85bc9d67b-t4q4s     0/1     CrashLoopBackOff   10 (4m38s ago)   31m
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s --all-containers
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# kubectl --namespace kube-system get pods
+NAME                      READY   STATUS             RESTARTS        AGE
+coredns-85bc9d67b-t4q4s   0/1     CrashLoopBackOff   11 (110s ago)   33m
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS             RESTARTS         AGE
+kube-system   coredns-85bc9d67b-t4q4s   0/1     CrashLoopBackOff   12 (4m45s ago)   41m
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS             RESTARTS         AGE
+kube-system   coredns-85bc9d67b-t4q4s   0/1     CrashLoopBackOff   15 (3m57s ago)   56m
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# kubectl logs coredns-85bc9d67b-t4q4s -n kube-system
+.:53
+[INFO] plugin/reload: Running configuration SHA512 = 591cf328cccc12bc490481273e738df59329c62c0b729d94e8b61db9961c2fa5f046dd37f1cf888b953814040d180f52594972691cd6ff41be96639138a43908
+CoreDNS-1.9.3
+linux/amd64, go1.18.2, 45b0a11
+[FATAL] plugin/loop: Loop (127.0.0.1:35200 -> :53) detected for zone ".", see https://coredns.io/plugins/loop#troubleshooting. Query: "HINFO 9160846267254039783.8586855390597187315."
+root@mm70:~# kubectl describe node
+Name:               127.0.0.1
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=127.0.0.1
+                    kubernetes.io/os=linux
+                    node_label=pv0
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Tue, 16 Aug 2022 17:21:16 +0000
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  127.0.0.1
+  AcquireTime:     <unset>
+  RenewTime:       Tue, 16 Aug 2022 18:21:07 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:15 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:15 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:15 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Tue, 16 Aug 2022 18:19:57 +0000   Tue, 16 Aug 2022 17:21:26 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  127.0.0.1
+  Hostname:    127.0.0.1
+Capacity:
+  cpu:                48
+  ephemeral-storage:  228651856Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65436548Ki
+  pods:               110
+Allocatable:
+  cpu:                48
+  ephemeral-storage:  210725550141
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65334148Ki
+  pods:               110
+System Info:
+  Machine ID:                 fee54e02eee248c380c398bdb13ed670
+  System UUID:                4c4c4544-0033-3210-8043-c7c04f324733
+  Boot ID:                    312537c6-ffeb-4699-af64-b7a99320ffb7
+  Kernel Version:             5.13.0-44-generic
+  OS Image:                   Ubuntu 20.04.4 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.7
+  Kubelet Version:            v1.24.0-beta.0.2166+2bea4b24e24bf2
+  Kube-Proxy Version:         v1.24.0-beta.0.2166+2bea4b24e24bf2
+Non-terminated Pods:          (1 in total)
+  Namespace                   Name                       CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                       ------------  ----------  ---------------  -------------  ---
+  kube-system                 coredns-85bc9d67b-t4q4s    100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     60m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests   Limits
+  --------           --------   ------
+  cpu                100m (0%)  0 (0%)
+  memory             70Mi (0%)  170Mi (0%)
+  ephemeral-storage  0 (0%)     0 (0%)
+  hugepages-1Gi      0 (0%)     0 (0%)
+  hugepages-2Mi      0 (0%)     0 (0%)
+Events:
+  Type    Reason                   Age                From             Message
+  ----    ------                   ----               ----             -------
+  Normal  Starting                 59m                kube-proxy
+  Normal  NodeHasSufficientMemory  60m (x8 over 60m)  kubelet          Node 127.0.0.1 status is now: NodeHasSufficientMemory
+  Normal  RegisteredNode           59m                node-controller  Node 127.0.0.1 event: Registered Node 127.0.0.1 in Controller
+root@mm70:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+127.0.0.1   Ready    <none>   61m   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm70:~# history
+    1  cd weathervane/
+    2  vi weathervane.config.k8s.quickstart
+    3  cd weathervane/
+    4  ls
+    5  vi runWeathervane.pl
+    6  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    7  cd /usr/local/bin/
+    8  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    9  chmod +x kubectl
+   10  cd
+   11  kubectl get nodes
+   12  kubectl label nodes 127.0.0.1 node_label=pv0
+   13  kubectl get nodes --show-labels
+   14  mkdir -p /k8s/weathervane/vol
+   15  chmod -R 777 /k8s
+   16  git clone http://github.com/vmware/weathervane
+   17  cd weathervane/
+   18  cat > create-persistent-vol.yaml << EOF
+   19  apiVersion: v1
+   20  kind: PersistentVolume
+   21  metadata:
+   22    name: weathervane-pv
+   23  spec:
+   24    capacity:
+   25      storage: 400Gi
+   26    accessModes:
+   27    - ReadWriteOnce
+   28    persistentVolumeReclaimPolicy: Retain
+   29    storageClassName: local-storage
+   30    local:
+   31      path: /k8s/weathervane/vol
+   32    nodeAffinity:
+   33      required:
+   34        nodeSelectorTerms:
+   35        - matchExpressions:
+   36          - key: kubernetes.io/hostname
+   37            operator: In
+   38            values:
+   39            - pv0
+   40  EOF
+   41  kubectl apply -f create-persistent-vol.yaml
+   42  ubectl get pv
+   43  kubectl get pv
+   44  cat > create-storage-class.yaml << EOF
+   45  kind: StorageClass
+   46  apiVersion: storage.k8s.io/v1
+   47  metadata:
+   48    name: local-storage
+   49  provisioner: kubernetes.io/no-provisioner
+   50  volumeBindingMode: Immediate
+   51  EOF
+   52  kubectl apply -f create-storage-class.yaml
+   53  kubectl get sc
+   54  cat $KUBECONFIG
+   55  vi /var/run/kubernetes/admin.kubeconfig
+   56  cat > weathervane.config.k8s.quickstart << EOF
+   57  {
+   58    "description" : "micro",
+   59    "configurationSize": "micro",
+   60    "runStrategy" : "fixed",
+   61    "dockerNamespace" : "mikemoranamd",
+   62    "kubernetesClusters" : [
+   63      {
+   64        "name" : "appCluster",
+   65        "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+   66        "kubeconfigContext" : "",
+   67      },
+   68      {
+   69        "name" : "driverCluster",
+   70        "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+   71        "kubeconfigContext" : "",
+   72      },
+   73    ],
+   74    "driverCluster" : "driverCluster",
+   75    "appInstanceCluster" : "appCluster",
+   76    "appIngressMethod" : "clusterip",
+   77    "cassandraDataStorageClass" : "local-storage",
+   78    "postgresqlStorageClass" : "local-storage",
+   79    "nginxCacheStorageClass" : "local-storage",
+   80  }
+   81  EOF
+   82  cat create-persistent-vol.yaml
+   83  cat create-storage-class.yaml
+   84  cat weathervane.config.k8s.quickstart
+   85  # ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   86  history
+   87  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   88  vi doit
+   89  . doit
+   90  ./local-up-cluster.sh
+   91  uname -a
+   92  screen -LU
+   93  ll
+   94  cd weathervane/
+   95  ls
+   96  vi runWeathervane.pl
+   97  ps
+   98  ls
+   99  history
+  100  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+  101  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+  102  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+  103  ps
+  104  exit
+  105  fg
+  106  jobs
+  107  ps
+  108  exit
+  109  kubectl get nodes
+  110  kubectl get pods -o wide
+  111  kubectl get pods --all-namespaces
+  112  docker logs coredns-85bc9d67b-t4q4s
+  113  kubectl logs coredns-85bc9d67b-t4q4s
+  114  kubectl get pods --all-namespaces
+  115  kubectl logs coredns-85bc9d67b-t4q4s --all-containers
+  116  kubectl --namespace kube-system get pods
+  117  kubectl logs coredns-85bc9d67b-t4q4s
+  118  docker ps
+  119  kubectl get pods --all-namespaces
+  120  kubectl logs coredns-85bc9d67b-t4q4s
+  121  kubectl logs coredns-85bc9d67b-t4q4s -n kube-system
+  122  kubectl describe node
+  123  kubectl get nodes
+  124  history
+root@mm70:~# !115
+kubectl logs coredns-85bc9d67b-t4q4s --all-containers
+Error from server (NotFound): pods "coredns-85bc9d67b-t4q4s" not found
+root@mm70:~# !119
+kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS             RESTARTS        AGE
+kube-system   coredns-85bc9d67b-t4q4s   0/1     CrashLoopBackOff   16 (5m2s ago)   62m
+root@mm70:~# !111
+kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS   RESTARTS         AGE
+kube-system   coredns-85bc9d67b-t4q4s   0/1     Error    17 (5m11s ago)   62m
+root@mm70:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                      READY   STATUS             RESTARTS      AGE
+kube-system   coredns-85bc9d67b-wdc9c   0/1     CrashLoopBackOff   3 (25s ago)   102s
+root@mm70:~# kubectl describe pod coredns-85bc9d67b-wdc9c
+Error from server (NotFound): pods "coredns-85bc9d67b-wdc9c" not found
+root@mm70:~# kubectl describe pod coredns-85bc9d67b-wdc9c -n kube-system
+Name:                 coredns-85bc9d67b-wdc9c
+Namespace:            kube-system
+Priority:             2000000000
+Priority Class Name:  system-cluster-critical
+Node:                 127.0.0.1/127.0.0.1
+Start Time:           Tue, 16 Aug 2022 18:25:32 +0000
+Labels:               k8s-app=kube-dns
+                      pod-template-hash=85bc9d67b
+Annotations:          <none>
+Status:               Running
+IP:                   10.88.0.6
+IPs:
+  IP:           10.88.0.6
+  IP:           2001:4860:4860::6
+Controlled By:  ReplicaSet/coredns-85bc9d67b
+Containers:
+  coredns:
+    Container ID:  containerd://afd60f380c58625ee3696ad4351b3f857add6f7f37164f6bde7635cc5d6381b8
+    Image:         registry.k8s.io/coredns/coredns:v1.9.3
+    Image ID:      registry.k8s.io/coredns/coredns@sha256:8e352a029d304ca7431c6507b56800636c321cb52289686a581ab70aaa8a2e2a
+    Ports:         53/UDP, 53/TCP, 9153/TCP
+    Host Ports:    0/UDP, 0/TCP, 0/TCP
+    Args:
+      -conf
+      /etc/coredns/Corefile
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Tue, 16 Aug 2022 18:27:10 +0000
+      Finished:     Tue, 16 Aug 2022 18:27:10 +0000
+    Ready:          False
+    Restart Count:  4
+    Limits:
+      memory:  170Mi
+    Requests:
+      cpu:        100m
+      memory:     70Mi
+    Liveness:     http-get http://:8080/health delay=60s timeout=5s period=10s #success=1 #failure=5
+    Readiness:    http-get http://:8181/ready delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /etc/coredns from config-volume (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-xlp59 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  config-volume:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      coredns
+    Optional:  false
+  kube-api-access-xlp59:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              kubernetes.io/os=linux
+Tolerations:                 CriticalAddonsOnly op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age                  From               Message
+  ----     ------            ----                 ----               -------
+  Warning  FailedScheduling  2m31s                default-scheduler  no nodes available to schedule pods
+  Warning  FailedScheduling  2m20s                default-scheduler  0/1 nodes are available: 1 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+  Normal   Scheduled         2m11s                default-scheduler  Successfully assigned kube-system/coredns-85bc9d67b-wdc9c to 127.0.0.1
+  Normal   Pulled            74s (x4 over 2m9s)   kubelet            Container image "registry.k8s.io/coredns/coredns:v1.9.3" already present on machine
+  Normal   Created           74s (x4 over 2m9s)   kubelet            Created container coredns
+  Normal   Started           74s (x4 over 2m9s)   kubelet            Started container coredns
+  Warning  BackOff           47s (x13 over 2m7s)  kubelet            Back-off restarting failed container
+root@mm70:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE     VERSION
+127.0.0.1   Ready    <none>   3m20s   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm70:~# kubectl get nodes -o wide
+NAME        STATUS   ROLES    AGE     VERSION                              INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+127.0.0.1   Ready    <none>   3m32s   v1.24.0-beta.0.2166+2bea4b24e24bf2   127.0.0.1     <none>        Ubuntu 20.04.4 LTS   5.13.0-44-generic   containerd://1.6.7
+root@mm70:~# ls
+doit  go  go1.18.1.linux-amd64.tar.gz  screenlog.0  screenlog.1  screenlog.2  screenlog.3  screenlog.4  screenlog.5  screenlog.6  snap  weathervane
+root@mm70:~# ps -a
+    PID TTY          TIME CMD
+ 199049 pts/1    00:00:00 screen
+ 309564 pts/7    00:00:00 ps
+root@mm70:~# kill 199049
+root@mm70:~# root@mm70:~# 2R2R2R2R

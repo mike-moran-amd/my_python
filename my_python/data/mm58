@@ -1,0 +1,529 @@
+Microsoft Windows [Version 10.0.19044.1826]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@145.40.99.45
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug  9 20:19:12 UTC 2022
+
+  System load:              1.08
+  Usage of /:               1.6% of 438.11GB
+  Memory usage:             2%
+  Swap usage:               0%
+  Processes:                564
+  Users logged in:          1
+  IPv4 address for bond0:   145.40.99.45Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug  9 20:19:12 UTC 2022
+
+  System load:              1.08
+  Usage of /:               1.6% of 438.11GB
+  Memory usage:             2%
+  Swap usage:               0%
+  Processes:                564
+  Users logged in:          1
+  IPv4 address for bond0:   145.40.99.45
+  IPv6 address for bond0:   2604:1380:4641:3b00::15
+  IPv4 address for docker0: 172.17.0.1
+
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+Last login: Tue Aug  9 20:07:34 2022 from 70.112.73.191
+root@mm58:~# uname -a
+Linux mm58 5.13.0-44-generic #49~20.04.1-Ubuntu SMP Wed May 18 18:44:28 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+root@mm58:~# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm58:~# cd /usr/local/bin/
+root@mm58:/usr/local/bin# curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 43.5M  100 43.5M    0     0   199M      0 --:--:-- --:--:-- --:--:--  200M
+root@mm58:/usr/local/bin# chmod +x ./kubectl
+root@mm58:/usr/local/bin# cd
+root@mm58:~# which kubectl
+/usr/local/bin/kubectl
+root@mm58:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE    VERSION
+127.0.0.1   Ready    <none>   3m5s   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm58:~# git clone http://github.com/vmware/weathervane
+Cloning into 'weathervane'...
+warning: redirecting to https://github.com/vmware/weathervane/
+remote: Enumerating objects: 19144, done.
+remote: Counting objects: 100% (1935/1935), done.
+remote: Compressing objects: 100% (633/633), done.
+remote: Total 19144 (delta 1003), reused 1871 (delta 956), pack-reused 17209
+Receiving objects: 100% (19144/19144), 64.62 MiB | 78.49 MiB/s, done.
+Resolving deltas: 100% (11699/11699), done.
+root@mm58:~# ls
+doit  go  go1.18.1.linux-amd64.tar.gz  snap  weathervane
+root@mm58:~# ll
+total 138428
+drwx------  8 root root      4096 Aug  9 20:24 ./
+drwxr-xr-x 22 root root      4096 Aug  9 20:05 ../
+-rw-r--r--  1 root root      3167 Aug  9 20:16 .bashrc
+drwx------  3 root root      4096 Aug  9 20:16 .cache/
+drwxr-x---  3 root root      4096 Aug  9 20:21 .kube/
+-rw-r--r--  1 root root       279 Aug  9 20:15 .profile
+drwx------  2 root root      4096 Aug  9 20:05 .ssh/
+-rw-------  1 root root       763 Aug  9 20:09 .viminfo
+-rw-r--r--  1 root root      1223 Aug  9 20:09 doit
+drwxr-xr-x  5 root root      4096 Aug  9 20:15 go/
+-rw-r--r--  1 root root 141699677 Aug  9 20:15 go1.18.1.linux-amd64.tar.gz
+drwx------  3 root root      4096 Aug  9 20:06 snap/
+drwxr-xr-x 16 root root      4096 Aug  9 20:24 weathervane/
+root@mm58:~# ll .kube
+total 12
+drwxr-x--- 3 root root 4096 Aug  9 20:21 ./
+drwx------ 8 root root 4096 Aug  9 20:24 ../
+drwxr-x--- 4 root root 4096 Aug  9 20:21 cache/
+root@mm58:~# cat > storageClass.yaml << EOF
+my-local> kind: StorageClass
+> apiVersion: storage.k8s.io/v1
+> metadata:
+>   name: my-local-storage
+> provisioner: kubernetes.io/no-provisioner
+er
+EOF
+> volumeBindingMode: WaitForFirstConsumer
+> EOF
+root@mm58:~# cat storageClass.yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: my-local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+root@mm58:~# kubectl create -f storageClass.yaml
+storageclass.storage.k8s.io/my-local-storage created
+root@mm58:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE     VERSION
+127.0.0.1   Ready    <none>   8m19s   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm58:~# cat > persistentVolume.yaml << EOF
+rsion: v1
+kind: PersistentVolume
+metadata:
+  name: my-loca> apiVersion: v1
+> kind: PersistentVolume
+> metadata:
+>   name: my-local-pv
+> spec:
+>   capacity:
+>     storage: 500Gi
+>   accessModes:
+>   - ReadWriteOnce
+>   persistentVolumeReclaimPolicy: Retain
+>   storageClassName: my-local-storage
+>   local:
+>     path: /mnt/disk/vol1
+rTerms:
+      - matchExpressi>   nodeAffinity:
+>     required:
+>       nodeSelectorTerms:
+>       - matchExpressions:
+>         - key: kubernetes.io/hostname
+>           operator: In
+>           values:
+>           - node1
+> EOF
+root@mm58:~# kubectl get pod
+No resources found in default namespace.
+root@mm58:~# curl -LO https://github.com/kvaps/kubectl-node-shell/raw/master/kubectl-node_shell
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100  3438  100  3438    0     0  11814      0 --:--:-- --:--:-- --:--:-- 11814
+root@mm58:~# ll
+total 138440
+drwx------  8 root root      4096 Aug  9 20:42 ./
+drwxr-xr-x 22 root root      4096 Aug  9 20:05 ../
+-rw-r--r--  1 root root      3167 Aug  9 20:16 .bashrc
+drwx------  3 root root      4096 Aug  9 20:16 .cache/
+drwxr-x---  3 root root      4096 Aug  9 20:21 .kube/
+-rw-r--r--  1 root root       279 Aug  9 20:15 .profile
+drwx------  2 root root      4096 Aug  9 20:05 .ssh/
+-rw-------  1 root root       763 Aug  9 20:09 .viminfo
+-rw-r--r--  1 root root      1223 Aug  9 20:09 doit
+drwxr-xr-x  5 root root      4096 Aug  9 20:15 go/
+-rw-r--r--  1 root root 141699677 Aug  9 20:15 go1.18.1.linux-amd64.tar.gz
+-rw-r--r--  1 root root      3438 Aug  9 20:42 kubectl-node_shell
+-rw-r--r--  1 root root       427 Aug  9 20:30 persistentVolume.yaml
+drwx------  3 root root      4096 Aug  9 20:06 snap/
+-rw-r--r--  1 root root       166 Aug  9 20:27 storageClass.yaml
+drwxr-xr-x 16 root root      4096 Aug  9 20:24 weathervane/
+root@mm58:~# rm kubectl-node_shell
+root@mm58:~# cd /usr/local/bin/
+root@mm58:/usr/local/bin# ll
+total 44648
+drwxr-xr-x  2 root root     4096 Aug  9 20:23 ./
+drwxr-xr-x 11 root root     4096 Aug  9 20:15 ../
+-rwxr-xr-x  1 root root 45711360 Aug  9 20:23 kubectl*
+root@mm58:/usr/local/bin# curl -LO https://github.com/kvaps/kubectl-node-shell/raw/master/kubectl-node_shell
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100  3438  100  3438    0     0  18684      0 --:--:-- --:--:-- --:--:-- 18684
+root@mm58:/usr/local/bin# chmoe +x kubectl-node_shell
+
+Command 'chmoe' not found, did you mean:
+
+  command 'chmod' from deb coreutils (8.30-3ubuntu2)
+
+Try: apt install <deb name>
+
+root@mm58:/usr/local/bin# chmod +x kubectl-node_shell
+root@mm58:/usr/local/bin# kubectl get node
+NAME        STATUS   ROLES    AGE   VERSION
+127.0.0.1   Ready    <none>   22m   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm58:/usr/local/bin# kubectl node-shell 127.0.0.1
+spawning "nsenter-zakthw" on "127.0.0.1"
+The Pod "nsenter-zakthw" is invalid: spec.containers[0].securityContext.privileged: Forbidden: disallowed by cluster policy
+Error from server (NotFound): pods "nsenter-zakthw" not found
+root@mm58:/usr/local/bin# ll
+total 44652
+drwxr-xr-x  2 root root     4096 Aug  9 20:43 ./
+drwxr-xr-x 11 root root     4096 Aug  9 20:15 ../
+-rwxr-xr-x  1 root root 45711360 Aug  9 20:23 kubectl*
+-rwxr-xr-x  1 root root     3438 Aug  9 20:43 kubectl-node_shell*
+root@mm58:/usr/local/bin# rm kubectl-node_shell
+root@mm58:/usr/local/bin# kubectl get pv
+No resources found
+root@mm58:/usr/local/bin# cd
+root@mm58:~# ls
+doit  go  go1.18.1.linux-amd64.tar.gz  persistentVolume.yaml  snap  storageClass.yaml  weathervane
+root@mm58:~# cat > vol.yaml << EOF
+: vol
+spec:
+  capacity> apiVersion: v1
+> kind: PersistentVolume
+> metadata:
+>   name: vol
+> spec:
+>   capacity:
+>     storage: 50Gi
+>   accessModes:
+>     - ReadWriteOnce
+>     - ReadWriteMany
+>   persistentVolumeReclaimPolicy: Retain
+>   hostPath:
+>     path: /mnt/data/vol
+> EOF
+root@mm58:~# # FROM: https://vocon-it.com/2018/12/10/kubernetes-4-persistent-volumes-hello-world/
+root@mm58:~# DIRNAME="vol"
+root@mm58:~# mkdir -p /mnt/data/$DIRNAME
+root@mm58:~# chcon -Rt svirt_sandbox_file_t /mnt/data/$DIRNAME
+chcon: can't apply partial context to unlabeled file '/mnt/data/vol'
+root@mm58:~# ll /mnt/data
+total 12
+drwxr-xr-x 3 root root 4096 Aug  9 21:09 ./
+drwxr-xr-x 3 root root 4096 Aug  9 21:09 ../
+drwxr-xr-x 2 root root 4096 Aug  9 21:09 vol/
+root@mm58:~# ll /mnt/data/vol
+total 8
+drwxr-xr-x 2 root root 4096 Aug  9 21:09 ./
+drwxr-xr-x 3 root root 4096 Aug  9 21:09 ../
+root@mm58:~# chmod 777 /mnt/data/$DIRNAME
+root@mm58:~# man chcon
+root@mm58:~# root@mm58:~#
+root@mm58:~# kubectl create -f vol.yaml
+persistentvolume/vol created
+root@mm58:~# kubectl get pv
+NAME   CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+vol    50Gi       RWO,RWX        Retain           Available                                   16s
+root@mm58:~# kubectl get pv vol -o yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  creationTimestamp: "2022-08-09T21:11:24Z"
+  finalizers:
+  - kubernetes.io/pv-protection
+  name: vol
+  resourceVersion: "974"
+  uid: 894e3348-3892-4def-8a95-d9674a5374e9
+spec:
+  accessModes:
+  - ReadWriteOnce
+  - ReadWriteMany
+  capacity:
+    storage: 50Gi
+  hostPath:
+    path: /mnt/data/vol
+    type: ""
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+status:
+  phase: Available
+root@mm58:~# cat > http-claim.yaml << EOF
+> kind: PersistentVolumeClaim
+> apiVersion: v1
+> metadata:
+>   name: http-claim
+> spec:
+>   accessModes:
+>     - ReadWriteOnce
+>   resources:
+>     requests:
+>       storage: 3Gi
+> EOF
+root@mm58:~# kubectl create -f http-claim.yaml
+persistentvolumeclaim/http-claim created
+root@mm58:~# kubectl get pvc
+NAME         STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+http-claim   Pending                                      standard       8s
+root@mm58:~# kubectl describe pvc http-claim
+Name:          http-claim
+Namespace:     default
+StorageClass:  standard
+Status:        Pending
+Volume:
+Labels:        <none>
+Annotations:   volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/host-path
+               volume.kubernetes.io/storage-provisioner: kubernetes.io/host-path
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:
+Access Modes:
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:
+  Type     Reason              Age                  From                         Message
+  ----     ------              ----                 ----                         -------
+  Warning  ProvisioningFailed  42s (x7 over 2m20s)  persistentvolume-controller  Failed to create provisioner: provisioning in volume plugin "kubernetes.io/host-path" is disabled
+root@mm58:~# who
+root     pts/0        2022-08-09 20:07 (70.112.73.191)
+root     pts/1        2022-08-09 20:19 (70.112.73.191)
+root@mm58:~# kubectl gen node
+error: unknown command "gen" for "kubectl"
+
+Did you mean this?
+        run
+        set
+        get
+root@mm58:~# kubectl gen nodes
+error: unknown command "gen" for "kubectl"
+
+Did you mean this?
+        run
+        set
+        get
+root@mm58:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE    VERSION
+127.0.0.1   Ready    <none>   112m   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm58:~# kubectl get persistentvolume
+NAME   CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+vol    50Gi       RWO,RWX        Retain           Available                                   70m
+root@mm58:~# history | grep mkdir
+   37  mkdir -p /mnt/data/$DIRNAME
+   55  history | grep mkdir
+root@mm58:~# mkdir -p /k8s/weathervane/vol
+root@mm58:~# cat > create-persistent-vol.yaml << EOF
+n: v1
+k> apiVersion: v1
+> kind: PersistentVolume
+> metadata:
+>   name: weathervane-pv
+> spec:
+>   capacity:
+>     storage: 2Gi
+storageC>   accessModes:
+>   - ReadWriteOnce
+>   persistentVolumeReclaimPolicy: Retain
+>   storageClassName: local-storage
+>   local:
+>     path: /k8s/weathervane/vol
+>   nodeAffinity:
+>     required:
+>       nodeSelectorTerms:
+>       - matchExpressions:
+>         - key: kubernetes.io/hostname
+>           operator: In
+>           values:
+>           - 127.0.0.1
+> EOF
+root@mm58:~# kubectl apply -f create-persistent-vol.yaml
+persistentvolume/weathervane-pv created
+root@mm58:~# kubectl apply -f create-persistent-vol.yaml
+Class
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+EOFpersistentvolume/weathervane-pv unchanged
+root@mm58:~# cat > create-storage-class.yaml << EOF
+> kind: StorageClass
+> apiVersion: storage.k8s.io/v1
+> metadata:
+>   name: local-storage
+> provisioner: kubernetes.io/no-provisioner
+> volumeBindingMode: WaitForFirstConsumer
+> EOF
+root@mm58:~# kubectl apply -f create-storage-class.yaml
+storageclass.storage.k8s.io/local-storage created
+root@mm58:~# kubectl get storageclass
+NAME                 PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage        kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  28s
+my-local-storage     kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  120m
+standard (default)   kubernetes.io/host-path        Delete          Immediate              false                  126m
+root@mm58:~# history
+    1  uname -a
+    2  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    3  cd /usr/local/bin/
+    4  curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+    5  chmod +x ./kubectl
+    6  cd
+    7  which kubectl
+    8  kubectl get nodes
+    9  git clone http://github.com/vmware/weathervane
+   10  ls
+   11  ll
+   12  ll .kube
+   13  cat > storageClass.yaml << EOF
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: my-local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+EOF
+
+   14  cat storageClass.yaml
+   15  kubectl create -f storageClass.yaml
+   16  kubectl get nodes
+   17  cat > persistentVolume.yaml << EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-local-pv
+spec:
+  capacity:
+    storage: 500Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: my-local-storage
+  local:
+    path: /mnt/disk/vol1
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node1
+EOF
+
+   18  kubectl get pod
+   19  curl -LO https://github.com/kvaps/kubectl-node-shell/raw/master/kubectl-node_shell
+   20  ll
+   21  rm kubectl-node_shell
+   22  cd /usr/local/bin/
+   23  ll
+   24  curl -LO https://github.com/kvaps/kubectl-node-shell/raw/master/kubectl-node_shell
+   25  chmoe +x kubectl-node_shell
+   26  chmod +x kubectl-node_shell
+   27  kubectl get node
+   28  kubectl node-shell 127.0.0.1
+   29  ll
+   30  rm kubectl-node_shell
+   31  kubectl get pv
+   32  cd
+   33  ls
+   34  cat > vol.yaml << EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vol
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /mnt/data/vol
+EOF
+
+   35  # FROM: https://vocon-it.com/2018/12/10/kubernetes-4-persistent-volumes-hello-world/
+   36  DIRNAME="vol"
+   37  mkdir -p /mnt/data/$DIRNAME
+   38  chcon -Rt svirt_sandbox_file_t /mnt/data/$DIRNAME
+   39  ll /mnt/data
+   40  ll /mnt/data/vol
+   41  chmod 777 /mnt/data/$DIRNAME
+   42  man chcon
+   43  kubectl create -f vol.yaml
+   44  kubectl get pv
+   45  kubectl get pv vol -o yaml
+   46  cat > http-claim.yaml << EOF
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: http-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+EOF
+
+   47  kubectl create -f http-claim.yaml
+   48  kubectl get pvc
+   49  kubectl describe pvc http-claim
+   50  who
+   51  kubectl gen node
+   52  kubectl gen nodes
+   53  kubectl get nodes
+   54  kubectl get persistentvolume
+   55  history | grep mkdir
+   56  mkdir -p /k8s/weathervane/vol
+   57  cat > create-persistent-vol.yaml << EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - 127.0.0.1
+EOF
+
+   58  kubectl apply -f create-persistent-vol.yaml
+   59  cat > create-storage-class.yaml << EOF
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+EOF
+
+   60  kubectl apply -f create-storage-class.yaml
+   61  kubectl get storageclass
+   62  history
+root@mm58:~#

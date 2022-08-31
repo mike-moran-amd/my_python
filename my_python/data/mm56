@@ -1,0 +1,533 @@
+Microsoft Windows [Version 10.0.19044.1826]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@145.40.77.69
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon Aug  8 17:40:00 UTC 2022
+
+  System load:              0.08
+  Usage of /:               5.2% of 217.57GB
+  Memory usage:             3%
+  Swap usage:               0%
+  Processes:                595
+  Users logged in:          1
+  IPv4 address for bond0:   145.40.77.69
+  IPv6 address for bond0:   2604:1380:4641:3b00::13
+  IPv4 address for cni0:    10.88.0.1
+  IPv6 address for cni0:    2001:4860:4860::1
+  IPv4 address for docker0: 172.17.0.1
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+Last login: Mon Aug  8 17:12:42 2022 from 70.112.73.191
+root@mm56:~# uname -a
+Linux mm56 5.13.0-44-generic #49~20.04.1-Ubuntu SMP Wed May 18 18:44:28 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+root@mm56:~# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm56:~# alias kubectl="~/go/src/k8s.io/kubernetes/cluster/kubectl.sh"
+root@mm56:~#
+root@mm56:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE     VERSION
+127.0.0.1   Ready    <none>   9m51s   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm56:~# ll
+total 138428
+drwx------  7 root root      4096 Aug  8 17:34 ./
+drwxr-xr-x 22 root root      4096 Aug  8 17:03 ../
+-rw-r--r--  1 root root      3167 Aug  8 17:28 .bashrc
+drwx------  3 root root      4096 Aug  8 17:28 .cache/
+drwxr-x---  3 root root      4096 Aug  8 17:34 .kube/
+-rw-r--r--  1 root root       279 Aug  8 17:27 .profile
+drwx------  2 root root      4096 Aug  8 17:03 .ssh/
+-rw-------  1 root root       761 Aug  8 17:24 .viminfo
+-rw-r--r--  1 root root      1223 Aug  8 17:24 doit
+drwxr-xr-x  5 root root      4096 Aug  8 17:27 go/
+-rw-r--r--  1 root root 141699677 Aug  8 17:27 go1.18.1.linux-amd64.tar.gz
+drwx------  3 root root      4096 Aug  8 17:03 snap/
+root@mm56:~# git clone http://github.com/mike-moran-amd/my_python.git
+Cloning into 'my_python'...
+warning: redirecting to https://github.com/mike-moran-amd/my_python.git/
+remote: Enumerating objects: 645, done.
+remote: Counting objects: 100% (288/288), done.
+remote: Compressing objects: 100% (203/203), done.
+remote: Total 645 (delta 174), reused 190 (delta 81), pack-reused 357
+Receiving objects: 100% (645/645), 370.24 KiB | 3.14 MiB/s, done.
+Resolving deltas: 100% (358/358), done.
+root@mm56:~# git clone http://github.com/vmware/weathervane
+Cloning into 'weathervane'...
+warning: redirecting to https://github.com/vmware/weathervane/
+remote: Enumerating objects: 19144, done.
+remote: Counting objects: 100% (1935/1935), done.
+remote: Compressing objects: 100% (633/633), done.
+remote: Total 19144 (delta 1003), reused 1871 (delta 956), pack-reused 17209
+Receiving objects: 100% (19144/19144), 64.62 MiB | 22.86 MiB/s, done.
+Resolving deltas: 100% (11699/11699), done.
+root@mm56:~# cd weathervane/
+root@mm56:~/weathervane# ll
+total 252
+drwxr-xr-x 16 root root  4096 Aug  8 18:34 ./
+drwx------  9 root root  4096 Aug  8 18:34 ../
+drwxr-xr-x  8 root root  4096 Aug  8 18:34 .git/
+-rw-r--r--  1 root root  2411 Aug  8 18:34 .gitignore
+-rw-r--r--  1 root root  2959 Aug  8 18:34 BRANCHING.md
+-rw-r--r--  1 root root   200 Aug  8 18:34 Branches.md
+-rw-r--r--  1 root root  5247 Aug  8 18:34 CODE-OF-CONDUCT.md
+-rw-r--r--  1 root root  9540 Aug  8 18:34 CONTRIBUTING.md
+-rw-r--r--  1 root root  4952 Aug  8 18:34 ISSUES.md
+-rw-r--r--  1 root root  1485 Aug  8 18:34 LICENSE.txt
+-rw-r--r--  1 root root   454 Aug  8 18:34 Notice.txt
+-rw-r--r--  1 root root  4585 Aug  8 18:34 README.md
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 auctionApp/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 auctionAppServerWarmer/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 auctionBidService/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 auctionWeb/
+-rw-r--r--  1 root root 10152 Aug  8 18:34 build.gradle
+-rwxr-xr-x  1 root root 13779 Aug  8 18:34 buildDockerImages.pl*
+drwxr-xr-x  4 root root  4096 Aug  8 18:34 configFiles/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 dbLoader/
+drwxr-xr-x  8 root root  4096 Aug  8 18:34 doc/
+drwxr-xr-x 14 root root  4096 Aug  8 18:34 dockerImages/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 gradle/
+-rw-r--r--  1 root root    20 Aug  8 18:34 gradle.properties
+-rwxr-xr-x  1 root root  5305 Aug  8 18:34 gradlew*
+-rwxr-xr-x  1 root root  2185 Aug  8 18:34 gradlew.bat*
+drwxr-xr-x 14 root root  4096 Aug  8 18:34 runHarness/
+-rwxr-xr-x  1 root root 20497 Aug  8 18:34 runWeathervane.pl*
+-rwxr-xr-x  1 root root  2527 Aug  8 18:34 runmany.sh*
+-rw-r--r--  1 root root   145 Aug  8 18:34 settings.gradle
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 testing/
+-rw-r--r--  1 root root     6 Aug  8 18:34 version.txt
+-rw-r--r--  1 root root   708 Aug  8 18:34 weathervane.config.k8s.micro
+-rw-r--r--  1 root root   721 Aug  8 18:34 weathervane.config.k8s.small2
+-rwxr-xr-x  1 root root 42556 Aug  8 18:34 weathervane.pl*
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 workloadConfiguration/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 workloadDriver/
+root@mm56:~/weathervane# cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+root@mm56:~/weathervane# cat weathervane.config.k8s.quickstart
+{
+  "description" : "micro",
+
+  "configurationSize": "micro",
+
+  "runStrategy" : "fixed",
+
+  "dockerNamespace" : "yourRepository",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/root/.kube/config",
+      "kubeconfigContext" : "cluster-context-1",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/root/.kube/config",
+      "kubeconfigContext" : "cluster-context-2",
+    },
+  ],
+
+  "driverCluster" : "driverCluster",
+
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "loadbalancer",
+
+  "cassandraDataStorageClass" : "weathervanesc",
+  "postgresqlStorageClass" : "weathervanesc",
+  "nginxCacheStorageClass" : "weathervanesc",
+
+}root@mm56:~/weathervane# vi weathervane.config.k8s.quickstart
+
+[1]+  Stopped                 vi weathervane.config.k8s.quickstart
+root@mm56:~/weathervane# [1]+  Stopped                 vi weathervane.config.k8s.quickstart
+root@mm56:~/weathervane# cat $KUBECONFIG
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURtVENDQW9HZ0F3SUJBZ0lVSmhRUVNQREVmeldvQ0RGK0prTHZGTTdORlpVd0RRWUpLb1pJaHZjTkFRRUwKQlFBd1hERUxNQWtHQTFVRUJoTUNlSGd4Q2pBSUJnTlZCQWdNQVhneENqQUlCZ05WQkFjTUFYZ3hDakFJQmdOVgpCQW9NQVhneENqQUlCZ05WQkFzTUFYZ3hDekFKQmdOVkJBTU1BbU5oTVJBd0RnWUpLb1pJaHZjTkFRa0JGZ0Y0Ck1CNFhEVEl5TURnd09ERTNNelEwTmxvWERUSXpNRGd3T0RFM016UTBObG93WERFTE1Ba0dBMVVFQmhNQ2VIZ3gKQ2pBSUJnTlZCQWdNQVhneENqQUlCZ05WQkFjTUFYZ3hDakFJQmdOVkJBb01BWGd4Q2pBSUJnTlZCQXNNQVhneApDekFKQmdOVkJBTU1BbU5oTVJBd0RnWUpLb1pJaHZjTkFRa0JGZ0Y0TUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGCkFBT0NBUThBTUlJQkNnS0NBUUVBcUVWV2pnWDJiVGxkYk5ud001c3ZUVE51bWlJMDh6SlhXOVg2MXZuMFZYQnMKTTdKeWFJNkF5amhHdjQ5ZFJ0dzJpL0QvRjB4WXZJbW1HLzhWK0dqb0FBbndJNmszaTBsU2laZGo4dC82b3BRVQp3M2Vnbkk5dlhTK1dzT2JGeWNDZnRqWVF4VVR2TnZmYWpjNHdxb1lNd0Z2YjJ1Sjl2MmEyZFEvYjlRSVJhUVpmCkNMVUJtTzkvbGVxdDhnVUpzL2g2cXd2N1lNQmpSVGFtYVc1Um1adzNSa3dkcjV1eWRpa0NMM2dmOHpTcER3amoKeDdFY2dTOEF5L211YmVFYXB6WTBoRnpCODAzSXFuZ2RWTTh6VXVjTGFkTVFFWFdsdDJJbklaZldwQ08rekM1UQp5Mm12dGtDYzdObklTdmN0YVZKSmZBVXJoMUxRQVp0L0piVDlXOXZLR3dJREFRQUJvMU13VVRBZEJnTlZIUTRFCkZnUVVIalJXcVN3YWtodk1aOVQvWDc5d29qWHBkMjR3SHdZRFZSMGpCQmd3Rm9BVUhqUldxU3dha2h2TVo5VC8KWDc5d29qWHBkMjR3RHdZRFZSMFRBUUgvQkFVd0F3RUIvekFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBYURtSgpuQWo0OW1qL2JxbmlVaUlraTNkampwanlqREtmQzc3Y2RpQ0NYNTBMWHpURktjQnR3NExKUG9KQW1yTE80UVJnCklEZkM0VU9kaXgrU3BGUFEvbmZ0Y1NsUTJib1c5RXYvcWxUd2dHOGQ3ZDRLb1k3UENWMk56UFVUSXBMRi9SZDcKbjBPdFBNV2NGM0pUeGQreC9CRzZ4d1UzVFJscWZMRjA5SURLNjI4d0ZmVXN5Nms4VG9BdE1UTm9GVlkrQnI5eQppU0NOeStvdHhVWVc5SHloYlB4MlEzTEp2MmdLZU9QeDdGdm1nZFV6am1oM0EwMkpqakZsWkFkb0w0SEdiTThSCkdHOWtUQzNVN2IxdHRxa1pibk9WMm42b25pS1ZIa2U0UkJKRXVxc2RhVVEwcHFReE56ejNXb2NXQkxtaEFNY2wKN3JNNno3M1loaHpxbHNNc2hnPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    server: https://localhost:6443/
+  name: local-up-cluster
+contexts:
+- context:
+    cluster: local-up-cluster
+    user: local-up-cluster
+  name: local-up-cluster
+current-context: local-up-cluster
+kind: Config
+preferences: {}
+users:
+- name: local-up-cluster
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURuakNDQW9hZ0F3SUJBZ0lVSElVdnBkTkVMM0VzUHpEUENqVmNoRnd6bDdFd0RRWUpLb1pJaHZjTkFRRUwKQlFBd1hERUxNQWtHQTFVRUJoTUNlSGd4Q2pBSUJnTlZCQWdNQVhneENqQUlCZ05WQkFjTUFYZ3hDakFJQmdOVgpCQW9NQVhneENqQUlCZ05WQkFzTUFYZ3hDekFKQmdOVkJBTU1BbU5oTVJBd0RnWUpLb1pJaHZjTkFRa0JGZ0Y0Ck1CNFhEVEl5TURnd09ERTNNekF3TUZvWERUSTNNRGd3TnpFM016QXdNRm93TURFWE1CVUdBMVVFQ2hNT2MzbHoKZEdWdE9tMWhjM1JsY25NeEZUQVRCZ05WQkFNVERITjVjM1JsYlRwaFpHMXBiakNDQVNJd0RRWUpLb1pJaHZjTgpBUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBUEllazNRWUpMZG52MGZxWXZycEE5ZVgvenJoaXE4VENOVHRFd0szCjRtNmlQMjhyQldLd1QxWGp3SjJoZ1RQU3lod1lJc1lpUzFUTlFxbG9KbWVJazFielJGaERNYVl2eXlmSzZlZlUKOXJWWWVNNFJXMkVrd0w0UWJzN1Vqays5R1VrVkR0c3ZFSnl5ZzA2REFjQmRKWmxxREtkL2RxbVU3Qmx4MVpxVAoxeXcrNzhzL1l2c3RLWU5Hb2JoRlIrNjNvdVdIVjJGQXZacjh3ZCtlYXRLTzZzT1dCZlZiam5SZVNIU043eXo2ClBJczBLMjhJQ0ZVemdvUFo4VGxrdEhEdUhUUmhDQ1RIWG8zbnN2Y2ZCRmkrYnkwdkF0bVBpRGptb3cxU0k3M20KcUZCREtjWUZtQ3YvSVpDbkRaUWN1NEwvTi9VajlQOVVCeHk3M3M1dkQwK09WQ2tDQXdFQUFhT0JnekNCZ0RBTwpCZ05WSFE4QkFmOEVCQU1DQmFBd0V3WURWUjBsQkF3d0NnWUlLd1lCQlFVSEF3SXdEQVlEVlIwVEFRSC9CQUl3CkFEQWRCZ05WSFE0RUZnUVVvS0N6dHZMQ2YvdkZ0bGVnWkpRczQvL1hVRFV3SHdZRFZSMGpCQmd3Rm9BVW9qMTIKdUdQOVhXVk9LSlVxVUE5aEwvd3dzUW93Q3dZRFZSMFJCQVF3QW9JQU1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQgpBUURoa3c3eDIxblVsU0JqQlY3QlNZdEJMeDk4ZG9nVDZ5NHdtajZvNTFsVGlROGZ5RkZyL0hzS3A1NjVhSTlrCi96Q2llUDZzN1NEaWp6YURKQW5aTGQvSjNNTlI4Z2hEcEJNSzJGOVdnUkFad1dIRTlpaXUveEdHak5wZVdVTEUKTlV3dnBDbUE5UG9wQmcrUjhZQ0ZEVGF2TDV4YVlvRVE0VTlFbHJ5NXIyV3U3YUNRVkRCZFpwN0xrVUdweEdjRQp6WDdMeHordm5MQnYxejFGWG5yNk5MVnRSbUQ0ZWlpMWE2NE9CaDkybitwWG1XNGFQc0ZuQXc5TE1zNHpiWVVpCnBUMElXcnA2RFMwMHNjdG1ZaW5YaGFkREJlbjJLRDdiMnZ3S2YyU2tUeHBnQmpOamRkaHJ2Y21OeU50WEk0RlgKT05QT3FzNUFOQlRTZ0l3UEtqclgwVlJoCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBOGg2VGRCZ2t0MmUvUitwaSt1a0QxNWYvT3VHS3J4TUkxTzBUQXJmaWJxSS9ieXNGCllyQlBWZVBBbmFHQk05TEtIQmdpeGlKTFZNMUNxV2dtWjRpVFZ2TkVXRU14cGkvTEo4cnA1OVQydFZoNHpoRmIKWVNUQXZoQnV6dFNPVDcwWlNSVU8yeThRbkxLRFRvTUJ3RjBsbVdvTXAzOTJxWlRzR1hIVm1wUFhMRDd2eXo5aQoreTBwZzBhaHVFVkg3cmVpNVlkWFlVQzltdnpCMzU1cTBvN3F3NVlGOVZ1T2RGNUlkSTN2TFBvOGl6UXJid2dJClZUT0NnOW54T1dTMGNPNGROR0VJSk1kZWplZXk5eDhFV0w1dkxTOEMyWStJT09hakRWSWp2ZWFvVUVNcHhnV1kKSy84aGtLY05sQnk3Z3Y4MzlTUDAvMVFISEx2ZXptOFBUNDVVS1FJREFRQUJBb0lCQUZnaUtTcXBYelFqMzgwZAoxTW5nNkRVaWJ4WFA0OXUyNGhBZi9EdVJGQ3VSZytYRGswSkpTNWZJUCtVaFZSYTRORG5sejBLd1dSdVZYQjZ1CmVzeFZPc3o3NEhVQWdLSXQ0NVdvbDF4OGVSR3FFczl3SWdOS2paNmgvTFB0UzZCYkJVbEZFUk5ZSG9QcnQwQnQKRDhZbUlmbW1VTlRuNFJuNXk3ZTNhRG5NZHhielhLY1czMDBmdVBJMktKNDNDcHhwbFJlc0xEek8vZkUvT0F6Sgp1cHg2M2l3VXltS0xLZUZxS3JzWmhYR2ZYWGxjVWhPUEg4TUlpQ0pXRXV6OEVoM1FWQXp5QUVhYzhJbDd5bUFICkV5bjJWaEpybVIwRkVjMVJhUnhPTHdIZTRwQmMxYXFDNHZWL1Nqb1RaOHBpRmo0TzUrOWJTSTcxQkxjbU9keVoKWXZtSmp3RUNnWUVBLzFoMW1uVHdtTU83d3ZoSHliZ1ozTjZ4VzB1YXBwbGJHcmx6NkdOelQzcUpac1lPcnd6agpvY2VEK1lReVU4YlEva0ZzdjhKakJLWFJxcTUzOTNUcnZDc2xldlJpZUdOQzV1QUh4ZWxxV0hCa0krU1UxdTFxCk1LZlh2U3dXNGtucGdLa3dEaEdCOWxlVDRIZHNmUVpMbmErMmlXTVBoL3EwclozMVY5TUFpL1VDZ1lFQThyMXcKUXJySlNxeldUTzZ5QmYwTmlEUE9qMDNZU0J2dWVTMWJ0UVNZMUxxdVNuV2k3bURwUStUTGRNUmZXd1lLelROdQpiMXFVbnc5VUcrM1ZPYk95M1FmTFNxWmhOM3RoYzE0b1lSdEVTdGJmV2N5bVp1eXN5OS85ekk2U2JoL0VrQ05FClQ2TDJ1N0R4Mk5Vb0ZPOVcvbU9jalZNbWxQckRpR0dMdjk1Sld1VUNnWUF5MlcvYUNXMmNUbVpHeG1DdGFBOG0KYithTDBydUNiOG0zd2JTMlU0KzBCU2Yxb24xc0dMb0FEcFpXaXgvbWxSSXJmK1hqTGhlLzVqR2h0c3JIS2E2RQpNMmRzVzl4OE12QXd2KzVzV0RaSVZHRnMwR2xmZjdvRTVIZlBBVWV4V3B5NGRYalBaR2NvSW5xZFdjcnQvdUh5CkRmcmcweXhWblBSOEdwZXdIS0hnUFFLQmdCdGoydDM4dTZmc2RzWDVqU2IxMWVnUGlIaE5IV0dOblV3WkhTY0EKM01uc1FxeHVON05VUmgzK0hDTVI0WHlnNHVraXE0eHZHU1FWazdVUEVpZFBxcGdjUUFrdFd2enF0Q1ZUYzVUNQpnYXc4TUxtdVNQeUdLajFiQ2dWaDlRM3VFYno5N2NCYXNDS2ZwYnFFMnQvNTNjUVlzMXFURG1Cekowc2xUcUtZCno0Z3RBb0dBSk9na3VMMVZER1dmTDltc1I3WnI4ZlpmTGpQVzhsS3BNaEI1QU9iWENyTkNnQU85RWFyQ04xTmgKSmRmMXJCZ1V3ZElCcGUyTTlsY0YwRFpuMWVkdm1BK0lSWGc4dWlhTnVUTjRxcGw1dnBua0R6TWlsU1RFOVBpbgovd09kT3cyYy9oUVlmOVBPT0xYM1YvcXR1eHZSenVzZkk3NG1DNnM0d2lBVzM1Ym1ldW89Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+root@mm56:~/weathervane# fg
+vi weathervane.config.k8s.quickstart
+
+[1]+  Stopped                 vi weathervane.config.k8s.quickstart
+root@mm56:~/weathervane# fg
+vi weathervane.config.k8s.quickstart
+root@mm56:~/weathervane# root@mm56:~/weathervane# cat $KUBECONFIG
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURtVENDQW9HZ0F3SUJBZ0lVSmhRUVNQREVmeldvQ0RGK0prTHZGTTdORlpVd0RRWUpLb1pJaHZjTkFRRUwKQlFBd1hERUxNQWtHQTFVRUJoTUNlSGd4Q2pBSUJnTlZCQWdNQVhneENqQUlCZ05WQkFjTUFYZ3hDakFJQmdOVgpCQW9NQVhneENqQUlCZ05WQkFzTUFYZ3hDekFKQmdOVkJBTU1BbU5oTVJBd0RnWUpLb1pJaHZjTkFRa0JGZ0Y0Ck1CNFhEVEl5TURnd09ERTNNelEwTmxvWERUSXpNRGd3T0RFM016UTBObG93WERFTE1Ba0dBMVVFQmhNQ2VIZ3gKQ2pBSUJnTlZCQWdNQVhneENqQUlCZ05WQkFjTUFYZ3hDakFJQmdOVkJBb01BWGd4Q2pBSUJnTlZCQXNNQVhneApDekFKQmdOVkJBTU1BbU5oTVJBd0RnWUpLb1pJaHZjTkFRa0JGZ0Y0TUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGCkFBT0NBUThBTUlJQkNnS0NBUUVBcUVWV2pnWDJiVGxkYk5ud001c3ZUVE51bWlJMDh6SlhXOVg2MXZuMFZYQnMKTTdKeWFJNkF5amhHdjQ5ZFJ0dzJpL0QvRjB4WXZJbW1HLzhWK0dqb0FBbndJNmszaTBsU2laZGo4dC82b3BRVQp3M2Vnbkk5dlhTK1dzT2JGeWNDZnRqWVF4VVR2TnZmYWpjNHdxb1lNd0Z2YjJ1Sjl2MmEyZFEvYjlRSVJhUVpmCkNMVUJtTzkvbGVxdDhnVUpzL2g2cXd2N1lNQmpSVGFtYVc1Um1adzNSa3dkcjV1eWRpa0NMM2dmOHpTcER3amoKeDdFY2dTOEF5L211YmVFYXB6WTBoRnpCODAzSXFuZ2RWTTh6VXVjTGFkTVFFWFdsdDJJbklaZldwQ08rekM1UQp5Mm12dGtDYzdObklTdmN0YVZKSmZBVXJoMUxRQVp0L0piVDlXOXZLR3dJREFRQUJvMU13VVRBZEJnTlZIUTRFCkZnUVVIalJXcVN3YWtodk1aOVQvWDc5d29qWHBkMjR3SHdZRFZSMGpCQmd3Rm9BVUhqUldxU3dha2h2TVo5VC8KWDc5d29qWHBkMjR3RHdZRFZSMFRBUUgvQkFVd0F3RUIvekFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBYURtSgpuQWo0OW1qL2JxbmlVaUlraTNkampwanlqREtmQzc3Y2RpQ0NYNTBMWHpURktjQnR3NExKUG9KQW1yTE80UVJnCklEZkM0VU9kaXgrU3BGUFEvbmZ0Y1NsUTJib1c5RXYvcWxUd2dHOGQ3ZDRLb1k3UENWMk56UFVUSXBMRi9SZDcKbjBPdFBNV2NGM0pUeGQreC9CRzZ4d1UzVFJscWZMRjA5SURLNjI4d0ZmVXN5Nms4VG9BdE1UTm9GVlkrQnI5eQppU0NOeStvdHhVWVc5SHloYlB4MlEzTEp2MmdLZU9QeDdGdm1nZFV6am1oM0EwMkpqakZsWkFkb0w0SEdiTThSCkdHOWtUQzNVN2IxdHRxa1pibk9WMm42b25pS1ZIa2U0UkJKRXVxc2RhVVEwcHFReE56ejNXb2NXQkxtaEFNY2wKN3JNNno3M1loaHpxbHNNc2hnPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    server: https://localhost:6443/
+  name: local-up-cluster
+contexts:
+- context:
+    cluster: local-up-cluster
+    user: local-up-cluster
+  name: local-up-cluster
+current-context: local-up-cluster
+kind: Config
+preferences: {}
+users:
+- name: local-up-cluster
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURuakNDQW9hZ0F3SUJBZ0lVSElVdnBkTkVMM0VzUHpEUENqVmNoRnd6bDdFd0RRWUpLb1pJaHZjTkFRRUwKQlFBd1hERUxNQWtHQTFVRUJoTUNlSGd4Q2pBSUJnTlZCQWdNQVhneENqQUlCZ05WQkFjTUFYZ3hDakFJQmdOVgpCQW9NQVhneENqQUlCZ05WQkFzTUFYZ3hDekFKQmdOVkJBTU1BbU5oTVJBd0RnWUpLb1pJaHZjTkFRa0JGZ0Y0Ck1CNFhEVEl5TURnd09ERTNNekF3TUZvWERUSTNNRGd3TnpFM016QXdNRm93TURFWE1CVUdBMVVFQ2hNT2MzbHoKZEdWdE9tMWhjM1JsY25NeEZUQVRCZ05WQkFNVERITjVjM1JsYlRwaFpHMXBiakNDQVNJd0RRWUpLb1pJaHZjTgpBUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBUEllazNRWUpMZG52MGZxWXZycEE5ZVgvenJoaXE4VENOVHRFd0szCjRtNmlQMjhyQldLd1QxWGp3SjJoZ1RQU3lod1lJc1lpUzFUTlFxbG9KbWVJazFielJGaERNYVl2eXlmSzZlZlUKOXJWWWVNNFJXMkVrd0w0UWJzN1Vqays5R1VrVkR0c3ZFSnl5ZzA2REFjQmRKWmxxREtkL2RxbVU3Qmx4MVpxVAoxeXcrNzhzL1l2c3RLWU5Hb2JoRlIrNjNvdVdIVjJGQXZacjh3ZCtlYXRLTzZzT1dCZlZiam5SZVNIU043eXo2ClBJczBLMjhJQ0ZVemdvUFo4VGxrdEhEdUhUUmhDQ1RIWG8zbnN2Y2ZCRmkrYnkwdkF0bVBpRGptb3cxU0k3M20KcUZCREtjWUZtQ3YvSVpDbkRaUWN1NEwvTi9VajlQOVVCeHk3M3M1dkQwK09WQ2tDQXdFQUFhT0JnekNCZ0RBTwpCZ05WSFE4QkFmOEVCQU1DQmFBd0V3WURWUjBsQkF3d0NnWUlLd1lCQlFVSEF3SXdEQVlEVlIwVEFRSC9CQUl3CkFEQWRCZ05WSFE0RUZnUVVvS0N6dHZMQ2YvdkZ0bGVnWkpRczQvL1hVRFV3SHdZRFZSMGpCQmd3Rm9BVW9qMTIKdUdQOVhXVk9LSlVxVUE5aEwvd3dzUW93Q3dZRFZSMFJCQVF3QW9JQU1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQgpBUURoa3c3eDIxblVsU0JqQlY3QlNZdEJMeDk4ZG9nVDZ5NHdtajZvNTFsVGlROGZ5RkZyL0hzS3A1NjVhSTlrCi96Q2llUDZzN1NEaWp6YURKQW5aTGQvSjNNTlI4Z2hEcEJNSzJGOVdnUkFad1dIRTlpaXUveEdHak5wZVdVTEUKTlV3dnBDbUE5UG9wQmcrUjhZQ0ZEVGF2TDV4YVlvRVE0VTlFbHJ5NXIyV3U3YUNRVkRCZFpwN0xrVUdweEdjRQp6WDdMeHordm5MQnYxejFGWG5yNk5MVnRSbUQ0ZWlpMWE2NE9CaDkybitwWG1XNGFQc0ZuQXc5TE1zNHpiWVVpCnBUMElXcnA2RFMwMHNjdG1ZaW5YaGFkREJlbjJLRDdiMnZ3S2YyU2tUeHBnQmpOamRkaHJ2Y21OeU50WEk0RlgKT05QT3FzNUFOQlRTZ0l3UEtqclgwVlJoCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBOGg2VGRCZ2t0MmUvUitwaSt1a0QxNWYvT3VHS3J4TUkxTzBUQXJmaWJxSS9ieXNGCllyQlBWZVBBbmFHQk05TEtIQmdpeGlKTFZNMUNxV2dtWjRpVFZ2TkVXRU14cGkvTEo4cnA1OVQydFZoNHpoRmIKWVNUQXZoQnV6dFNPVDcwWlNSVU8yeThRbkxLRFRvTUJ3RjBsbVdvTXAzOTJxWlRzR1hIVm1wUFhMRDd2eXo5aQoreTBwZzBhaHVFVkg3cmVpNVlkWFlVQzltdnpCMzU1cTBvN3F3NVlGOVZ1T2RGNUlkSTN2TFBvOGl6UXJid2dJClZUT0NnOW54T1dTMGNPNGROR0VJSk1kZWplZXk5eDhFV0w1dkxTOEMyWStJT09hakRWSWp2ZWFvVUVNcHhnV1kKSy84aGtLY05sQnk3Z3Y4MzlTUDAvMVFISEx2ZXptOFBUNDVVS1FJREFRQUJBb0lCQUZnaUtTcXBYelFqMzgwZAoxTW5nNkRVaWJ4WFA0OXUyNGhBZi9EdVJGQ3VSZytYRGswSkpTNWZJUCtVaFZSYTRORG5sejBLd1dSdVZYQjZ1CmVzeFZPc3o3NEhVQWdLSXQ0NVdvbDF4OGVSR3FFczl3SWdOS2paNmgvTFB0UzZCYkJVbEZFUk5ZSG9QcnQwQnQKRDhZbUlmbW1VTlRuNFJuNXk3ZTNhRG5NZHhielhLY1czMDBmdVBJMktKNDNDcHhwbFJlc0xEek8vZkUvT0F6Sgp1cHg2M2l3VXltS0xLZUZxS3JzWmhYR2ZYWGxjVWhPUEg4TUlpQ0pXRXV6OEVoM1FWQXp5QUVhYzhJbDd5bUFICkV5bjJWaEpybVIwRkVjMVJhUnhPTHdIZTRwQmMxYXFDNHZWL1Nqb1RaOHBpRmo0TzUrOWJTSTcxQkxjbU9keVoKWXZtSmp3RUNnWUVBLzFoMW1uVHdtTU83d3ZoSHliZ1ozTjZ4VzB1YXBwbGJHcmx6NkdOelQzcUpac1lPcnd6agpvY2VEK1lReVU4YlEva0ZzdjhKakJLWFJxcTUzOTNUcnZDc2xldlJpZUdOQzV1QUh4ZWxxV0hCa0krU1UxdTFxCk1LZlh2U3dXNGtucGdLa3dEaEdCOWxlVDRIZHNmUVpMbmErMmlXTVBoL3EwclozMVY5TUFpL1VDZ1lFQThyMXcKUXJySlNxeldUTzZ5QmYwTmlEUE9qMDNZU0J2dWVTMWJ0UVNZMUxxdVNuV2k3bURwUStUTGRNUmZXd1lLelROdQpiMXFVbnc5VUcrM1ZPYk95M1FmTFNxWmhOM3RoYzE0b1lSdEVTdGJmV2N5bVp1eXN5OS85ekk2U2JoL0VrQ05FClQ2TDJ1N0R4Mk5Vb0ZPOVcvbU9jalZNbWxQckRpR0dMdjk1Sld1VUNnWUF5MlcvYUNXMmNUbVpHeG1DdGFBOG0KYithTDBydUNiOG0zd2JTMlU0KzBCU2Yxb24xc0dMb0FEcFpXaXgvbWxSSXJmK1hqTGhlLzVqR2h0c3JIS2E2RQpNMmRzVzl4OE12QXd2KzVzV0RaSVZHRnMwR2xmZjdvRTVIZlBBVWV4V3B5NGRYalBaR2NvSW5xZFdjcnQvdUh5CkRmcmcweXhWblBSOEdwZXdIS0hnUFFLQmdCdGoydDM4dTZmc2RzWDVqU2IxMWVnUGlIaE5IV0dOblV3WkhTY0EKM01uc1FxeHVON05VUmgzK0hDTVI0WHlnNHVraXE0eHZHU1FWazdVUEVpZFBxcGdjUUFrdFd2enF0Q1ZUYzVUNQpnYXc4TUxtdVNQeUdLajFiQ2dWaDlRM3VFYno5N2NCYXNDS2ZwYnFFMnQvNTNjUVlzMXFURG1Cekowc2xUcUtZCno0Z3RBb0dBSk9na3VMMVZER1dmTDltc1I3WnI4ZlpmTGpQVzhsS3BNaEI1QU9iWENyTkNnQU85RWFyQ04xTmgKSmRmMXJCZ1V3ZElCcGUyTTlsY0YwRFpuMWVkdm1BK0lSWGc4dWlhTnVUTjRxcGw1dnBua0R6TWlsU1RFOVBpbgovd09kT3cyYy9oUVlmOVBPT0xYM1YvcXR1eHZSenVzZkk3NG1DNnM0d2lBVzM1Ym1ldW89Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+root@mm56:~/weathervane# cat weathervane.config.k8s.quickstart
+{
+  "description" : "micro",
+
+  "configurationSize": "micro",
+
+  "runStrategy" : "fixed",
+
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "local-up-cluster",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "local-up-cluster",
+    },
+  ],
+
+  "driverCluster" : "driverCluster",
+
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "clusterip",
+
+  "cassandraDataStorageClass" : "standard",
+  "postgresqlStorageClass" : "standard",
+  "nginxCacheStorageClass" : "standard",
+
+}
+root@mm56:~/weathervane# ll
+total 256
+drwxr-xr-x 16 root root  4096 Aug  8 20:30 ./
+drwx------  9 root root  4096 Aug  8 20:30 ../
+drwxr-xr-x  8 root root  4096 Aug  8 18:34 .git/
+-rw-r--r--  1 root root  2411 Aug  8 18:34 .gitignore
+-rw-r--r--  1 root root  2959 Aug  8 18:34 BRANCHING.md
+-rw-r--r--  1 root root   200 Aug  8 18:34 Branches.md
+-rw-r--r--  1 root root  5247 Aug  8 18:34 CODE-OF-CONDUCT.md
+-rw-r--r--  1 root root  9540 Aug  8 18:34 CONTRIBUTING.md
+-rw-r--r--  1 root root  4952 Aug  8 18:34 ISSUES.md
+-rw-r--r--  1 root root  1485 Aug  8 18:34 LICENSE.txt
+-rw-r--r--  1 root root   454 Aug  8 18:34 Notice.txt
+-rw-r--r--  1 root root  4585 Aug  8 18:34 README.md
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 auctionApp/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 auctionAppServerWarmer/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 auctionBidService/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 auctionWeb/
+-rw-r--r--  1 root root 10152 Aug  8 18:34 build.gradle
+-rwxr-xr-x  1 root root 13779 Aug  8 18:34 buildDockerImages.pl*
+drwxr-xr-x  4 root root  4096 Aug  8 18:34 configFiles/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 dbLoader/
+drwxr-xr-x  8 root root  4096 Aug  8 18:34 doc/
+drwxr-xr-x 14 root root  4096 Aug  8 18:34 dockerImages/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 gradle/
+-rw-r--r--  1 root root    20 Aug  8 18:34 gradle.properties
+-rwxr-xr-x  1 root root  5305 Aug  8 18:34 gradlew*
+-rwxr-xr-x  1 root root  2185 Aug  8 18:34 gradlew.bat*
+drwxr-xr-x 14 root root  4096 Aug  8 18:34 runHarness/
+-rwxr-xr-x  1 root root 20497 Aug  8 18:34 runWeathervane.pl*
+-rwxr-xr-x  1 root root  2527 Aug  8 18:34 runmany.sh*
+-rw-r--r--  1 root root   145 Aug  8 18:34 settings.gradle
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 testing/
+-rw-r--r--  1 root root     6 Aug  8 18:34 version.txt
+-rw-r--r--  1 root root   708 Aug  8 18:34 weathervane.config.k8s.micro
+-rw-r--r--  1 root root   723 Aug  8 20:30 weathervane.config.k8s.quickstart
+-rw-r--r--  1 root root   721 Aug  8 18:34 weathervane.config.k8s.small2
+-rwxr-xr-x  1 root root 42556 Aug  8 18:34 weathervane.pl*
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 workloadConfiguration/
+drwxr-xr-x  3 root root  4096 Aug  8 18:34 workloadDriver/
+root@mm56:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane
+Copyright (c) 2019 VMware, Inc. All Rights Reserved.
+
+This product is licensed to you under the BSD-2 license (the "License").  You may not use this product except in compliance with the BSD-2 License.
+
+This product may include a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the subcomponent's license, as noted in the LICENSE file.
+
+Do you accept these terms and conditions (yes/no)? yes
+sh: 21: kubectl: not found
+sh: 1: kubectl: not found
+sh: 1: kubectl: not found
+^C
+root@mm56:~/weathervane# alias
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias kubectl='~/go/src/k8s.io/kubernetes/cluster/kubectl.sh'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+root@mm56:~/weathervane# alias kubectl=
+root@mm56:~/weathervane# alias
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias kubectl=''
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+root@mm56:~/weathervane# ll ~/go/src/k8s.io/kubernetes/cluster
+total 112
+drwxr-xr-x  9 root root  4096 Aug  8 17:28 ./
+drwxr-xr-x 21 root root  4096 Aug  8 17:32 ../
+-rw-r--r--  1 root root   305 Aug  8 17:28 OWNERS
+-rw-r--r--  1 root root   331 Aug  8 17:28 README.md
+drwxr-xr-x 18 root root  4096 Aug  8 17:28 addons/
+-rwxr-xr-x  1 root root 17970 Aug  8 17:28 common.sh*
+drwxr-xr-x  6 root root  4096 Aug  8 17:28 gce/
+-rwxr-xr-x  1 root root  9457 Aug  8 17:28 get-kube-binaries.sh*
+-rwxr-xr-x  1 root root  9003 Aug  8 17:28 get-kube.sh*
+drwxr-xr-x  5 root root  4096 Aug  8 17:28 images/
+-rwxr-xr-x  1 root root  1112 Aug  8 17:28 kube-down.sh*
+-rwxr-xr-x  1 root root  2483 Aug  8 17:28 kube-up.sh*
+-rwxr-xr-x  1 root root  1414 Aug  8 17:28 kube-util.sh*
+-rwxr-xr-x  1 root root  2868 Aug  8 17:28 kubectl.sh*
+drwxr-xr-x  5 root root  4096 Aug  8 17:28 kubemark/
+drwxr-xr-x  2 root root  4096 Aug  8 17:28 log-dump/
+drwxr-xr-x  2 root root  4096 Aug  8 17:28 pre-existing/
+drwxr-xr-x  2 root root  4096 Aug  8 17:28 skeleton/
+-rwxr-xr-x  1 root root  7476 Aug  8 17:28 validate-cluster.sh*
+root@mm56:~/weathervane#
+root@mm56:~/weathervane# echo $PATH
+/root/go/src/k8s.io/kubernetes/third_party/etcd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin
+root@mm56:~/weathervane# ;; /usr/bin
+-bash: syntax error near unexpected token `;;'
+root@mm56:~/weathervane# ll /usr/bin
+total 428976
+root@mm56:~/weathervane# which kubectl
+root@mm56:~/weathervane# ll /usr/local/bin
+total 8
+drwxr-xr-x  2 root root 4096 May  5 21:39 ./
+drwxr-xr-x 11 root root 4096 Aug  8 17:27 ../
+root@mm56:~/weathervane# cd /usr/local/bin
+root@mm56:/usr/local/bin# pwd
+/usr/local/bin
+root@mm56:/usr/local/bin# cd
+root@mm56:~# pwd
+/root
+root@mm56:~# cd go
+root@mm56:~/go# pwd
+/root/go
+root@mm56:~/go# cd src/k8s.io/kubernetes/c
+cluster/ cmd/
+root@mm56:~/go# cd src/k8s.io/kubernetes/cluster/
+root@mm56:~/go/src/k8s.io/kubernetes/cluster# ls
+OWNERS     common.sh             get-kube.sh   kube-up.sh    kubemark      skeleton
+README.md  gce                   images        kube-util.sh  log-dump      validate-cluster.sh
+addons     get-kube-binaries.sh  kube-down.sh  kubectl.sh    pre-existing
+root@mm56:~/go/src/k8s.io/kubernetes/cluster# vi kubectl.sh
+root@mm56:~/go/src/k8s.io/kubernetes/cluster# Cd /usr/local/bin
+Cd: command not found
+root@mm56:~/go/src/k8s.io/kubernetes/cluster# cd /usr/local/bin
+root@mm56:/usr/local/bin# ln -s /root/go/src/k8s.io/kubernetes/cluster/kubectl.sh kubectl
+root@mm56:/usr/local/bin# ll
+total 8
+drwxr-xr-x  2 root root 4096 Aug  8 20:58 ./
+drwxr-xr-x 11 root root 4096 Aug  8 17:27 ../
+lrwxrwxrwx  1 root root   49 Aug  8 20:58 kubectl -> /root/go/src/k8s.io/kubernetes/cluster/kubectl.sh*
+root@mm56:/usr/local/bin# cd
+root@mm56:~# cd weathervane/
+root@mm56:~/weathervane# history
+    1  uname -a
+    2  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    3  alias kubectl="~/go/src/k8s.io/kubernetes/cluster/kubectl.sh"
+    4  kubectl get nodes
+    5  ll
+    6  git clone http://github.com/mike-moran-amd/my_python.git
+    7  git clone http://github.com/vmware/weathervane
+    8  cd weathervane/
+    9  ll
+   10  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   11  cat weathervane.config.k8s.quickstart
+   12  vi weathervane.config.k8s.quickstart
+   13  cat $KUBECONFIG
+   14  fg
+   15  cat $KUBECONFIG
+   16  cat weathervane.config.k8s.quickstart
+   17  ll
+   18  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   19  alias
+   20  alias kubectl=
+   21  alias
+   22  ll ~/go/src/k8s.io/kubernetes/cluster
+   23  echo $PATH
+   24  ;; /usr/bin
+   25  ll /usr/bin
+   26  which kubectl
+   27  ll /usr/local/bin
+   28  cd /usr/local/bin
+   29  pwd
+   30  cd
+   31  pwd
+   32  cd go
+   33  pwd
+   34  cd src/k8s.io/kubernetes/cluster/
+   35  ls
+   36  vi kubectl.sh
+   37  Cd /usr/local/bin
+   38  cd /usr/local/bin
+   39  ln -s /root/go/src/k8s.io/kubernetes/cluster/kubectl.sh kubectl
+   40  ll
+   41  cd
+   42  cd weathervane/
+   43  history
+root@mm56:~/weathervane# !18
+./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+/usr/local/bin/kubectl: line 34: /usr/local/bin/../cluster/kube-util.sh: No such file or directory
+/usr/local/bin/kubectl: line 34: /usr/local/bin/../cluster/kube-util.sh: No such file or directory
+^C
+root@mm56:~/weathervane# cd /usr/local/bin
+root@mm56:/usr/local/bin# ll
+total 8
+drwxr-xr-x  2 root root 4096 Aug  8 20:58 ./
+drwxr-xr-x 11 root root 4096 Aug  8 17:27 ../
+lrwxrwxrwx  1 root root   49 Aug  8 20:58 kubectl -> /root/go/src/k8s.io/kubernetes/cluster/kubectl.sh*
+root@mm56:/usr/local/bin# rm kubectl
+root@mm56:/usr/local/bin# ll
+total 8
+drwxr-xr-x  2 root root 4096 Aug  8 21:00 ./
+drwxr-xr-x 11 root root 4096 Aug  8 17:27 ../
+root@mm56:/usr/local/bin# curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 43.5M  100 43.5M    0     0   222M      0 --:--:-- --:--:-- --:--:--  222M
+root@mm56:/usr/local/bin# chmod +x ./kubectl
+root@mm56:/usr/local/bin# ll
+total 44648
+drwxr-xr-x  2 root root     4096 Aug  8 21:00 ./
+drwxr-xr-x 11 root root     4096 Aug  8 17:27 ../
+-rwxr-xr-x  1 root root 45711360 Aug  8 21:00 kubectl*
+root@mm56:/usr/local/bin# cd
+root@mm56:~# which kubectl
+/usr/local/bin/kubectl
+root@mm56:~# kubectl version
+version: command not found
+root@mm56:~# kubectl --version
+--version: command not found
+root@mm56:~# kubectl get nodes
+
+Command 'get' not found, but there are 18 similar ones.
+
+root@mm56:~# !18
+./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+-bash: ./runWeathervane.pl: No such file or directory
+root@mm56:~# cd weathervane/
+root@mm56:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane is unable to create a persistant volume using storage class standard in kubernetesCluster appCluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+root@mm56:~/weathervane# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+root@mm56:~/weathervane# docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@mm56:~/weathervane#
+root@mm56:~/weathervane# history
+    1  uname -a
+    2  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    3  alias kubectl="~/go/src/k8s.io/kubernetes/cluster/kubectl.sh"
+    4  kubectl get nodes
+    5  ll
+    6  git clone http://github.com/mike-moran-amd/my_python.git
+    7  git clone http://github.com/vmware/weathervane
+    8  cd weathervane/
+    9  ll
+   10  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   11  cat weathervane.config.k8s.quickstart
+   12  vi weathervane.config.k8s.quickstart
+   13  cat $KUBECONFIG
+   14  fg
+   15  cat $KUBECONFIG
+   16  cat weathervane.config.k8s.quickstart
+   17  ll
+   18  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   19  alias
+   20  alias kubectl=
+   21  alias
+   22  ll ~/go/src/k8s.io/kubernetes/cluster
+   23  echo $PATH
+   24  ;; /usr/bin
+   25  ll /usr/bin
+   26  which kubectl
+   27  ll /usr/local/bin
+   28  cd /usr/local/bin
+   29  pwd
+   30  cd
+   31  pwd
+   32  cd go
+   33  pwd
+   34  cd src/k8s.io/kubernetes/cluster/
+   35  ls
+   36  vi kubectl.sh
+   37  Cd /usr/local/bin
+   38  cd /usr/local/bin
+   39  ln -s /root/go/src/k8s.io/kubernetes/cluster/kubectl.sh kubectl
+   40  ll
+   41  cd
+   42  cd weathervane/
+   43  history
+   44  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   45  cd /usr/local/bin
+   46  ll
+   47  rm kubectl
+   48  ll
+   49  curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+   50  chmod +x ./kubectl
+   51  ll
+   52  cd
+   53  which kubectl
+   54  kubectl version
+   55  kubectl --version
+   56  kubectl get nodes
+   57  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   58  cd weathervane/
+   59  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   60  docker images
+   61  docker ps -a
+   62  history
+root@mm56:~/weathervane#
+
+
+root@mm56:~/go/src/k8s.io/kubernetes/cluster# history
+    1  uname -a
+    2  who
+    3  cd go/src/k8s.io/kubernetes/cluster/
+    4  kubectl.sh get nodes
+    5  ./kubectl.sh get nodes
+    6  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    7  ./kubectl.sh get nodes
+    8  which kubectl
+    9  kubectl get nodes
+   10  who
+   11  history

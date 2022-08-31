@@ -1,0 +1,870 @@
+Microsoft Windows [Version 10.0.19044.1826]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@147.28.148.231
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Thu Aug 11 15:35:39 UTC 2022
+
+  System load:              0.14
+  Usage of /:               5.2% of 218.06GB
+  Memory usage:             2%
+  Swap usage:               0%
+  Processes:                575
+  Users logged in:          1
+  IPv4 address for bond0:   147.28.148.231
+  IPv6 address for bond0:   2604:1380:4641:3b00::d
+  IPv4 address for cni0:    10.88.0.1
+  IPv6 address for cni0:    2001:4860:4860::1
+  IPv4 address for docker0: 172.17.0.1
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+Last login: Thu Aug 11 15:03:52 2022 from 70.112.73.191
+root@mm62:~# mkdir hello
+root@mm62:~# cd hello
+root@mm62:~/hello# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm62:~/hello# kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv   50Gi       RWO            Retain           Available           local-storage            16m
+root@mm62:~/hello# df /k8s/
+Filesystem     1K-blocks     Used Available Use% Mounted on
+/dev/sda3      228651856 11998052 205015864   6% /
+root@mm62:~/hello# cat > vol.yaml << EOF
+> apiVersion: v1
+> kind: PersistentVolume
+
+  name: vol
+s> metadata:
+>   name: vol
+> spec:
+>   capacity:
+>     storage: 500Gi
+>   accessModes:
+>     - ReadWriteOnce
+    - ReadWrit>     - ReadWriteMany
+>   persistentVolumeReclaimPolicy: Retain
+>   hostPath:
+>     path: /mnt/data/vol
+> EOF
+root@mm62:~/hello# DIRNAME="vol"
+root@mm62:~/hello# mkdir -p /mnt/data/$DIRNAME
+root@mm62:~/hello# touch /mnt/data/vol/hi
+root@mm62:~/hello# chcon -Rt svirt_sandbox_file_t /mnt/data/$DIRNAME
+chcon: can't apply partial context to unlabeled file 'hi'
+chcon: can't apply partial context to unlabeled file '/mnt/data/vol'
+root@mm62:~/hello# chmod 777 /mnt/data/$DIRNAME
+root@mm62:~/hello# kubectl create -f vol.yaml
+persistentvolume/vol created
+root@mm62:~/hello# kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+vol              500Gi      RWO,RWX        Retain           Available                                    19s
+weathervane-pv   50Gi       RWO            Retain           Available           local-storage            23m
+root@mm62:~/hello# kubectl get pv vol -o yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  creationTimestamp: "2022-08-11T15:43:13Z"
+  finalizers:
+  - kubernetes.io/pv-protection
+  name: vol
+  resourceVersion: "696"
+  uid: 7099035c-271f-4a4b-9889-bb71c219ca0f
+spec:
+  accessModes:
+  - ReadWriteOnce
+  - ReadWriteMany
+  capacity:
+    storage: 500Gi
+  hostPath:
+    path: /mnt/data/vol
+    type: ""
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+status:
+  phase: Available
+root@mm62:~/hello# cat > http-claim.yaml << EOF
+ PersistentVolumeClaim
+apiVersion: v1
+meta> kind: PersistentVolumeClaim
+> apiVersion: v1
+> metadata:
+>   name: http-claim
+> spec:
+>   accessModes:
+ ReadWriteOnc>     - ReadWriteOnce
+urces:
+    requ>   resources:
+>     requests:
+>       storage: 3Gi
+> EOF
+root@mm62:~/hello# kubectl create -f http-claim.yaml
+persistentvolumeclaim/http-claim created
+root@mm62:~/hello# kubectl get pvc
+NAME         STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+http-claim   Pending                                      standard       10s
+root@mm62:~/hello# kubectl describe pvc http-claim
+Name:          http-claim
+Namespace:     default
+StorageClass:  standard
+Status:        Pending
+Volume:
+Labels:        <none>
+Annotations:   volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/host-path
+               volume.kubernetes.io/storage-provisioner: kubernetes.io/host-path
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:
+Access Modes:
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:
+  Type     Reason              Age                From                         Message
+  ----     ------              ----               ----                         -------
+  Warning  ProvisioningFailed  11s (x2 over 21s)  persistentvolume-controller  Failed to create provisioner: provisioning in volume plugin "kubernetes.io/host-path" is disabled
+root@mm62:~/hello# client_loop: send disconnect: Connection reset
+
+C:\Users\mikmoran>ssh root@147.28.148.231
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Thu Aug 11 16:46:04 UTC 2022
+
+  System load:              0.07
+  Usage of /:               5.3% of 218.06GB
+  Memory usage:             3%
+  Swap usage:               0%
+  Processes:                575
+  Users logged in:          1
+  IPv4 address for bond0:   147.28.148.231
+  IPv6 address for bond0:   2604:1380:4641:3b00::d
+  IPv4 address for cni0:    10.88.0.1
+  IPv6 address for cni0:    2001:4860:4860::1
+  IPv4 address for docker0: 172.17.0.1
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+Last login: Thu Aug 11 15:35:40 2022 from 165.204.77.11
+root@mm62:~# cd hello
+root@mm62:~/hello# history
+    1  cd hello
+    2  history
+root@mm62:~/hello# ll
+total 16
+drwxr-xr-x 2 root root 4096 Aug 11 15:44 ./
+drwx------ 9 root root 4096 Aug 11 15:35 ../
+-rw-r--r-- 1 root root  159 Aug 11 15:44 http-claim.yaml
+-rw-r--r-- 1 root root  228 Aug 11 15:41 vol.yaml
+root@mm62:~/hello# kubectl get pc
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@mm62:~/hello# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm62:~/hello# kubectl get pc
+NAME                      VALUE        GLOBAL-DEFAULT   AGE
+system-cluster-critical   2000000000   false            99m
+system-node-critical      2000001000   false            99m
+root@mm62:~/hello# kubectl describe pvc http-claim
+Name:          http-claim
+Namespace:     default
+StorageClass:  standard
+Status:        Pending
+Volume:
+Labels:        <none>
+Annotations:   volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/host-path
+               volume.kubernetes.io/storage-provisioner: kubernetes.io/host-path
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:
+Access Modes:
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:
+  Type     Reason              Age                  From                         Message
+  ----     ------              ----                 ----                         -------
+  Warning  ProvisioningFailed  2m6s (x37 over 68m)  persistentvolume-controller  Failed to create provisioner: provisioning in volume plugin "kubernetes.io/host-path" is disabled
+root@mm62:~/hello#
+root@mm62:~/hello# cat > hostpath_provisioner_pod.yaml << EOF
+> kind: Pod
+ v1
+met> apiVersion: v1
+> metadata:
+>   name: hostpath-provisioner
+> spec:
+>   containers:
+>     - name: hostpath-provisioner
+>       image: hostpath-provisioner:latest
+>       imagePullPolicy: "IfNotPresent"
+>       env:
+>         - name: 127.0.0.1
+>           valueFrom:
+>             fieldRef:
+>               fieldPath: spec.nodeName
+>       volumeMounts:
+>         - name: pv-volume
+>           mountPath: /mnt/data/vol
+>   volumes:
+>     - name: pv-volume
+>       hostPath:
+>         path: /mnt/data/vol
+> EOF
+root@mm62:~/hello# ll
+total 20
+drwxr-xr-x 2 root root 4096 Aug 11 17:23 ./
+drwx------ 9 root root 4096 Aug 11 15:35 ../
+-rw-r--r-- 1 root root  473 Aug 11 17:23 hostpath_provisioner_pod.yaml
+-rw-r--r-- 1 root root  159 Aug 11 15:44 http-claim.yaml
+-rw-r--r-- 1 root root  228 Aug 11 15:41 vol.yaml
+root@mm62:~/hello# kubectl apply -f h
+error: the path "h" does not exist
+root@mm62:~/hello# kubectl apply -f hostpath_provisioner_pod.yaml
+The Pod "hostpath-provisioner" is invalid: spec.containers[0].env[0].name: Invalid value: "127.0.0.1": a valid environment variable name must consist of alphabetic characters, digits, '_', '-', or '.', and must not start with a digit (e.g. 'my.env-name',  or 'MY_ENV.NAME',  or 'MyEnvName1', regex used for validation is '[-._a-zA-Z][-._a-zA-Z0-9]*')
+root@mm62:~/hello# cat > hostpath_provisioner_pod.yaml << EOF
+> kind: Pod
+> apiVersion: v1
+> metadata:
+>   name: hostpath-provisioner
+> spec:
+valueFrom:
+            fieldRef:
+   >   containers:
+>     - name: hostpath-provisioner
+>       image: hostpath-provisioner:latest
+>       imagePullPolicy: "IfNotPresent"
+ts:
+   >       env:
+>         - name: localhost
+>           valueFrom:
+>             fieldRef:
+>               fieldPath: spec.nodeName
+>       volumeMounts:
+>         - name: pv-volume
+>           mountPath: /mnt/data/vol
+>   volumes:
+>     - name: pv-volume
+>       hostPath:
+>         path: /mnt/data/vol
+> EOF
+root@mm62:~/hello# kubectl apply -f hostpath_provisioner_pod.yaml
+pod/hostpath-provisioner created
+root@mm62:~/hello# kubectl delete pv vol
+persistentvolume "vol" deleted
+root@mm62:~/hello# kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv   50Gi       RWO            Retain           Available           local-storage            128m
+root@mm62:~/hello# ll
+total 20
+drwxr-xr-x 2 root root 4096 Aug 11 17:23 ./
+drwx------ 9 root root 4096 Aug 11 15:35 ../
+-rw-r--r-- 1 root root  473 Aug 11 17:25 hostpath_provisioner_pod.yaml
+-rw-r--r-- 1 root root  159 Aug 11 15:44 http-claim.yaml
+-rw-r--r-- 1 root root  228 Aug 11 15:41 vol.yaml
+root@mm62:~/hello# kubectl get pvc
+NAME         STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+http-claim   Pending                                      standard       104m
+root@mm62:~/hello# kubectl delete pvc http-clain
+Error from server (NotFound): persistentvolumeclaims "http-clain" not found
+root@mm62:~/hello# kubectl delete pvc http-claim
+persistentvolumeclaim "http-claim" deleted
+root@mm62:~/hello# kubectl apply -f vol.yaml
+persistentvolume/vol created
+root@mm62:~/hello# kubectl apply -f http-claim.yaml
+persistentvolumeclaim/http-claim created
+root@mm62:~/hello# describe pvc http-claim
+describe: command not found
+root@mm62:~/hello# kubectl describe pvc http-claim
+Name:          http-claim
+Namespace:     default
+StorageClass:  standard
+Status:        Pending
+Volume:
+Labels:        <none>
+Annotations:   volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/host-path
+               volume.kubernetes.io/storage-provisioner: kubernetes.io/host-path
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:
+Access Modes:
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:
+  Type     Reason              Age                From                         Message
+  ----     ------              ----               ----                         -------
+  Warning  ProvisioningFailed  11s (x3 over 39s)  persistentvolume-controller  Failed to create provisioner: provisioning in volume plugin "kubernetes.io/host-path" is disabled
+root@mm62:~/hello#
+root@mm62:~/hello# apt install -y curl wget apt-transport-https
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+curl is already the newest version (7.68.0-1ubuntu2.12).
+wget is already the newest version (1.20.3-1ubuntu2).
+wget set to manually installed.
+apt-transport-https is already the newest version (2.0.9).
+The following packages were automatically installed and are no longer required:
+  linux-headers-5.4.0-109 linux-headers-5.4.0-109-generic linux-image-5.4.0-109-generic
+  linux-modules-5.4.0-109-generic
+Use 'apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+root@mm62:~/hello# wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+--2022-08-11 17:45:00--  https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+Resolving storage.googleapis.com (storage.googleapis.com)... 2607:f8b0:4000:810::2010, 2607:f8b0:4000:805::2010, 2607:f8b0:4000:81b::2010, ...
+Connecting to storage.googleapis.com (storage.googleapis.com)|2607:f8b0:4000:810::2010|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 75566620 (72M) [application/octet-stream]
+Saving to: ‘minikube-linux-amd64’
+
+minikube-linux-amd64          100%[=================================================>]  72.07M   256MB/s    in 0.3s
+
+2022-08-11 17:45:00 (256 MB/s) - ‘minikube-linux-amd64’ saved [75566620/75566620]
+
+root@mm62:~/hello# cp minikube-linux-amd64 /usr/local/bin/minikube
+root@mm62:~/hello# chmod +x /usr/local/bin/minikube
+root@mm62:~/hello# minikube version
+minikube version: v1.26.1
+commit: 62e108c3dfdec8029a890ad6d8ef96b6461426dc
+root@mm62:~/hello# kubectl version -o yaml
+clientVersion:
+  buildDate: "2022-07-13T14:30:46Z"
+  compiler: gc
+  gitCommit: aef86a93758dc3cb2c658dd9657ab4ad4afc21cb
+  gitTreeState: clean
+  gitVersion: v1.24.3
+  goVersion: go1.18.3
+  major: "1"
+  minor: "24"
+  platform: linux/amd64
+kustomizeVersion: v4.5.4
+serverVersion:
+  buildDate: "2022-08-11T15:12:41Z"
+  compiler: gc
+  gitCommit: 2bea4b24e24bf2e958162e86f7c08f0a1ca4518a
+  gitTreeState: clean
+  gitVersion: v1.24.0-beta.0.2166+2bea4b24e24bf2
+  goVersion: go1.18.1
+  major: "1"
+  minor: 24+
+  platform: linux/amd64
+
+root@mm62:~/hello# minikube start --driver=docker
+😄  minikube v1.26.1 on Ubuntu 20.04
+    ▪ KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+✨  Using the docker driver based on user configuration
+🛑  The "docker" driver should not be used with root privileges. If you wish to continue as root, use --force.
+💡  If you are running minikube within a VM, consider using --driver=none:
+📘    https://minikube.sigs.k8s.io/docs/reference/drivers/none/
+
+❌  Exiting due to DRV_AS_ROOT: The "docker" driver should not be used with root privileges.
+
+root@mm62:~/hello# minikube start --driver=docker --force
+😄  minikube v1.26.1 on Ubuntu 20.04
+    ▪ KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+❗  minikube skips various validations when --force is supplied; this may lead to unexpected behavior
+✨  Using the docker driver based on user configuration
+🛑  The "docker" driver should not be used with root privileges. If you wish to continue as root, use --force.
+💡  If you are running minikube within a VM, consider using --driver=none:
+📘    https://minikube.sigs.k8s.io/docs/reference/drivers/none/
+📌  Using Docker driver with root privileges
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+💾  Downloading Kubernetes v1.24.3 preload ...
+    > preloaded-images-k8s-v18-v1...:  405.75 MiB / 405.75 MiB  100.00% 435.52
+    > gcr.io/k8s-minikube/kicbase:  386.60 MiB / 386.61 MiB  100.00% 120.40 MiB
+    > gcr.io/k8s-minikube/kicbase:  0 B [_______________________] ?% ? p/s 3.3s
+🔥  Creating docker container (CPUs=2, Memory=15900MB) ...
+🐳  Preparing Kubernetes v1.24.3 on Docker 20.10.17 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔎  Verifying Kubernetes components...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🌟  Enabled addons: storage-provisioner, default-storageclass
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+root@mm62:~/hello# minikube status
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+
+root@mm62:~/hello# kubectl cluster-info
+Kubernetes control plane is running at https://192.168.49.2:8443
+CoreDNS is running at https://192.168.49.2:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+root@mm62:~/hello# kubectl get nodes
+NAME       STATUS   ROLES           AGE   VERSION
+minikube   Ready    control-plane   18m   v1.24.3
+root@mm62:~/hello# minikube addons list
+|-----------------------------|----------|--------------|--------------------------------|
+|         ADDON NAME          | PROFILE  |    STATUS    |           MAINTAINER           |
+|-----------------------------|----------|--------------|--------------------------------|
+| ambassador                  | minikube | disabled     | 3rd party (Ambassador)         |
+| auto-pause                  | minikube | disabled     | Google                         |
+| csi-hostpath-driver         | minikube | disabled     | Kubernetes                     |
+| dashboard                   | minikube | disabled     | Kubernetes                     |
+| default-storageclass        | minikube | enabled ✅   | Kubernetes                     |
+| efk                         | minikube | disabled     | 3rd party (Elastic)            |
+| freshpod                    | minikube | disabled     | Google                         |
+| gcp-auth                    | minikube | disabled     | Google                         |
+| gvisor                      | minikube | disabled     | Google                         |
+| headlamp                    | minikube | disabled     | 3rd party (kinvolk.io)         |
+| helm-tiller                 | minikube | disabled     | 3rd party (Helm)               |
+| inaccel                     | minikube | disabled     | 3rd party (InAccel             |
+|                             |          |              | [info@inaccel.com])            |
+| ingress                     | minikube | disabled     | Kubernetes                     |
+| ingress-dns                 | minikube | disabled     | Google                         |
+| istio                       | minikube | disabled     | 3rd party (Istio)              |
+| istio-provisioner           | minikube | disabled     | 3rd party (Istio)              |
+| kong                        | minikube | disabled     | 3rd party (Kong HQ)            |
+| kubevirt                    | minikube | disabled     | 3rd party (KubeVirt)           |
+| logviewer                   | minikube | disabled     | 3rd party (unknown)            |
+| metallb                     | minikube | disabled     | 3rd party (MetalLB)            |
+| metrics-server              | minikube | disabled     | Kubernetes                     |
+| nvidia-driver-installer     | minikube | disabled     | Google                         |
+| nvidia-gpu-device-plugin    | minikube | disabled     | 3rd party (Nvidia)             |
+| olm                         | minikube | disabled     | 3rd party (Operator Framework) |
+| pod-security-policy         | minikube | disabled     | 3rd party (unknown)            |
+| portainer                   | minikube | disabled     | 3rd party (Portainer.io)       |
+| registry                    | minikube | disabled     | Google                         |
+| registry-aliases            | minikube | disabled     | 3rd party (unknown)            |
+| registry-creds              | minikube | disabled     | 3rd party (UPMC Enterprises)   |
+| storage-provisioner         | minikube | enabled ✅   | Google                         |
+| storage-provisioner-gluster | minikube | disabled     | 3rd party (Gluster)            |
+| volumesnapshots             | minikube | disabled     | Kubernetes                     |
+|-----------------------------|----------|--------------|--------------------------------|
+root@mm62:~/hello# # FROM https://www.linuxtechi.com/how-to-install-minikube-on-ubuntu/
+root@mm62:~/hello# minikube addons enable ingress
+💡  ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+    ▪ Using image k8s.gcr.io/ingress-nginx/controller:v1.2.1
+    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+🔎  Verifying ingress addon...
+🌟  The 'ingress' addon is enabled
+root@mm62:~/hello# kubectl create deployment my-nginx --image=nginx
+deployment.apps/my-nginx created
+root@mm62:~/hello# kubectl get deployments.apps my-nginx
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE
+my-nginx   1/1     1            1           8s
+root@mm62:~/hello# kubectl get pods
+NAME                        READY   STATUS    RESTARTS   AGE
+my-nginx-7cddc5685c-qk67w   1/1     Running   0          25s
+root@mm62:~/hello# kubectl expose deployment my-nginx --name=my-nginx-svc --type=NodePort --port=80
+service/my-nginx-svc exposed
+root@mm62:~/hello#  kubectl get svc my-nginx-svc
+NAME           TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+my-nginx-svc   NodePort   10.97.49.248   <none>        80:30153/TCP   7s
+root@mm62:~/hello# minikube service my-nginx-svc --url
+http://192.168.49.2:30153
+root@mm62:~/hello# curl http://192.168.49.2:30153
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+root@mm62:~/hello# mkdir /mnt/data
+mkdir: cannot create directory ‘/mnt/data’: File exists
+root@mm62:~/hello# cd /mnt
+root@mm62:/mnt# ll
+total 12
+drwxr-xr-x  3 root root 4096 Aug 11 15:42 ./
+drwxr-xr-x 23 root root 4096 Aug 11 15:18 ../
+drwxr-xr-x  3 root root 4096 Aug 11 15:42 data/
+root@mm62:/mnt# cd data
+root@mm62:/mnt/data# ll
+total 12
+drwxr-xr-x 3 root root 4096 Aug 11 15:42 ./
+drwxr-xr-x 3 root root 4096 Aug 11 15:42 ../
+drwxrwxrwx 2 root root 4096 Aug 11 15:42 vol/
+root@mm62:/mnt/data# cd
+root@mm62:~# cd hello/
+root@mm62:~/hello# ll
+total 73816
+drwxr-xr-x  2 root root     4096 Aug 11 17:45 ./
+drwx------ 10 root root     4096 Aug 11 17:56 ../
+-rw-r--r--  1 root root      473 Aug 11 17:25 hostpath_provisioner_pod.yaml
+-rw-r--r--  1 root root      159 Aug 11 15:44 http-claim.yaml
+-rw-r--r--  1 root root 75566620 Aug  2 22:16 minikube-linux-amd64
+-rw-r--r--  1 root root      228 Aug 11 15:41 vol.yaml
+root@mm62:~/hello# minikube ssh
+docker@minikube:~$ sudo mkdir /mnt/data
+docker@minikube:~$ ll /mnt/data
+total 8
+drwxr-xr-x 2 root root 4096 Aug 11 18:19 ./
+drwxr-xr-x 1 root root 4096 Aug 11 18:19 ../
+docker@minikube:~$ sudo sh -c "echo 'Hello from Kubernetes storage' > /mnt/data/index.html"
+docker@minikube:~$ ll /mnt/data
+total 12
+drwxr-xr-x 2 root root 4096 Aug 11 18:19 ./
+drwxr-xr-x 1 root root 4096 Aug 11 18:19 ../
+-rw-r--r-- 1 root root   30 Aug 11 18:19 index.html
+docker@minikube:~$ cat /mnt/data/index.html
+Hello from Kubernetes storage
+docker@minikube:~$ logout
+root@mm62:~/hello# cat > task-pv-volume.yaml << EOF
+> apiVersion: v1
+ata:
+  name: t> kind: PersistentVolume
+> metadata:
+>   name: task-pv-volume
+>   labels:
+>     type: local
+> spec:
+>   storageClassName: manual
+>   capacity:
+>     storage: 10Gi
+>   accessModes:
+>     - ReadWriteOnce
+>   hostPath:
+>     path: "/mnt/data"
+> EOF
+root@mm62:~/hello# kubectl apply -f task-pv-volume.yaml
+persistentvolume/task-pv-volume created
+root@mm62:~/hello# kubectl get pv task-pv-volume
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+task-pv-volume   10Gi       RWO            Retain           Available           manual                  12s
+root@mm62:~/hello# cat > task-pv-claim.yaml << EOF
+> apiVersion: v1
+> kind: PersistentVolumeClaim
+> metadata:
+>   name: task-pv-claim
+> spec:
+>   storageClassName: manual
+>   accessModes:
+>     - ReadWriteOnce
+>   resources:
+>     requests:
+>       storage: 3Gi
+> cat > task-pv-claim.yaml << EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+> ^C
+root@mm62:~/hello# cat > task-pv-claim.yaml << EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+cat > task-pv-claim.yaml << EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWri^C
+root@mm62:~/hello# cat > task-pv-claim.yaml << EOF
+> apiVersion: v1
+entVolumeClaim
+metadata:
+  na> kind: PersistentVolumeClaim
+> metadata:
+>   name: task-pv-claim
+> spec:
+>   storageClassName: manual
+
+    - R>   accessModes:
+>     - ReadWriteOnce
+>   resources:
+>     requests:
+>       storage: 3Gi
+> EOF
+root@mm62:~/hello# kubectl apply -f task-pv-claim.yaml
+persistentvolumeclaim/task-pv-claim created
+root@mm62:~/hello# kubectl get pv task-pv-volume
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                   STORAGECLASS   REASON   AGE
+task-pv-volume   10Gi       RWO            Retain           Bound    default/task-pv-claim   manual                  2m27s
+root@mm62:~/hello# kubectl get pvc task-pv-claim
+NAME            STATUS   VOLUME           CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+task-pv-claim   Bound    task-pv-volume   10Gi       RWO            manual         36s
+root@mm62:~/hello# cat > task-pv-pod.yaml << EOF
+> apiVersion: v1
+> kind: Pod
+ task-pv-pod
+spe> metadata:
+>   name: task-pv-pod
+> spec:
+>   volumes:
+>     - name: task-pv-storage
+>       persistentVolumeClaim:
+>         claimName: task-pv-claim
+>   containers:
+>     - name: task-pv-container
+>       image: nginx
+>       ports:
+>         - containerPort: 80
+rver"
+      vol>           name: "http-server"
+>       volumeMounts:
+>         - mountPath: "/usr/share/nginx/html"
+>           name: task-pv-storage
+>
+> EOF
+root@mm62:~/hello# kubectl apply -f task-pv-pod.yaml
+pod/task-pv-pod created
+root@mm62:~/hello# kubectl get pod task-pv-pod
+NAME          READY   STATUS    RESTARTS   AGE
+task-pv-pod   1/1     Running   0          10s
+root@mm62:~/hello# kubectl exec -it task-pv-pod -- /bin/bash
+root@task-pv-pod:/# apt update
+Get:1 http://deb.debian.org/debian bullseye InRelease [116 kB]
+Get:2 http://deb.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+Get:3 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+Get:4 http://deb.debian.org/debian bullseye/main amd64 Packages [8182 kB]
+Get:5 http://deb.debian.org/debian-security bullseye-security/main amd64 Packages [175 kB]
+Get:6 http://deb.debian.org/debian bullseye-updates/main amd64 Packages [2592 B]
+Fetched 8567 kB in 1s (8636 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+3 packages can be upgraded. Run 'apt list --upgradable' to see them.
+root@task-pv-pod:/# apt install curl
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+curl is already the newest version (7.74.0-1.3+deb11u2).
+0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+root@task-pv-pod:/# curl http://localhost/
+Hello from Kubernetes storage
+root@task-pv-pod:/#
+
+root@mm62:~/hello# history
+    1  cd hello
+    2  history
+    3  ll
+    4  kubectl get pc
+    5  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    6  kubectl get pc
+    7  kubectl describe pvc http-claim
+    8  cat > hostpath_provisioner_pod.yaml << EOF
+kind: Pod
+apiVersion: v1
+metadata:
+  name: hostpath-provisioner
+spec:
+  containers:
+    - name: hostpath-provisioner
+      image: hostpath-provisioner:latest
+      imagePullPolicy: "IfNotPresent"
+      env:
+        - name: 127.0.0.1
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+      volumeMounts:
+        - name: pv-volume
+          mountPath: /mnt/data/vol
+  volumes:
+    - name: pv-volume
+      hostPath:
+        path: /mnt/data/vol
+EOF
+
+    9  ll
+   10  kubectl apply -f h
+   11  kubectl apply -f hostpath_provisioner_pod.yaml
+   12  cat > hostpath_provisioner_pod.yaml << EOF
+kind: Pod
+apiVersion: v1
+metadata:
+  name: hostpath-provisioner
+spec:
+  containers:
+    - name: hostpath-provisioner
+      image: hostpath-provisioner:latest
+      imagePullPolicy: "IfNotPresent"
+      env:
+        - name: localhost
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+      volumeMounts:
+        - name: pv-volume
+          mountPath: /mnt/data/vol
+  volumes:
+    - name: pv-volume
+      hostPath:
+        path: /mnt/data/vol
+EOF
+
+   13  kubectl apply -f hostpath_provisioner_pod.yaml
+   14  kubectl delete pv vol
+   15  kubectl get pv
+   16  ll
+   17  kubectl get pvc
+   18  kubectl delete pvc http-clain
+   19  kubectl delete pvc http-claim
+   20  kubectl apply -f vol.yaml
+   21  kubectl apply -f http-claim.yaml
+   22  describe pvc http-claim
+   23  kubectl describe pvc http-claim
+   24  apt install -y curl wget apt-transport-https
+   25  wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+   26  cp minikube-linux-amd64 /usr/local/bin/minikube
+   27  chmod +x /usr/local/bin/minikube
+   28  minikube version
+   29  kubectl version -o yaml
+   30  minikube start --driver=docker
+   31  minikube start --driver=docker --force
+   32  minikube status
+   33  kubectl cluster-info
+   34  kubectl get nodes
+   35  minikube addons list
+   36  # FROM https://www.linuxtechi.com/how-to-install-minikube-on-ubuntu/
+   37  minikube addons enable ingress
+   38  kubectl create deployment my-nginx --image=nginx
+   39  kubectl get deployments.apps my-nginx
+   40  kubectl get pods
+   41  kubectl expose deployment my-nginx --name=my-nginx-svc --type=NodePort --port=80
+   42  minikube service my-nginx-svc --url
+   43  curl http://192.168.49.2:30153
+   44  mkdir /mnt/data
+   45  cd /mnt
+   46  ll
+   47  cd data
+   48  ll
+   49  cd
+   50  cd hello/
+   51  ll
+   52  minikube ssh
+   53  cat > task-pv-volume.yaml << EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: task-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+EOF
+
+   54  kubectl apply -f task-pv-volume.yaml
+   55  kubectl get pv task-pv-volume
+   56  cat > task-pv-claim.yaml << EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+cat > task-pv-claim.yaml << EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+
+
+   57  cat > task-pv-claim.yaml << EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+EOF
+
+   58  kubectl apply -f task-pv-claim.yaml
+   59  kubectl get pv task-pv-volume
+   60  kubectl get pvc task-pv-claim
+   61  cat > task-pv-pod.yaml << EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: task-pv-pod
+spec:
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: task-pv-claim
+  containers:
+    - name: task-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: task-pv-storage
+
+EOF
+
+   62  kubectl apply -f task-pv-pod.yaml
+   63  kubectl get pod task-pv-pod
+   64  kubectl exec -it task-pv-pod -- /bin/bash
+   65  history

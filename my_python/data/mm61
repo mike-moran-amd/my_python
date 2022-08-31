@@ -1,0 +1,516 @@
+Microsoft Windows [Version 10.0.19044.1826]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@139.178.85.245
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Aug 10 18:05:06 UTC 2022
+
+  System load:            0.0
+  Usage of /:             1.5% of 218.06GB
+  Memory usage:           1%
+  Swap usage:             0%
+  Processes:              513
+  Users logged in:        1
+  IPv4 address for bond0: 139.178.85.245
+  IPv6 address for bond0: 2604:1380:4641:3b00::15
+
+
+8 updates can be applied immediately.
+8 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+Last login: Wed Aug 10 18:02:18 2022 from 165.204.78.25
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Aug 10 18:05:06 UTC 2022
+
+  System load:            0.0
+  Usage of /:             1.5% of 218.06GB
+  Memory usage:           1%
+  Swap usage:             0%
+  Processes:              513
+  Users logged in:        1
+  IPv4 address for bond0: 139.178.85.245
+  IPv6 address for bond0: 2604:1380:4641:3b00::15
+
+
+8 updates can be applied immediately.
+8 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+Last login: Wed Aug 10 18:02:18 2022 from 165.204.78.25
+root@mm61:~# who
+root     pts/0        2022-08-10 18:02 (165.204.78.25)
+root     pts/1        2022-08-10 18:05 (165.204.78.25)
+root@mm61:~# uname -a
+Linux mm61 5.13.0-44-generic #49~20.04.1-Ubuntu SMP Wed May 18 18:44:28 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+root@mm61:~# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm61:~# cd /usr/local/bin/
+root@mm61:/usr/local/bin# curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   154  100   154    0     0   4967      0 --:--:-- --:--:-- --:--:--  4812
+100 43.5M  100 43.5M    0     0   160M      0 --:--:-- --:--:-- --:--:--  160M
+root@mm61:/usr/local/bin# chmod +x kubectl
+root@mm61:/usr/local/bin# cd
+root@mm61:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+127.0.0.1   Ready    <none>   60s   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm61:~# git clone http://github.com/vmware/weathervane
+Cloning into 'weathervane'...
+warning: redirecting to https://github.com/vmware/weathervane/
+remote: Enumerating objects: 19144, done.
+remote: Counting objects: 100% (1935/1935), done.
+remote: Compressing objects: 100% (633/633), done.
+remote: Total 19144 (delta 1003), reused 1871 (delta 956), pack-reused 17209
+Receiving objects: 100% (19144/19144), 64.62 MiB | 57.24 MiB/s, done.
+Resolving deltas: 100% (11699/11699), done.
+root@mm61:~# cd weathervane/
+root@mm61:~/weathervane# mkdir -p /k8s/weathervane/vol
+root@mm61:~/weathervane# cat > create-persistent-vol.yaml << EOF
+iVersion: v1
+kind: Persisten> apiVersion: v1
+> kind: PersistentVolume
+> metadata:
+>   name: weathervane-pv
+    stor> spec:
+>   capacity:
+>     storage: 50Gi
+>   accessModes:
+>   - ReadWriteOnce
+>   persistentVolumeReclaimPolicy: Retain
+>   storageClassName: local-storage
+>   local:
+>     path: /k8s/weathervane/vol
+>   nodeAffinity:
+ired:
+ >     required:
+>       nodeSelectorTerms:
+>       - matchExpressions:
+>         - key: kubernetes.io/hostname
+>           operator: In
+>           values:
+>           - 127.0.0.1
+> EOF
+root@mm61:~/weathervane# kubectl apply -f create-persistent-vol.yaml
+persistentvolume/weathervane-pv created
+root@mm61:~/weathervane# cat > create-storage-class.yaml << EOF
+> kind: StorageClass
+> apiVersion: storage.k8s.io/v1
+> metadata:
+>   name: local-storage
+> provisioner: kubernetes.io/no-provisioner
+> volumeBindingMode: WaitForFirstConsumer
+> EOF
+root@mm61:~/weathervane# kubectl apply -f create-storage-class.yaml
+storageclass.storage.k8s.io/local-storage created
+root@mm61:~/weathervane# cat > weathervane.config.k8s.quickstart << EOF
+> {
+>   "description" : "micro",
+>   "configurationSize": "micro",
+>   "runStrategy" : "fixed",
+ "dockerNamesp>   "dockerNamespace" : "mikemoranamd",
+>   "kubernetesClusters" : [
+>     {
+>       "name" : "appCluster",
+>       "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+>       "kubeconfigContext" : "",
+>     },
+>     {
+>       "name" : "driverCluster",
+>       "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+>       "kubeconfigContext" : "",
+>     },
+>   ],
+>   "driverCluster" : "driverCluster",
+>   "appInstanceCluster" : "appCluster",
+ip",
+  "cassan>   "appIngressMethod" : "clusterip",
+>   "cassandraDataStorageClass" : "local-storage",
+>   "postgresqlStorageClass" : "local-storage",
+>   "nginxCacheStorageClass" : "local-storage",
+> }
+> EOF
+root@mm61:~/weathervane# history
+    1  who
+    2  uname -a
+    3  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    4  cd /usr/local/bin/
+    5  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    6  chmod +x kubectl
+    7  cd
+    8  kubectl get nodes
+    9  git clone http://github.com/vmware/weathervane
+   10  cd weathervane/
+   11  mkdir -p /k8s/weathervane/vol
+   12  cat > create-persistent-vol.yaml << EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - 127.0.0.1
+EOF
+
+   13  kubectl apply -f create-persistent-vol.yaml
+   14  cat > create-storage-class.yaml << EOF
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+EOF
+
+   15  kubectl apply -f create-storage-class.yaml
+   16  cat > weathervane.config.k8s.quickstart << EOF
+{
+  "description" : "micro",
+  "configurationSize": "micro",
+  "runStrategy" : "fixed",
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "",
+    },
+  ],
+  "driverCluster" : "driverCluster",
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "clusterip",
+  "cassandraDataStorageClass" : "local-storage",
+  "postgresqlStorageClass" : "local-storage",
+  "nginxCacheStorageClass" : "local-storage",
+}
+EOF
+
+   17  history
+root@mm61:~/weathervane# cd /k8s/
+root@mm61:/k8s# ll
+total 12
+drwxr-xr-x  3 root root 4096 Aug 10 18:15 ./
+drwxr-xr-x 23 root root 4096 Aug 10 18:15 ../
+drwxr-xr-x  3 root root 4096 Aug 10 18:15 weathervane/
+root@mm61:/k8s# chmod -R 777 weathervane/
+root@mm61:/k8s# ll
+total 12
+drwxr-xr-x  3 root root 4096 Aug 10 18:15 ./
+drwxr-xr-x 23 root root 4096 Aug 10 18:15 ../
+drwxrwxrwx  3 root root 4096 Aug 10 18:15 weathervane/
+root@mm61:/k8s# cd weathervane/
+root@mm61:/k8s/weathervane# ll
+total 12
+drwxrwxrwx 3 root root 4096 Aug 10 18:15 ./
+drwxr-xr-x 3 root root 4096 Aug 10 18:15 ../
+drwxrwxrwx 2 root root 4096 Aug 10 18:15 vol/
+root@mm61:/k8s/weathervane# cd vol
+root@mm61:/k8s/weathervane/vol# ll
+total 8
+drwxrwxrwx 2 root root 4096 Aug 10 18:15 ./
+drwxrwxrwx 3 root root 4096 Aug 10 18:15 ../
+root@mm61:/k8s/weathervane/vol# cd
+root@mm61:~# cd weathervane/
+root@mm61:~/weathervane# ./run
+runHarness/        runWeathervane.pl  runmany.sh
+root@mm61:~/weathervane# ./runWeathervane.pl
+Weathervane
+Copyright (c) 2019 VMware, Inc. All Rights Reserved.
+
+This product is licensed to you under the BSD-2 license (the "License").  You may not use this product except in compliance with the BSD-2 License.
+
+This product may include a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the subcomponent's license, as noted in the LICENSE file.
+
+Do you accept these terms and conditions (yes/no)? yes
+You must specify a valid configuration file using the configFile parameter.  The file weathervane.config does not exist.
+Usage: ./runWeathervane.pl [options] [-- parameters]
+
+This script is used to run the Weathervane benchmark using the configuration specified in a configuration file.
+It takes the following options:
+--configFile: This specifies the configuration file used to control the Weathervane run.
+              If this parameter is not a fully-qualified file name starting with a / then
+              the location of the file is assumed to be relative to the directory in which
+              this script was invoked.
+              For a description of the Weathervane configuration file, please see the
+              Weathervane User's Guide
+              default value: weathervane.config
+--version:    The version of Weathervane to use.  This will override the default version
+              number to use for the Weathervane container images.
+              default value: 2.1.1
+--outputDir:  The directory in which to store the output from the Weathervane run.  You should
+              use the same directory for all runs. Output is only placed in this directory
+              at the end of a run.  The directory is created if it does not exist.
+              If this parameter is not a fully-qualified file name starting with a / then
+              the location of the file is assumed to be relative to the directory in which
+              this script was invoked.
+              default value: output
+--tmpDir:     The directory in which to store temporary output created during the run.
+              This information can be helpful when troubleshooting runs which do not complete
+              properly.  The directory is created if it does not exist.
+              If this parameter is not a fully-qualified file name starting with a / then
+              the location of the file is assumed to be relative to the directory in which
+              this script was invoked.
+              default value: None.  If no value is specified the temporary files are stored
+                             inside the Weathervane container.
+--script:     The path to a script that should be run every scriptPeriod seconds.
+              The script may be used to refresh the credentials in the kubeconfig file
+              or to trigger external stats collection.
+              If this parameter is not a fully-qualified file name starting with a / then
+              the location of the file is assumed to be relative to the directory in which
+              this script was invoked.
+              default value: None.
+--scriptPeriod: The frequency at which the script should be run in seconds.
+              default value: 60
+--mapSsh:     Causes the user's $HOME/.ssh directory to be mapped into the run harness container.
+              This is only needed when collecting esxtop data, which requires passwordless ssh.
+              default value: False
+--accept:     Accepts the terms of the Weathervane license.  Useful when running this script
+              from another script.  Only needs to be specified on the first run in a given directory.
+              default value: None.  If no value is specified the user is prompted to accept the
+                             license terms.
+--skipPvTest: Causes the scipt to skip testing whether Weathervane can dynamically allocate
+              persistant volumes in the storage classes defined in the configuration file.
+              default value: False--help:       Displays this text.
+
+To pass command-line parameters to the Weathervane run harness, enter them following two dashes
+after the options.  For example, to stop the services from a previous run you would use:
+./runWeathervane.pl --configFile=weathervane.config -- --stop
+root@mm61:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster appCluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+root@mm61:~/weathervane# cd
+root@mm61:~# client_loop: send disconnect: Connection reset
+
+C:\Users\mikmoran>ssh root@139.178.85.245
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Aug 10 18:28:38 UTC 2022
+
+  System load:              0.01
+  Usage of /:               5.2% of 218.06GB
+  Memory usage:             3%
+  Swap usage:               0%
+  Processes:                598
+  Users logged in:          1
+  IPv4 address for bond0:   139.178.85.245
+  IPv6 address for bond0:   2604:1380:4641:3b00::15
+  IPv4 address for cni0:    10.88.0.1
+  IPv6 address for cni0:    2001:4860:4860::1
+  IPv4 address for docker0: 172.17.0.1
+
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+Last login: Wed Aug 10 18:05:06 2022 from 165.204.78.25
+root@mm61:~# mkdir hello
+root@mm61:~# cd hello/
+root@mm61:~/hello# kubectl get pv
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@mm61:~/hello# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm61:~/hello# kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv   50Gi       RWO            Retain           Available           local-storage            13m
+root@mm61:~/hello# cat > vol.yaml << EOF
+ v1
+kind: PersistentVolume
+m> apiVersion: v1
+> kind: PersistentVolume
+> metadata:
+>   name: vol
+> spec:
+>   capacity:
+>     storage: 500Gi
+>   accessModes:
+>     - ReadWriteOnce
+>     - ReadWriteMany
+>   persistentVolumeReclaimPolicy: Retain
+>   hostPath:
+>     path: /mnt/data/vol
+> EOF
+root@mm61:~/hello# DIRNAME="vol"
+root@mm61:~/hello# mkdir -p /mnt/data/$DIRNAME
+root@mm61:~/hello# chcon -Rt svirt_sandbox_file_t /mnt/data/$DIRNAME
+chcon: can't apply partial context to unlabeled file '/mnt/data/vol'
+root@mm61:~/hello# chmod 777 /mnt/data/$DIRNAME
+root@mm61:~/hello# ll /mnt
+total 12
+drwxr-xr-x  3 root root 4096 Aug 10 18:30 ./
+drwxr-xr-x 23 root root 4096 Aug 10 18:15 ../
+drwxr-xr-x  3 root root 4096 Aug 10 18:30 data/
+root@mm61:~/hello# chmod -R 777 /mnt/data
+root@mm61:~/hello# ll /mnt
+total 12
+drwxr-xr-x  3 root root 4096 Aug 10 18:30 ./
+drwxr-xr-x 23 root root 4096 Aug 10 18:15 ../
+drwxrwxrwx  3 root root 4096 Aug 10 18:30 data/
+root@mm61:~/hello# ll /mnt/data
+total 12
+drwxrwxrwx 3 root root 4096 Aug 10 18:30 ./
+drwxr-xr-x 3 root root 4096 Aug 10 18:30 ../
+drwxrwxrwx 2 root root 4096 Aug 10 18:30 vol/
+root@mm61:~/hello# ll /mnt/data/vol
+total 8
+drwxrwxrwx 2 root root 4096 Aug 10 18:30 ./
+drwxrwxrwx 3 root root 4096 Aug 10 18:30 ../
+root@mm61:~/hello# kubectl create -f vol.yaml
+persistentvolume/vol created
+root@mm61:~/hello# kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+vol              500Gi      RWO,RWX        Retain           Available                                    31s
+weathervane-pv   50Gi       RWO            Retain           Available           local-storage            22m
+root@mm61:~/hello# kubectl get pv vol -o yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  creationTimestamp: "2022-08-10T18:38:34Z"
+  finalizers:
+  - kubernetes.io/pv-protection
+  name: vol
+  resourceVersion: "651"
+  uid: e80f6869-8442-419c-a01b-70c796fdb8d4
+spec:
+  accessModes:
+  - ReadWriteOnce
+  - ReadWriteMany
+  capacity:
+    storage: 500Gi
+  hostPath:
+    path: /mnt/data/vol
+    type: ""
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+status:
+  phase: Available
+root@mm61:~/hello# cat > http-claim.yaml << EOF
+> kind: PersistentVolumeClaim
+> apiVersion: v1
+> metadata:
+>   name: http-claim
+> spec:
+>   accessModes:
+>     - ReadWriteOnce
+>   resources:
+>     requests:
+>       storage: 3Gi
+> EOF
+root@mm61:~/hello# kubectl create -f http-claim.yaml
+persistentvolumeclaim/http-claim created
+root@mm61:~/hello# kubectl get pvc
+NAME         STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+http-claim   Pending                                      standard       9s
+root@mm61:~/hello# kubectl describe pvc http-claim
+Name:          http-claim
+Namespace:     default
+StorageClass:  standard
+Status:        Pending
+Volume:
+Labels:        <none>
+Annotations:   volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/host-path
+               volume.kubernetes.io/storage-provisioner: kubernetes.io/host-path
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:
+Access Modes:
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:
+  Type     Reason              Age               From                         Message
+  ----     ------              ----              ----                         -------
+  Warning  ProvisioningFailed  8s (x3 over 28s)  persistentvolume-controller  Failed to create provisioner: provisioning in volume plugin "kubernetes.io/host-path" is disabled
+root@mm61:~/hello# client_loop: send disconnect: Connection reset
+
+C:\Users\mikmoran>ssh root@139.178.85.245
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Aug 10 20:31:57 UTC 2022
+
+  System load:              0.03
+  Usage of /:               5.3% of 218.06GB
+  Memory usage:             2%
+  Swap usage:               0%
+  Processes:                569
+  Users logged in:          1
+  IPv4 address for bond0:   139.178.85.245
+  IPv6 address for bond0:   2604:1380:4641:3b00::15
+  IPv4 address for cni0:    10.88.0.1
+  IPv6 address for cni0:    2001:4860:4860::1
+  IPv4 address for docker0: 172.17.0.1
+
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+Last login: Wed Aug 10 20:31:54 2022 from 70.112.73.191
+root@mm61:~# cd hello/
+root@mm61:~/hello# ll
+total 16
+drwxr-xr-x 2 root root 4096 Aug 10 18:41 ./
+drwx------ 9 root root 4096 Aug 10 18:28 ../
+-rw-r--r-- 1 root root  159 Aug 10 18:41 http-claim.yaml
+-rw-r--r-- 1 root root  228 Aug 10 18:29 vol.yaml
+root@mm61:~/hello# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm61:~/hello# kubectl get pvc
+No resources found in default namespace.
+root@mm61:~/hello# kubectl get pv
+No resources found
+root@mm61:~/hello# kubectl get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+127.0.0.1   Ready    <none>   36m   v1.24.0-beta.0.2166+2bea4b24e24bf2-dirty
+root@mm61:~/hello# ll
+total 16
+drwxr-xr-x 2 root root 4096 Aug 10 18:41 ./
+drwx------ 9 root root 4096 Aug 10 18:28 ../
+-rw-r--r-- 1 root root  159 Aug 10 18:41 http-claim.yaml
+-rw-r--r-- 1 root root  228 Aug 10 18:29 vol.yaml
+root@mm61:~/hello#

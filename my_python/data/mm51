@@ -1,0 +1,162 @@
+root@mm51:~/weathervane# history
+    1  uptimee
+    2  uptime
+    3  git status
+    4  cd
+    5  git clone http://github.com/mike-moran-amd/my_python.git
+    6  cd my
+    7  cd my_python/
+    8  ll
+    9  cd weathervane/
+   10  ll
+   11  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   12  cd /root
+   13  ll
+   14  cd .kube
+   15  ll
+   16  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   17  cd
+   18  cd weathervane/
+   19  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   20  which kubectl
+   21  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+   22  which kubectl
+   23  ll
+   24  kubectl
+   25  rm kubectl
+   26  curl -LO https://dl.k8s.io/release/v1.24.0/bin/linux/amd64/kubectl
+   27  curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+   28  echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+   29  apt-get update
+   30  apt-get install -y ca-certificates curl
+   31  sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+   32  echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+   33  apt-get update
+   34  apt-get install -y kubectl
+   35  which kubectl
+   36  history
+   37  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   38  ll
+   39  git status
+   40  vi cassandra_service.yaml
+   41  kubectl apply -f cassandra_service.yaml
+   42  kubectl get svc cassandra
+   43  docker pull cassandra:latest
+   44  docker network create cassandra
+   45  docker run --rm -d --name cassandra --hostname cassandra --network cassandra cassandra
+   46  vi data.cql
+   47  docker run --rm --network cassandra -v "$(pwd)/data.cql:/scripts/data.cql" -e CQLSH_HOST=cassandra -e CQLSH_PORT=9042 -e CQLVERSION=3.4.5 nuvo/docker-cqlsh
+   48  docker run --rm -it --network cassandra nuvo/docker-cqlsh cqlsh cassandra 9042 --cqlversion='3.4.5'
+   49  history
+   50  ll
+   51  git status
+   52  vi weathervane.config.k8s.quickstart
+   53  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   54  docker ps -a
+   55  kubectl describe storageclass cassandra
+   56  kubectl describe storageclass
+   57  kubectl describe storageclass default
+   58  ls
+   59  git status
+   60  cat cassandra_service.yaml
+   61  cat data.cql
+   62  cat kubectl
+   63  history
+root@mm51:~/weathervane#
+
+    2  uptime
+    3  git status
+    4  cd
+    5  git clone http://github.com/mike-moran-amd/my_python.git
+    6  cd my
+    7  cd my_python/
+    8  ll
+    9  cd go
+   10  ls
+   11  ll
+   12  cd src
+   13  ll
+   14  cd k8s.io/
+   15  cd kubernetes/
+   16  ll
+   17  cd hack
+   18  ll
+   19  ll  l*;2~
+   20  ll l*
+   21  ./local-up-cluster.sh &
+   22  jobs
+   23  docker ps -a
+   24  uptime
+   25  docker images
+   26  history
+   27  ps -a
+   28  kill 361635
+   29  ps -a
+   30  history
+   31  git status
+   32  history
+
+root@mm51:~/weathervane# cat weathervane.config.k8s.quickstart
+{
+  "description" : "micro",
+
+  "configurationSize": "micro",
+
+  "runStrategy" : "fixed",
+
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "local-up-cluster",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/root/.kube/config",
+      "kubeconfigContext" : "cluster-context-2",
+    },
+  ],
+
+  "driverCluster" : "driverCluster",
+
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "loadbalancer",
+
+  "cassandraDataStorageClass" : "cassandra",
+
+}
+root@mm51:~/weathervane# cat cassandra_service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cassandra
+  name: cassandra
+spec:
+  clusterIP: None
+  ports:
+  - port: 9042
+  selector:
+    app: cassandra
+
+-- Create a keyspace
+CREATE KEYSPACE IF NOT EXISTS store WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : '1' };
+
+-- Create a table
+CREATE TABLE IF NOT EXISTS store.shopping_cart (
+userid text PRIMARY KEY,
+item_count int,
+last_update_timestamp timestamp
+);
+
+-- Insert some data
+INSERT INTO store.shopping_cart
+(userid, item_count, last_update_timestamp)
+VALUES ('9876', 2, toTimeStamp(now()));
+INSERT INTO store.shopping_cart
+(userid, item_count, last_update_timestamp)
+VALUES ('1234', 5, toTimeStamp(now()));
+
+
+

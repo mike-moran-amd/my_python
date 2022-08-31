@@ -1,0 +1,3 @@
+alias sc="kubectl get sc -A"
+alias pv="kubectl get pv -A"
+alias pvc="kubectl get pvc -A"

@@ -1,0 +1,1099 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nginx-pv-volume
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/nginx"
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pv-claim
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pv-pod
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: nginx-storage
+  volumes:
+    - name: nginx-storage
+      persistentVolumeClaim:
+        claimName: nginx-pv-claim
+
+Microsoft Windows [Version 10.0.19044.1826]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@147.28.148.235
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug  9 14:50:12 UTC 2022
+
+  System load:            0.07
+  Usage of /:             1.5% of 217.57GB
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug  9 14:50:12 UTC 2022
+
+  System load:            0.07
+  Usage of /:             1.5% of 217.57GB
+  Memory usage:           2%
+  Swap usage:             0%
+  Processes:              529
+  Users logged in:        1
+  IPv4 address for bond0: 147.28.148.235
+  IPv6 address for bond0: 2604:1380:4641:3b00::13
+
+
+8 updates can be applied immediately.
+8 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+Last login: Tue Aug  9 14:49:48 2022 from 70.112.73.191
+root@mm57:~# uname -a
+Linux mm57 5.13.0-44-generic #49~20.04.1-Ubuntu SMP Wed May 18 18:44:28 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+root@mm57:~# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm57:~# cd /usr/local/bin/
+root@mm57:/usr/local/bin# ll
+total 8
+drwxr-xr-x  2 root root 4096 May  5 21:39 ./
+drwxr-xr-x 11 root root 4096 Aug  9 14:53 ../
+root@mm57:/usr/local/bin# curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 43.5M  100 43.5M    0     0   193M      0 --:--:-- --:--:-- --:--:--  193M
+root@mm57:/usr/local/bin# chmod +x ./kubectl
+root@mm57:/usr/local/bin# cd
+root@mm57:~# which kubectl
+/usr/local/bin/kubectl
+root@mm57:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+127.0.0.1   Ready    <none>   13m   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm57:~# git clone http://github.com/vmware/weathervane
+Cloning into 'weathervane'...
+warning: redirecting to https://github.com/vmware/weathervane/
+remote: Enumerating objects: 19144, done.
+remote: Counting objects: 100% (1935/1935), done.
+remote: Compressing objects: 100% (633/633), done.
+remote: Total 19144 (delta 1003), reused 1871 (delta 956), pack-reused 17209
+Receiving objects: 100% (19144/19144), 64.62 MiB | 55.14 MiB/s, done.
+Resolving deltas: 100% (11699/11699), done.
+root@mm57:~# cd weathervane/
+root@mm57:~/weathervane# cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+root@mm57:~/weathervane# vi weathervane.config.k8s.quickstart
+
+[1]+  Stopped                 vi weathervane.config.k8s.quickstart
+root@mm57:~/weathervane#
+[1]+  Stopped                 vi weathervane.config.k8s.quickstart
+root@mm57:~/weathervane#
+root@mm57:~/weathervane# fg
+vi weathervane.config.k8s.quickstart
+root@mm57:~/weathervane# root@mm57:~/weathervane# vi cassandra_service.yaml
+root@mm57:~/weathervane# vi local_storage.yaml
+root@mm57:~/weathervane# cat local_storage.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+root@mm57:~/weathervane# jobs
+root@mm57:~/weathervane# vi weathervane.config.k8s.quickstart
+root@mm57:~/weathervane# kubectl apply -f local_storage.yaml
+storageclass.storage.k8s.io/local-storage created
+root@mm57:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane
+Copyright (c) 2019 VMware, Inc. All Rights Reserved.
+
+This product is licensed to you under the BSD-2 license (the "License").  You may not use this product except in compliance with the BSD-2 License.
+
+This product may include a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the subcomponent's license, as noted in the LICENSE file.
+
+Do you accept these terms and conditions (yes/no)? yes
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster appCluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+root@mm57:~/weathervane# uptime
+ 17:25:41 up  2:37,  2 users,  load average: 0.17, 0.08, 0.02
+root@mm57:~/weathervane# kubectl get storageclass
+NAME                 PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage        kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  116m
+standard (default)   kubernetes.io/host-path        Delete          Immediate              false                  164m
+root@mm57:~/weathervane# which minikube
+root@mm57:~/weathervane# vi cassandra_service.yaml
+root@mm57:~/weathervane# cat cassandra_service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cassandra
+  name: cassandra
+spec:
+  clusterIP: None
+   ports:
+   - port: 9042
+  selector:
+    app: cassandra
+
+root@mm57:~/weathervane# kubectl apply -f cassandra_service.yaml
+error: error parsing cassandra_service.yaml: error converting YAML to JSON: yaml: line 9: mapping values are not allowed in this context
+root@mm57:~/weathervane# vi cassandra_service.yaml
+root@mm57:~/weathervane# cat cassandra_service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cassandra
+  name: cassandra
+spec:
+  clusterIP: None
+  ports:
+  - port: 9042
+  selector:
+    app: cassandra
+
+root@mm57:~/weathervane# kubectl apply -f cassandra_service.yaml
+service/cassandra created
+root@mm57:~/weathervane# kubectl get storageclass
+NAME                 PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage        kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  135m
+standard (default)   kubernetes.io/host-path        Delete          Immediate              false                  3h4m
+root@mm57:~/weathervane# kubectl get svc cassandra
+NAME        TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+cassandra   ClusterIP   None         <none>        9042/TCP   32s
+root@mm57:~/weathervane# docker pull cassandra:latest
+latest: Pulling from library/cassandra
+3b65ec22a9e9: Pull complete
+398d776e32fa: Pull complete
+94b7337533ca: Pull complete
+dc1775729625: Pull complete
+0b204811aacc: Pull complete
+d98bcc8bffb0: Pull complete
+dc07ab296370: Pull complete
+3b71155e4779: Pull complete
+e9ed9e661616: Pull complete
+Digest: sha256:515f3851e4f1c287a8e09d1b19180b1447aa448d067271929e069506447a7572
+Status: Downloaded newer image for cassandra:latest
+docker.io/library/cassandra:latest
+root@mm57:~/weathervane# docker network create cassandra
+d5d4e58ec12e513a98402795b3ffaab447d2f2cde5e4084f4efc3ef225ec89b0
+root@mm57:~/weathervane# docker run --rm -d --name cassandra --hostname cassandra --network cassandra cassandra
+bc1db3a3698ebeb3c9c1d21ba49596487731520060e2d49bbaa0382d387d0565
+root@mm57:~/weathervane# ls
+BRANCHING.md            auctionBidService       gradle.properties   version.txt
+Branches.md             auctionWeb              gradlew             weathervane.config.k8s.micro
+CODE-OF-CONDUCT.md      build.gradle            gradlew.bat         weathervane.config.k8s.quickstart
+CONTRIBUTING.md         buildDockerImages.pl    local_storage.yaml  weathervane.config.k8s.small2
+ISSUES.md               cassandra_service.yaml  output              weathervane.pl
+LICENSE.txt             configFiles             runHarness          weathervaneResults.csv
+Notice.txt              dbLoader                runWeathervane.pl   workloadConfiguration
+README.md               doc                     runmany.sh          workloadDriver
+auctionApp              dockerImages            settings.gradle
+auctionAppServerWarmer  gradle                  testing
+root@mm57:~/weathervane# history
+    1  uname -a
+    2  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    3  cd /usr/local/bin/
+    4  ll
+    5  curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+    6  chmod +x ./kubectl
+    7  cd
+    8  which kubectl
+    9  kubectl get nodes
+   10  git clone http://github.com/vmware/weathervane
+   11  cd weathervane/
+   12  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   13  vi weathervane.config.k8s.quickstart
+   14  fg
+   15  vi cassandra_service.yaml
+   16  vi local_storage.yaml
+   17  cat local_storage.yaml
+   18  jobs
+   19  vi weathervane.config.k8s.quickstart
+   20  kubectl apply -f local_storage.yaml
+   21  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   22  uptime
+   23  kubectl get storageclass
+   24  which minikube
+   25  vi cassandra_service.yaml
+   26  cat cassandra_service.yaml
+   27  kubectl apply -f cassandra_service.yaml
+   28  vi cassandra_service.yaml
+   29  cat cassandra_service.yaml
+   30  kubectl apply -f cassandra_service.yaml
+   31  kubectl get storageclass
+   32  kubectl get svc cassandra
+   33  docker pull cassandra:latest
+   34  docker network create cassandra
+   35  docker run --rm -d --name cassandra --hostname cassandra --network cassandra cassandra
+   36  ls
+   37  history
+root@mm57:~/weathervane# vi data.cql
+root@mm57:~/weathervane# cat data.cql
+-- Create a keyspace
+CREATE KEYSPACE IF NOT EXISTS store WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : '1' };
+
+-- Create a table
+CREATE TABLE IF NOT EXISTS store.shopping_cart (
+userid text PRIMARY KEY,
+item_count int,
+last_update_timestamp timestamp
+);
+
+-- Insert some data
+INSERT INTO store.shopping_cart
+(userid, item_count, last_update_timestamp)
+VALUES ('9876', 2, toTimeStamp(now()));
+INSERT INTO store.shopping_cart
+(userid, item_count, last_update_timestamp)
+VALUES ('1234', 5, toTimeStamp(now()));
+
+root@mm57:~/weathervane# docker run --rm --network cassandra -v "$(pwd)/data.cql:/scripts/data.cql" -e CQLSH_HOST=cassandra -e CQLSH_PORT=9042 -e CQLVERSION=3.4.5 nuvo/docker-cqlsh
+Unable to find image 'nuvo/docker-cqlsh:latest' locally
+latest: Pulling from nuvo/docker-cqlsh
+cd784148e348: Pull complete
+30f71ecab593: Pull complete
+ed606575a835: Pull complete
+9c862b3c365f: Pull complete
+a5d45fa50c31: Pull complete
+9a1e1cb30c66: Pull complete
+b88bf3f8b15b: Pull complete
+Digest: sha256:410c040df719f9dbb07708c25b5430a22e570c4914084976f0b7dede329fab69
+Status: Downloaded newer image for nuvo/docker-cqlsh:latest
+Checking connection to cassandra...
+Connected to Test Cluster at cassandra:9042.
+Executing /scripts/data.cql...
+Done.
+root@mm57:~/weathervane# docker run --rm -it --network cassandra nuvo/docker-cqlsh cqlsh cassandra 9042 --cqlversion='3.4.5'
+Connected to Test Cluster at cassandra:9042.
+[cqlsh 5.0.1 | Cassandra 4.0.5 | CQL spec 3.4.5 | Native protocol v5]
+Use HELP for help.
+cqlsh> SELECT * FROM store.shopping_cart;
+
+ userid | item_count | last_update_timestamp
+--------+------------+---------------------------------
+   1234 |          5 | 2022-08-09 18:22:28.736000+0000
+   9876 |          2 | 2022-08-09 18:22:28.735000+0000
+
+(2 rows)
+cqlsh> INSERT INTO store.shopping_cart (userid, item_count) VALUES ('4567', 20);
+cqlsh>
+root@mm57:~/weathervane# history
+    1  uname -a
+    2  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    3  cd /usr/local/bin/
+    4  ll
+    5  curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+    6  chmod +x ./kubectl
+    7  cd
+    8  which kubectl
+    9  kubectl get nodes
+   10  git clone http://github.com/vmware/weathervane
+   11  cd weathervane/
+   12  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   13  vi weathervane.config.k8s.quickstart
+   14  fg
+   15  vi cassandra_service.yaml
+   16  vi local_storage.yaml
+   17  cat local_storage.yaml
+   18  jobs
+   19  vi weathervane.config.k8s.quickstart
+   20  kubectl apply -f local_storage.yaml
+   21  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   22  uptime
+   23  kubectl get storageclass
+   24  which minikube
+   25  vi cassandra_service.yaml
+   26  cat cassandra_service.yaml
+   27  kubectl apply -f cassandra_service.yaml
+   28  vi cassandra_service.yaml
+   29  cat cassandra_service.yaml
+   30  kubectl apply -f cassandra_service.yaml
+   31  kubectl get storageclass
+   32  kubectl get svc cassandra
+   33  docker pull cassandra:latest
+   34  docker network create cassandra
+   35  docker run --rm -d --name cassandra --hostname cassandra --network cassandra cassandra
+   36  ls
+   37  history
+   38  vi data.cql
+   39  cat data.cql
+   40  docker run --rm --network cassandra -v "$(pwd)/data.cql:/scripts/data.cql" -e CQLSH_HOST=cassandra -e CQLSH_PORT=9042 -e CQLVERSION=3.4.5 nuvo/docker-cqlsh
+   41  docker run --rm -it --network cassandra nuvo/docker-cqlsh cqlsh cassandra 9042 --cqlversion='3.4.5'
+   42  history
+root@mm57:~/weathervane# kubectl get storageclass
+NAME                 PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage        kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  159m
+standard (default)   kubernetes.io/host-path        Delete          Immediate              false                  3h28m
+root@mm57:~/weathervane# kubectl get svc cassandra\
+> ^C
+root@mm57:~/weathervane# kubectl get svc cassandra
+NAME        TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+cassandra   ClusterIP   None         <none>        9042/TCP   29m
+root@mm57:~/weathervane# jobs
+root@mm57:~/weathervane# ls
+BRANCHING.md        auctionApp              data.cql           local_storage.yaml  weathervane.config.k8s.micro
+Branches.md         auctionAppServerWarmer  dbLoader           output              weathervane.config.k8s.quickstart
+CODE-OF-CONDUCT.md  auctionBidService       doc                runHarness          weathervane.config.k8s.small2
+CONTRIBUTING.md     auctionWeb              dockerImages       runWeathervane.pl   weathervane.pl
+ISSUES.md           build.gradle            gradle             runmany.sh          weathervaneResults.csv
+LICENSE.txt         buildDockerImages.pl    gradle.properties  settings.gradle     workloadConfiguration
+Notice.txt          cassandra_service.yaml  gradlew            testing             workloadDriver
+README.md           configFiles             gradlew.bat        version.txt
+root@mm57:~/weathervane# vi weathervane.config.k8s.quickstart
+root@mm57:~/weathervane# root@mm57:~/weathervane# cat weathervane.config.k8s.quickstart
+{
+  "description" : "micro",
+
+  "configurationSize": "micro",
+
+  "runStrategy" : "fixed",
+
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "local-up-cluster",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "local-up-cluster",
+    },
+  ],
+
+  "driverCluster" : "driverCluster",
+
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "clusterip",
+
+  "cassandraDataStorageClass" : "cassandra",
+  "postgresqlStorageClass" : "cassandra",
+  "nginxCacheStorageClass" : "cassandra",
+
+}
+root@mm57:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane is unable to create a persistant volume using storage class cassandra in kubernetesCluster appCluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+root@mm57:~/weathervane# kubectl get pod
+No resources found in default namespace.
+root@mm57:~/weathervane# kubectl.sh run my-shell -i --tty --image ubuntu -- bash
+kubectl.sh: command not found
+root@mm57:~/weathervane# kubectl run my-shell -i --tty --image ubuntu -- bash
+If you don't see a command prompt, try pressing enter.
+root@my-shell:/# mkdir /mnt/data
+root@my-shell:/# cd /mnt/data
+root@my-shell:/mnt/data# ll
+total 8
+drwxr-xr-x 2 root root 4096 Aug  9 18:54 ./
+drwxr-xr-x 1 root root 4096 Aug  9 18:54 ../
+root@my-shell:/mnt/data# sh -c "echo 'Hello from Kubernetes storage' > /mnt/data/index.html"
+root@my-shell:/mnt/data# ll
+total 12
+drwxr-xr-x 2 root root 4096 Aug  9 18:54 ./
+drwxr-xr-x 1 root root 4096 Aug  9 18:54 ../
+-rw-r--r-- 1 root root   30 Aug  9 18:54 index.html
+root@my-shell:/mnt/data# cat index.html
+Hello from Kubernetes storage
+root@my-shell:/mnt/data# exit
+exit
+Session ended, resume using 'kubectl attach my-shell -c my-shell -i -t' command when the pod is running
+root@mm57:~/weathervane# kubectl pod
+error: unknown command "pod" for "kubectl"
+
+Did you mean this?
+        top
+root@mm57:~/weathervane# kubectl get pod
+NAME       READY   STATUS    RESTARTS      AGE
+my-shell   1/1     Running   1 (21s ago)   5m52s
+root@mm57:~/weathervane# kubectl attach my-shell -c my-shell -i -t
+If you don't see a command prompt, try pressing enter.
+root@my-shell:/# cd /mnt/data
+bash: cd: /mnt/data: No such file or directory
+root@my-shell:/# cd /mnt
+root@my-shell:/mnt# ls
+root@my-shell:/mnt# df .
+Filesystem     1K-blocks     Used Available Use% Mounted on
+overlay        228137840 12999016 203526996   7% /
+root@my-shell:/mnt# exit
+exit
+Session ended, resume using 'kubectl attach my-shell -c my-shell -i -t' command when the pod is running
+root@mm57:~/weathervane# apt install minikube
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+E: Unable to locate package minikube
+root@mm57:~/weathervane# kubectl get node
+NAME        STATUS   ROLES    AGE    VERSION
+127.0.0.1   Ready    <none>   4h2m   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm57:~/weathervane# kubectl get pv
+No resources found
+root@mm57:~/weathervane# kubectl get pvc
+No resources found in default namespace.
+root@mm57:~/weathervane# kubectl get pod
+NAME       READY   STATUS    RESTARTS        AGE
+my-shell   1/1     Running   2 (2m18s ago)   10m
+root@mm57:~/weathervane# kubectl attach my-shell -c my-shell -i -t
+If you don't see a command prompt, try pressing enter.
+root@my-shell:/# cd /mnt/data
+bash: cd: /mnt/data: No such file or directory
+root@my-shell:/# cd /mnt
+root@my-shell:/mnt# mkdir data
+root@my-shell:/mnt# cd data
+root@my-shell:/mnt/data# sh -c "echo 'Hello from Kubernetes storage' > /mnt/data/index.html"
+root@my-shell:/mnt/data# df .
+Filesystem     1K-blocks     Used Available Use% Mounted on
+overlay        228137840 13009100 203516912   7% /
+root@my-shell:/mnt/data# ll
+total 12
+drwxr-xr-x 2 root root 4096 Aug  9 19:01 ./
+drwxr-xr-x 1 root root 4096 Aug  9 19:01 ../
+-rw-r--r-- 1 root root   30 Aug  9 19:01 index.html
+root@my-shell:/mnt/data#
+root@my-shell:/mnt/data#
+root@my-shell:/mnt/data# exit
+exit
+Session ended, resume using 'kubectl attach my-shell -c my-shell -i -t' command when the pod is running
+root@mm57:~/weathervane# # from https://www.containiq.com/post/kubernetes-persistent-volumes
+root@mm57:~/weathervane# vi nginx-pv.yaml
+root@mm57:~/weathervane# cat nginx-pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nginx-pv-volume
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/nginx"
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pv-claim
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pv-pod
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: nginx-storage
+  volumes:
+    - name: nginx-storage
+      persistentVolumeClaim:
+        claimName: nginx-pv-claim
+
+root@mm57:~/weathervane# kubectl create -f nginx-pv.yaml
+persistentvolume/nginx-pv-volume created
+persistentvolumeclaim/nginx-pv-claim created
+pod/nginx-pv-pod created
+root@mm57:~/weathervane# kubectl get pv
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   REASON   AGE
+nginx-pv-volume   5Gi        RWO            Retain           Bound    default/nginx-pv-claim   standard                22s
+root@mm57:~/weathervane# kubectl get pvc
+NAME             STATUS   VOLUME            CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+nginx-pv-claim   Bound    nginx-pv-volume   5Gi        RWO            standard       36s
+root@mm57:~/weathervane# kubectl get pod
+NAME           READY   STATUS    RESTARTS        AGE
+my-shell       1/1     Running   3 (6m26s ago)   20m
+nginx-pv-pod   1/1     Running   0               50s
+root@mm57:~/weathervane# kubectl exec -it nginx-pv-pod -- /bin/bash
+root@nginx-pv-pod:/# ll /mnt
+bash: ll: command not found
+root@nginx-pv-pod:/# ls /mnt
+root@nginx-pv-pod:/# mkdir /mnt/data
+root@nginx-pv-pod:/# cd /mnt/data
+root@nginx-pv-pod:/mnt/data# sh -c "echo 'Hello from Kubernetes storage' > /mnt/data/index.html"
+root@nginx-pv-pod:/mnt/data# ls
+index.html
+root@nginx-pv-pod:/mnt/data# df .
+Filesystem     1K-blocks     Used Available Use% Mounted on
+overlay        228137840 13239608 203286404   7% /
+root@nginx-pv-pod:/mnt/data# apt update
+Err:1 http://deb.debian.org/debian bullseye InRelease
+  Temporary failure resolving 'deb.debian.org'
+Err:2 http://deb.debian.org/debian-security bullseye-security InRelease
+  Temporary failure resolving 'deb.debian.org'
+Err:3 http://deb.debian.org/debian bullseye-updates InRelease
+  Temporary failure resolving 'deb.debian.org'
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+W: Failed to fetch http://deb.debian.org/debian/dists/bullseye/InRelease  Temporary failure resolving 'deb.debian.org'
+W: Failed to fetch http://deb.debian.org/debian-security/dists/bullseye-security/InRelease  Temporary failure resolving 'deb.debian.org'
+W: Failed to fetch http://deb.debian.org/debian/dists/bullseye-updates/InRelease  Temporary failure resolving 'deb.debian.org'
+W: Some index files failed to download. They have been ignored, or old ones used instead.
+root@nginx-pv-pod:/mnt/data# apt install curl
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+curl is already the newest version (7.74.0-1.3+deb11u2).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+root@nginx-pv-pod:/mnt/data# which curl
+/usr/bin/curl
+root@nginx-pv-pod:/mnt/data# curl http://localhost/
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<center><h1>403 Forbidden</h1></center>
+<hr><center>nginx/1.23.1</center>
+</body>
+</html>
+root@nginx-pv-pod:/mnt/data# ls
+index.html
+root@nginx-pv-pod:/mnt/data# ls
+index.html
+root@nginx-pv-pod:/mnt/data# curl http://localhost/index.html
+<html>
+<head><title>404 Not Found</title></head>
+<body>
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx/1.23.1</center>
+</body>
+</html>
+root@nginx-pv-pod:/mnt/data# exit
+exit
+root@mm57:~/weathervane# jobs
+root@mm57:~/weathervane# vi pv0005
+root@mm57:~/weathervane# root@mm57:~/weathervane# vi block-pvc.yaml
+root@mm57:~/weathervane# root@mm57:~/weathervane# history | grep yaml
+   15  vi cassandra_service.yaml
+   16  vi local_storage.yaml
+   17  cat local_storage.yaml
+   20  kubectl apply -f local_storage.yaml
+   25  vi cassandra_service.yaml
+   26  cat cassandra_service.yaml
+   27  kubectl apply -f cassandra_service.yaml
+   28  vi cassandra_service.yaml
+   29  cat cassandra_service.yaml
+   30  kubectl apply -f cassandra_service.yaml
+   64  vi nginx-pv.yaml
+   65  cat nginx-pv.yaml
+   66  kubectl create -f nginx-pv.yaml
+   73  vi block-pvc.yaml
+   74  history | grep yaml
+root@mm57:~/weathervane# kubectl apply -f block-pvc.yaml
+persistentvolumeclaim/block-pvc created
+root@mm57:~/weathervane# kubectl get pv
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   REASON   AGE
+nginx-pv-volume   5Gi        RWO            Retain           Bound    default/nginx-pv-claim   standard                12m
+root@mm57:~/weathervane# kubectl get pvc
+NAME             STATUS    VOLUME            CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+block-pvc        Pending                                               standard       34s
+nginx-pv-claim   Bound     nginx-pv-volume   5Gi        RWO            standard       12m
+root@mm57:~/weathervane# cat block-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: block-pvc
+spec:
+  accessModes:
+   - ReadWriteOnce
+  volumeMode: Block
+  resources:
+   requests:
+    storage: 10Gi
+root@mm57:~/weathervane# ll *.yaml
+-rw-r--r-- 1 root root 175 Aug  9 19:20 block-pvc.yaml
+-rw-r--r-- 1 root root 166 Aug  9 18:00 cassandra_service.yaml
+-rw-r--r-- 1 root root 163 Aug  9 15:43 local_storage.yaml
+-rw-r--r-- 1 root root 800 Aug  9 19:08 nginx-pv.yaml
+root@mm57:~/weathervane# cat local_storage.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+root@mm57:~/weathervane# vi block-pvc.yaml
+root@mm57:~/weathervane# root@mm57:~/weathervane# cat block-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: block2-pvc
+spec:
+  accessModes:
+   - ReadWriteOnce
+  volumeMode: Block
+  resources:
+   requests:
+    storage: 10Gi
+volumeBindingMode: WaitForFirstConsumer
+root@mm57:~/weathervane# kubectl apply -f block-pvc.yaml
+Error from server (BadRequest): error when creating "block-pvc.yaml": PersistentVolumeClaim in version "v1" cannot be handled as a PersistentVolumeClaim: strict decoding error: unknown field "volumeBindingMode"
+root@mm57:~/weathervane# kubectl get pv
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   REASON   AGE
+nginx-pv-volume   5Gi        RWO            Retain           Bound    default/nginx-pv-claim   standard                16m
+root@mm57:~/weathervane# ls
+BRANCHING.md            auctionWeb              gradle.properties   testing
+Branches.md             block-pvc.yaml          gradlew             version.txt
+CODE-OF-CONDUCT.md      build.gradle            gradlew.bat         weathervane.config.k8s.micro
+CONTRIBUTING.md         buildDockerImages.pl    local_storage.yaml  weathervane.config.k8s.quickstart
+ISSUES.md               cassandra_service.yaml  nginx-pv.yaml       weathervane.config.k8s.small2
+LICENSE.txt             configFiles             output              weathervane.pl
+Notice.txt              data.cql                pv0005              weathervaneResults.csv
+README.md               dbLoader                runHarness          workloadConfiguration
+auctionApp              doc                     runWeathervane.pl   workloadDriver
+auctionAppServerWarmer  dockerImages            runmany.sh
+auctionBidService       gradle                  settings.gradle
+root@mm57:~/weathervane# vi *.quick*
+root@mm57:~/weathervane# history
+    1  uname -a
+    2  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    3  cd /usr/local/bin/
+    4  ll
+    5  curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+    6  chmod +x ./kubectl
+    7  cd
+    8  which kubectl
+    9  kubectl get nodes
+   10  git clone http://github.com/vmware/weathervane
+   11  cd weathervane/
+   12  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   13  vi weathervane.config.k8s.quickstart
+   14  fg
+   15  vi cassandra_service.yaml
+   16  vi local_storage.yaml
+   17  cat local_storage.yaml
+   18  jobs
+   19  vi weathervane.config.k8s.quickstart
+   20  kubectl apply -f local_storage.yaml
+   21  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   22  uptime
+   23  kubectl get storageclass
+   24  which minikube
+   25  vi cassandra_service.yaml
+   26  cat cassandra_service.yaml
+   27  kubectl apply -f cassandra_service.yaml
+   28  vi cassandra_service.yaml
+   29  cat cassandra_service.yaml
+   30  kubectl apply -f cassandra_service.yaml
+   31  kubectl get storageclass
+   32  kubectl get svc cassandra
+   33  docker pull cassandra:latest
+   34  docker network create cassandra
+   35  docker run --rm -d --name cassandra --hostname cassandra --network cassandra cassandra
+   36  ls
+   37  history
+   38  vi data.cql
+   39  cat data.cql
+   40  docker run --rm --network cassandra -v "$(pwd)/data.cql:/scripts/data.cql" -e CQLSH_HOST=cassandra -e CQLSH_PORT=9042 -e CQLVERSION=3.4.5 nuvo/docker-cqlsh
+   41  docker run --rm -it --network cassandra nuvo/docker-cqlsh cqlsh cassandra 9042 --cqlversion='3.4.5'
+   42  history
+   43  kubectl get storageclass
+   44  kubectl get svc cassandra\
+   45  kubectl get svc cassandra
+   46  jobs
+   47  ls
+   48  vi weathervane.config.k8s.quickstart
+   49  cat weathervane.config.k8s.quickstart
+   50  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   51  kubectl get pod
+   52  kubectl.sh run my-shell -i --tty --image ubuntu -- bash
+   53  kubectl run my-shell -i --tty --image ubuntu -- bash
+   54  kubectl pod
+   55  kubectl get pod
+   56  kubectl attach my-shell -c my-shell -i -t
+   57  apt install minikube
+   58  kubectl get node
+   59  kubectl get pv
+   60  kubectl get pvc
+   61  kubectl get pod
+   62  kubectl attach my-shell -c my-shell -i -t
+   63  # from https://www.containiq.com/post/kubernetes-persistent-volumes
+   64  vi nginx-pv.yaml
+   65  cat nginx-pv.yaml
+   66  kubectl create -f nginx-pv.yaml
+   67  kubectl get pv
+   68  kubectl get pvc
+   69  kubectl get pod
+   70  kubectl exec -it nginx-pv-pod -- /bin/bash
+   71  jobs
+   72  vi pv0005
+   73  vi block-pvc.yaml
+   74  history | grep yaml
+   75  kubectl apply -f block-pvc.yaml
+   76  kubectl get pv
+   77  kubectl get pvc
+   78  cat block-pvc.yaml
+   79  ll *.yaml
+   80  cat local_storage.yaml
+   81  vi block-pvc.yaml
+   82  cat block-pvc.yaml
+   83  kubectl apply -f block-pvc.yaml
+   84  kubectl get pv
+   85  ls
+   86  vi *.quick*
+   87  history
+root@mm57:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane is unable to create a persistant volume using storage class nginx-pv-volume in kubernetesCluster appCluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+root@mm57:~/weathervane# kubectl get pv
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   REASON   AGE
+nginx-pv-volume   5Gi        RWO            Retain           Bound    default/nginx-pv-claim   standard                22m
+root@mm57:~/weathervane# ll
+total 284
+drwxr-xr-x 17 root root  4096 Aug  9 19:26 ./
+drwx------  8 root root  4096 Aug  9 19:26 ../
+-rw-r--r--  1 root root     0 Aug  9 15:45 .accept-weathervane
+drwxr-xr-x  8 root root  4096 Aug  9 15:10 .git/
+-rw-r--r--  1 root root  2411 Aug  9 15:10 .gitignore
+-rw-r--r--  1 root root  2959 Aug  9 15:10 BRANCHING.md
+-rw-r--r--  1 root root   200 Aug  9 15:10 Branches.md
+-rw-r--r--  1 root root  5247 Aug  9 15:10 CODE-OF-CONDUCT.md
+-rw-r--r--  1 root root  9540 Aug  9 15:10 CONTRIBUTING.md
+-rw-r--r--  1 root root  4952 Aug  9 15:10 ISSUES.md
+-rw-r--r--  1 root root  1485 Aug  9 15:10 LICENSE.txt
+-rw-r--r--  1 root root   454 Aug  9 15:10 Notice.txt
+-rw-r--r--  1 root root  4585 Aug  9 15:10 README.md
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 auctionApp/
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 auctionAppServerWarmer/
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 auctionBidService/
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 auctionWeb/
+-rw-r--r--  1 root root   216 Aug  9 19:23 block-pvc.yaml
+-rw-r--r--  1 root root 10152 Aug  9 15:10 build.gradle
+-rwxr-xr-x  1 root root 13779 Aug  9 15:10 buildDockerImages.pl*
+-rw-r--r--  1 root root   166 Aug  9 18:00 cassandra_service.yaml
+drwxr-xr-x  4 root root  4096 Aug  9 15:10 configFiles/
+-rw-r--r--  1 root root   534 Aug  9 18:21 data.cql
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 dbLoader/
+drwxr-xr-x  8 root root  4096 Aug  9 15:10 doc/
+drwxr-xr-x 14 root root  4096 Aug  9 15:10 dockerImages/
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 gradle/
+-rw-r--r--  1 root root    20 Aug  9 15:10 gradle.properties
+-rwxr-xr-x  1 root root  5305 Aug  9 15:10 gradlew*
+-rwxr-xr-x  1 root root  2185 Aug  9 15:10 gradlew.bat*
+-rw-r--r--  1 root root   163 Aug  9 15:43 local_storage.yaml
+-rw-r--r--  1 root root   800 Aug  9 19:08 nginx-pv.yaml
+drwxr-xr-x  2 root root  4096 Aug  9 15:45 output/
+-rw-r--r--  1 root root   308 Aug  9 19:17 pv0005
+drwxr-xr-x 14 root root  4096 Aug  9 15:10 runHarness/
+-rwxr-xr-x  1 root root 20497 Aug  9 15:10 runWeathervane.pl*
+-rwxr-xr-x  1 root root  2527 Aug  9 15:10 runmany.sh*
+-rw-r--r--  1 root root   145 Aug  9 15:10 settings.gradle
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 testing/
+-rw-r--r--  1 root root     6 Aug  9 15:10 version.txt
+-rw-r--r--  1 root root   708 Aug  9 15:10 weathervane.config.k8s.micro
+-rw-r--r--  1 root root   744 Aug  9 19:26 weathervane.config.k8s.quickstart
+-rw-r--r--  1 root root   721 Aug  9 15:10 weathervane.config.k8s.small2
+-rwxr-xr-x  1 root root 42556 Aug  9 15:10 weathervane.pl*
+-rw-r--r--  1 root root     0 Aug  9 15:45 weathervaneResults.csv
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 workloadConfiguration/
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 workloadDriver/
+root@mm57:~/weathervane# vi weathervane.config.k8s.quickstart
+root@mm57:~/weathervane# history
+    1  uname -a
+    2  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    3  cd /usr/local/bin/
+    4  ll
+    5  curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+    6  chmod +x ./kubectl
+    7  cd
+    8  which kubectl
+    9  kubectl get nodes
+   10  git clone http://github.com/vmware/weathervane
+   11  cd weathervane/
+   12  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   13  vi weathervane.config.k8s.quickstart
+   14  fg
+   15  vi cassandra_service.yaml
+   16  vi local_storage.yaml
+   17  cat local_storage.yaml
+   18  jobs
+   19  vi weathervane.config.k8s.quickstart
+   20  kubectl apply -f local_storage.yaml
+   21  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   22  uptime
+   23  kubectl get storageclass
+   24  which minikube
+   25  vi cassandra_service.yaml
+   26  cat cassandra_service.yaml
+   27  kubectl apply -f cassandra_service.yaml
+   28  vi cassandra_service.yaml
+   29  cat cassandra_service.yaml
+   30  kubectl apply -f cassandra_service.yaml
+   31  kubectl get storageclass
+   32  kubectl get svc cassandra
+   33  docker pull cassandra:latest
+   34  docker network create cassandra
+   35  docker run --rm -d --name cassandra --hostname cassandra --network cassandra cassandra
+   36  ls
+   37  history
+   38  vi data.cql
+   39  cat data.cql
+   40  docker run --rm --network cassandra -v "$(pwd)/data.cql:/scripts/data.cql" -e CQLSH_HOST=cassandra -e CQLSH_PORT=9042 -e CQLVERSION=3.4.5 nuvo/docker-cqlsh
+   41  docker run --rm -it --network cassandra nuvo/docker-cqlsh cqlsh cassandra 9042 --cqlversion='3.4.5'
+   42  history
+   43  kubectl get storageclass
+   44  kubectl get svc cassandra\
+   45  kubectl get svc cassandra
+   46  jobs
+   47  ls
+   48  vi weathervane.config.k8s.quickstart
+   49  cat weathervane.config.k8s.quickstart
+   50  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   51  kubectl get pod
+   52  kubectl.sh run my-shell -i --tty --image ubuntu -- bash
+   53  kubectl run my-shell -i --tty --image ubuntu -- bash
+   54  kubectl pod
+   55  kubectl get pod
+   56  kubectl attach my-shell -c my-shell -i -t
+   57  apt install minikube
+   58  kubectl get node
+   59  kubectl get pv
+   60  kubectl get pvc
+   61  kubectl get pod
+   62  kubectl attach my-shell -c my-shell -i -t
+   63  # from https://www.containiq.com/post/kubernetes-persistent-volumes
+   64  vi nginx-pv.yaml
+   65  cat nginx-pv.yaml
+   66  kubectl create -f nginx-pv.yaml
+   67  kubectl get pv
+   68  kubectl get pvc
+   69  kubectl get pod
+   70  kubectl exec -it nginx-pv-pod -- /bin/bash
+   71  jobs
+   72  vi pv0005
+   73  vi block-pvc.yaml
+   74  history | grep yaml
+   75  kubectl apply -f block-pvc.yaml
+   76  kubectl get pv
+   77  kubectl get pvc
+   78  cat block-pvc.yaml
+   79  ll *.yaml
+   80  cat local_storage.yaml
+   81  vi block-pvc.yaml
+   82  cat block-pvc.yaml
+   83  kubectl apply -f block-pvc.yaml
+   84  kubectl get pv
+   85  ls
+   86  vi *.quick*
+   87  history
+   88  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   89  kubectl get pv
+   90  ll
+   91  vi weathervane.config.k8s.quickstart
+   92  history
+root@mm57:~/weathervane# 9kubectl get pod
+9kubectl: command not found
+root@mm57:~/weathervane# kubectl get pod
+NAME           READY   STATUS    RESTARTS      AGE
+my-shell       1/1     Running   3 (31m ago)   44m
+nginx-pv-pod   1/1     Running   0             25m
+root@mm57:~/weathervane# jobs
+root@mm57:~/weathervane# !vi
+vi weathervane.config.k8s.quickstart
+root@mm57:~/weathervane# root@mm57:~/weathervane# ll
+total 284
+drwxr-xr-x 17 root root  4096 Aug  9 19:37 ./
+drwx------  8 root root  4096 Aug  9 19:37 ../
+-rw-r--r--  1 root root     0 Aug  9 15:45 .accept-weathervane
+drwxr-xr-x  8 root root  4096 Aug  9 15:10 .git/
+-rw-r--r--  1 root root  2411 Aug  9 15:10 .gitignore
+-rw-r--r--  1 root root  2959 Aug  9 15:10 BRANCHING.md
+-rw-r--r--  1 root root   200 Aug  9 15:10 Branches.md
+-rw-r--r--  1 root root  5247 Aug  9 15:10 CODE-OF-CONDUCT.md
+-rw-r--r--  1 root root  9540 Aug  9 15:10 CONTRIBUTING.md
+-rw-r--r--  1 root root  4952 Aug  9 15:10 ISSUES.md
+-rw-r--r--  1 root root  1485 Aug  9 15:10 LICENSE.txt
+-rw-r--r--  1 root root   454 Aug  9 15:10 Notice.txt
+-rw-r--r--  1 root root  4585 Aug  9 15:10 README.md
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 auctionApp/
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 auctionAppServerWarmer/
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 auctionBidService/
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 auctionWeb/
+-rw-r--r--  1 root root   216 Aug  9 19:23 block-pvc.yaml
+-rw-r--r--  1 root root 10152 Aug  9 15:10 build.gradle
+-rwxr-xr-x  1 root root 13779 Aug  9 15:10 buildDockerImages.pl*
+-rw-r--r--  1 root root   166 Aug  9 18:00 cassandra_service.yaml
+drwxr-xr-x  4 root root  4096 Aug  9 15:10 configFiles/
+-rw-r--r--  1 root root   534 Aug  9 18:21 data.cql
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 dbLoader/
+drwxr-xr-x  8 root root  4096 Aug  9 15:10 doc/
+drwxr-xr-x 14 root root  4096 Aug  9 15:10 dockerImages/
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 gradle/
+-rw-r--r--  1 root root    20 Aug  9 15:10 gradle.properties
+-rwxr-xr-x  1 root root  5305 Aug  9 15:10 gradlew*
+-rwxr-xr-x  1 root root  2185 Aug  9 15:10 gradlew.bat*
+-rw-r--r--  1 root root   163 Aug  9 15:43 local_storage.yaml
+-rw-r--r--  1 root root   800 Aug  9 19:08 nginx-pv.yaml
+drwxr-xr-x  2 root root  4096 Aug  9 15:45 output/
+-rw-r--r--  1 root root   308 Aug  9 19:17 pv0005
+drwxr-xr-x 14 root root  4096 Aug  9 15:10 runHarness/
+-rwxr-xr-x  1 root root 20497 Aug  9 15:10 runWeathervane.pl*
+-rwxr-xr-x  1 root root  2527 Aug  9 15:10 runmany.sh*
+-rw-r--r--  1 root root   145 Aug  9 15:10 settings.gradle
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 testing/
+-rw-r--r--  1 root root     6 Aug  9 15:10 version.txt
+-rw-r--r--  1 root root   708 Aug  9 15:10 weathervane.config.k8s.micro
+-rw-r--r--  1 root root   744 Aug  9 19:26 weathervane.config.k8s.quickstart
+-rw-r--r--  1 root root   721 Aug  9 15:10 weathervane.config.k8s.small2
+-rwxr-xr-x  1 root root 42556 Aug  9 15:10 weathervane.pl*
+-rw-r--r--  1 root root     0 Aug  9 15:45 weathervaneResults.csv
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 workloadConfiguration/
+drwxr-xr-x  3 root root  4096 Aug  9 15:10 workloadDriver/
+root@mm57:~/weathervane# vi weathervane.config.k8s.micro
+root@mm57:~/weathervane#
+root@mm57:~/weathervane# history
+    1  uname -a
+    2  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    3  cd /usr/local/bin/
+    4  ll
+    5  curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+    6  chmod +x ./kubectl
+    7  cd
+    8  which kubectl
+    9  kubectl get nodes
+   10  git clone http://github.com/vmware/weathervane
+   11  cd weathervane/
+   12  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   13  vi weathervane.config.k8s.quickstart
+   14  fg
+   15  vi cassandra_service.yaml
+   16  vi local_storage.yaml
+   17  cat local_storage.yaml
+   18  jobs
+   19  vi weathervane.config.k8s.quickstart
+   20  kubectl apply -f local_storage.yaml
+   21  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   22  uptime
+   23  kubectl get storageclass
+   24  which minikube
+   25  vi cassandra_service.yaml
+   26  cat cassandra_service.yaml
+   27  kubectl apply -f cassandra_service.yaml
+   28  vi cassandra_service.yaml
+   29  cat cassandra_service.yaml
+   30  kubectl apply -f cassandra_service.yaml
+   31  kubectl get storageclass
+   32  kubectl get svc cassandra
+   33  docker pull cassandra:latest
+   34  docker network create cassandra
+   35  docker run --rm -d --name cassandra --hostname cassandra --network cassandra cassandra
+   36  ls
+   37  history
+   38  vi data.cql
+   39  cat data.cql
+   40  docker run --rm --network cassandra -v "$(pwd)/data.cql:/scripts/data.cql" -e CQLSH_HOST=cassandra -e CQLSH_PORT=9042 -e CQLVERSION=3.4.5 nuvo/docker-cqlsh
+   41  docker run --rm -it --network cassandra nuvo/docker-cqlsh cqlsh cassandra 9042 --cqlversion='3.4.5'
+   42  history
+   43  kubectl get storageclass
+   44  kubectl get svc cassandra\
+   45  kubectl get svc cassandra
+   46  jobs
+   47  ls
+   48  vi weathervane.config.k8s.quickstart
+   49  cat weathervane.config.k8s.quickstart
+   50  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   51  kubectl get pod
+   52  kubectl.sh run my-shell -i --tty --image ubuntu -- bash
+   53  kubectl run my-shell -i --tty --image ubuntu -- bash
+   54  kubectl pod
+   55  kubectl get pod
+   56  kubectl attach my-shell -c my-shell -i -t
+   57  apt install minikube
+   58  kubectl get node
+   59  kubectl get pv
+   60  kubectl get pvc
+   61  kubectl get pod
+   62  kubectl attach my-shell -c my-shell -i -t
+   63  # from https://www.containiq.com/post/kubernetes-persistent-volumes
+   64  vi nginx-pv.yaml
+   65  cat nginx-pv.yaml
+   66  kubectl create -f nginx-pv.yaml
+   67  kubectl get pv
+   68  kubectl get pvc
+   69  kubectl get pod
+   70  kubectl exec -it nginx-pv-pod -- /bin/bash
+   71  jobs
+   72  vi pv0005
+   73  vi block-pvc.yaml
+   74  history | grep yaml
+   75  kubectl apply -f block-pvc.yaml
+   76  kubectl get pv
+   77  kubectl get pvc
+   78  cat block-pvc.yaml
+   79  ll *.yaml
+   80  cat local_storage.yaml
+   81  vi block-pvc.yaml
+   82  cat block-pvc.yaml
+   83  kubectl apply -f block-pvc.yaml
+   84  kubectl get pv
+   85  ls
+   86  vi *.quick*
+   87  history
+   88  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   89  kubectl get pv
+   90  ll
+   91  vi weathervane.config.k8s.quickstart
+   92  history
+   93  9kubectl get pod
+   94  kubectl get pod
+   95  jobs
+   96  vi weathervane.config.k8s.quickstart
+   97  ll
+   98  vi weathervane.config.k8s.micro
+   99  history
+root@mm57:~/weathervane#
+

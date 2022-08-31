@@ -1,0 +1,52 @@
+sudo kubeadm join 147.75.35.193:6443 --token jjcgi3.56j9855khl9lefmy --discovery-token-ca-cert-hash sha256:99d302c79c040351212978f9fb494ea2b3ef6aede55efda8ac3ef0c94afe951b
+
+transfer failed: instance "wv03" does not exist
+mfm@wv03:/home/mfm/.kube$ history
+    1  vi user_script
+    2  . user_script
+    3  sudo snap install multipass
+    4  multipass launch -c 4 -d 50G -m 8G -n node1
+    5  multipass launch -c 4 -d 50G -m 8G -n node2
+    6  multipass info --all
+    7  multipass shell node1
+    8  multipass shell node2
+    9  sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+   10  mkdir -p $HOME/.kube
+   11  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   12  sudo rm $HOME/.kube/config
+   13  multipass shell node1
+   14  kubectl get nodes
+   15  multipass shell node2
+   16  mkdir -p $HOME/.kube
+   17  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   18  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+   19  kubectl get nodes
+   20  kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+   21  kubectl create -f https://projectcalico.docs.tigera.io/manifests/custom-resources.yaml
+   22  kubectl get nodes --show-labels
+   23  wget https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+   24  ls
+   25  cat tigera-operator.yaml
+   26  history
+   27  grep 192 *.yaml
+   28  grep 168 *.yaml
+   29  less *.yaml
+   30  kubectl get nodes --show-labels
+   31  sudo mkdir -p /k8s/weathervane/vol
+   32  sudo chmod -R 777 /k8s
+   33  git clone http://github.com/vmware/weathervane
+   34  cd weathervane/
+   35  ls
+   36  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   37  vi *.q*
+   38  cat /root/.kube/config
+   39  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+   40  cat /root/.kube/config
+   41  cd $HOME
+   42  cd .kube
+   43  ls
+   44  ll
+   45  cat config
+   46  cat /$HOME/.kube/config
+   47  multipass copy-files wv03:.kube/config ~/.kube/
+   48  history

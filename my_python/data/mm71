@@ -1,0 +1,1140 @@
+Microsoft Windows [Version 10.0.19044.1826]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@147.28.155.77
+The authenticity of host '147.28.155.77 (147.28.155.77)' can't be established.
+ECDSA key fingerprint is SHA256:Gq3rrioPVwa5e7YpWvBCFO3RJqJR8hNizagcYfxkehY.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '147.28.155.77' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.15.0-33-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 16 19:48:04 UTC 2022
+
+  System load:            0.05078125
+  Usage of /:             1.5% of 217.57GB
+  Memory usage:           2%
+  Swap usage:             0%
+  Processes:              550
+  Users logged in:        0
+  IPv4 address for bond0: 147.28.155.77
+  IPv6 address for bond0: 2604:1380:4641:3b00::d
+
+6 updates can be applied immediately.
+6 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@mm71:~# useradd -s /bin/bash -d /home/mfm/ -m -G sudo mfm
+root@mm71:~# cd /home/mfm
+root@mm71:/home/mfm# ls
+root@mm71:/home/mfm# cp -r ~/.ssh .
+root@mm71:/home/mfm# ll
+total 24
+drwxr-x--- 3 mfm  mfm  4096 Aug 16 19:51 ./
+drwxr-xr-x 3 root root 4096 Aug 16 19:49 ../
+-rw-r--r-- 1 mfm  mfm   220 Jan  6  2022 .bash_logout
+-rw-r--r-- 1 mfm  mfm  3771 Jan  6  2022 .bashrc
+-rw-r--r-- 1 mfm  mfm   807 Jan  6  2022 .profile
+drwx------ 2 root root 4096 Aug 16 19:51 .ssh/
+root@mm71:/home/mfm# ll ~
+total 28
+drwx------  5 root root 4096 Aug 16 19:48 ./
+drwxr-xr-x 22 root root 4096 Aug 16 19:46 ../
+-rw-r--r--  1 root root 3106 Oct 15  2021 .bashrc
+drwx------  2 root root 4096 Aug 16 19:48 .cache/
+-rw-r--r--  1 root root  161 Jul  9  2019 .profile
+drwx------  2 root root 4096 Aug 16 19:46 .ssh/
+drwx------  3 root root 4096 Aug 16 19:46 snap/
+root@mm71:/home/mfm# ll .ssh
+total 20
+drwx------ 2 root root  4096 Aug 16 19:51 ./
+drwxr-x--- 3 mfm  mfm   4096 Aug 16 19:51 ../
+-rw------- 1 root root 11716 Aug 16 19:51 authorized_keys
+root@mm71:/home/mfm# chown -R mfm:mfm .ssh
+root@mm71:/home/mfm# ll
+total 24
+drwxr-x--- 3 mfm  mfm  4096 Aug 16 19:51 ./
+drwxr-xr-x 3 root root 4096 Aug 16 19:49 ../
+-rw-r--r-- 1 mfm  mfm   220 Jan  6  2022 .bash_logout
+-rw-r--r-- 1 mfm  mfm  3771 Jan  6  2022 .bashrc
+-rw-r--r-- 1 mfm  mfm   807 Jan  6  2022 .profile
+drwx------ 2 mfm  mfm  4096 Aug 16 19:51 .ssh/
+root@mm71:/home/mfm# ll .ssh
+total 20
+drwx------ 2 mfm mfm  4096 Aug 16 19:51 ./
+drwxr-x--- 3 mfm mfm  4096 Aug 16 19:51 ../
+-rw------- 1 mfm mfm 11716 Aug 16 19:51 authorized_keys
+root@mm71:/home/mfm# ll ~/.ssh
+total 20
+drwx------ 2 root root  4096 Aug 16 19:46 ./
+drwx------ 5 root root  4096 Aug 16 19:48 ../
+-rw------- 1 root root 11716 Aug 16 19:46 authorized_keys
+root@mm71:/home/mfm# ssh mfm@147.28.155.77
+The authenticity of host '147.28.155.77 (147.28.155.77)' can't be established.
+ED25519 key fingerprint is SHA256:yNkQH6gMeyFRo6lESPWTlLTprhaMp3wLUWhx35CC4Jg.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '147.28.155.77' (ED25519) to the list of known hosts.
+mfm@147.28.155.77: Permission denied (publickey).
+root@mm71:/home/mfm# history
+    1  useradd -s /bin/bash -d /home/mfm/ -m -G sudo mfm
+    2  cd /home/mfm
+    3  ls
+    4  cp -r ~/.ssh .
+    5  ll
+    6  ll ~
+    7  ll .ssh
+    8  chown -R mfm:mfm .ssh
+    9  ll
+   10  ll .ssh
+   11  ll ~/.ssh
+   12  ssh mfm@147.28.155.77
+   13  history
+root@mm71:/home/mfm# df .
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/sda3      228137840 3532852 212993160   2% /
+root@mm71:/home/mfm#
+
+
+
+
+
+Microsoft Windows [Version 10.0.19044.1826]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh mfm@147.28.155.77
+Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.15.0-33-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 16 19:58:45 UTC 2022
+
+  System load:            0.0
+  Usage of /:             1.5% of 217.57GB
+  Memory usage:           2%
+  Swap usage:             0%
+  Processes:              500
+  Users logged in:        1
+  IPv4 address for bond0: 147.28.155.77
+  IPv6 address for bond0: 2604:1380:4641:3b00::d
+
+
+6 updates can be applied immediately.
+6 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.15.0-33-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 16 19:58:45 UTC 2022
+
+  System load:            0.0
+  Usage of /:             1.5% of 217.57GB
+  Memory usage:           2%
+  Swap usage:             0%
+  Processes:              500
+  Users logged in:        1
+  IPv4 address for bond0: 147.28.155.77
+  IPv6 address for bond0: 2604:1380:4641:3b00::d
+
+
+6 updates can be applied immediately.
+6 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+mfm@mm71:~$ sudo apt update
+[sudo] password for mfm:
+Sorry, try again.
+[sudo] password for mfm:
+sudo: 1 incorrect password attempt
+mfm@mm71:~$
+logout
+Connection to 147.28.155.77 closed.
+
+C:\Users\mikmoran>ssh root@147.28.155.77
+Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.15.0-33-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 16 20:03:55 UTC 2022
+
+  System load:            0.0
+  Usage of /:             1.5% of 217.57GB
+  Memory usage:           2%
+  Swap usage:             0%
+  Processes:              502
+  Users logged in:        0
+  IPv4 address for bond0: 147.28.155.77
+  IPv6 address for bond0: 2604:1380:4641:3b00::d
+
+
+6 updates can be applied immediately.
+6 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Tue Aug 16 19:48:04 2022 from 165.204.78.25
+root@mm71:~# passwd mfm
+New password:
+Retype new password:
+passwd: password updated successfully
+root@mm71:~#
+logout
+Connection to 147.28.155.77 closed.
+
+C:\Users\mikmoran>ssh mfm@147.28.155.77
+Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.15.0-33-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 16 20:03:55 UTC 2022
+
+  System load:            0.0
+  Usage of /:             1.5% of 217.57GB
+  Memory usage:           2%
+  Swap usage:             0%
+  Processes:              502
+  Users logged in:        0
+  IPv4 address for bond0: 147.28.155.77
+  IPv6 address for bond0: 2604:1380:4641:3b00::d
+
+
+6 updates can be applied immediately.
+6 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Tue Aug 16 19:58:45 2022 from 165.204.78.25
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+mfm@mm71:~$ sudo apt update
+[sudo] password for mfm:
+Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:3 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [503 kB]
+Get:6 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [267 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [119 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [7152 B]
+Get:9 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [276 kB]
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [63.6 kB]
+Get:11 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [3924 B]
+Get:12 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [243 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [42.5 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 c-n-f Metadata [524 B]
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [211 kB]
+Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [70.3 kB]
+Get:17 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [4404 B]
+Get:18 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [7000 B]
+Get:19 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [2264 B]
+Get:20 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [37.3 kB]
+Get:21 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 c-n-f Metadata [524 B]
+Get:22 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [108 kB]
+Get:23 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [37.5 kB]
+Get:24 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [2408 B]
+Get:25 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [4192 B]
+Get:26 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 c-n-f Metadata [228 B]
+Get:27 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [420 B]
+Get:28 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [5416 B]
+Get:29 http://archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [8248 B]
+Get:30 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [236 B]
+Fetched 2349 kB in 2s (1520 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+84 packages can be upgraded. Run 'apt list --upgradable' to see them.
+mfm@mm71:~$ sudo apt install -y ca-certificates curl gnupg lsb-release
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20211016).
+ca-certificates set to manually installed.
+lsb-release is already the newest version (11.1.0ubuntu4).
+lsb-release set to manually installed.
+The following additional packages will be installed:
+  dirmngr gnupg-l10n gnupg-utils gpg gpg-agent gpg-wks-client gpg-wks-server gpgconf gpgsm gpgv libcurl4
+Suggested packages:
+  pinentry-gnome3 tor parcimonie xloadimage scdaemon
+The following packages will be upgraded:
+  curl dirmngr gnupg gnupg-l10n gnupg-utils gpg gpg-agent gpg-wks-client gpg-wks-server gpgconf gpgsm gpgv libcurl4
+13 upgraded, 0 newly installed, 0 to remove and 71 not upgraded.
+Need to get 2730 kB of archives.
+After this operation, 4096 B of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-wks-client amd64 2.2.27-3ubuntu2.1 [62.7 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 dirmngr amd64 2.2.27-3ubuntu2.1 [293 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gnupg-utils amd64 2.2.27-3ubuntu2.1 [308 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-wks-server amd64 2.2.27-3ubuntu2.1 [57.5 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg-agent amd64 2.2.27-3ubuntu2.1 [209 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpg amd64 2.2.27-3ubuntu2.1 [519 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpgconf amd64 2.2.27-3ubuntu2.1 [94.2 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gnupg-l10n all 2.2.27-3ubuntu2.1 [54.4 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gnupg all 2.2.27-3ubuntu2.1 [315 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpgsm amd64 2.2.27-3ubuntu2.1 [197 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gpgv amd64 2.2.27-3ubuntu2.1 [137 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 curl amd64 7.81.0-1ubuntu1.3 [194 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4 amd64 7.81.0-1ubuntu1.3 [290 kB]
+Fetched 2730 kB in 1s (2310 kB/s)
+(Reading database ... 74930 files and directories currently installed.)
+Preparing to unpack .../00-gpg-wks-client_2.2.27-3ubuntu2.1_amd64.deb ...
+Unpacking gpg-wks-client (2.2.27-3ubuntu2.1) over (2.2.27-3ubuntu2) ...
+Preparing to unpack .../01-dirmngr_2.2.27-3ubuntu2.1_amd64.deb ...
+Unpacking dirmngr (2.2.27-3ubuntu2.1) over (2.2.27-3ubuntu2) ...
+Preparing to unpack .../02-gnupg-utils_2.2.27-3ubuntu2.1_amd64.deb ...
+Unpacking gnupg-utils (2.2.27-3ubuntu2.1) over (2.2.27-3ubuntu2) ...
+Preparing to unpack .../03-gpg-wks-server_2.2.27-3ubuntu2.1_amd64.deb ...
+Unpacking gpg-wks-server (2.2.27-3ubuntu2.1) over (2.2.27-3ubuntu2) ...
+Preparing to unpack .../04-gpg-agent_2.2.27-3ubuntu2.1_amd64.deb ...
+Unpacking gpg-agent (2.2.27-3ubuntu2.1) over (2.2.27-3ubuntu2) ...
+Preparing to unpack .../05-gpg_2.2.27-3ubuntu2.1_amd64.deb ...
+Unpacking gpg (2.2.27-3ubuntu2.1) over (2.2.27-3ubuntu2) ...
+Preparing to unpack .../06-gpgconf_2.2.27-3ubuntu2.1_amd64.deb ...
+Unpacking gpgconf (2.2.27-3ubuntu2.1) over (2.2.27-3ubuntu2) ...
+Preparing to unpack .../07-gnupg-l10n_2.2.27-3ubuntu2.1_all.deb ...
+Unpacking gnupg-l10n (2.2.27-3ubuntu2.1) over (2.2.27-3ubuntu2) ...
+Preparing to unpack .../08-gnupg_2.2.27-3ubuntu2.1_all.deb ...
+Unpacking gnupg (2.2.27-3ubuntu2.1) over (2.2.27-3ubuntu2) ...
+Preparing to unpack .../09-gpgsm_2.2.27-3ubuntu2.1_amd64.deb ...
+Unpacking gpgsm (2.2.27-3ubuntu2.1) over (2.2.27-3ubuntu2) ...
+Preparing to unpack .../10-gpgv_2.2.27-3ubuntu2.1_amd64.deb ...
+Unpacking gpgv (2.2.27-3ubuntu2.1) over (2.2.27-3ubuntu2) ...
+Setting up gpgv (2.2.27-3ubuntu2.1) ...
+(Reading database ... 74930 files and directories currently installed.)
+Preparing to unpack .../curl_7.81.0-1ubuntu1.3_amd64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.3) over (7.81.0-1ubuntu1.2) ...
+Preparing to unpack .../libcurl4_7.81.0-1ubuntu1.3_amd64.deb ...
+Unpacking libcurl4:amd64 (7.81.0-1ubuntu1.3) over (7.81.0-1ubuntu1.2) ...
+Setting up gnupg-l10n (2.2.27-3ubuntu2.1) ...
+Setting up gpgconf (2.2.27-3ubuntu2.1) ...
+Setting up libcurl4:amd64 (7.81.0-1ubuntu1.3) ...
+Setting up curl (7.81.0-1ubuntu1.3) ...
+Setting up gpg (2.2.27-3ubuntu2.1) ...
+Setting up gnupg-utils (2.2.27-3ubuntu2.1) ...
+Setting up gpg-agent (2.2.27-3ubuntu2.1) ...
+Setting up gpgsm (2.2.27-3ubuntu2.1) ...
+Setting up dirmngr (2.2.27-3ubuntu2.1) ...
+Setting up gpg-wks-server (2.2.27-3ubuntu2.1) ...
+Setting up gpg-wks-client (2.2.27-3ubuntu2.1) ...
+Setting up gnupg (2.2.27-3ubuntu2.1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for install-info (6.8-4build1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+mfm@mm71:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+mfm@mm71:~$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
+deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu jammy stable
+mfm@mm71:~$ apt update
+Reading package lists... Done
+E: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)
+E: Unable to lock directory /var/lib/apt/lists/
+W: Problem unlinking the file /var/cache/apt/pkgcache.bin - RemoveCaches (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/srcpkgcache.bin - RemoveCaches (13: Permission denied)
+mfm@mm71:~$ sudo apt update
+Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.9 kB]
+Get:2 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [6255 B]
+Hit:3 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Fetched 55.1 kB in 1s (65.4 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+71 packages can be upgraded. Run 'apt list --upgradable' to see them.
+mfm@mm71:~$ sudo apt install -y containerd.io
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  containerd.io
+0 upgraded, 1 newly installed, 0 to remove and 71 not upgraded.
+Need to get 28.1 MB of archives.
+After this operation, 127 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu jammy/stable amd64 containerd.io amd64 1.6.7-1 [28.1 MB]
+Fetched 28.1 MB in 0s (79.7 MB/s)
+Selecting previously unselected package containerd.io.
+(Reading database ... 74930 files and directories currently installed.)
+Preparing to unpack .../containerd.io_1.6.7-1_amd64.deb ...
+Unpacking containerd.io (1.6.7-1) ...
+Setting up containerd.io (1.6.7-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+mfm@mm71:~$ wget https://github.com/opencontainers/runc/releases/download/v1.1.1/runc.amd64
+--2022-08-16 20:08:16--  https://github.com/opencontainers/runc/releases/download/v1.1.1/runc.amd64
+Resolving github.com (github.com)... 140.82.112.4
+Connecting to github.com (github.com)|140.82.112.4|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://objects.githubusercontent.com/github-production-release-asset-2e65be/36960321/decb03b0-76a4-4ee7-bd06-4e3a548d9f87?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220816%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220816T200816Z&X-Amz-Expires=300&X-Amz-Signature=3ae335433dd5233057ddb2accead3bbdbfae1404be3e0ab9f1ea0e635a552f8a&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=36960321&response-content-disposition=attachment%3B%20filename%3Drunc.amd64&response-content-type=application%2Foctet-stream [following]
+--2022-08-16 20:08:16--  https://objects.githubusercontent.com/github-production-release-asset-2e65be/36960321/decb03b0-76a4-4ee7-bd06-4e3a548d9f87?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220816%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220816T200816Z&X-Amz-Expires=300&X-Amz-Signature=3ae335433dd5233057ddb2accead3bbdbfae1404be3e0ab9f1ea0e635a552f8a&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=36960321&response-content-disposition=attachment%3B%20filename%3Drunc.amd64&response-content-type=application%2Foctet-stream
+Resolving objects.githubusercontent.com (objects.githubusercontent.com)... 185.199.111.133, 185.199.110.133, 185.199.109.133, ...
+Connecting to objects.githubusercontent.com (objects.githubusercontent.com)|185.199.111.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 9415040 (9.0M) [application/octet-stream]
+Saving to: ‘runc.amd64’
+
+runc.amd64                    100%[=================================================>]   8.98M  34.7MB/s    in 0.3s
+
+2022-08-16 20:08:16 (34.7 MB/s) - ‘runc.amd64’ saved [9415040/9415040]
+
+mfm@mm71:~$ sudo install -m 755 runc.amd64 /usr/local/sbin/runc
+mfm@mm71:~$ sudo mkdir -p /etc/containerd/
+mfm@mm71:~$ containerd config default | sudo tee /etc/containerd/config.toml
+disabled_plugins = []
+imports = []
+oom_score = 0
+plugin_dir = ""
+required_plugins = []
+root = "/var/lib/containerd"
+state = "/run/containerd"
+temp = ""
+version = 2
+
+[cgroup]
+  path = ""
+
+[debug]
+  address = ""
+  format = ""
+  gid = 0
+  level = ""
+  uid = 0
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+  tcp_address = ""
+  tcp_tls_ca = ""
+  tcp_tls_cert = ""
+  tcp_tls_key = ""
+  uid = 0
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+
+  [plugins."io.containerd.gc.v1.scheduler"]
+    deletion_threshold = 0
+    mutation_threshold = 100
+    pause_threshold = 0.02
+    schedule_delay = "0s"
+    startup_delay = "100ms"
+
+  [plugins."io.containerd.grpc.v1.cri"]
+    device_ownership_from_security_context = false
+    disable_apparmor = false
+    disable_cgroup = false
+    disable_hugetlb_controller = true
+    disable_proc_mount = false
+    disable_tcp_service = true
+    enable_selinux = false
+    enable_tls_streaming = false
+    enable_unprivileged_icmp = false
+    enable_unprivileged_ports = false
+    ignore_image_defined_volumes = false
+    max_concurrent_downloads = 3
+    max_container_log_line_size = 16384
+    netns_mounts_under_state_dir = false
+    restrict_oom_score_adj = false
+    sandbox_image = "k8s.gcr.io/pause:3.6"
+    selinux_category_range = 1024
+    stats_collect_period = 10
+    stream_idle_timeout = "4h0m0s"
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    systemd_cgroup = false
+    tolerate_missing_hugetlb_controller = true
+    unset_seccomp_profile = ""
+
+    [plugins."io.containerd.grpc.v1.cri".cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = ""
+      ip_pref = ""
+      max_conf_num = 1
+
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      disable_snapshot_annotations = true
+      discard_unpacked_layers = false
+      ignore_rdt_not_enabled_errors = false
+      no_pivot = false
+      snapshotter = "overlayfs"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options]
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            BinaryName = ""
+            CriuImagePath = ""
+            CriuPath = ""
+            CriuWorkPath = ""
+            IoGid = 0
+            IoUid = 0
+            NoNewKeyring = false
+            NoPivotRoot = false
+            Root = ""
+            ShimCgroup = ""
+            SystemdCgroup = false
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options]
+
+    [plugins."io.containerd.grpc.v1.cri".image_decryption]
+      key_model = "node"
+
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = ""
+
+      [plugins."io.containerd.grpc.v1.cri".registry.auths]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.configs]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.headers]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+
+    [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+
+  [plugins."io.containerd.internal.v1.opt"]
+    path = "/opt/containerd"
+
+  [plugins."io.containerd.internal.v1.restart"]
+    interval = "10s"
+
+  [plugins."io.containerd.internal.v1.tracing"]
+    sampling_ratio = 1.0
+    service_name = "containerd"
+
+  [plugins."io.containerd.metadata.v1.bolt"]
+    content_sharing_policy = "shared"
+
+  [plugins."io.containerd.monitor.v1.cgroups"]
+    no_prometheus = false
+
+  [plugins."io.containerd.runtime.v1.linux"]
+    no_shim = false
+    runtime = "runc"
+    runtime_root = ""
+    shim = "containerd-shim"
+    shim_debug = false
+
+  [plugins."io.containerd.runtime.v2.task"]
+    platforms = ["linux/amd64"]
+    sched_core = false
+
+  [plugins."io.containerd.service.v1.diff-service"]
+    default = ["walking"]
+
+  [plugins."io.containerd.service.v1.tasks-service"]
+    rdt_config_file = ""
+
+  [plugins."io.containerd.snapshotter.v1.aufs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.btrfs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.devmapper"]
+    async_remove = false
+    base_image_size = ""
+    discard_blocks = false
+    fs_options = ""
+    fs_type = ""
+    pool_name = ""
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.native"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.overlayfs"]
+    root_path = ""
+    upperdir_label = false
+
+  [plugins."io.containerd.snapshotter.v1.zfs"]
+    root_path = ""
+
+  [plugins."io.containerd.tracing.processor.v1.otlp"]
+    endpoint = ""
+    insecure = false
+    protocol = ""
+
+[proxy_plugins]
+
+[stream_processors]
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar"
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+gzip+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar+gzip"
+
+[timeouts]
+  "io.containerd.timeout.bolt.open" = "0s"
+  "io.containerd.timeout.shim.cleanup" = "5s"
+  "io.containerd.timeout.shim.load" = "5s"
+  "io.containerd.timeout.shim.shutdown" = "3s"
+  "io.containerd.timeout.task.state" = "2s"
+
+[ttrpc]
+  address = ""
+  gid = 0
+  uid = 0
+mfm@mm71:~$ sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+mfm@mm71:~$ sudo systemctl restart containerd
+mfm@mm71:~$ cat <<EOF | sudo tee -a /etc/containerd/config.toml
+> [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+> [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+> SystemdCgroup = true
+> EOF
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+SystemdCgroup = true
+mfm@mm71:~$ sudo sed -i 's/^disabled_plugins \=/\#disabled_plugins \=/g' /etc/containerd/config.toml
+mfm@mm71:~$ sudo systemctl restart containerd
+Job for containerd.service failed because the control process exited with error code.
+See "systemctl status containerd.service" and "journalctl -xeu containerd.service" for details.
+mfm@mm71:~$ systemctl status containerd.service
+● containerd.service - containerd container runtime
+     Loaded: loaded (/lib/systemd/system/containerd.service; enabled; vendor preset: enabled)
+     Active: activating (auto-restart) (Result: exit-code) since Tue 2022-08-16 20:11:47 UTC; 4s ago
+       Docs: https://containerd.io
+    Process: 4622 ExecStartPre=/sbin/modprobe overlay (code=exited, status=0/SUCCESS)
+    Process: 4623 ExecStart=/usr/bin/containerd (code=exited, status=1/FAILURE)
+   Main PID: 4623 (code=exited, status=1/FAILURE)
+        CPU: 26ms
+mfm@mm71:~$ systemctl status containerd
+● containerd.service - containerd container runtime
+     Loaded: loaded (/lib/systemd/system/containerd.service; enabled; vendor preset: enabled)
+     Active: activating (auto-restart) (Result: exit-code) since Tue 2022-08-16 20:12:23 UTC; 4s ago
+       Docs: https://containerd.io
+    Process: 4738 ExecStartPre=/sbin/modprobe overlay (code=exited, status=0/SUCCESS)
+    Process: 4739 ExecStart=/usr/bin/containerd (code=exited, status=1/FAILURE)
+   Main PID: 4739 (code=exited, status=1/FAILURE)
+        CPU: 25ms
+mfm@mm71:~$ sudo systemctl restart containerd
+Job for containerd.service failed because the control process exited with error code.
+See "systemctl status containerd.service" and "journalctl -xeu containerd.service" for details.
+mfm@mm71:~$ journalctl -xeu containerd.service
+Hint: You are currently not seeing messages from other users and the system.
+      Users in groups 'adm', 'systemd-journal' can see all messages.
+      Pass -q to turn off this notice.
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+-- No entries --
+mfm@mm71:~$ :q
+:q: command not found
+mfm@mm71:~$ sudo ufw allow 6443/tcp
+Rules updated
+Rules updated (v6)
+mfm@mm71:~$ ufw allow 2379/tcp
+ERROR: You need to be root to run this script
+mfm@mm71:~$ sudo ufw allow 2379/tcp
+Rules updated
+Rules updated (v6)
+mfm@mm71:~$ sudo ufw allow 2380/tcp
+Rules updated
+Rules updated (v6)
+mfm@mm71:~$ sudo ufw allow 10250/tcp
+Rules updated
+Rules updated (v6)
+mfm@mm71:~$ sudo ufw allow 10257/tcp
+Rules updated
+Rules updated (v6)
+mfm@mm71:~$ sudo ufw allow 10259/tcp
+Rules updated
+Rules updated (v6)
+mfm@mm71:~$ sudo ufw reload
+Firewall not enabled (skipping reload)
+mfm@mm71:~$ sudo ufw allow 10250/tcp
+Skipping adding existing rule
+Skipping adding existing rule (v6)
+mfm@mm71:~$ sudo ufw allow 30000:32767/tcp
+Rules updated
+Rules updated (v6)
+mfm@mm71:~$ sudo ufw reload
+Firewall not enabled (skipping reload)
+mfm@mm71:~$ cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+> br_netfilter
+> EOF
+br_netfilter
+mfm@mm71:~$ cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+idge.bridge-nf-call-ip6tables = 1
+net.br> net.bridge.bridge-nf-call-ip6tables = 1
+> net.bridge.bridge-nf-call-iptables = 1
+rward = 1
+EOF
+> net.ipv4.ip_forward = 1
+> EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+mfm@mm71:~$ sudo sysctl --system
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 65536
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+kernel.core_uses_pid = 1
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.default.accept_source_route = 0
+sysctl: setting key "net.ipv4.conf.all.accept_source_route": Invalid argument
+net.ipv4.conf.default.promote_secondaries = 1
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /usr/lib/sysctl.d/99-protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+net.core.rmem_default = 12582912
+net.core.wmem_default = 12582912
+net.core.rmem_max = 12582912
+net.core.wmem_max = 12582912
+net.ipv4.tcp_rmem = 10240 87380 12582912
+net.ipv4.tcp_wmem = 10240 87380 12582912
+net.ipv4.tcp_congestion_control = westwood
+* Applying /etc/sysctl.d/k8s.conf ...
+net.ipv4.ip_forward = 1
+* Applying /etc/sysctl.conf ...
+net.core.rmem_default = 12582912
+net.core.wmem_default = 12582912
+net.core.rmem_max = 12582912
+net.core.wmem_max = 12582912
+net.ipv4.tcp_rmem = 10240 87380 12582912
+net.ipv4.tcp_wmem = 10240 87380 12582912
+net.ipv4.tcp_congestion_control = westwood
+mfm@mm71:~$ swapoff -a
+swapoff: Not superuser.
+mfm@mm71:~$ sudo swapoff -a
+mfm@mm71:~$ cat /etc/fstab
+UUID=3C70-F0E6  /boot/efi       vfat    errors=remount-ro       0       2
+UUID=8478cec9-0e64-4ac6-b00e-0d231e33bb76       /       ext4    errors=remount-ro       0       1
+UUID=07eb20d6-8c7c-4411-be8a-f9d2d7f6f5ee       none    swap    none    0       0
+
+mfm@mm71:~$ nano /etc/fstab
+mfm@mm71:~$ modprobe br_netfilter
+modprobe: ERROR: could not insert 'br_netfilter': Operation not permitted
+mfm@mm71:~$ sudo modprobe br_netfilter
+mfm@mm71:~$ sysctl net.bridge.bridge-nf-call-iptables=1
+sysctl: permission denied on key "net.bridge.bridge-nf-call-iptables", ignoring
+mfm@mm71:~$ sudo sysctl net.bridge.bridge-nf-call-iptables=1
+net.bridge.bridge-nf-call-iptables = 1
+mfm@mm71:~$ sudo apt update
+Hit:1 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:3 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Fetched 324 kB in 1s (341 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+71 packages can be upgraded. Run 'apt list --upgradable' to see them.
+mfm@mm71:~$ sudo apt install -y apt-transport-https ca-certificates curl
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20211016).
+curl is already the newest version (7.81.0-1ubuntu1.3).
+The following packages will be upgraded:
+  apt-transport-https
+1 upgraded, 0 newly installed, 0 to remove and 70 not upgraded.
+Need to get 1512 B of archives.
+After this operation, 0 B of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 apt-transport-https all 2.4.7 [1512 B]
+Fetched 1512 B in 0s (6766 B/s)
+(Reading database ... 74946 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.4.7_all.deb ...
+Unpacking apt-transport-https (2.4.7) over (2.4.5) ...
+Setting up apt-transport-https (2.4.7) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+mfm@mm71:~$ sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+mfm@mm71:~$ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
+mfm@mm71:~$ sudo apt update
+Hit:1 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Get:7 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [57.6 kB]
+Fetched 67.0 kB in 1s (114 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+70 packages can be upgraded. Run 'apt list --upgradable' to see them.
+mfm@mm71:~$ sudo apt install -y kubelet kubeadm kubectl
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 70 not upgraded.
+Need to get 75.2 MB of archives.
+After this operation, 313 MB of additional disk space will be used.
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.24.2-00 [12.3 MB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 conntrack amd64 1:1.4.6-2build2 [33.5 kB]
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.8.7-00 [25.0 MB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 ebtables amd64 2.0.11-4build2 [84.9 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 socat amd64 1.7.4.1-3ubuntu4 [349 kB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.24.3-00 [19.2 MB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.24.3-00 [9316 kB]
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.24.3-00 [9002 kB]
+Fetched 75.2 MB in 1s (54.9 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 74946 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.6-2build2_amd64.deb ...
+Unpacking conntrack (1:1.4.6-2build2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.24.2-00_amd64.deb ...
+Unpacking cri-tools (1.24.2-00) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-4build2_amd64.deb ...
+Unpacking ebtables (2.0.11-4build2) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../3-kubernetes-cni_0.8.7-00_amd64.deb ...
+Unpacking kubernetes-cni (0.8.7-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../4-socat_1.7.4.1-3ubuntu4_amd64.deb ...
+Unpacking socat (1.7.4.1-3ubuntu4) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../5-kubelet_1.24.3-00_amd64.deb ...
+Unpacking kubelet (1.24.3-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../6-kubectl_1.24.3-00_amd64.deb ...
+Unpacking kubectl (1.24.3-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../7-kubeadm_1.24.3-00_amd64.deb ...
+Unpacking kubeadm (1.24.3-00) ...
+Setting up conntrack (1:1.4.6-2build2) ...
+Setting up kubectl (1.24.3-00) ...
+Setting up ebtables (2.0.11-4build2) ...
+Setting up socat (1.7.4.1-3ubuntu4) ...
+Setting up cri-tools (1.24.2-00) ...
+Setting up kubernetes-cni (0.8.7-00) ...
+Setting up kubelet (1.24.3-00) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+Setting up kubeadm (1.24.3-00) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+mfm@mm71:~$ kubeadm init --pod-network-cidr=192.168.0.0/16
+[init] Using Kubernetes version: v1.24.3
+[preflight] Running pre-flight checks
+error execution phase preflight: [preflight] Some fatal errors occurred:
+        [ERROR IsPrivilegedUser]: user is not running as root
+[preflight] If you know what you are doing, you can make a check non-fatal with `--ignore-preflight-errors=...`
+To see the stack trace of this error execute with --v=5 or higher
+mfm@mm71:~$ sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+[init] Using Kubernetes version: v1.24.3
+[preflight] Running pre-flight checks
+        [WARNING SystemVerification]: missing optional cgroups: blkio
+error execution phase preflight: [preflight] Some fatal errors occurred:
+        [ERROR CRI]: container runtime is not running: output: time="2022-08-16T20:21:31Z" level=fatal msg="unable to determine runtime API version: rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial unix /var/run/containerd/containerd.sock: connect: no such file or directory\""
+, error: exit status 1
+[preflight] If you know what you are doing, you can make a check non-fatal with `--ignore-preflight-errors=...`
+To see the stack trace of this error execute with --v=5 or higher
+mfm@mm71:~$ cat /etc/fstab
+UUID=3C70-F0E6  /boot/efi       vfat    errors=remount-ro       0       2
+UUID=8478cec9-0e64-4ac6-b00e-0d231e33bb76       /       ext4    errors=remount-ro       0       1
+UUID=07eb20d6-8c7c-4411-be8a-f9d2d7f6f5ee       none    swap    none    0       0
+
+mfm@mm71:~$ sudo vi /etc/fstab
+mfm@mm71:~$
+mfm@mm71:~$
+mfm@mm71:~$
+mfm@mm71:~$
+mfm@mm71:~$ history
+    1  sudo apt update
+    2  sudo apt install -y ca-certificates curl gnupg lsb-release
+    3  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    4  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
+    5  apt update
+    6  sudo apt update
+    7  sudo apt install -y containerd.io
+    8  wget https://github.com/opencontainers/runc/releases/download/v1.1.1/runc.amd64
+    9  sudo install -m 755 runc.amd64 /usr/local/sbin/runc
+   10  sudo mkdir -p /etc/containerd/
+   11  containerd config default | sudo tee /etc/containerd/config.toml
+   12  sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+   13  sudo systemctl restart containerd
+   14  cat <<EOF | sudo tee -a /etc/containerd/config.toml
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+SystemdCgroup = true
+EOF
+
+   15  sudo sed -i 's/^disabled_plugins \=/\#disabled_plugins \=/g' /etc/containerd/config.toml
+   16  sudo systemctl restart containerd
+   17  systemctl status containerd.service
+   18  systemctl status containerd
+   19  sudo systemctl restart containerd
+   20  journalctl -xeu containerd.service
+   21  :q
+   22  sudo ufw allow 6443/tcp
+   23  ufw allow 2379/tcp
+   24  sudo ufw allow 2379/tcp
+   25  sudo ufw allow 2380/tcp
+   26  sudo ufw allow 10250/tcp
+   27  sudo ufw allow 10257/tcp
+   28  sudo ufw allow 10259/tcp
+   29  sudo ufw reload
+   30  sudo ufw allow 10250/tcp
+   31  sudo ufw allow 30000:32767/tcp
+   32  sudo ufw reload
+   33  cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+
+   34  cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+
+   35  sudo sysctl --system
+   36  swapoff -a
+   37  sudo swapoff -a
+   38  cat /etc/fstab
+   39  nano /etc/fstab
+   40  modprobe br_netfilter
+   41  sudo modprobe br_netfilter
+   42  sysctl net.bridge.bridge-nf-call-iptables=1
+   43  sudo sysctl net.bridge.bridge-nf-call-iptables=1
+   44  sudo apt update
+   45  sudo apt install -y apt-transport-https ca-certificates curl
+   46  sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+   47  echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+   48  sudo apt update
+   49  sudo apt install -y kubelet kubeadm kubectl
+   50  kubeadm init --pod-network-cidr=192.168.0.0/16
+   51  sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+   52  cat /etc/fstab
+   53  sudo vi /etc/fstab
+   54  history
+mfm@mm71:~$

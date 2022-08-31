@@ -1,0 +1,61 @@
+
+TS="$(date +%y%m%d%H%M%S)"
+Z_DIR="/tmp/$TS"
+mkdir -p $Z_DIR
+echo "Z_DIR=$Z_DIR"
+cp z $Z_DIR
+cp weathervane.config.k8s.quickstart $Z_DIR
+cp *.yaml $Z_DIR
+cp runWeathervane.pl $Z_DIR
+
+
+kubectl delete pvc --namespace auctionw1i1 cassandra-data-cassandra-0
+kubectl delete pvc --namespace auctionw1i1 postgresql-postgresql-0
+#kubectl delete pv weathervane-pv1
+#kubectl delete pv weathervane-pv2
+#kubectl delete pv weathervane-pv3
+#kubectl delete sc local-storage
+
+#kubectl create -f create-storage-class.yaml
+#kubectl apply -f pv01.yaml
+#kubectl apply -f pv02.yaml
+#kubectl apply -f pv03.yaml
+
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "$ kubectl get sc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get sc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pv --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pv --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pvc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pvc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT" | tee -a $Z_DIR/ZOUT
+
+
+./runWeathervane.pl --skipPvTest --configFile=weathervane.config.k8s.quickstart --outputDir $Z_DIR/outDir --tmpDir $Z_DIR/tmpDir 2>&1 | tee -a $Z_DIR/ZOUT
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "END OF WEATHERVANE PERL SCRIPT OUTPUT" | tee -a $Z_DIR/ZOUT
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "$ kubectl get sc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get sc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pv --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pv --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pvc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pvc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT

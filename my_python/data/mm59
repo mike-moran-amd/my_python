@@ -1,0 +1,529 @@
+Microsoft Windows [Version 10.0.19044.1826]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@139.178.84.229
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug  9 23:07:26 UTC 2022
+
+  System load:              3.87
+  Usage of /:               5.2% of 217.57GB
+  Memory usage:             4%
+  Swap usage:               0%
+  Processes:                597
+  Users logged in:          1
+  IPv4 address for bond0:   139.178.84.229
+  Usage of /:               5.2% of 217.57GB
+  Memory usage:             4%
+  Swap usage:               0%
+  Processes:                597
+  Users logged in:          1
+  IPv4 address for bond0:   139.178.84.229
+  IPv6 address for bond0:   2604:1380:4641:3b00::13
+  IPv4 address for cni0:    10.88.0.1
+  IPv6 address for cni0:    2001:4860:4860::1
+  IPv4 address for docker0: 172.17.0.1
+
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+Last login: Tue Aug  9 22:57:19 2022 from 70.112.73.191
+root@mm59:~# uname -a
+Linux mm59 5.13.0-44-generic #49~20.04.1-Ubuntu SMP Wed May 18 18:44:28 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+root@mm59:~# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm59:~# cd /usr/local/bin/
+root@mm59:/usr/local/bin# curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   154  100   154    0     0   6160      0 --:--:-- --:--:-- --:--:--  6160
+100 43.5M  100 43.5M    0     0   132M      0 --:--:-- --:--:-- --:--:--  132M
+root@mm59:/usr/local/bin# ll
+total 44648
+drwxr-xr-x  2 root root     4096 Aug  9 23:10 ./
+drwxr-xr-x 11 root root     4096 Aug  9 23:02 ../
+-rw-r--r--  1 root root 45711360 Aug  9 23:10 kubectl
+root@mm59:/usr/local/bin# chmod +x kubectl
+root@mm59:/usr/local/bin# ll
+total 44648
+drwxr-xr-x  2 root root     4096 Aug  9 23:10 ./
+drwxr-xr-x 11 root root     4096 Aug  9 23:02 ../
+-rwxr-xr-x  1 root root 45711360 Aug  9 23:10 kubectl*
+root@mm59:/usr/local/bin# cd
+root@mm59:~# which kubectl
+/usr/local/bin/kubectl
+root@mm59:~# kubectl gen nodes
+error: unknown command "gen" for "kubectl"
+
+Did you mean this?
+        run
+        set
+        get
+root@mm59:~# kubectl get nodes
+NAME        STATUS   ROLES    AGE     VERSION
+127.0.0.1   Ready    <none>   5m45s   v1.24.0-beta.0.2166+2bea4b24e24bf2
+root@mm59:~# git clone http://github.com/vmware/weathervane
+Cloning into 'weathervane'...
+warning: redirecting to https://github.com/vmware/weathervane/
+remote: Enumerating objects: 19144, done.
+remote: Counting objects: 100% (1935/1935), done.
+remote: Compressing objects: 100% (629/629), done.
+remote: Total 19144 (delta 1003), reused 1876 (delta 960), pack-reused 17209
+Receiving objects: 100% (19144/19144), 64.62 MiB | 65.71 MiB/s, done.
+Resolving deltas: 100% (11699/11699), done.
+root@mm59:~# cd weathervane/
+root@mm59:~/weathervane# cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+root@mm59:~/weathervane# vi weathervane.config.k8s.quickstart
+
+
+[1]+  Stopped                 vi weathervane.config.k8s.quickstart
+root@mm59:~/weathervane# ll /root/.kube/
+total 12
+drwxr-x--- 3 root root 4096 Aug  9 23:06 ./
+drwx------ 8 root root 4096 Aug  9 23:12 ../
+drwxr-x--- 4 root root 4096 Aug  9 23:06 cache/
+root@mm59:~/weathervane# fg
+vi weathervane.config.k8s.quickstart
+root@mm59:~/weathervane# cat weathervane.config.k8s.quickstart
+{
+  "description" : "micro",
+
+  "configurationSize": "micro",
+
+  "runStrategy" : "fixed",
+
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "",
+    },
+  ],
+
+  "driverCluster" : "driverCluster",
+
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "clusterip",
+
+  "cassandraDataStorageClass" : "local-storage",
+  "postgresqlStorageClass" : "local-storage",
+  "nginxCacheStorageClass" : "local-storage",
+
+}
+root@mm59:~/weathervane# mkdir -p /k8s/weathervane/vol
+root@mm59:~/weathervane# cat > create-persistent-vol.yaml << EOF
+> apiVersion: v1
+> kind: PersistentVolume
+> metadata:
+>   name: weathervane-pv
+> spec:
+olumeRe>   capacity:
+>     storage: 20Gi
+>   accessModes:
+>   - ReadWriteOnce
+>   persistentVolumeReclaimPolicy: Retain
+  path: /k8s/weathervan>   storageClassName: local-storage
+>   local:
+>     path: /k8s/weathervane/vol
+ired:
+      nodeSelectorTerms:
+     >   nodeAffinity:
+>     required:
+>       nodeSelectorTerms:
+>       - matchExpressions:
+>         - key: kubernetes.io/hostname
+>           operator: In
+>           values:
+>           - 127.0.0.1
+> EOF
+root@mm59:~/weathervane# kubectl apply -f create-persistent-vol.yaml
+persistentvolume/weathervane-pv created
+root@mm59:~/weathervane# cat > create-storage-class.yaml << EOF
+> kind: StorageClass
+> apiVersion: storage.k8s.io/v1
+> metadata:
+>   name: local-storage
+> provisioner: kubernetes.io/no-provisioner
+> volumeBindingMode: WaitForFirstConsumer
+> EOF
+root@mm59:~/weathervane# kubectl apply -f create-storage-class.yaml
+storageclass.storage.k8s.io/local-storage created
+root@mm59:~/weathervane# cat create-storage-class.yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+root@mm59:~/weathervane#
+root@mm59:~/weathervane# cat create-storage-class.yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+root@mm59:~/weathervane# cat create-persistent-vol.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - 127.0.0.1
+root@mm59:~/weathervane# kubectl get ps
+error: the server doesn't have a resource type "ps"
+root@mm59:~/weathervane# kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv   20Gi       RWO            Retain           Available           local-storage            12m
+root@mm59:~/weathervane# kubectl get pvc
+No resources found in default namespace.
+root@mm59:~/weathervane# kubectl get storageclass
+NAME                 PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage        kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  12m
+standard (default)   kubernetes.io/host-path        Delete          Immediate              false                  33m
+root@mm59:~/weathervane# cat weathervane.config.k8s.quickstart
+{
+  "description" : "micro",
+
+  "configurationSize": "micro",
+
+  "runStrategy" : "fixed",
+
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "",
+    },
+  ],
+
+  "driverCluster" : "driverCluster",
+
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "clusterip",
+
+  "cassandraDataStorageClass" : "local-storage",
+  "postgresqlStorageClass" : "local-storage",
+  "nginxCacheStorageClass" : "local-storage",
+
+}
+root@mm59:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane
+Copyright (c) 2019 VMware, Inc. All Rights Reserved.
+
+This product is licensed to you under the BSD-2 license (the "License").  You may not use this product except in compliance with the BSD-2 License.
+
+This product may include a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the subcomponent's license, as noted in the LICENSE file.
+
+Do you accept these terms and conditions (yes/no)? yes
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster appCluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+root@mm59:~/weathervane# history
+    1  uname -a
+    2  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    3  cd /usr/local/bin/
+    4  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    5  ll
+    6  chmod +x kubectl
+    7  ll
+    8  cd
+    9  which kubectl
+   10  kubectl gen nodes
+   11  kubectl get nodes
+   12  git clone http://github.com/vmware/weathervane
+   13  cd weathervane/
+   14  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   15  vi weathervane.config.k8s.quickstart
+   16  ll /root/.kube/
+   17  fg
+   18  cat weathervane.config.k8s.quickstart
+   19  mkdir -p /k8s/weathervane/vol
+   20  cat > create-persistent-vol.yaml << EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - 127.0.0.1
+EOF
+
+   21  kubectl apply -f create-persistent-vol.yaml
+   22  cat > create-storage-class.yaml << EOF
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+EOF
+
+   23  kubectl apply -f create-storage-class.yaml
+   24  cat create-storage-class.yaml
+   25  cat create-persistent-vol.yaml
+   26  kubectl get ps
+   27  kubectl get pv
+   28  kubectl get pvc
+   29  kubectl get storageclass
+   30  cat weathervane.config.k8s.quickstart
+   31  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   32  history
+root@mm59:~/weathervane# jobs
+root@mm59:~/weathervane# !15
+vi weathervane.config.k8s.quickstart
+root@mm59:~/weathervane# cat weathervane.config.k8s.quickstart
+{
+  "description" : "micro",
+
+  "configurationSize": "micro",
+
+  "runStrategy" : "fixed",
+
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "",
+    },
+  ],
+
+  "driverCluster" : "driverCluster",
+
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "clusterip",
+
+  "cassandraDataStorageClass" : "weathervane-pv",
+  "postgresqlStorageClass" : "weathervane-pv",
+  "nginxCacheStorageClass" : "weathervane-pv",
+
+}
+root@mm59:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane is unable to create a persistant volume using storage class weathervane-pv in kubernetesCluster appCluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+root@mm59:~/weathervane#
+
+root@mm59:~/weathervane# history
+    1  uname -a
+    2  export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+    3  cd /usr/local/bin/
+    4  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    5  ll
+    6  chmod +x kubectl
+    7  ll
+    8  cd
+    9  which kubectl
+   10  kubectl gen nodes
+   11  kubectl get nodes
+   12  git clone http://github.com/vmware/weathervane
+   13  cd weathervane/
+   14  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   15  vi weathervane.config.k8s.quickstart
+   16  ll /root/.kube/
+   17  fg
+   18  cat weathervane.config.k8s.quickstart
+   19  mkdir -p /k8s/weathervane/vol
+   20  cat > create-persistent-vol.yaml << EOF
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - 127.0.0.1
+EOF
+
+   21  kubectl apply -f create-persistent-vol.yaml
+   22  cat > create-storage-class.yaml << EOF
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+EOF
+
+   23  kubectl apply -f create-storage-class.yaml
+   24  cat create-storage-class.yaml
+   25  cat create-persistent-vol.yaml
+   26  kubectl get ps
+   27  kubectl get pv
+   28  kubectl get pvc
+   29  kubectl get storageclass
+   30  cat weathervane.config.k8s.quickstart
+   31  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   32  history
+root@mm59:~/weathervane# jobs
+root@mm59:~/weathervane# !15
+vi weathervane.config.k8s.quickstart
+root@mm59:~/weathervane# cat weathervane.config.k8s.quickstart
+{
+  "description" : "micro",
+
+  "configurationSize": "micro",
+
+  "runStrategy" : "fixed",
+
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/var/run/kubernetes/admin.kubeconfig",
+      "kubeconfigContext" : "",
+    },
+  ],
+
+  "driverCluster" : "driverCluster",
+
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "clusterip",
+
+  "cassandraDataStorageClass" : "weathervane-pv",
+  "postgresqlStorageClass" : "weathervane-pv",
+  "nginxCacheStorageClass" : "weathervane-pv",
+
+}
+root@mm59:~/weathervane# ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane is unable to create a persistant volume using storage class weathervane-pv in kubernetesCluster appCluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+root@mm59:~/weathervane# ll
+total 268
+drwxr-xr-x 17 root root  4096 Aug  9 23:50 ./
+drwx------  8 root root  4096 Aug  9 23:50 ../
+-rw-r--r--  1 root root     0 Aug  9 23:43 .accept-weathervane
+drwxr-xr-x  8 root root  4096 Aug  9 23:12 .git/
+-rw-r--r--  1 root root  2411 Aug  9 23:12 .gitignore
+-rw-r--r--  1 root root  2959 Aug  9 23:12 BRANCHING.md
+-rw-r--r--  1 root root   200 Aug  9 23:12 Branches.md
+-rw-r--r--  1 root root  5247 Aug  9 23:12 CODE-OF-CONDUCT.md
+-rw-r--r--  1 root root  9540 Aug  9 23:12 CONTRIBUTING.md
+-rw-r--r--  1 root root  4952 Aug  9 23:12 ISSUES.md
+-rw-r--r--  1 root root  1485 Aug  9 23:12 LICENSE.txt
+-rw-r--r--  1 root root   454 Aug  9 23:12 Notice.txt
+-rw-r--r--  1 root root  4585 Aug  9 23:12 README.md
+drwxr-xr-x  3 root root  4096 Aug  9 23:12 auctionApp/
+drwxr-xr-x  3 root root  4096 Aug  9 23:12 auctionAppServerWarmer/
+drwxr-xr-x  3 root root  4096 Aug  9 23:12 auctionBidService/
+drwxr-xr-x  3 root root  4096 Aug  9 23:12 auctionWeb/
+-rw-r--r--  1 root root 10152 Aug  9 23:12 build.gradle
+-rwxr-xr-x  1 root root 13779 Aug  9 23:12 buildDockerImages.pl*
+drwxr-xr-x  4 root root  4096 Aug  9 23:12 configFiles/
+-rw-r--r--  1 root root   436 Aug  9 23:26 create-persistent-vol.yaml
+-rw-r--r--  1 root root   163 Aug  9 23:27 create-storage-class.yaml
+drwxr-xr-x  3 root root  4096 Aug  9 23:12 dbLoader/
+drwxr-xr-x  8 root root  4096 Aug  9 23:12 doc/
+drwxr-xr-x 14 root root  4096 Aug  9 23:12 dockerImages/
+drwxr-xr-x  3 root root  4096 Aug  9 23:12 gradle/
+-rw-r--r--  1 root root    20 Aug  9 23:12 gradle.properties
+-rwxr-xr-x  1 root root  5305 Aug  9 23:12 gradlew*
+-rwxr-xr-x  1 root root  2185 Aug  9 23:12 gradlew.bat*
+drwxr-xr-x  2 root root  4096 Aug  9 23:43 output/
+drwxr-xr-x 14 root root  4096 Aug  9 23:12 runHarness/
+-rwxr-xr-x  1 root root 20497 Aug  9 23:12 runWeathervane.pl*
+-rwxr-xr-x  1 root root  2527 Aug  9 23:12 runmany.sh*
+-rw-r--r--  1 root root   145 Aug  9 23:12 settings.gradle
+drwxr-xr-x  3 root root  4096 Aug  9 23:12 testing/
+-rw-r--r--  1 root root     6 Aug  9 23:12 version.txt
+-rw-r--r--  1 root root   708 Aug  9 23:12 weathervane.config.k8s.micro
+-rw-r--r--  1 root root   709 Aug  9 23:50 weathervane.config.k8s.quickstart
+-rw-r--r--  1 root root   721 Aug  9 23:12 weathervane.config.k8s.small2
+-rwxr-xr-x  1 root root 42556 Aug  9 23:12 weathervane.pl*
+-rw-r--r--  1 root root     0 Aug  9 23:43 weathervaneResults.csv
+drwxr-xr-x  3 root root  4096 Aug  9 23:12 workloadConfiguration/
+drwxr-xr-x  3 root root  4096 Aug  9 23:12 workloadDriver/
+root@mm59:~/weathervane# cat create-persistent-vol.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - 127.0.0.1
+root@mm59:~/weathervane# kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv   20Gi       RWO            Retain           Available           local-storage            28m

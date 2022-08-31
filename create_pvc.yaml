@@ -1,0 +1,52 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: weathervane-test-claim2
+  annotations:
+    volume.beta.kubernetes.io/storage-class: local-storage
+spec:
+  accessModes:
+    ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Mi
+
+pvcYamlStringCopy: {
+  \"kind\": \"PersistentVolumeClaim\",
+  \"apiVersion\": \"v1\",
+  \"metadata\": {
+    \"name\": \"weathervane-test-claim\",
+    \"annotations\": {
+        \"volume.beta.kubernetes.io/storage-class\": \"local-storage\"
+    }
+  },
+  \"spec\": {
+    \"accessModes\": [
+      \"ReadWriteOnce\"
+    ],
+    \"resources\": {
+      \"requests\": {
+        \"storage\": \"1Mi\"
+      }
+    }
+  }
+}
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: weathervane-test-claim2
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: slow
+  selector:
+    matchLabels:
+      release: "stable"
+    matchExpressions:
+      - {key: environment, operator: In, values: [dev]}
+Access Modes

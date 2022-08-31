@@ -1,0 +1,447 @@
+Microsoft Windows [Version 10.0.19044.1766]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@139.178.85.63
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Fri Jul 29 17:49:51 UTC 2022
+
+  System load:              0.19
+  Usage of /:               5.1% of 218.06GB
+  Memory usage:             3%
+  Swap usage:               0%
+  Processes:                586
+  Users logged in:          1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.13.0-44-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Fri Jul 29 17:49:51 UTC 2022
+
+  System load:              0.19
+  Usage of /:               5.1% of 218.06GB
+  Memory usage:             3%
+  Swap usage:               0%
+  Processes:                586
+  Users logged in:          1
+  IPv4 address for bond0:   139.178.85.63
+  IPv6 address for bond0:   2604:1380:4641:3b00::d
+  IPv4 address for cni0:    10.88.0.1
+  IPv6 address for cni0:    2001:4860:4860::1
+  IPv4 address for docker0: 172.17.0.1
+
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+
+*** System restart required ***
+Last login: Fri Jul 29 17:30:12 2022 from 70.112.73.191
+root@mm52:~# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
+root@mm52:~# which kubectl
+root@mm52:~# cd ~/go/src/k8s.io/kubernetes/hack
+root@mm52:~/go/src/k8s.io/kubernetes/hack#
+root@mm52:~/go/src/k8s.io/kubernetes/hack# cluster/kubectl.sh
+-bash: cluster/kubectl.sh: No such file or directory
+root@mm52:~/go/src/k8s.io/kubernetes/hack# cd ..
+root@mm52:~/go/src/k8s.io/kubernetes# cluster/kubectl.sh
+kubectl controls the Kubernetes cluster manager.
+
+ Find more information at: https://kubernetes.io/docs/reference/kubectl/
+
+Basic Commands (Beginner):
+  create          Create a resource from a file or from stdin
+  expose          Take a replication controller, service, deployment or pod and expose it as a new Kubernetes service
+  run             Run a particular image on the cluster
+  set             Set specific features on objects
+
+Basic Commands (Intermediate):
+  explain         Get documentation for a resource
+  get             Display one or many resources
+  edit            Edit a resource on the server
+  delete          Delete resources by file names, stdin, resources and names, or by resources and label selector
+
+Deploy Commands:
+  rollout         Manage the rollout of a resource
+  scale           Set a new size for a deployment, replica set, or replication controller
+  autoscale       Auto-scale a deployment, replica set, stateful set, or replication controller
+
+Cluster Management Commands:
+  certificate     Modify certificate resources.
+  cluster-info    Display cluster information
+  top             Display resource (CPU/memory) usage
+  cordon          Mark node as unschedulable
+  uncordon        Mark node as schedulable
+  drain           Drain node in preparation for maintenance
+  taint           Update the taints on one or more nodes
+
+Troubleshooting and Debugging Commands:
+  describe        Show details of a specific resource or group of resources
+  logs            Print the logs for a container in a pod
+  attach          Attach to a running container
+  exec            Execute a command in a container
+  port-forward    Forward one or more local ports to a pod
+  proxy           Run a proxy to the Kubernetes API server
+  cp              Copy files and directories to and from containers
+  auth            Inspect authorization
+  debug           Create debugging sessions for troubleshooting workloads and nodes
+
+Advanced Commands:
+  diff            Diff the live version against a would-be applied version
+  apply           Apply a configuration to a resource by file name or stdin
+  patch           Update fields of a resource
+  replace         Replace a resource by file name or stdin
+  wait            Experimental: Wait for a specific condition on one or many resources
+  kustomize       Build a kustomization target from a directory or URL.
+
+Settings Commands:
+  label           Update the labels on a resource
+  annotate        Update the annotations on a resource
+  completion      Output shell completion code for the specified shell (bash, zsh, fish, or powershell)
+
+Other Commands:
+  alpha           Commands for features in alpha
+  api-resources   Print the supported API resources on the server
+  api-versions    Print the supported API versions on the server, in the form of "group/version"
+  config          Modify kubeconfig files
+  plugin          Provides utilities for interacting with plugins
+  version         Print the client and server version information
+
+Usage:
+  kubectl [flags] [options]
+
+Use "kubectl <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+root@mm52:~/go/src/k8s.io/kubernetes# cluster/kubectl.sh get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+127.0.0.1   Ready    <none>   15m   v1.24.0-beta.0.1925+7133720d3d2c82
+root@mm52:~/go/src/k8s.io/kubernetes#
+root@mm52:~/go/src/k8s.io/kubernetes# uptime
+ 18:51:20 up  1:25,  2 users,  load average: 0.09, 0.06, 0.05
+root@mm52:~/go/src/k8s.io/kubernetes# cd
+root@mm52:~# git clone https://github.com/vmware/weathervane
+Cloning into 'weathervane'...
+remote: Enumerating objects: 19144, done.
+remote: Counting objects: 100% (1935/1935), done.
+remote: Compressing objects: 100% (629/629), done.
+remote: Total 19144 (delta 1003), reused 1876 (delta 960), pack-reused 17209
+Receiving objects: 100% (19144/19144), 64.62 MiB | 60.82 MiB/s, done.
+Resolving deltas: 100% (11699/11699), done.
+root@mm52:~# cd weathervane/
+root@mm52:~/weathervane# cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+root@mm52:~/weathervane# cat weathervane.config.k8s.quickstart
+{
+  "description" : "micro",
+
+  "configurationSize": "micro",
+
+  "runStrategy" : "fixed",
+
+  "dockerNamespace" : "yourRepository",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/root/.kube/config",
+      "kubeconfigContext" : "cluster-context-1",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/root/.kube/config",
+      "kubeconfigContext" : "cluster-context-2",
+    },
+  ],
+
+  "driverCluster" : "driverCluster",
+
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "loadbalancer",
+
+  "cassandraDataStorageClass" : "weathervanesc",
+  "postgresqlStorageClass" : "weathervanesc",
+  "nginxCacheStorageClass" : "weathervanesc",
+
+}root@mm52:~/weathervane# vi weathervane.config.k8s.quickstart
+
+[1]+  Stopped                 vi weathervane.config.k8s.quickstart
+root@mm52:~/weathervane# root@mm52:~/weathervane# kubectl get pv
+kubectl: command not found
+root@mm52:~/weathervane# echo $PATH
+/root/go/src/k8s.io/kubernetes/third_party/etcd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin
+root@mm52:~/weathervane# ll /root/go/src/k8s.io/kubernetes
+total 248
+drwxr-xr-x 21 root root  4096 Jul 29 17:38 ./
+drwxr-xr-x  3 root root  4096 Jul 29 17:35 ../
+-rw-r--r--  1 root root   766 Jul 29 17:36 .generated_files
+drwxr-xr-x  8 root root  4096 Jul 29 17:39 .git/
+-rw-r--r--  1 root root   381 Jul 29 17:36 .gitattributes
+drwxr-xr-x  3 root root  4096 Jul 29 17:36 .github/
+-rw-r--r--  1 root root  2056 Jul 29 17:36 .gitignore
+-rw-r--r--  1 root root  1394 Jul 29 17:36 .golangci.yaml
+drwxr-xr-x  3 root root  4096 Jul 29 17:38 .make/
+drwxr-xr-x  2 root root  4096 Jul 29 17:36 CHANGELOG/
+lrwxrwxrwx  1 root root    19 Jul 29 17:36 CHANGELOG.md -> CHANGELOG/README.md
+-rw-r--r--  1 root root   525 Jul 29 17:36 CONTRIBUTING.md
+-rw-r--r--  1 root root 11358 Jul 29 17:36 LICENSE
+drwxr-xr-x  4 root root  4096 Jul 29 17:36 LICENSES/
+lrwxrwxrwx  1 root root    19 Jul 29 17:36 Makefile -> build/root/Makefile
+lrwxrwxrwx  1 root root    35 Jul 29 17:36 Makefile.generated_files -> build/root/Makefile.generated_files
+-rw-r--r--  1 root root   777 Jul 29 17:36 OWNERS
+-rw-r--r--  1 root root 10328 Jul 29 17:36 OWNERS_ALIASES
+-rw-r--r--  1 root root  4407 Jul 29 17:36 README.md
+-rw-r--r--  1 root root   563 Jul 29 17:36 SECURITY_CONTACTS
+-rw-r--r--  1 root root  1077 Jul 29 17:36 SUPPORT.md
+drwxr-xr-x  3 root root  4096 Jul 29 17:40 _output/
+drwxr-xr-x  4 root root  4096 Jul 29 17:36 api/
+drwxr-xr-x  7 root root  4096 Jul 29 17:36 build/
+drwxr-xr-x  9 root root  4096 Jul 29 17:36 cluster/
+drwxr-xr-x 26 root root  4096 Jul 29 17:36 cmd/
+-rw-r--r--  1 root root   148 Jul 29 17:36 code-of-conduct.md
+drwxr-xr-x  2 root root  4096 Jul 29 17:36 docs/
+-rw-r--r--  1 root root 38672 Jul 29 17:36 go.mod
+-rw-r--r--  1 root root 54461 Jul 29 17:36 go.sum
+drwxr-xr-x 12 root root  4096 Jul 29 17:40 hack/
+drwxr-xr-x  2 root root  4096 Jul 29 17:36 logo/
+drwxr-xr-x 32 root root  4096 Jul 29 17:36 pkg/
+drwxr-xr-x  3 root root  4096 Jul 29 17:36 plugin/
+drwxr-xr-x  4 root root  4096 Jul 29 17:36 staging/
+drwxr-xr-x 17 root root  4096 Jul 29 17:36 test/
+drwxr-xr-x  6 root root  4096 Jul 29 17:36 third_party/
+drwxr-xr-x 16 root root  4096 Jul 29 17:36 vendor/
+root@mm52:~/weathervane# /root/go/src/k8s.io/kubernetes/cluster/kube
+kube-down.sh  kube-up.sh    kube-util.sh  kubectl.sh    kubemark/
+root@mm52:~/weathervane# /root/go/src/k8s.io/kubernetes/cluster/kube
+kube-down.sh  kube-up.sh    kube-util.sh  kubectl.sh    kubemark/
+root@mm52:~/weathervane# /root/go/src/k8s.io/kubernetes/cluster/kubectl.sh get pv
+No resources found
+root@mm52:~/weathervane# /root/go/src/k8s.io/kubernetes/cluster/kubectl.sh get storageclass.storage.k8s.io/standard
+NAME                 PROVISIONER               RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+standard (default)   kubernetes.io/host-path   Delete          Immediate           false                  131m
+root@mm52:~/weathervane# /root/go/src/k8s.io/kubernetes/cluster/kubectl.sh get ALL
+error: the server doesn't have a resource type "ALL"
+root@mm52:~/weathervane# /root/go/src/k8s.io/kubernetes/cluster/kubectl.sh get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.0.0.1     <none>        443/TCP   133m
+root@mm52:~/weathervane# ll
+total 268
+drwxr-xr-x 16 root root  4096 Jul 29 19:49 ./
+drwx------  8 root root  4096 Jul 29 18:57 ../
+drwxr-xr-x  8 root root  4096 Jul 29 18:57 .git/
+-rw-r--r--  1 root root  2411 Jul 29 18:57 .gitignore
+-rw-r--r--  1 root root 12288 Jul 29 19:38 .weathervane.config.k8s.quickstart.swp
+-rw-r--r--  1 root root  2959 Jul 29 18:57 BRANCHING.md
+-rw-r--r--  1 root root   200 Jul 29 18:57 Branches.md
+-rw-r--r--  1 root root  5247 Jul 29 18:57 CODE-OF-CONDUCT.md
+-rw-r--r--  1 root root  9540 Jul 29 18:57 CONTRIBUTING.md
+-rw-r--r--  1 root root  4952 Jul 29 18:57 ISSUES.md
+-rw-r--r--  1 root root  1485 Jul 29 18:57 LICENSE.txt
+-rw-r--r--  1 root root   454 Jul 29 18:57 Notice.txt
+-rw-r--r--  1 root root  4585 Jul 29 18:57 README.md
+drwxr-xr-x  3 root root  4096 Jul 29 18:57 auctionApp/
+drwxr-xr-x  3 root root  4096 Jul 29 18:57 auctionAppServerWarmer/
+drwxr-xr-x  3 root root  4096 Jul 29 18:57 auctionBidService/
+drwxr-xr-x  3 root root  4096 Jul 29 18:57 auctionWeb/
+-rw-r--r--  1 root root 10152 Jul 29 18:57 build.gradle
+-rwxr-xr-x  1 root root 13779 Jul 29 18:57 buildDockerImages.pl*
+drwxr-xr-x  4 root root  4096 Jul 29 18:57 configFiles/
+drwxr-xr-x  3 root root  4096 Jul 29 18:57 dbLoader/
+drwxr-xr-x  8 root root  4096 Jul 29 18:57 doc/
+drwxr-xr-x 14 root root  4096 Jul 29 18:57 dockerImages/
+drwxr-xr-x  3 root root  4096 Jul 29 18:57 gradle/
+-rw-r--r--  1 root root    20 Jul 29 18:57 gradle.properties
+-rwxr-xr-x  1 root root  5305 Jul 29 18:57 gradlew*
+-rwxr-xr-x  1 root root  2185 Jul 29 18:57 gradlew.bat*
+drwxr-xr-x 14 root root  4096 Jul 29 18:57 runHarness/
+-rwxr-xr-x  1 root root 20497 Jul 29 18:57 runWeathervane.pl*
+-rwxr-xr-x  1 root root  2527 Jul 29 18:57 runmany.sh*
+-rw-r--r--  1 root root   145 Jul 29 18:57 settings.gradle
+drwxr-xr-x  3 root root  4096 Jul 29 18:57 testing/
+-rw-r--r--  1 root root     6 Jul 29 18:57 version.txt
+-rw-r--r--  1 root root   708 Jul 29 18:57 weathervane.config.k8s.micro
+-rw-r--r--  1 root root   706 Jul 29 19:49 weathervane.config.k8s.quickstart
+-rw-r--r--  1 root root   721 Jul 29 18:57 weathervane.config.k8s.small2
+-rwxr-xr-x  1 root root 42556 Jul 29 18:57 weathervane.pl*
+drwxr-xr-x  3 root root  4096 Jul 29 18:57 workloadConfiguration/
+drwxr-xr-x  3 root root  4096 Jul 29 18:57 workloadDriver/
+root@mm52:~/weathervane#
+root@mm52:~/weathervane# jobs
+[1]+  Stopped                 vi weathervane.config.k8s.quickstart
+root@mm52:~/weathervane# fg
+vi weathervane.config.k8s.quickstart
+
+[1]+  Stopped                 vi weathervane.config.k8s.quickstart
+root@mm52:~/weathervane#
+[1]+  Stopped                 vi weathervane.config.k8s.quickstart
+root@mm52:~/weathervane# df .
+Filesystem     1K-blocks     Used Available Use% Mounted on
+/dev/sda3      228651856 12222028 204791888   6% /
+root@mm52:~/weathervane# df
+Filesystem     1K-blocks     Used Available Use% Mounted on
+udev            32660820        0  32660820   0% /dev
+tmpfs            6543656     3668   6539988   1% /run
+/dev/sda3      228651856 12222028 204791888   6% /
+tmpfs           32718272        0  32718272   0% /dev/shm
+tmpfs               5120        0      5120   0% /run/lock
+tmpfs           32718272        0  32718272   0% /sys/fs/cgroup
+/dev/loop0         63488    63488         0 100% /snap/core20/1434
+/dev/loop1         69504    69504         0 100% /snap/lxd/22753
+/dev/loop2         45824    45824         0 100% /snap/snapd/15534
+tmpfs            6543652        0   6543652   0% /run/user/0
+tmpfs             174080       12    174068   1% /var/lib/kubelet/pods/2d9f5a4b-289c-4067-bfb3-90cf47f20f58/volumes/kubernetes.io~projected/kube-api-access-d5vp9
+shm                65536        0     65536   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/c2fb72ba528708f0601399b89415fc67044eef99dcf89d8818631e48dcf67bc7/shm
+overlay        228651856 12222028 204791888   6% /run/containerd/io.containerd.runtime.v2.task/k8s.io/c2fb72ba528708f0601399b89415fc67044eef99dcf89d8818631e48dcf67bc7/rootfs
+root@mm52:~/weathervane# echo $PATH
+/root/go/src/k8s.io/kubernetes/third_party/etcd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin
+root@mm52:~/weathervane# export PATH=$PATH:/root/go/src/k8s.io/kubernetes/cluster
+root@mm52:~/weathervane# kubectl exec -i -- /bin/bash
+kubectl: command not found
+root@mm52:~/weathervane# kubectl.sh exec -i -- /bin/bash
+error: pod, type/name or --filename must be specified
+root@mm52:~/weathervane# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@mm52:~/weathervane# docker pods
+docker: 'pods' is not a docker command.
+See 'docker --help'
+root@mm52:~/weathervane# docker --help
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default "/root/.docker")
+  -c, --context string     Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level ("debug"|"info"|"warn"|"error"|"fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default "/root/.docker/ca.pem")
+      --tlscert string     Path to TLS certificate file (default "/root/.docker/cert.pem")
+      --tlskey string      Path to TLS key file (default "/root/.docker/key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  app*        Docker App (Docker Inc., v0.9.1-beta3)
+  builder     Manage builds
+  buildx*     Docker Buildx (Docker Inc., v0.8.2-docker)
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  scan*       Docker Scan (Docker Inc., v0.17.0)
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+
+To get more help with docker, check out our guides at https://docs.docker.com/go/guides/
+root@mm52:~/weathervane# vi pv-volume.yaml
+root@mm52:~/weathervane# root@mm52:~/weathervane# git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        pv-volume.yaml
+        weathervane.config.k8s.quickstart
+
+nothing added to commit but untracked files present (use "git add" to track)
+root@mm52:~/weathervane# kubectl.sh apply pv-volume.yaml
+error: Unexpected args: [pv-volume.yaml]
+See 'kubectl apply -h' for help and examples
+root@mm52:~/weathervane# kubectl.sh apply -f pv-volume.yaml
+persistentvolume/task-pv-volume created
+root@mm52:~/weathervane# 4kubectl.sh get pv task-pv-volume
+4kubectl.sh: command not found
+root@mm52:~/weathervane# kubectl.sh get pv task-pv-volume
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+task-pv-volume   10Gi       RWO            Retain           Available           manual                  37s
+root@mm52:~/weathervane# kubectl.sh exe -it task-pv-volume -- /bin/bash
+error: unknown command "exe" for "kubectl"
+
+Did you mean this?
+        exec
+root@mm52:~/weathervane# kubectl.sh exec -it task-pv-volume -- /bin/bash
+Error from server (NotFound): pods "task-pv-volume" not found
+root@mm52:~/weathervane# kubectl.sh exec -i -- /bin/bash
+error: pod, type/name or --filename must be specified
+root@mm52:~/weathervane# kubectl.sh run my-shell -i --tty --image ubuntu -- bash
+If you don't see a command prompt, try pressing enter.
+root@my-shell:/#
+root@my-shell:/# cd /mnt
+root@my-shell:/mnt# ls
+root@my-shell:/mnt# mkdir data
+root@my-shell:/mnt# cd data
+root@my-shell:/mnt/data# vi index.html
+bash: vi: command not found
+root@my-shell:/mnt/data# echo 'Hello from Kubernetes storage' > /mnt/data/index.html
+root@my-shell:/mnt/data# ll
+total 12
+drwxr-xr-x 2 root root 4096 Jul 29 21:59 ./
+drwxr-xr-x 1 root root 4096 Jul 29 21:58 ../
+-rw-r--r-- 1 root root   30 Jul 29 21:59 index.html
+root@my-shell:/mnt/data# cat index.html
+Hello from Kubernetes storage
+root@my-shell:/mnt/data#
+exit
+Session ended, resume using 'kubectl attach my-shell -c my-shell -i -t' command when the pod is running
+root@mm52:~/weathervane#
+root@mm52:~/weathervane#

@@ -305,7 +305,7 @@ metadata:
   name: weathervane-pv
 spec:
   capacity:
-    storage: 400Gi
+    storage: 40Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -319,7 +319,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - mm74
+          - node1
 EOF
 
    52  kubectl create -f create-persistent-vol.yaml

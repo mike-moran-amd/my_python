@@ -1,0 +1,3901 @@
+Microsoft Windows [Version 10.0.19044.1889]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh ubuntu@139.178.85.77
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-46-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 30 16:42:52 UTC 2022
+
+  System load:                0.09521484375
+  Usage of /:                 6.8% of 218.00GB
+  Memory usage:               14%
+  Swap usage:                 0%
+  Processes:                  627
+  Users logged in:            1
+  IPv4 address for bond0:     139.178.85.77
+  IPv6 address for bond0:     2604:1380:4641:3b00::15
+  IPv4 address for mpqemubr0: 10.226.243.1
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+4 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+
+Last login: Tue Aug 30 15:12:14 2022 from 70.112.73.191
+ubuntu@wv05:~$ cd weathervane/
+ubuntu@wv05:/home/ubuntu/weathervane$ cd /tmp
+ubuntu@wv05:/tmp$ ls
+220830151655  220830160359    systemd-private-a2af191e71c0499aa9a3892caf38ec99-ModemManager.service-FXGgeX
+220830151845  220830161003    systemd-private-a2af191e71c0499aa9a3892caf38ec99-systemd-logind.service-K61sAE
+220830154527  220830162250    systemd-private-a2af191e71c0499aa9a3892caf38ec99-systemd-resolved.service-v9YGdW
+220830154706  220830163230    systemd-private-a2af191e71c0499aa9a3892caf38ec99-systemd-timesyncd.service-I2Ix1V
+220830155344  220830163255    vevyVBD
+220830155419  snap.lxd
+220830155441  snap.multipass
+ubuntu@wv05:/tmp$ cd 220830163255
+ubuntu@wv05:/tmp/220830163255$ ll
+total 76
+drwxrwxr-x  4 ubuntu ubuntu  4096 Aug 30 16:32 ./
+drwxrwxrwt 26 root   root    4096 Aug 30 16:43 ../
+-rw-rw-r--  1 ubuntu ubuntu  2382 Aug 30 16:33 ZOUT
+-rw-rw-r--  1 ubuntu ubuntu   432 Aug 30 16:32 create-persistent-vol.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 16:32 create-storage-class.yaml
+-rw-rw-r--  1 ubuntu ubuntu   163 Aug 30 16:32 create_pv.yaml
+drwxrwxr-x  2 ubuntu ubuntu  4096 Aug 30 16:32 outDir/
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 16:32 pv01.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 16:32 pv02.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 16:32 pv03.yaml
+-rwxrwxr-x  1 ubuntu ubuntu 20497 Aug 30 16:32 runWeathervane.pl*
+drwxrwxr-x  2 ubuntu ubuntu  4096 Aug 30 16:32 tmpDir/
+-rw-rw-r--  1 ubuntu ubuntu   565 Aug 30 16:32 weathervane.config.k8s.quickstart
+-rw-rw-r--  1 ubuntu ubuntu  2057 Aug 30 16:32 z
+ubuntu@wv05:/tmp/220830163255$ cat ZOUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  10m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  10m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/tmp/220830163255$ cd
+ubuntu@wv05:/home/ubuntu$ cd weathervane/
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830164723
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  24m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  25m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc -A
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc -A
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  26m
+ubuntu@wv05:/home/ubuntu/weathervane$ ll
+total 360
+drwxrwxr-x 17 ubuntu ubuntu  4096 Aug 30 16:47 ./
+drwxr-x--- 10 ubuntu ubuntu  4096 Aug 30 16:40 ../
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 .accept-weathervane
+-rw-r--r--  1 ubuntu ubuntu 45056 Aug 30 16:47 .debugWeathervane.pl.swp
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 .git/
+-rw-rw-r--  1 ubuntu ubuntu  2411 Aug 30 00:15 .gitignore
+-rw-rw-r--  1 ubuntu ubuntu  2959 Aug 30 00:15 BRANCHING.md
+-rw-rw-r--  1 ubuntu ubuntu   200 Aug 30 00:15 Branches.md
+-rw-rw-r--  1 ubuntu ubuntu  5247 Aug 30 00:15 CODE-OF-CONDUCT.md
+-rw-rw-r--  1 ubuntu ubuntu  9540 Aug 30 00:15 CONTRIBUTING.md
+-rw-rw-r--  1 ubuntu ubuntu  4952 Aug 30 00:15 ISSUES.md
+-rw-rw-r--  1 ubuntu ubuntu  1485 Aug 30 00:15 LICENSE.txt
+-rw-rw-r--  1 ubuntu ubuntu   454 Aug 30 00:15 Notice.txt
+-rw-rw-r--  1 ubuntu ubuntu  4585 Aug 30 00:15 README.md
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionApp/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionAppServerWarmer/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionBidService/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionWeb/
+-rw-rw-r--  1 ubuntu ubuntu 10152 Aug 30 00:15 build.gradle
+-rwxrwxr-x  1 ubuntu ubuntu 13779 Aug 30 00:15 buildDockerImages.pl*
+drwxrwxr-x  4 ubuntu ubuntu  4096 Aug 30 00:15 configFiles/
+-rw-rw-r--  1 ubuntu ubuntu   432 Aug 30 00:17 create-persistent-vol.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 00:19 create-storage-class.yaml
+-rw-rw-r--  1 ubuntu ubuntu   163 Aug 30 16:20 create_pv.yaml
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 dbLoader/
+-rwxrwxr-x  1 ubuntu ubuntu 26855 Aug 30 16:47 debugWeathervane.pl*
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 doc/
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 dockerImages/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 gradle/
+-rw-rw-r--  1 ubuntu ubuntu    20 Aug 30 00:15 gradle.properties
+-rwxrwxr-x  1 ubuntu ubuntu  5305 Aug 30 00:15 gradlew*
+-rwxrwxr-x  1 ubuntu ubuntu  2185 Aug 30 00:15 gradlew.bat*
+drwxrwxr-x  2 ubuntu ubuntu  4096 Aug 30 00:34 output/
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv01.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv02.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv03.yaml
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 runHarness/
+-rwxrwxr-x  1 ubuntu ubuntu 20497 Aug 30 00:15 runWeathervane.pl*
+-rwxrwxr-x  1 ubuntu ubuntu  2527 Aug 30 00:15 runmany.sh*
+-rw-rw-r--  1 ubuntu ubuntu   145 Aug 30 00:15 settings.gradle
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 testing/
+-rw-rw-r--  1 ubuntu ubuntu     6 Aug 30 00:15 version.txt
+-rw-rw-r--  1 ubuntu ubuntu   708 Aug 30 00:15 weathervane.config.k8s.micro
+-rw-rw-r--  1 ubuntu ubuntu   565 Aug 30 15:46 weathervane.config.k8s.quickstart
+-rw-rw-r--  1 ubuntu ubuntu   721 Aug 30 00:15 weathervane.config.k8s.small2
+-rwxrwxr-x  1 ubuntu ubuntu 42556 Aug 30 00:15 weathervane.pl*
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 weathervaneResults.csv
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadConfiguration/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadDriver/
+-rw-rw-r--  1 ubuntu ubuntu  2057 Aug 30 16:32 z
+ubuntu@wv05:/home/ubuntu/weathervane$ cat create_pv.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl delete pv local-storage
+Error from server (NotFound): persistentvolumes "local-storage" not found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl delete sc local-storage
+storageclass.storage.k8s.io "local-storage" deleted
+ubuntu@wv05:/home/ubuntu/weathervane$ vi create_pv.yaml
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830165037
+
+$ kubectl get sc --all-namespaces
+No resources found
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+No resources found
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ cat create_pv.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
+ubuntu@wv05:/home/ubuntu/weathervane$ ll
+total 360
+drwxrwxr-x 17 ubuntu ubuntu  4096 Aug 30 16:50 ./
+drwxr-x--- 10 ubuntu ubuntu  4096 Aug 30 16:50 ../
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 .accept-weathervane
+-rw-r--r--  1 ubuntu ubuntu 45056 Aug 30 16:47 .debugWeathervane.pl.swp
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 .git/
+-rw-rw-r--  1 ubuntu ubuntu  2411 Aug 30 00:15 .gitignore
+-rw-rw-r--  1 ubuntu ubuntu  2959 Aug 30 00:15 BRANCHING.md
+-rw-rw-r--  1 ubuntu ubuntu   200 Aug 30 00:15 Branches.md
+-rw-rw-r--  1 ubuntu ubuntu  5247 Aug 30 00:15 CODE-OF-CONDUCT.md
+-rw-rw-r--  1 ubuntu ubuntu  9540 Aug 30 00:15 CONTRIBUTING.md
+-rw-rw-r--  1 ubuntu ubuntu  4952 Aug 30 00:15 ISSUES.md
+-rw-rw-r--  1 ubuntu ubuntu  1485 Aug 30 00:15 LICENSE.txt
+-rw-rw-r--  1 ubuntu ubuntu   454 Aug 30 00:15 Notice.txt
+-rw-rw-r--  1 ubuntu ubuntu  4585 Aug 30 00:15 README.md
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionApp/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionAppServerWarmer/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionBidService/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionWeb/
+-rw-rw-r--  1 ubuntu ubuntu 10152 Aug 30 00:15 build.gradle
+-rwxrwxr-x  1 ubuntu ubuntu 13779 Aug 30 00:15 buildDockerImages.pl*
+drwxrwxr-x  4 ubuntu ubuntu  4096 Aug 30 00:15 configFiles/
+-rw-rw-r--  1 ubuntu ubuntu   432 Aug 30 00:17 create-persistent-vol.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 00:19 create-storage-class.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 16:50 create_pv.yaml
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 dbLoader/
+-rwxrwxr-x  1 ubuntu ubuntu 26855 Aug 30 16:47 debugWeathervane.pl*
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 doc/
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 dockerImages/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 gradle/
+-rw-rw-r--  1 ubuntu ubuntu    20 Aug 30 00:15 gradle.properties
+-rwxrwxr-x  1 ubuntu ubuntu  5305 Aug 30 00:15 gradlew*
+-rwxrwxr-x  1 ubuntu ubuntu  2185 Aug 30 00:15 gradlew.bat*
+drwxrwxr-x  2 ubuntu ubuntu  4096 Aug 30 00:34 output/
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv01.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv02.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv03.yaml
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 runHarness/
+-rwxrwxr-x  1 ubuntu ubuntu 20497 Aug 30 00:15 runWeathervane.pl*
+-rwxrwxr-x  1 ubuntu ubuntu  2527 Aug 30 00:15 runmany.sh*
+-rw-rw-r--  1 ubuntu ubuntu   145 Aug 30 00:15 settings.gradle
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 testing/
+-rw-rw-r--  1 ubuntu ubuntu     6 Aug 30 00:15 version.txt
+-rw-rw-r--  1 ubuntu ubuntu   708 Aug 30 00:15 weathervane.config.k8s.micro
+-rw-rw-r--  1 ubuntu ubuntu   565 Aug 30 15:46 weathervane.config.k8s.quickstart
+-rw-rw-r--  1 ubuntu ubuntu   721 Aug 30 00:15 weathervane.config.k8s.small2
+-rwxrwxr-x  1 ubuntu ubuntu 42556 Aug 30 00:15 weathervane.pl*
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 weathervaneResults.csv
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadConfiguration/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadDriver/
+-rw-rw-r--  1 ubuntu ubuntu  2057 Aug 30 16:32 z
+ubuntu@wv05:/home/ubuntu/weathervane$ cat create_pv.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
+ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830170309
+
+$ kubectl get sc --all-namespaces
+No resources found
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+pvcYamlStringCopy: {
+  \"kind\": \"PersistentVolumeClaim\",
+  \"apiVersion\": \"v1\",
+  \"metadata\": {
+    \"name\": \"weathervane-test-claim\",
+    \"annotations\": {
+        \"volume.beta.kubernetes.io/storage-class\": \"storageClassNameHere\"
+    }
+  },
+  \"spec\": {
+    \"accessModes\": [
+      \"ReadWriteOnce\"
+    ],
+    \"resources\": {
+      \"requests\": {
+        \"storage\": \"1Mi\"
+      }
+    }
+  }
+}
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+No resources found
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc -A
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ ll
+total 364
+drwxrwxr-x 17 ubuntu ubuntu  4096 Aug 30 17:03 ./
+drwxr-x--- 10 ubuntu ubuntu  4096 Aug 30 16:50 ../
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 .accept-weathervane
+-rw-r--r--  1 ubuntu ubuntu 49152 Aug 30 17:03 .debugWeathervane.pl.swp
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 .git/
+-rw-rw-r--  1 ubuntu ubuntu  2411 Aug 30 00:15 .gitignore
+-rw-rw-r--  1 ubuntu ubuntu  2959 Aug 30 00:15 BRANCHING.md
+-rw-rw-r--  1 ubuntu ubuntu   200 Aug 30 00:15 Branches.md
+-rw-rw-r--  1 ubuntu ubuntu  5247 Aug 30 00:15 CODE-OF-CONDUCT.md
+-rw-rw-r--  1 ubuntu ubuntu  9540 Aug 30 00:15 CONTRIBUTING.md
+-rw-rw-r--  1 ubuntu ubuntu  4952 Aug 30 00:15 ISSUES.md
+-rw-rw-r--  1 ubuntu ubuntu  1485 Aug 30 00:15 LICENSE.txt
+-rw-rw-r--  1 ubuntu ubuntu   454 Aug 30 00:15 Notice.txt
+-rw-rw-r--  1 ubuntu ubuntu  4585 Aug 30 00:15 README.md
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionApp/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionAppServerWarmer/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionBidService/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionWeb/
+-rw-rw-r--  1 ubuntu ubuntu 10152 Aug 30 00:15 build.gradle
+-rwxrwxr-x  1 ubuntu ubuntu 13779 Aug 30 00:15 buildDockerImages.pl*
+drwxrwxr-x  4 ubuntu ubuntu  4096 Aug 30 00:15 configFiles/
+-rw-rw-r--  1 ubuntu ubuntu   432 Aug 30 00:17 create-persistent-vol.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 00:19 create-storage-class.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 16:50 create_pv.yaml
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 dbLoader/
+-rwxrwxr-x  1 ubuntu ubuntu 26907 Aug 30 17:03 debugWeathervane.pl*
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 doc/
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 dockerImages/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 gradle/
+-rw-rw-r--  1 ubuntu ubuntu    20 Aug 30 00:15 gradle.properties
+-rwxrwxr-x  1 ubuntu ubuntu  5305 Aug 30 00:15 gradlew*
+-rwxrwxr-x  1 ubuntu ubuntu  2185 Aug 30 00:15 gradlew.bat*
+drwxrwxr-x  2 ubuntu ubuntu  4096 Aug 30 00:34 output/
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv01.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv02.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv03.yaml
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 runHarness/
+-rwxrwxr-x  1 ubuntu ubuntu 20497 Aug 30 00:15 runWeathervane.pl*
+-rwxrwxr-x  1 ubuntu ubuntu  2527 Aug 30 00:15 runmany.sh*
+-rw-rw-r--  1 ubuntu ubuntu   145 Aug 30 00:15 settings.gradle
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 testing/
+-rw-rw-r--  1 ubuntu ubuntu     6 Aug 30 00:15 version.txt
+-rw-rw-r--  1 ubuntu ubuntu   708 Aug 30 00:15 weathervane.config.k8s.micro
+-rw-rw-r--  1 ubuntu ubuntu   565 Aug 30 15:46 weathervane.config.k8s.quickstart
+-rw-rw-r--  1 ubuntu ubuntu   721 Aug 30 00:15 weathervane.config.k8s.small2
+-rwxrwxr-x  1 ubuntu ubuntu 42556 Aug 30 00:15 weathervane.pl*
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 weathervaneResults.csv
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadConfiguration/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadDriver/
+-rw-rw-r--  1 ubuntu ubuntu  2057 Aug 30 16:32 z
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv -A
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get ps -A
+error: the server doesn't have a resource type "ps"
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc -A
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ cat create_pv.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
+ubuntu@wv05:/home/ubuntu/weathervane$ mv create_pv.yaml create_sc.yaml
+ubuntu@wv05:/home/ubuntu/weathervane$ ll
+total 364
+drwxrwxr-x 17 ubuntu ubuntu  4096 Aug 30 17:06 ./
+drwxr-x--- 10 ubuntu ubuntu  4096 Aug 30 16:50 ../
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 .accept-weathervane
+-rw-r--r--  1 ubuntu ubuntu 49152 Aug 30 17:03 .debugWeathervane.pl.swp
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 .git/
+-rw-rw-r--  1 ubuntu ubuntu  2411 Aug 30 00:15 .gitignore
+-rw-rw-r--  1 ubuntu ubuntu  2959 Aug 30 00:15 BRANCHING.md
+-rw-rw-r--  1 ubuntu ubuntu   200 Aug 30 00:15 Branches.md
+-rw-rw-r--  1 ubuntu ubuntu  5247 Aug 30 00:15 CODE-OF-CONDUCT.md
+-rw-rw-r--  1 ubuntu ubuntu  9540 Aug 30 00:15 CONTRIBUTING.md
+-rw-rw-r--  1 ubuntu ubuntu  4952 Aug 30 00:15 ISSUES.md
+-rw-rw-r--  1 ubuntu ubuntu  1485 Aug 30 00:15 LICENSE.txt
+-rw-rw-r--  1 ubuntu ubuntu   454 Aug 30 00:15 Notice.txt
+-rw-rw-r--  1 ubuntu ubuntu  4585 Aug 30 00:15 README.md
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionApp/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionAppServerWarmer/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionBidService/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionWeb/
+-rw-rw-r--  1 ubuntu ubuntu 10152 Aug 30 00:15 build.gradle
+-rwxrwxr-x  1 ubuntu ubuntu 13779 Aug 30 00:15 buildDockerImages.pl*
+drwxrwxr-x  4 ubuntu ubuntu  4096 Aug 30 00:15 configFiles/
+-rw-rw-r--  1 ubuntu ubuntu   432 Aug 30 00:17 create-persistent-vol.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 00:19 create-storage-class.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 16:50 create_sc.yaml
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 dbLoader/
+-rwxrwxr-x  1 ubuntu ubuntu 26907 Aug 30 17:03 debugWeathervane.pl*
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 doc/
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 dockerImages/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 gradle/
+-rw-rw-r--  1 ubuntu ubuntu    20 Aug 30 00:15 gradle.properties
+-rwxrwxr-x  1 ubuntu ubuntu  5305 Aug 30 00:15 gradlew*
+-rwxrwxr-x  1 ubuntu ubuntu  2185 Aug 30 00:15 gradlew.bat*
+drwxrwxr-x  2 ubuntu ubuntu  4096 Aug 30 00:34 output/
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv01.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv02.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv03.yaml
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 runHarness/
+-rwxrwxr-x  1 ubuntu ubuntu 20497 Aug 30 00:15 runWeathervane.pl*
+-rwxrwxr-x  1 ubuntu ubuntu  2527 Aug 30 00:15 runmany.sh*
+-rw-rw-r--  1 ubuntu ubuntu   145 Aug 30 00:15 settings.gradle
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 testing/
+-rw-rw-r--  1 ubuntu ubuntu     6 Aug 30 00:15 version.txt
+-rw-rw-r--  1 ubuntu ubuntu   708 Aug 30 00:15 weathervane.config.k8s.micro
+-rw-rw-r--  1 ubuntu ubuntu   565 Aug 30 15:46 weathervane.config.k8s.quickstart
+-rw-rw-r--  1 ubuntu ubuntu   721 Aug 30 00:15 weathervane.config.k8s.small2
+-rwxrwxr-x  1 ubuntu ubuntu 42556 Aug 30 00:15 weathervane.pl*
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 weathervaneResults.csv
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadConfiguration/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadDriver/
+-rw-rw-r--  1 ubuntu ubuntu  2057 Aug 30 16:32 z
+ubuntu@wv05:/home/ubuntu/weathervane$ cat create_sc.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
+ubuntu@wv05:/home/ubuntu/weathervane$ vi create_sc_aws_ebs.yaml
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc -A
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl apply -f create_sc_aws_ebs.yaml
+storageclass.storage.k8s.io/slow created
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc -A
+NAME   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+slow   kubernetes.io/aws-ebs   Delete          Immediate           false                  4s
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv -A
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc -A
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830170953
+
+$ kubectl get sc --all-namespaces
+NAME   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+slow   kubernetes.io/aws-ebs   Delete          Immediate           false                  32s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+pvcYamlStringCopy: {
+  \"kind\": \"PersistentVolumeClaim\",
+  \"apiVersion\": \"v1\",
+  \"metadata\": {
+    \"name\": \"weathervane-test-claim\",
+    \"annotations\": {
+        \"volume.beta.kubernetes.io/storage-class\": \"storageClassNameHere\"
+    }
+  },
+  \"spec\": {
+    \"accessModes\": [
+      \"ReadWriteOnce\"
+    ],
+    \"resources\": {
+      \"requests\": {
+        \"storage\": \"1Mi\"
+      }
+    }
+  }
+}
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+slow   kubernetes.io/aws-ebs   Delete          Immediate           false                  53s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830171146
+
+$ kubectl get sc --all-namespaces
+NAME   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+slow   kubernetes.io/aws-ebs   Delete          Immediate           false                  2m25s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+pvcYamlStringCopy: {
+  \"kind\": \"PersistentVolumeClaim\",
+  \"apiVersion\": \"v1\",
+  \"metadata\": {
+    \"name\": \"weathervane-test-claim\",
+    \"annotations\": {
+        \"volume.beta.kubernetes.io/storage-class\": \"local-storage\"
+    }
+  },
+  \"spec\": {
+    \"accessModes\": [
+      \"ReadWriteOnce\"
+    ],
+    \"resources\": {
+      \"requests\": {
+        \"storage\": \"1Mi\"
+      }
+    }
+  }
+}
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+slow   kubernetes.io/aws-ebs   Delete          Immediate           false                  2m46s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830171420
+
+$ kubectl get sc --all-namespaces
+NAME   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+slow   kubernetes.io/aws-ebs   Delete          Immediate           false                  4m59s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+pvcYamlStringCopy: {
+  \"kind\": \"PersistentVolumeClaim\",
+  \"apiVersion\": \"v1\",
+  \"metadata\": {
+    \"name\": \"weathervane-test-claim\",
+    \"annotations\": {
+        \"volume.beta.kubernetes.io/storage-class\": \"local-storage\"
+    }
+  },
+  \"spec\": {
+    \"accessModes\": [
+      \"ReadWriteOnce\"
+    ],
+    \"resources\": {
+      \"requests\": {
+        \"storage\": \"1Mi\"
+      }
+    }
+  }
+}
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+slow   kubernetes.io/aws-ebs   Delete          Immediate           false                  5m20s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830171722
+
+$ kubectl get sc --all-namespaces
+NAME   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+slow   kubernetes.io/aws-ebs   Delete          Immediate           false                  8m1s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+pvcYamlStringCopy: {
+  \"kind\": \"PersistentVolumeClaim\",
+  \"apiVersion\": \"v1\",
+  \"metadata\": {
+    \"name\": \"weathervane-test-claim\",
+    \"annotations\": {
+        \"volume.beta.kubernetes.io/storage-class\": \"local-storage\"
+    }
+  },
+  \"spec\": {
+    \"accessModes\": [
+      \"ReadWriteOnce\"
+    ],
+    \"resources\": {
+      \"requests\": {
+        \"storage\": \"1Mi\"
+      }
+    }
+  }
+}
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+slow   kubernetes.io/aws-ebs   Delete          Immediate           false                  8m22s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+NAMESPACE   NAME                     STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS    AGE
+default     weathervane-test-claim   Pending                                      local-storage   20s
+
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl delete pvc weathervane-test-claim
+persistentvolumeclaim "weathervane-test-claim" deleted
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc --all-namespaces
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ ls
+BRANCHING.md            build.gradle                gradle.properties  version.txt
+Branches.md             buildDockerImages.pl        gradlew            weathervane.config.k8s.micro
+CODE-OF-CONDUCT.md      configFiles                 gradlew.bat        weathervane.config.k8s.quickstart
+CONTRIBUTING.md         create-persistent-vol.yaml  output             weathervane.config.k8s.small2
+ISSUES.md               create-storage-class.yaml   pv01.yaml          weathervane.pl
+LICENSE.txt             create_sc.yaml              pv02.yaml          weathervaneResults.csv
+Notice.txt              create_sc_aws_ebs.yaml      pv03.yaml          workloadConfiguration
+README.md               dbLoader                    runHarness         workloadDriver
+auctionApp              debugWeathervane.pl         runWeathervane.pl  z
+auctionAppServerWarmer  doc                         runmany.sh
+auctionBidService       dockerImages                settings.gradle
+auctionWeb              gradle                      testing
+ubuntu@wv05:/home/ubuntu/weathervane$ cat create_sc_aws_ebs.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: slow
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: io1
+  iopsPerGB: "10"
+  fsType: ext4
+
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl apply -f create_sc_aws_ebs.yaml
+storageclass.storage.k8s.io/slow unchanged
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc --all-namespaces
+NAME   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+slow   kubernetes.io/aws-ebs   Delete          Immediate           false                  10m
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl delete sc slow
+storageclass.storage.k8s.io "slow" deleted
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc --all-namespaces
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl apply -f create_sc_aws_ebs.yaml
+storageclass.storage.k8s.io/slow created
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc --all-namespaces
+NAME   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+slow   kubernetes.io/aws-ebs   Delete          Immediate           false                  7s
+ubuntu@wv05:/home/ubuntu/weathervane$ vi create_sc.yaml
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl delete sc slow
+storageclass.storage.k8s.io "slow" deleted
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl apply -f create_sc.yaml
+storageclass.storage.k8s.io/local-storage created
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc -A
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  8s
+ubuntu@wv05:/home/ubuntu/weathervane$ ls
+BRANCHING.md            build.gradle                gradle.properties  version.txt
+Branches.md             buildDockerImages.pl        gradlew            weathervane.config.k8s.micro
+CODE-OF-CONDUCT.md      configFiles                 gradlew.bat        weathervane.config.k8s.quickstart
+CONTRIBUTING.md         create-persistent-vol.yaml  output             weathervane.config.k8s.small2
+ISSUES.md               create-storage-class.yaml   pv01.yaml          weathervane.pl
+LICENSE.txt             create_sc.yaml              pv02.yaml          weathervaneResults.csv
+Notice.txt              create_sc_aws_ebs.yaml      pv03.yaml          workloadConfiguration
+README.md               dbLoader                    runHarness         workloadDriver
+auctionApp              debugWeathervane.pl         runWeathervane.pl  z
+auctionAppServerWarmer  doc                         runmany.sh
+auctionBidService       dockerImages                settings.gradle
+auctionWeb              gradle                      testing
+ubuntu@wv05:/home/ubuntu/weathervane$ cat pv01.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv1
+spec:
+  capacity:
+    storage: 15Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol/v01
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node1
+ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ cat *.q*
+{
+  "description" : "micro",
+  "configurationSize": "micro",
+  "runStrategy" : "fixed",
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "kubernetes",
+      "kubeconfigFile" : "/home/ubuntu/.kube/config",
+      "kubeconfigContext" : "kubernetes-admin@kubernetes",
+    },
+  ],
+  "driverCluster" : "kubernetes",
+  "appInstanceCluster" : "kubernetes",
+  "appIngressMethod" : "clusterip",
+  "cassandraDataStorageClass" : "local-storage",
+  "postgresqlStorageClass" : "local-storage",
+  "nginxCacheStorageClass" : "local-storage",
+}
+ubuntu@wv05:/home/ubuntu/weathervane$ cat pv01.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv1
+spec:
+  capacity:
+    storage: 15Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol/v01
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node1
+ubuntu@wv05:/home/ubuntu/weathervane$ cat pv02.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv2
+spec:
+  capacity:
+    storage: 15Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol/v02
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node1
+ubuntu@wv05:/home/ubuntu/weathervane$ cat pv03.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv3
+spec:
+  capacity:
+    storage: 15Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol/v03
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node1
+ubuntu@wv05:/home/ubuntu/weathervane$ jobs
+ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830173207
+persistentvolume/weathervane-pv1 created
+persistentvolume/weathervane-pv2 created
+persistentvolume/weathervane-pv3 created
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  6m14s
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Available           local-storage            1s
+weathervane-pv2   15Gi       RWO            Retain           Available           local-storage            1s
+weathervane-pv3   15Gi       RWO            Retain           Available           local-storage            0s
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+pvcYamlStringCopy: {
+  \"kind\": \"PersistentVolumeClaim\",
+  \"apiVersion\": \"v1\",
+  \"metadata\": {
+    \"name\": \"weathervane-test-claim\",
+    \"annotations\": {
+        \"volume.beta.kubernetes.io/storage-class\": \"local-storage\"
+    }
+  },
+  \"spec\": {
+    \"accessModes\": [
+      \"ReadWriteOnce\"
+    ],
+    \"resources\": {
+      \"requests\": {
+        \"storage\": \"1Mi\"
+      }
+    }
+  }
+}
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  6m34s
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Available           local-storage            21s
+weathervane-pv2   15Gi       RWO            Retain           Available           local-storage            21s
+weathervane-pv3   15Gi       RWO            Retain           Available           local-storage            20s
+
+$ kubectl get pvc --all-namespaces
+NAMESPACE   NAME                     STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS    AGE
+default     weathervane-test-claim   Pending                                      local-storage   21s
+
+ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ ls
+BRANCHING.md            build.gradle                gradle.properties  version.txt
+Branches.md             buildDockerImages.pl        gradlew            weathervane.config.k8s.micro
+CODE-OF-CONDUCT.md      configFiles                 gradlew.bat        weathervane.config.k8s.quickstart
+CONTRIBUTING.md         create-persistent-vol.yaml  output             weathervane.config.k8s.small2
+ISSUES.md               create-storage-class.yaml   pv01.yaml          weathervane.pl
+LICENSE.txt             create_sc.yaml              pv02.yaml          weathervaneResults.csv
+Notice.txt              create_sc_aws_ebs.yaml      pv03.yaml          workloadConfiguration
+README.md               dbLoader                    runHarness         workloadDriver
+auctionApp              debugWeathervane.pl         runWeathervane.pl  z
+auctionAppServerWarmer  doc                         runmany.sh
+auctionBidService       dockerImages                settings.gradle
+auctionWeb              gradle                      testing
+ubuntu@wv05:/home/ubuntu/weathervane$ cat pv01.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: weathervane-pv1
+spec:
+  capacity:
+    storage: 15Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /k8s/weathervane/vol/v01
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node1
+ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc -A
+NAMESPACE   NAME                     STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS    AGE
+default     weathervane-test-claim   Pending                                      local-storage   12m
+ubuntu@wv05:/home/ubuntu/weathervane$ vi create_pvc.yaml
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl apply -f create_pvc.yaml
+Error from server (BadRequest): error when creating "create_pvc.yaml": PersistentVolumeClaim in version "v1" cannot be handled as a PersistentVolumeClaim: json: cannot unmarshal string into Go struct field PersistentVolumeClaimSpec.spec.accessModes of type []v1.PersistentVolumeAccessMode
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl describe pvc weathervane-test-claim
+Name:          weathervane-test-claim
+Namespace:     default
+StorageClass:  local-storage
+Status:        Pending
+Volume:
+Labels:        <none>
+Annotations:   volume.beta.kubernetes.io/storage-class: local-storage
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:
+Access Modes:
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:
+  Type    Reason                Age                From                         Message
+  ----    ------                ----               ----                         -------
+  Normal  WaitForFirstConsumer  5s (x62 over 15m)  persistentvolume-controller  waiting for first consumer to be created before binding
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc weathervane-test-claim -o yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{"volume.beta.kubernetes.io/storage-class":"local-storage"},"name":"weathervane-test-claim","namespace":"default"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"1Mi"}}}}
+    volume.beta.kubernetes.io/storage-class: local-storage
+  creationTimestamp: "2022-08-30T17:32:08Z"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  name: weathervane-test-claim
+  namespace: default
+  resourceVersion: "153709"
+  uid: fa4bd7e7-8b3a-4bf1-925d-13d92bf80251
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Mi
+  volumeMode: Filesystem
+status:
+  phase: Pending
+ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv -A
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Available           local-storage            25m
+weathervane-pv2   15Gi       RWO            Retain           Available           local-storage            25m
+weathervane-pv3   15Gi       RWO            Retain           Available           local-storage            25m
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830175725
+persistentvolume/weathervane-pv1 unchanged
+persistentvolume/weathervane-pv2 unchanged
+persistentvolume/weathervane-pv3 unchanged
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  31m
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Available           local-storage            25m
+weathervane-pv2   15Gi       RWO            Retain           Available           local-storage            25m
+weathervane-pv3   15Gi       RWO            Retain           Available           local-storage            25m
+
+$ kubectl get pvc --all-namespaces
+NAMESPACE   NAME                     STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS    AGE
+default     weathervane-test-claim   Pending                                      local-storage   25m
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: persistentvolumeclaim "weathervane-test-claim" deleted
+
+pvcYamlStringCopy: {
+  \"kind\": \"PersistentVolumeClaim\",
+  \"apiVersion\": \"v1\",
+  \"metadata\": {
+    \"name\": \"weathervane-test-claim\",
+    \"annotations\": {
+        \"volume.beta.kubernetes.io/storage-class\": \"local-storage\"
+    }
+  },
+  \"spec\": {
+    \"accessModes\": [
+      \"ReadWriteOnce\"
+    ],
+    \"resources\": {
+      \"requests\": {
+        \"storage\": \"1Mi\"
+      }
+    }
+  }
+}
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+status: Pending
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  31m
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Available           local-storage            25m
+weathervane-pv2   15Gi       RWO            Retain           Available           local-storage            25m
+weathervane-pv3   15Gi       RWO            Retain           Available           local-storage            25m
+
+$ kubectl get pvc --all-namespaces
+NAMESPACE   NAME                     STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS    AGE
+default     weathervane-test-claim   Pending                                      local-storage   20s
+
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get endpoints
+NAME         ENDPOINTS            AGE
+kubernetes   139.178.85.77:6443   18h
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get endpoints -A
+NAMESPACE          NAME                              ENDPOINTS                                                           AGE
+calico-apiserver   calico-api                        192.168.66.197:5443,192.168.66.198:5443                             18h
+calico-system      calico-kube-controllers-metrics   192.168.66.196:9094                                                 18h
+calico-system      calico-typha                      10.226.243.50:5473,139.178.85.77:5473                               18h
+default            kubernetes                        139.178.85.77:6443                                                  18h
+kube-system        kube-dns                          192.168.66.193:53,192.168.66.195:53,192.168.66.193:53 + 3 more...   18h
+ubuntu@wv05:/home/ubuntu/weathervane$ history
+    1  git clone http://github.com/mike-moran-amd/my_python.git
+    2  cd my_python/
+    3  . install_k8s
+    4  sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+    5  mkdir -p $HOME/.kube
+    6  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    7  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    8  kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+    9  kubectl create -f https://projectcalico.docs.tigera.io/manifests/custom-resources.yaml
+   10  kubectl get nodes --show-labels
+   11  sudo snap install multipass
+   12  multipass launch -c 4 -d 50G -m 8G -n node1
+   13  multipass shell node1
+   14  multipass launch -c 4 -d 50G -m 8G -n node2
+   15  multipass shell node2
+   16  kubectl get nodes --show-labels
+   17  sudo mkdir -p /k8s/weathervane/vol
+   18  sudo chmod -R 777 /k8s
+   19  cd
+   20  git clone http://github.com/vmware/weathervane
+   21  cd weathervane/
+   22  cat > create-persistent-vol.yaml << EOF
+   23  apiVersion: v1
+   24  kind: PersistentVolume
+   25  metadata:
+   26    name: weathervane-pv
+   27  spec:
+   28    capacity:
+   29      storage: 40Gi
+   30    accessModes:
+   31    - ReadWriteOnce
+   32    persistentVolumeReclaimPolicy: Retain
+   33    storageClassName: local-storage
+   34    local:
+   35      path: /k8s/weathervane/vol
+   36    nodeAffinity:
+   37      required:
+   38        nodeSelectorTerms:
+   39        - matchExpressions:
+   40          - key: kubernetes.io/hostname
+   41            operator: In
+   42            values:
+   43            - node1
+   44  EOF
+   45  kubectl create -f create-persistent-vol.yaml
+   46  kubectl get pv
+   47  cat > create-storage-class.yaml << EOF
+   48  kind: StorageClass
+   49  apiVersion: storage.k8s.io/v1
+   50  metadata:
+   51    name: local-storage
+   52  provisioner: kubernetes.io/no-provisioner
+   53  volumeBindingMode: Immediate
+   54  EOF
+   55  kubectl create -f create-storage-class.yaml
+   56  kubectl get sc
+   57  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   58  vi weathervane.config.k8s.quickstart
+   59  cat weathervane.config.k8s.quickstart
+   60  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   61  vi weathervane.config.k8s.quickstart
+   62  cat weathervane.config.k8s.quickstart
+   63  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   64  kubectl get ps
+   65  kubectl get pv
+   66  kubectl get pvc
+   67  kubectl get sc
+   68  kubectl get sc- -A
+   69  kubectl get sc -A
+   70  kubectl get pv -A
+   71  kubectl get pvc -A
+   72  kubectl config view
+   73  kubectl get node -A
+   74  kubectl describe node node1
+   75  kubectl config get-contexts
+   76  kubectl config view -o jsonpath='{.contexts[*].name}' | tr " " "\n"
+   77  cd weathervane/
+   78  cd /tmp
+   79  ls
+   80  cd 220830163255
+   81  ll
+   82  cat ZOUT
+   83  cd
+   84  cd weathervane/
+   85  . z
+   86  kubectl get pvc -A
+   87  kubectl get sc -A
+   88  ll
+   89  cat create_pv.yaml
+   90  kubectl delete pv local-storage
+   91  kubectl delete sc local-storage
+   92  vi create_pv.yaml
+   93  . z
+   94  cat create_pv.yaml
+   95  ll
+   96  cat create_pv.yaml
+   97  . z
+   98  kubectl get sc -A
+   99  ll
+  100  kubectl get pv -A
+  101  kubectl get ps -A
+  102  kubectl get sc -A
+  103  cat create_pv.yaml
+  104  mv create_pv.yaml create_sc.yaml
+  105  ll
+  106  cat create_sc.yaml
+  107  vi create_sc_aws_ebs.yaml
+  108  kubectl get sc -A
+  109  kubectl apply -f create_sc_aws_ebs.yaml
+  110  kubectl get sc -A
+  111  kubectl get pv -A
+  112  kubectl get pvc -A
+  113  . z
+  114  kubectl delete pvc weathervane-test-claim
+  115  kubectl get pvc --all-namespaces
+  116  ls
+  117  cat create_sc_aws_ebs.yaml
+  118  kubectl apply -f create_sc_aws_ebs.yaml
+  119  kubectl get sc --all-namespaces
+  120  kubectl delete sc slow
+  121  kubectl get sc --all-namespaces
+  122  kubectl apply -f create_sc_aws_ebs.yaml
+  123  kubectl get sc --all-namespaces
+  124  vi create_sc.yaml
+  125  kubectl delete sc slow
+  126  kubectl apply -f create_sc.yaml
+  127  kubectl get sc -A
+  128  ls
+  129  cat pv01.yaml
+  130  cat *.q*
+  131  cat pv01.yaml
+  132  cat pv02.yaml
+  133  cat pv03.yaml
+  134  jobs
+  135  vi z
+  136  . z
+  137  ls
+  138  cat pv01.yaml
+  139  kubectl get pvc -A
+  140  vi create_pvc.yaml
+  141  kubectl apply -f create_pvc.yaml
+  142  kubectl describe pvc weathervane-test-claim
+  143  kubectl get pvc weathervane-test-claim -o yaml
+  144  kubectl get pv -A
+  145  . z
+  146  kubectl get endpoints
+  147  kubectl get endpoints -A
+  148  history
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc weathervane-test-claim -o yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{"volume.beta.kubernetes.io/storage-class":"local-storage"},"name":"weathervane-test-claim","namespace":"default"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"1Mi"}}}}
+    volume.beta.kubernetes.io/storage-class: local-storage
+  creationTimestamp: "2022-08-30T17:57:26Z"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  name: weathervane-test-claim
+  namespace: default
+  resourceVersion: "157399"
+  uid: 25477187-e3de-4b1a-83a6-2d71809e94e0
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Mi
+  volumeMode: Filesystem
+status:
+  phase: Pending
+ubuntu@wv05:/home/ubuntu/weathervane$ who
+ubuntu   pts/0        2022-08-30 15:12 (70.112.73.191)
+ubuntu   pts/1        2022-08-30 16:42 (70.112.73.191)
+ubuntu   pts/2        2022-08-30 18:11 (165.204.84.11)
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get node
+NAME    STATUS   ROLES           AGE   VERSION
+node1   Ready    <none>          18h   v1.25.0
+node2   Ready    <none>          18h   v1.25.0
+wv05    Ready    control-plane   18h   v1.25.0
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc weathervane-test-claim -o json
+{
+    "apiVersion": "v1",
+    "kind": "PersistentVolumeClaim",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"PersistentVolumeClaim\",\"metadata\":{\"annotations\":{\"volume.beta.kubernetes.io/storage-class\":\"local-storage\"},\"name\":\"weathervane-test-claim\",\"namespace\":\"default\"},\"spec\":{\"accessModes\":[\"ReadWriteOnce\"],\"resources\":{\"requests\":{\"storage\":\"1Mi\"}}}}\n",
+            "volume.beta.kubernetes.io/storage-class": "local-storage"
+        },
+        "creationTimestamp": "2022-08-30T17:57:26Z",
+        "finalizers": [
+            "kubernetes.io/pvc-protection"
+        ],
+        "name": "weathervane-test-claim",
+        "namespace": "default",
+        "resourceVersion": "157399",
+        "uid": "25477187-e3de-4b1a-83a6-2d71809e94e0"
+    },
+    "spec": {
+        "accessModes": [
+            "ReadWriteOnce"
+        ],
+        "resources": {
+            "requests": {
+                "storage": "1Mi"
+            }
+        },
+        "volumeMode": "Filesystem"
+    },
+    "status": {
+        "phase": "Pending"
+    }
+}
+ubuntu@wv05:/home/ubuntu/weathervane$ uptime
+ 18:20:06 up 18:56,  3 users,  load average: 0.22, 0.22, 0.30
+ubuntu@wv05:/home/ubuntu/weathervane$ cd /home/ubuntu/scaling
+ubuntu@wv05:/home/ubuntu/scaling$ ll
+total 48
+drwxr-xr-x  5 ubuntu ubuntu 4096 Aug 30 18:20 ./
+drwxr-x--- 11 ubuntu ubuntu 4096 Aug 30 18:20 ../
+drwxr-xr-x  6 ubuntu ubuntu 4096 Aug 30 18:18 container-benchmark/
+-rwxr-xr-x  1 ubuntu ubuntu 1056 Aug 30 18:18 create-job-yaml-deploy.sh*
+-rwxr-xr-x  1 ubuntu ubuntu  994 Aug 30 18:20 create-test-job-files.sh*
+-rwxr-xr-x  1 ubuntu ubuntu  144 Aug 30 18:18 delete-jobs.sh*
+-rwxr-xr-x  1 ubuntu ubuntu  390 Aug 30 18:18 get-log-results.sh*
+-rw-r--r--  1 ubuntu ubuntu  384 Aug 30 18:18 get-log-results2.sh
+drwxrwxr-x  2 ubuntu ubuntu 4096 Aug 30 18:19 logs/
+-rw-r--r--  1 ubuntu ubuntu  466 Aug 30 18:18 readme
+-rwxr-xr-x  1 ubuntu ubuntu 2082 Aug 30 18:18 scaling-test.sh*
+drwxrwxr-x  2 ubuntu ubuntu 4096 Aug 30 18:20 tests/
+ubuntu@wv05:/home/ubuntu/scaling$ ps -a
+    PID TTY          TIME CMD
+ 775285 pts/0    00:00:01 vi
+ 860392 pts/1    00:00:00 ps
+ubuntu@wv05:/home/ubuntu/scaling$ cat scaling-test.sh
+#!/bin/bash
+
+# Read the test directory for a list of all the yaml files
+numberofcontainer=""
+
+interval=1
+for yamlfile in ./tests/*.yaml; do
+  #get the numer of containers from the yaml file name
+  numberofcontainer=$(echo $yamlfile | cut -d'/' -f3 | cut -d- -f1)
+  testname=$(echo $yamlfile | cut -d'/' -f3 | cut -d. -f1)
+  logfile="logs/${testname}.log"
+  echo "yaml file: $yamlfile, logfile: $logfile"
+  echo "number of containers: $numberofcontainer"
+
+  starttime=$(date)
+  echo "[$starttime]  Test start" | tee $logfile
+  START=$(date -d"$starttime" +%s)
+
+  #1.  Deploy the containers
+  kubectl apply -f $yamlfile
+
+  #2.  Track the pods
+  echo "Tracking containers..."
+
+  # Track the number of containers on the system that are running or have exited.
+  echo "Interval(s) RUNNING PENDING COMPLETED" | tee -a $logfile
+  for ((i = 1; i < 10000; i++)); do
+    running=$(kubectl get pods | grep "Running" -c)
+    pending=$(kubectl get pods | grep "Pending" -c)
+    completed=$(kubectl get pods | grep "Completed" -c)
+    failed=$(kubectl get pods | grep "Failed" -c)
+    printf "%11d %7d %7d %9d\n" $interval $running $pending $completed | tee -a $logfile
+    sleep 1.0
+    let interval=$interval+1
+    if [[ "$completed" -eq "$numberofcontainer" ]]; then
+      echo "All $completed jobs finished successfully!"
+      endtime=$(date)
+      echo "[$endtime] Test complete" | tee -a $logfile
+      END=$(date -d"$endtime" +%s)
+      DURATION=$((END-START))
+      echo "$completed job test duration in seconds: $DURATION" | tee -a $logfile
+      i=20000
+    fi
+    let totaljobs=completed+failed
+    if [[ "$failed" -ne "0" ]]; then
+      if [[ "$totaljobs" -eq "$numberofcontainer" ]]; then
+        echo "Something went wrong, $failed jobs failed, $completed completed!" | tee -a $logfile
+        timestamp=$(date)
+        echo "[$timestamp] Test aborted" | tee -a $logfile
+        i=20000
+      fi
+    fi
+  done
+
+  # get logs
+  ./get-log-results.sh ./logs $numberofcontainer
+
+  #3.  Cleanup
+  ./delete-jobs.sh $numberofcontainer sysbench
+  sleep 30
+  #4.  Repeat
+  echo "-----"
+done
+ubuntu@wv05:/home/ubuntu/scaling$
+ubuntu@wv05:/home/ubuntu/scaling$ ll
+total 56
+drwxr-xr-x  5 ubuntu ubuntu 4096 Aug 30 18:30 ./
+drwxr-x--- 11 ubuntu ubuntu 4096 Aug 30 18:20 ../
+drwxr-xr-x  6 ubuntu ubuntu 4096 Aug 30 18:18 container-benchmark/
+-rwxr-xr-x  1 ubuntu ubuntu 1056 Aug 30 18:18 create-job-yaml-deploy.sh*
+-rwxr-xr-x  1 ubuntu ubuntu  994 Aug 30 18:20 create-test-job-files.sh*
+-rwxr-xr-x  1 ubuntu ubuntu  144 Aug 30 18:18 delete-jobs.sh*
+-rwxr-xr-x  1 ubuntu ubuntu  390 Aug 30 18:18 get-log-results.sh*
+-rw-r--r--  1 ubuntu ubuntu  384 Aug 30 18:18 get-log-results2.sh
+drwxrwxr-x  2 ubuntu ubuntu 4096 Aug 30 18:30 logs/
+-rw-r--r--  1 ubuntu ubuntu  466 Aug 30 18:18 readme
+-rwxr-xr-x  1 ubuntu ubuntu 2082 Aug 30 18:18 scaling-test.sh*
+-rw-rw-r--  1 ubuntu ubuntu 4639 Aug 30 18:30 scaling.log
+drwxrwxr-x  2 ubuntu ubuntu 4096 Aug 30 18:20 tests/
+ubuntu@wv05:/home/ubuntu/scaling$ tail -f scaling.log
+         28       0     120         0
+         29       0     120         0
+         30       0     120         0
+         31       0     120         0
+         32       0     120         0
+         33       0     120         0
+         34       0     120         0
+         35       0     120         0
+         36       0     120         0
+         37       0     120         0
+         38       0     120         0
+         39       0     120         0
+         40       0     120         0
+         41       0     120         0
+         42       0     120         0
+         43       0     120         0
+         44       0     120         0
+         45       0     120         0
+         46       0     120         0
+         47       0     120         0
+         48       0     120         0
+         49       0     120         0
+         50       0     120         0
+         51       0     120         0
+^C
+ubuntu@wv05:/home/ubuntu/scaling$ kubectl get pods -A
+NAMESPACE          NAME                                       READY   STATUS              RESTARTS   AGE
+calico-apiserver   calico-apiserver-65f7c49d9c-9dc77          1/1     Running             0          18h
+calico-apiserver   calico-apiserver-65f7c49d9c-zfkq2          1/1     Running             0          18h
+calico-system      calico-kube-controllers-85666c5b94-zjbzf   1/1     Running             0          18h
+calico-system      calico-node-hp99s                          1/1     Running             0          18h
+calico-system      calico-node-lcfhc                          1/1     Running             0          18h
+calico-system      calico-node-tqf4k                          1/1     Running             0          18h
+calico-system      calico-typha-748c4c9cc6-tx48m              1/1     Running             0          18h
+calico-system      calico-typha-748c4c9cc6-v4ldp              1/1     Running             0          18h
+calico-system      csi-node-driver-b8rpg                      2/2     Running             0          18h
+calico-system      csi-node-driver-p8k4c                      2/2     Running             0          18h
+calico-system      csi-node-driver-xcwbl                      2/2     Running             0          18h
+default            sysbench0-kl882                            0/1     ErrImageNeverPull   0          75s
+default            sysbench1-lqvhm                            0/1     ErrImageNeverPull   0          75s
+default            sysbench10-dns2h                           0/1     Pending             0          75s
+default            sysbench100-4w9p7                          0/1     Pending             0          64s
+default            sysbench101-vsd7p                          0/1     Pending             0          64s
+default            sysbench102-k2xdh                          0/1     Pending             0          64s
+default            sysbench103-qbct8                          0/1     Pending             0          64s
+default            sysbench104-zzk54                          0/1     Pending             0          64s
+default            sysbench105-tz5xt                          0/1     Pending             0          63s
+default            sysbench106-n4g76                          0/1     Pending             0          63s
+default            sysbench107-97h4n                          0/1     Pending             0          63s
+default            sysbench108-dg574                          0/1     Pending             0          63s
+default            sysbench109-thtcb                          0/1     Pending             0          63s
+default            sysbench11-q664d                           0/1     Pending             0          75s
+default            sysbench110-nmhs5                          0/1     Pending             0          63s
+default            sysbench111-6szcl                          0/1     Pending             0          63s
+default            sysbench112-fltx7                          0/1     Pending             0          63s
+default            sysbench113-sb4rj                          0/1     Pending             0          63s
+default            sysbench114-b7hvg                          0/1     Pending             0          63s
+default            sysbench115-vp7xw                          0/1     Pending             0          62s
+default            sysbench116-b88q7                          0/1     Pending             0          62s
+default            sysbench117-w5xvz                          0/1     Pending             0          62s
+default            sysbench118-qvs5j                          0/1     Pending             0          62s
+default            sysbench119-nsbw4                          0/1     Pending             0          62s
+default            sysbench12-g6898                           0/1     Pending             0          75s
+default            sysbench120-d7z4j                          0/1     Pending             0          62s
+default            sysbench121-vdzwn                          0/1     Pending             0          61s
+default            sysbench122-7krts                          0/1     Pending             0          61s
+default            sysbench123-2tcmw                          0/1     Pending             0          61s
+default            sysbench124-jps2q                          0/1     Pending             0          61s
+default            sysbench125-429xs                          0/1     Pending             0          61s
+default            sysbench126-kkx7z                          0/1     Pending             0          61s
+default            sysbench127-wdhdn                          0/1     Pending             0          61s
+default            sysbench13-fslht                           0/1     Pending             0          75s
+default            sysbench14-d2nbm                           0/1     Pending             0          75s
+default            sysbench15-t4nbm                           0/1     Pending             0          74s
+default            sysbench16-9446b                           0/1     Pending             0          74s
+default            sysbench17-rzdcq                           0/1     Pending             0          74s
+default            sysbench18-njg8f                           0/1     Pending             0          74s
+default            sysbench19-8kkcj                           0/1     Pending             0          74s
+default            sysbench2-8brhf                            0/1     ErrImageNeverPull   0          75s
+default            sysbench20-l8lmz                           0/1     Pending             0          74s
+default            sysbench21-ksmwb                           0/1     Pending             0          73s
+default            sysbench22-cb629                           0/1     Pending             0          73s
+default            sysbench23-6b8zx                           0/1     Pending             0          73s
+default            sysbench24-6m8t4                           0/1     Pending             0          73s
+default            sysbench25-x28xg                           0/1     Pending             0          73s
+default            sysbench26-wt2m6                           0/1     Pending             0          73s
+default            sysbench27-2m9dg                           0/1     Pending             0          73s
+default            sysbench28-9s858                           0/1     Pending             0          73s
+default            sysbench29-crl98                           0/1     Pending             0          73s
+default            sysbench3-lct6d                            0/1     ErrImageNeverPull   0          75s
+default            sysbench30-qqjwt                           0/1     Pending             0          72s
+default            sysbench31-rw5jm                           0/1     Pending             0          72s
+default            sysbench32-dmtsr                           0/1     Pending             0          72s
+default            sysbench33-92tvz                           0/1     Pending             0          72s
+default            sysbench34-m82f4                           0/1     Pending             0          72s
+default            sysbench35-fgj7w                           0/1     Pending             0          72s
+default            sysbench36-qr2h7                           0/1     Pending             0          72s
+default            sysbench37-v8rlm                           0/1     Pending             0          72s
+default            sysbench38-d5gpv                           0/1     Pending             0          72s
+default            sysbench39-r8m94                           0/1     Pending             0          72s
+default            sysbench4-j4vdk                            0/1     ErrImageNeverPull   0          75s
+default            sysbench40-rj42c                           0/1     Pending             0          71s
+default            sysbench41-zv7fw                           0/1     Pending             0          71s
+default            sysbench42-z6qm6                           0/1     Pending             0          71s
+default            sysbench43-njscv                           0/1     Pending             0          71s
+default            sysbench44-fh4rb                           0/1     Pending             0          71s
+default            sysbench45-9dd8p                           0/1     Pending             0          71s
+default            sysbench46-nn9cz                           0/1     Pending             0          70s
+default            sysbench47-ndpwr                           0/1     Pending             0          70s
+default            sysbench48-6qjsq                           0/1     Pending             0          70s
+default            sysbench49-gmq7m                           0/1     Pending             0          70s
+default            sysbench5-95qn5                            0/1     ErrImageNeverPull   0          75s
+default            sysbench50-2h5r5                           0/1     Pending             0          70s
+default            sysbench51-dl62l                           0/1     Pending             0          70s
+default            sysbench52-mmb5v                           0/1     Pending             0          70s
+default            sysbench53-476hj                           0/1     Pending             0          70s
+default            sysbench54-ts4rk                           0/1     Pending             0          70s
+default            sysbench55-m8ldv                           0/1     Pending             0          69s
+default            sysbench56-x9h28                           0/1     Pending             0          69s
+default            sysbench57-f8f49                           0/1     Pending             0          69s
+default            sysbench58-tpvn2                           0/1     Pending             0          69s
+default            sysbench59-hjzlc                           0/1     Pending             0          69s
+default            sysbench6-mh577                            0/1     ErrImageNeverPull   0          75s
+default            sysbench60-w6gkh                           0/1     Pending             0          69s
+default            sysbench61-w5zqv                           0/1     Pending             0          69s
+default            sysbench62-w6wnw                           0/1     Pending             0          69s
+default            sysbench63-vxk4f                           0/1     Pending             0          69s
+default            sysbench64-h7s66                           0/1     Pending             0          69s
+default            sysbench65-2bcgk                           0/1     Pending             0          68s
+default            sysbench66-kbhb7                           0/1     Pending             0          68s
+default            sysbench67-4b28r                           0/1     Pending             0          68s
+default            sysbench68-z2x2f                           0/1     Pending             0          68s
+default            sysbench69-bqhpq                           0/1     Pending             0          68s
+default            sysbench7-vj2g2                            0/1     ErrImageNeverPull   0          75s
+default            sysbench70-9dnrw                           0/1     Pending             0          68s
+default            sysbench71-gjxpl                           0/1     Pending             0          67s
+default            sysbench72-64q9w                           0/1     Pending             0          67s
+default            sysbench73-lpg9l                           0/1     Pending             0          67s
+default            sysbench74-rbtd7                           0/1     Pending             0          67s
+default            sysbench75-cf2qt                           0/1     Pending             0          67s
+default            sysbench76-82jlc                           0/1     Pending             0          67s
+default            sysbench77-wc4pp                           0/1     Pending             0          67s
+default            sysbench78-wc2h8                           0/1     Pending             0          67s
+default            sysbench79-h8wzv                           0/1     Pending             0          67s
+default            sysbench8-frtqw                            0/1     Pending             0          75s
+default            sysbench80-rmtk9                           0/1     Pending             0          66s
+default            sysbench81-dnpxc                           0/1     Pending             0          66s
+default            sysbench82-vm6wc                           0/1     Pending             0          66s
+default            sysbench83-tw5xz                           0/1     Pending             0          66s
+default            sysbench84-hgfpf                           0/1     Pending             0          66s
+default            sysbench85-cnbwl                           0/1     Pending             0          66s
+default            sysbench86-skm9f                           0/1     Pending             0          66s
+default            sysbench87-p6cnt                           0/1     Pending             0          66s
+default            sysbench88-9rqdd                           0/1     Pending             0          66s
+default            sysbench89-mbbww                           0/1     Pending             0          66s
+default            sysbench9-hb9vn                            0/1     Pending             0          75s
+default            sysbench90-n57hd                           0/1     Pending             0          65s
+default            sysbench91-xqxmr                           0/1     Pending             0          65s
+default            sysbench92-xjqql                           0/1     Pending             0          65s
+default            sysbench93-p6srj                           0/1     Pending             0          65s
+default            sysbench94-msb4z                           0/1     Pending             0          65s
+default            sysbench95-2xgjk                           0/1     Pending             0          65s
+default            sysbench96-rjg25                           0/1     Pending             0          64s
+default            sysbench97-ndjkx                           0/1     Pending             0          64s
+default            sysbench98-qwk62                           0/1     Pending             0          64s
+default            sysbench99-sw92r                           0/1     Pending             0          64s
+kube-system        coredns-565d847f94-bpnzt                   1/1     Running             0          18h
+kube-system        coredns-565d847f94-mk8w4                   1/1     Running             0          18h
+kube-system        etcd-wv05                                  1/1     Running             0          18h
+kube-system        kube-apiserver-wv05                        1/1     Running             0          18h
+kube-system        kube-controller-manager-wv05               1/1     Running             0          18h
+kube-system        kube-proxy-7p9nd                           1/1     Running             0          18h
+kube-system        kube-proxy-nhss5                           1/1     Running             0          18h
+kube-system        kube-proxy-v85fv                           1/1     Running             0          18h
+kube-system        kube-scheduler-wv05                        1/1     Running             0          18h
+tigera-operator    tigera-operator-6675dc47f4-96pxc           1/1     Running             0          18h
+ubuntu@wv05:/home/ubuntu/scaling$
+ubuntu@wv05:/home/ubuntu/scaling$ sudo ctr -n=k8s.io image ls | grep -i mysysbench
+[sudo] password for ubuntu:
+docker.io/library/mysysbench:latest                                                                             application/vnd.docker.distribution.manifest.v2+json      sha256:20366163583a6c4da7a7903f8f95658266bb3bba03ee9b504ae598c4dfce33df 120.0 MiB linux/amd64                                                                  io.cri-containerd.image=managed
+ubuntu@wv05:/home/ubuntu/scaling$ cat /etc/containerd/config.toml
+#disabled_plugins = []
+imports = []
+oom_score = 0
+plugin_dir = ""
+required_plugins = []
+root = "/var/lib/containerd"
+state = "/run/containerd"
+temp = ""
+version = 2
+
+[cgroup]
+  path = ""
+
+[debug]
+  address = ""
+  format = ""
+  gid = 0
+  level = ""
+  uid = 0
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+  tcp_address = ""
+  tcp_tls_ca = ""
+  tcp_tls_cert = ""
+  tcp_tls_key = ""
+  uid = 0
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+
+  [plugins."io.containerd.gc.v1.scheduler"]
+    deletion_threshold = 0
+    mutation_threshold = 100
+    pause_threshold = 0.02
+    schedule_delay = "0s"
+    startup_delay = "100ms"
+
+  [plugins."io.containerd.grpc.v1.cri"]
+    device_ownership_from_security_context = false
+    disable_apparmor = false
+    disable_cgroup = false
+    disable_hugetlb_controller = true
+    disable_proc_mount = false
+    disable_tcp_service = true
+    enable_selinux = false
+    enable_tls_streaming = false
+    enable_unprivileged_icmp = false
+    enable_unprivileged_ports = false
+    ignore_image_defined_volumes = false
+    max_concurrent_downloads = 3
+    max_container_log_line_size = 16384
+    netns_mounts_under_state_dir = false
+    restrict_oom_score_adj = false
+    sandbox_image = "k8s.gcr.io/pause:3.6"
+    selinux_category_range = 1024
+    stats_collect_period = 10
+    stream_idle_timeout = "4h0m0s"
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    systemd_cgroup = false
+    tolerate_missing_hugetlb_controller = true
+    unset_seccomp_profile = ""
+
+    [plugins."io.containerd.grpc.v1.cri".cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = ""
+      ip_pref = ""
+      max_conf_num = 1
+
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      disable_snapshot_annotations = true
+      discard_unpacked_layers = false
+      ignore_rdt_not_enabled_errors = false
+      no_pivot = false
+      snapshotter = "overlayfs"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options]
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            BinaryName = ""
+            CriuImagePath = ""
+            CriuPath = ""
+            CriuWorkPath = ""
+            IoGid = 0
+            IoUid = 0
+            NoNewKeyring = false
+            NoPivotRoot = false
+            Root = ""
+            ShimCgroup = ""
+            SystemdCgroup = true
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options]
+
+    [plugins."io.containerd.grpc.v1.cri".image_decryption]
+      key_model = "node"
+
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = ""
+
+      [plugins."io.containerd.grpc.v1.cri".registry.auths]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.configs]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.headers]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+
+    [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+
+  [plugins."io.containerd.internal.v1.opt"]
+    path = "/opt/containerd"
+
+  [plugins."io.containerd.internal.v1.restart"]
+    interval = "10s"
+
+  [plugins."io.containerd.internal.v1.tracing"]
+    sampling_ratio = 1.0
+    service_name = "containerd"
+
+  [plugins."io.containerd.metadata.v1.bolt"]
+    content_sharing_policy = "shared"
+
+  [plugins."io.containerd.monitor.v1.cgroups"]
+    no_prometheus = false
+
+  [plugins."io.containerd.runtime.v1.linux"]
+    no_shim = false
+    runtime = "runc"
+    runtime_root = ""
+    shim = "containerd-shim"
+    shim_debug = false
+
+  [plugins."io.containerd.runtime.v2.task"]
+    platforms = ["linux/amd64"]
+    sched_core = false
+
+  [plugins."io.containerd.service.v1.diff-service"]
+    default = ["walking"]
+
+  [plugins."io.containerd.service.v1.tasks-service"]
+    rdt_config_file = ""
+
+  [plugins."io.containerd.snapshotter.v1.aufs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.btrfs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.devmapper"]
+    async_remove = false
+    base_image_size = ""
+    discard_blocks = false
+    fs_options = ""
+    fs_type = ""
+    pool_name = ""
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.native"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.overlayfs"]
+    root_path = ""
+    upperdir_label = false
+
+  [plugins."io.containerd.snapshotter.v1.zfs"]
+    root_path = ""
+
+  [plugins."io.containerd.tracing.processor.v1.otlp"]
+    endpoint = ""
+    insecure = false
+    protocol = ""
+
+[proxy_plugins]
+
+[stream_processors]
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar"
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+gzip+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar+gzip"
+
+[timeouts]
+  "io.containerd.timeout.bolt.open" = "0s"
+  "io.containerd.timeout.shim.cleanup" = "5s"
+  "io.containerd.timeout.shim.load" = "5s"
+  "io.containerd.timeout.shim.shutdown" = "3s"
+  "io.containerd.timeout.task.state" = "2s"
+
+[ttrpc]
+  address = ""
+  gid = 0
+  uid = 0
+ubuntu@wv05:/home/ubuntu/scaling$
+ubuntu@wv05:/home/ubuntu/scaling$ git status
+fatal: not a git repository (or any of the parent directories): .git
+ubuntu@wv05:/home/ubuntu/scaling$
+ubuntu@wv05:/home/ubuntu/scaling$ cd
+ubuntu@wv05:/home/ubuntu$ ls
+my_python  mysysbench.tar  scaling  snap  weathervane
+ubuntu@wv05:/home/ubuntu$ cd ../amd
+-bash: cd: ../amd: No such file or directory
+ubuntu@wv05:/home/ubuntu$ ll ..
+total 12
+drwxr-xr-x  3 root   root   4096 Aug 29 23:40 ./
+drwxr-xr-x 20 root   root   4096 Aug 30 00:15 ../
+drwxr-x--- 11 ubuntu ubuntu 4096 Aug 30 18:58 ubuntu/
+ubuntu@wv05:/home/ubuntu$ ll
+total 122960
+drwxr-x--- 11 ubuntu ubuntu      4096 Aug 30 18:58 ./
+drwxr-xr-x  3 root   root        4096 Aug 29 23:40 ../
+-rw-------  1 ubuntu ubuntu       100 Aug 30 18:58 .Xauthority
+-rw-------  1 ubuntu ubuntu      2226 Aug 30 01:37 .bash_history
+-rw-r--r--  1 ubuntu ubuntu       220 Jan  6  2022 .bash_logout
+-rw-r--r--  1 ubuntu ubuntu      3771 Jan  6  2022 .bashrc
+drwx------  2 ubuntu ubuntu      4096 Aug 29 23:40 .cache/
+drwxr-xr-x  3 ubuntu ubuntu      4096 Aug 30 16:04 .config/
+drwxrwxr-x  3 ubuntu ubuntu      4096 Aug 30 15:46 .kube/
+drwx------  3 ubuntu ubuntu      4096 Aug 30 16:04 .local/
+-rw-r--r--  1 ubuntu ubuntu       807 Jan  6  2022 .profile
+drwx------  2 ubuntu ubuntu      4096 Aug 30 18:58 .ssh/
+-rw-r--r--  1 ubuntu ubuntu         0 Aug 29 23:41 .sudo_as_admin_successful
+-rw-------  1 ubuntu ubuntu     14659 Aug 30 18:20 .viminfo
+-rw-rw-r--  1 ubuntu ubuntu       165 Aug 29 23:41 .wget-hsts
+drwxrwxr-x  4 ubuntu ubuntu      4096 Aug 29 23:41 my_python/
+-rw-r--r--  1 ubuntu ubuntu 125821440 Aug 30 18:16 mysysbench.tar
+drwxr-xr-x  5 ubuntu ubuntu      4096 Aug 30 18:30 scaling/
+drwx------  3 ubuntu ubuntu      4096 Aug 29 23:59 snap/
+drwxrwxr-x 17 ubuntu ubuntu      4096 Aug 30 17:45 weathervane/
+ubuntu@wv05:/home/ubuntu$ find . -name "*.tar" -print
+./mysysbench.tar
+ubuntu@wv05:/home/ubuntu$ ls
+my_python  mysysbench.tar  scaling  snap  weathervane
+ubuntu@wv05:/home/ubuntu$ multipass copy-files ./mysysbench.tar node1:.
+ubuntu@wv05:/home/ubuntu$ multipass copy-files ./mysysbench.tar node2:.
+ubuntu@wv05:/home/ubuntu$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 30 19:15:56 UTC 2022
+
+  System load:  0.0               Processes:             203
+  Usage of /:   6.4% of 48.27GB   Users logged in:       1
+  Memory usage: 7%                IPv4 address for ens3: 10.226.243.222
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+6 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Tue Aug 30 18:57:00 2022 from 10.226.243.1
+ubuntu@node1:~$ ls
+my_python  mysysbench.tar
+ubuntu@node1:~$
+ubuntu@node1:~$ kubectl get pcv -A
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv05:/home/ubuntu$ kubectl get pcv -A
+error: the server doesn't have a resource type "pcv"
+ubuntu@wv05:/home/ubuntu$ kubectl get pvc -A
+NAMESPACE   NAME                     STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS    AGE
+default     weathervane-test-claim   Pending                                      local-storage   85m
+ubuntu@wv05:/home/ubuntu$ kubectl describe pvc weathervane-test-claim
+Name:          weathervane-test-claim
+Namespace:     default
+StorageClass:  local-storage
+Status:        Pending
+Volume:
+Labels:        <none>
+Annotations:   volume.beta.kubernetes.io/storage-class: local-storage
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:
+Access Modes:
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:
+  Type    Reason                Age                  From                         Message
+  ----    ------                ----                 ----                         -------
+  Normal  WaitForFirstConsumer  50s (x342 over 86m)  persistentvolume-controller  waiting for first consumer to be created before binding
+ubuntu@wv05:/home/ubuntu$ cd weathervane/
+ubuntu@wv05:/home/ubuntu/weathervane$ cat create_
+create_pvc.yaml         create_sc.yaml          create_sc_aws_ebs.yaml
+ubuntu@wv05:/home/ubuntu/weathervane$ cat create_sc.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+
+ubuntu@wv05:/home/ubuntu/weathervane$ history
+    1  git clone http://github.com/mike-moran-amd/my_python.git
+    2  cd my_python/
+    3  . install_k8s
+    4  sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+    5  mkdir -p $HOME/.kube
+    6  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    7  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    8  kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+    9  kubectl create -f https://projectcalico.docs.tigera.io/manifests/custom-resources.yaml
+   10  kubectl get nodes --show-labels
+   11  sudo snap install multipass
+   12  multipass launch -c 4 -d 50G -m 8G -n node1
+   13  multipass shell node1
+   14  multipass launch -c 4 -d 50G -m 8G -n node2
+   15  multipass shell node2
+   16  kubectl get nodes --show-labels
+   17  sudo mkdir -p /k8s/weathervane/vol
+   18  sudo chmod -R 777 /k8s
+   19  cd
+   20  git clone http://github.com/vmware/weathervane
+   21  cd weathervane/
+   22  cat > create-persistent-vol.yaml << EOF
+   23  apiVersion: v1
+   24  kind: PersistentVolume
+   25  metadata:
+   26    name: weathervane-pv
+   27  spec:
+   28    capacity:
+   29      storage: 40Gi
+   30    accessModes:
+   31    - ReadWriteOnce
+   32    persistentVolumeReclaimPolicy: Retain
+   33    storageClassName: local-storage
+   34    local:
+   35      path: /k8s/weathervane/vol
+   36    nodeAffinity:
+   37      required:
+   38        nodeSelectorTerms:
+   39        - matchExpressions:
+   40          - key: kubernetes.io/hostname
+   41            operator: In
+   42            values:
+   43            - node1
+   44  EOF
+   45  kubectl create -f create-persistent-vol.yaml
+   46  kubectl get pv
+   47  cat > create-storage-class.yaml << EOF
+   48  kind: StorageClass
+   49  apiVersion: storage.k8s.io/v1
+   50  metadata:
+   51    name: local-storage
+   52  provisioner: kubernetes.io/no-provisioner
+   53  volumeBindingMode: Immediate
+   54  EOF
+   55  kubectl create -f create-storage-class.yaml
+   56  kubectl get sc
+   57  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   58  vi weathervane.config.k8s.quickstart
+   59  cat weathervane.config.k8s.quickstart
+   60  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   61  vi weathervane.config.k8s.quickstart
+   62  cat weathervane.config.k8s.quickstart
+   63  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   64  kubectl get ps
+   65  kubectl get pv
+   66  kubectl get pvc
+   67  kubectl get sc
+   68  kubectl get sc- -A
+   69  kubectl get sc -A
+   70  kubectl get pv -A
+   71  kubectl get pvc -A
+   72  kubectl config view
+   73  kubectl get node -A
+   74  kubectl describe node node1
+   75  kubectl config get-contexts
+   76  kubectl config view -o jsonpath='{.contexts[*].name}' | tr " " "\n"
+   77  cd weathervane/
+   78  cd /tmp
+   79  ls
+   80  cd 220830163255
+   81  ll
+   82  cat ZOUT
+   83  cd
+   84  cd weathervane/
+   85  . z
+   86  kubectl get pvc -A
+   87  kubectl get sc -A
+   88  ll
+   89  cat create_pv.yaml
+   90  kubectl delete pv local-storage
+   91  kubectl delete sc local-storage
+   92  vi create_pv.yaml
+   93  . z
+   94  cat create_pv.yaml
+   95  ll
+   96  cat create_pv.yaml
+   97  . z
+   98  kubectl get sc -A
+   99  ll
+  100  kubectl get pv -A
+  101  kubectl get ps -A
+  102  kubectl get sc -A
+  103  cat create_pv.yaml
+  104  mv create_pv.yaml create_sc.yaml
+  105  ll
+  106  cat create_sc.yaml
+  107  vi create_sc_aws_ebs.yaml
+  108  kubectl get sc -A
+  109  kubectl apply -f create_sc_aws_ebs.yaml
+  110  kubectl get sc -A
+  111  kubectl get pv -A
+  112  kubectl get pvc -A
+  113  . z
+  114  kubectl delete pvc weathervane-test-claim
+  115  kubectl get pvc --all-namespaces
+  116  ls
+  117  cat create_sc_aws_ebs.yaml
+  118  kubectl apply -f create_sc_aws_ebs.yaml
+  119  kubectl get sc --all-namespaces
+  120  kubectl delete sc slow
+  121  kubectl get sc --all-namespaces
+  122  kubectl apply -f create_sc_aws_ebs.yaml
+  123  kubectl get sc --all-namespaces
+  124  vi create_sc.yaml
+  125  kubectl delete sc slow
+  126  kubectl apply -f create_sc.yaml
+  127  kubectl get sc -A
+  128  ls
+  129  cat pv01.yaml
+  130  cat *.q*
+  131  cat pv01.yaml
+  132  cat pv02.yaml
+  133  cat pv03.yaml
+  134  jobs
+  135  vi z
+  136  . z
+  137  ls
+  138  cat pv01.yaml
+  139  kubectl get pvc -A
+  140  vi create_pvc.yaml
+  141  kubectl apply -f create_pvc.yaml
+  142  kubectl describe pvc weathervane-test-claim
+  143  kubectl get pvc weathervane-test-claim -o yaml
+  144  kubectl get pv -A
+  145  . z
+  146  kubectl get endpoints
+  147  kubectl get endpoints -A
+  148  history
+  149  kubectl get pvc weathervane-test-claim -o yaml
+  150  who
+  151  kubectl get node
+  152  kubectl get pvc weathervane-test-claim -o json
+  153  uptime
+  154  cd /home/ubuntu/scaling
+  155  ll
+  156  ps -a
+  157  cat scaling-test.sh
+  158  ll
+  159  tail -f scaling.log
+  160  kubectl get pods -A
+  161  sudo ctr -n=k8s.io image ls | grep -i mysysbench
+  162  cat /etc/containerd/config.toml
+  163  git status
+  164  cd
+  165  ls
+  166  cd ../amd
+  167  ll ..
+  168  ll
+  169  find . -name "*.tar" -print
+  170  ls
+  171  multipass copy-files ./mysysbench.tar node1:.
+  172  multipass copy-files ./mysysbench.tar node2:.
+  173  multipass shell node1
+  174  kubectl get pcv -A
+  175  kubectl get pvc -A
+  176  kubectl describe pvc weathervane-test-claim
+  177  cd weathervane/
+  178  cat create_sc.yaml
+  179  history
+ubuntu@wv05:/home/ubuntu/weathervane$
+
+
+Microsoft Windows [Version 10.0.19044.1889]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh ubuntu@139.178.85.77
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-46-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 30 15:12:14 UTC 2022
+
+  System load:                0.5751953125
+  Usage of /:                 6.8% of 218.00GB
+  Memory usage:               14%
+  Swap usage:                 0%
+  Processes:                  621
+  Users logged in:            0
+  IPv4 address for bond0:     139.178.85.77
+  IPv6 address for bond0:     2604:1380:4641:3b00::15
+  IPv4 address for mpqemubr0: 10.226.243.1
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-46-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 30 15:12:14 UTC 2022
+
+  System load:                0.5751953125
+  Usage of /:                 6.8% of 218.00GB
+  Memory usage:               14%
+  Swap usage:                 0%
+  Processes:                  621
+  Users logged in:            0
+  IPv4 address for bond0:     139.178.85.77
+  IPv6 address for bond0:     2604:1380:4641:3b00::15
+  IPv4 address for mpqemubr0: 10.226.243.1
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+4 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+
+Last login: Mon Aug 29 23:40:40 2022 from 70.112.73.191
+ubuntu@wv05:~$ cd weathervane/
+ubuntu@wv05:/home/ubuntu/weathervane$ ll
+total 268
+drwxrwxr-x 17 ubuntu ubuntu  4096 Aug 30 00:34 ./
+drwxr-x---  8 ubuntu ubuntu  4096 Aug 30 01:37 ../
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 .accept-weathervane
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 .git/
+-rw-rw-r--  1 ubuntu ubuntu  2411 Aug 30 00:15 .gitignore
+-rw-rw-r--  1 ubuntu ubuntu  2959 Aug 30 00:15 BRANCHING.md
+-rw-rw-r--  1 ubuntu ubuntu   200 Aug 30 00:15 Branches.md
+-rw-rw-r--  1 ubuntu ubuntu  5247 Aug 30 00:15 CODE-OF-CONDUCT.md
+-rw-rw-r--  1 ubuntu ubuntu  9540 Aug 30 00:15 CONTRIBUTING.md
+-rw-rw-r--  1 ubuntu ubuntu  4952 Aug 30 00:15 ISSUES.md
+-rw-rw-r--  1 ubuntu ubuntu  1485 Aug 30 00:15 LICENSE.txt
+-rw-rw-r--  1 ubuntu ubuntu   454 Aug 30 00:15 Notice.txt
+-rw-rw-r--  1 ubuntu ubuntu  4585 Aug 30 00:15 README.md
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionApp/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionAppServerWarmer/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionBidService/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionWeb/
+-rw-rw-r--  1 ubuntu ubuntu 10152 Aug 30 00:15 build.gradle
+-rwxrwxr-x  1 ubuntu ubuntu 13779 Aug 30 00:15 buildDockerImages.pl*
+drwxrwxr-x  4 ubuntu ubuntu  4096 Aug 30 00:15 configFiles/
+-rw-rw-r--  1 ubuntu ubuntu   432 Aug 30 00:17 create-persistent-vol.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 00:19 create-storage-class.yaml
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 dbLoader/
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 doc/
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 dockerImages/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 gradle/
+-rw-rw-r--  1 ubuntu ubuntu    20 Aug 30 00:15 gradle.properties
+-rwxrwxr-x  1 ubuntu ubuntu  5305 Aug 30 00:15 gradlew*
+-rwxrwxr-x  1 ubuntu ubuntu  2185 Aug 30 00:15 gradlew.bat*
+drwxrwxr-x  2 ubuntu ubuntu  4096 Aug 30 00:34 output/
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 runHarness/
+-rwxrwxr-x  1 ubuntu ubuntu 20497 Aug 30 00:15 runWeathervane.pl*
+-rwxrwxr-x  1 ubuntu ubuntu  2527 Aug 30 00:15 runmany.sh*
+-rw-rw-r--  1 ubuntu ubuntu   145 Aug 30 00:15 settings.gradle
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 testing/
+-rw-rw-r--  1 ubuntu ubuntu     6 Aug 30 00:15 version.txt
+-rw-rw-r--  1 ubuntu ubuntu   708 Aug 30 00:15 weathervane.config.k8s.micro
+-rw-rw-r--  1 ubuntu ubuntu   687 Aug 30 00:34 weathervane.config.k8s.quickstart
+-rw-rw-r--  1 ubuntu ubuntu   721 Aug 30 00:15 weathervane.config.k8s.small2
+-rwxrwxr-x  1 ubuntu ubuntu 42556 Aug 30 00:15 weathervane.pl*
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 weathervaneResults.csv
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadConfiguration/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadDriver/
+ubuntu@wv05:/home/ubuntu/weathervane$ vi z
+
+[1]+  Stopped                 vi z
+[1]+  Stopped                 vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  14h
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            14h
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc
+No resources found in default namespace.
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc -A
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv -A
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            14h
+ubuntu@wv05:/home/ubuntu/weathervane$ jobs
+[1]+  Stopped                 vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ fg
+vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ ls
+BRANCHING.md            auctionBidService           gradle             version.txt
+Branches.md             auctionWeb                  gradle.properties  weathervane.config.k8s.micro
+CODE-OF-CONDUCT.md      build.gradle                gradlew            weathervane.config.k8s.quickstart
+CONTRIBUTING.md         buildDockerImages.pl        gradlew.bat        weathervane.config.k8s.small2
+ISSUES.md               configFiles                 output             weathervane.pl
+LICENSE.txt             create-persistent-vol.yaml  runHarness         weathervaneResults.csv
+Notice.txt              create-storage-class.yaml   runWeathervane.pl  workloadConfiguration
+README.md               dbLoader                    runmany.sh         workloadDriver
+auctionApp              doc                         settings.gradle    z
+auctionAppServerWarmer  dockerImages                testing
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830151655
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  14h
+
+$ kubectl get pv --all-namespaces
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            14h
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster appCluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  14h
+
+$ kubectl get pv --all-namespaces
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            14h
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ ll
+total 272
+drwxrwxr-x 17 ubuntu ubuntu  4096 Aug 30 15:18 ./
+drwxr-x---  8 ubuntu ubuntu  4096 Aug 30 15:18 ../
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 .accept-weathervane
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 .git/
+-rw-rw-r--  1 ubuntu ubuntu  2411 Aug 30 00:15 .gitignore
+-rw-rw-r--  1 ubuntu ubuntu  2959 Aug 30 00:15 BRANCHING.md
+-rw-rw-r--  1 ubuntu ubuntu   200 Aug 30 00:15 Branches.md
+-rw-rw-r--  1 ubuntu ubuntu  5247 Aug 30 00:15 CODE-OF-CONDUCT.md
+-rw-rw-r--  1 ubuntu ubuntu  9540 Aug 30 00:15 CONTRIBUTING.md
+-rw-rw-r--  1 ubuntu ubuntu  4952 Aug 30 00:15 ISSUES.md
+-rw-rw-r--  1 ubuntu ubuntu  1485 Aug 30 00:15 LICENSE.txt
+-rw-rw-r--  1 ubuntu ubuntu   454 Aug 30 00:15 Notice.txt
+-rw-rw-r--  1 ubuntu ubuntu  4585 Aug 30 00:15 README.md
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionApp/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionAppServerWarmer/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionBidService/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionWeb/
+-rw-rw-r--  1 ubuntu ubuntu 10152 Aug 30 00:15 build.gradle
+-rwxrwxr-x  1 ubuntu ubuntu 13779 Aug 30 00:15 buildDockerImages.pl*
+drwxrwxr-x  4 ubuntu ubuntu  4096 Aug 30 00:15 configFiles/
+-rw-rw-r--  1 ubuntu ubuntu   432 Aug 30 00:17 create-persistent-vol.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 00:19 create-storage-class.yaml
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 dbLoader/
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 doc/
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 dockerImages/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 gradle/
+-rw-rw-r--  1 ubuntu ubuntu    20 Aug 30 00:15 gradle.properties
+-rwxrwxr-x  1 ubuntu ubuntu  5305 Aug 30 00:15 gradlew*
+-rwxrwxr-x  1 ubuntu ubuntu  2185 Aug 30 00:15 gradlew.bat*
+drwxrwxr-x  2 ubuntu ubuntu  4096 Aug 30 00:34 output/
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 runHarness/
+-rwxrwxr-x  1 ubuntu ubuntu 20497 Aug 30 00:15 runWeathervane.pl*
+-rwxrwxr-x  1 ubuntu ubuntu  2527 Aug 30 00:15 runmany.sh*
+-rw-rw-r--  1 ubuntu ubuntu   145 Aug 30 00:15 settings.gradle
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 testing/
+-rw-rw-r--  1 ubuntu ubuntu     6 Aug 30 00:15 version.txt
+-rw-rw-r--  1 ubuntu ubuntu   708 Aug 30 00:15 weathervane.config.k8s.micro
+-rw-rw-r--  1 ubuntu ubuntu   687 Aug 30 00:34 weathervane.config.k8s.quickstart
+-rw-rw-r--  1 ubuntu ubuntu   721 Aug 30 00:15 weathervane.config.k8s.small2
+-rwxrwxr-x  1 ubuntu ubuntu 42556 Aug 30 00:15 weathervane.pl*
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 weathervaneResults.csv
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadConfiguration/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadDriver/
+-rw-rw-r--  1 ubuntu ubuntu  2049 Aug 30 15:18 z
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830151845
+error: the path "pv01.yaml" does not exist
+error: the path "pv02.yaml" does not exist
+error: the path "pv03.yaml" does not exist
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  14h
+
+$ kubectl get pv --all-namespaces
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            15h
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster appCluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  14h
+
+$ kubectl get pv --all-namespaces
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            15h
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ vi pv01.yaml
+ubuntu@wv05:/home/ubuntu/weathervane$ ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ vi pv02.yaml
+ubuntu@wv05:/home/ubuntu/weathervane$ ubuntu@wv05:/home/ubuntu/weathervane$ vi pv03.yaml
+ubuntu@wv05:/home/ubuntu/weathervane$ ubuntu@wv05:/home/ubuntu/weathervane$ ll
+total 284
+drwxrwxr-x 17 ubuntu ubuntu  4096 Aug 30 15:25 ./
+drwxr-x---  8 ubuntu ubuntu  4096 Aug 30 15:25 ../
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 .accept-weathervane
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 .git/
+-rw-rw-r--  1 ubuntu ubuntu  2411 Aug 30 00:15 .gitignore
+-rw-rw-r--  1 ubuntu ubuntu  2959 Aug 30 00:15 BRANCHING.md
+-rw-rw-r--  1 ubuntu ubuntu   200 Aug 30 00:15 Branches.md
+-rw-rw-r--  1 ubuntu ubuntu  5247 Aug 30 00:15 CODE-OF-CONDUCT.md
+-rw-rw-r--  1 ubuntu ubuntu  9540 Aug 30 00:15 CONTRIBUTING.md
+-rw-rw-r--  1 ubuntu ubuntu  4952 Aug 30 00:15 ISSUES.md
+-rw-rw-r--  1 ubuntu ubuntu  1485 Aug 30 00:15 LICENSE.txt
+-rw-rw-r--  1 ubuntu ubuntu   454 Aug 30 00:15 Notice.txt
+-rw-rw-r--  1 ubuntu ubuntu  4585 Aug 30 00:15 README.md
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionApp/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionAppServerWarmer/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionBidService/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionWeb/
+-rw-rw-r--  1 ubuntu ubuntu 10152 Aug 30 00:15 build.gradle
+-rwxrwxr-x  1 ubuntu ubuntu 13779 Aug 30 00:15 buildDockerImages.pl*
+drwxrwxr-x  4 ubuntu ubuntu  4096 Aug 30 00:15 configFiles/
+-rw-rw-r--  1 ubuntu ubuntu   432 Aug 30 00:17 create-persistent-vol.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 00:19 create-storage-class.yaml
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 dbLoader/
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 doc/
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 dockerImages/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 gradle/
+-rw-rw-r--  1 ubuntu ubuntu    20 Aug 30 00:15 gradle.properties
+-rwxrwxr-x  1 ubuntu ubuntu  5305 Aug 30 00:15 gradlew*
+-rwxrwxr-x  1 ubuntu ubuntu  2185 Aug 30 00:15 gradlew.bat*
+drwxrwxr-x  2 ubuntu ubuntu  4096 Aug 30 00:34 output/
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:23 pv01.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:24 pv02.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:25 pv03.yaml
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 runHarness/
+-rwxrwxr-x  1 ubuntu ubuntu 20497 Aug 30 00:15 runWeathervane.pl*
+-rwxrwxr-x  1 ubuntu ubuntu  2527 Aug 30 00:15 runmany.sh*
+-rw-rw-r--  1 ubuntu ubuntu   145 Aug 30 00:15 settings.gradle
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 testing/
+-rw-rw-r--  1 ubuntu ubuntu     6 Aug 30 00:15 version.txt
+-rw-rw-r--  1 ubuntu ubuntu   708 Aug 30 00:15 weathervane.config.k8s.micro
+-rw-rw-r--  1 ubuntu ubuntu   687 Aug 30 00:34 weathervane.config.k8s.quickstart
+-rw-rw-r--  1 ubuntu ubuntu   721 Aug 30 00:15 weathervane.config.k8s.small2
+-rwxrwxr-x  1 ubuntu ubuntu 42556 Aug 30 00:15 weathervane.pl*
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 weathervaneResults.csv
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadConfiguration/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadDriver/
+-rw-rw-r--  1 ubuntu ubuntu  2049 Aug 30 15:18 z
+ubuntu@wv05:/home/ubuntu/weathervane$ jobs
+ubuntu@wv05:/home/ubuntu/weathervane$ vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ ubuntu@wv05:/home/ubuntu/weathervane$ vi *q.
+ubuntu@wv05:/home/ubuntu/weathervane$ vi *.q*
+ubuntu@wv05:/home/ubuntu/weathervane$ cat z
+
+TS="$(date +%y%m%d%H%M%S)"
+Z_DIR="/tmp/$TS"
+mkdir -p $Z_DIR
+echo "Z_DIR=$Z_DIR"
+cp z $Z_DIR
+cp weathervane.config.k8s.quickstart $Z_DIR
+cp *.yaml $Z_DIR
+cp runWeathervane.pl $Z_DIR
+
+
+#kubectl delete pvc --namespace auctionw1i1 cassandra-data-cassandra-0
+#kubectl delete pvc --namespace auctionw1i1 postgresql-postgresql-0
+
+#kubectl delete pv weathervane-pv1
+#kubectl delete pv weathervane-pv2
+#kubectl delete pv weathervane-pv3
+
+#kubectl delete sc local-storage
+
+#kubectl create -f create-storage-class.yaml
+
+kubectl apply -f pv01.yaml
+kubectl apply -f pv02.yaml
+kubectl apply -f pv03.yaml
+
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "$ kubectl get sc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get sc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pv --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pv --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pvc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pvc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT" | tee -a $Z_DIR/ZOUT
+
+
+./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart --outputDir $Z_DIR/outDir --tmpDir $Z_DIR/tmpDir 2>&1 | tee -a $Z_DIR/ZOUT
+#./runWeathervane.pl --skipPvTest --configFile=weathervane.config.k8s.quickstart --outputDir $Z_DIR/outDir --tmpDir $Z_DIR/tmpDir 2>&1 | tee -a $Z_DIR/ZOUT
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "END OF WEATHERVANE PERL SCRIPT OUTPUT" | tee -a $Z_DIR/ZOUT
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "$ kubectl get sc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get sc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pv --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pv --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pvc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pvc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv --all-namespaces
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            15h
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc --all-namespaces
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ jobs
+ubuntu@wv05:/home/ubuntu/weathervane$ vi z
+
+[1]+  Stopped                 vi z
+
+[1]+  Stopped                 vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ fg
+vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830154527
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            15h
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+The kubeconfigFile /home/mfm/.kube/config must exist and be a regular file.
+Usage: ./runWeathervane.pl [options] [-- parameters]
+
+This script is used to run the Weathervane benchmark using the configuration specified in a configuration file.
+It takes the following options:
+--configFile: This specifies the configuration file used to control the Weathervane run.
+              If this parameter is not a fully-qualified file name starting with a / then
+              the location of the file is assumed to be relative to the directory in which
+              this script was invoked.
+              For a description of the Weathervane configuration file, please see the
+              Weathervane User's Guide
+              default value: weathervane.config
+--version:    The version of Weathervane to use.  This will override the default version
+              number to use for the Weathervane container images.
+              default value: 2.1.1
+--outputDir:  The directory in which to store the output from the Weathervane run.  You should
+              use the same directory for all runs. Output is only placed in this directory
+              at the end of a run.  The directory is created if it does not exist.
+              If this parameter is not a fully-qualified file name starting with a / then
+              the location of the file is assumed to be relative to the directory in which
+              this script was invoked.
+              default value: output
+--tmpDir:     The directory in which to store temporary output created during the run.
+              This information can be helpful when troubleshooting runs which do not complete
+              properly.  The directory is created if it does not exist.
+              If this parameter is not a fully-qualified file name starting with a / then
+              the location of the file is assumed to be relative to the directory in which
+              this script was invoked.
+              default value: None.  If no value is specified the temporary files are stored
+                             inside the Weathervane container.
+--script:     The path to a script that should be run every scriptPeriod seconds.
+              The script may be used to refresh the credentials in the kubeconfig file
+              or to trigger external stats collection.
+              If this parameter is not a fully-qualified file name starting with a / then
+              the location of the file is assumed to be relative to the directory in which
+              this script was invoked.
+              default value: None.
+--scriptPeriod: The frequency at which the script should be run in seconds.
+              default value: 60
+--mapSsh:     Causes the user's $HOME/.ssh directory to be mapped into the run harness container.
+              This is only needed when collecting esxtop data, which requires passwordless ssh.
+              default value: False
+--accept:     Accepts the terms of the Weathervane license.  Useful when running this script
+              from another script.  Only needs to be specified on the first run in a given directory.
+              default value: None.  If no value is specified the user is prompted to accept the
+                             license terms.
+--skipPvTest: Causes the scipt to skip testing whether Weathervane can dynamically allocate
+              persistant volumes in the storage classes defined in the configuration file.
+              default value: False--help:       Displays this text.
+
+To pass command-line parameters to the Weathervane run harness, enter them following two dashes
+after the options.  For example, to stop the services from a previous run you would use:
+./runWeathervane.pl --configFile=weathervane.config -- --stop
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            15h
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ cd
+ubuntu@wv05:/home/ubuntu$ cd .kube
+ubuntu@wv05:/home/ubuntu/.kube$ ll
+total 20
+drwxrwxr-x 3 ubuntu ubuntu 4096 Aug 29 23:56 ./
+drwxr-x--- 8 ubuntu ubuntu 4096 Aug 30 15:45 ../
+drwxr-x--- 4 ubuntu ubuntu 4096 Aug 29 23:56 cache/
+-rw------- 1 ubuntu ubuntu 5641 Aug 29 23:54 config
+ubuntu@wv05:/home/ubuntu/.kube$ cat config
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeU1EZ3lPVEl6TlRFMU9Gb1hEVE15TURneU5qSXpOVEUxT0Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBSzVPClYvRmVvbnlORGlQS3MwaUpxNkdzTFBGUkJVck84SnNjNGJzSnJINng1Rjk5R1pRMDlpQnNUY2Q4VFE3dHd0dTgKa1pzMGlyQjVIMlE3RGZLV0dQN2RQMWY3YnIrSUxpOVJIdElFdmFIYWQ3bGJXd3c4MEJNRVNQVFRLTTl2bmV0VApwOW41OUYzNnBxTUpsOFI1WEZLaFdsT2FwbEMwMW5FeFNEcm00bHd4ajVuNVBESGtzNWY2UUZNS0xoYld3MnJDClhhV1NYUVZqUDZ0ZTJXMEovOXFUNnoxaldkRW1tOWdqNHRtSDhwYzh2alJzbzV2K2NZQmVUZjRHdUk2ZXZmV1YKZy9zVW11aDAxclhVZ2E5SzVGaFZkamhnbUhseEFrK0xWbS9KSFkyazhta2c1SU1iOSs1T3Z6ZUJaZGU4NGJsMgpaeXlTUG9iK0JLaVkzMTlMeXRFQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZNaHRGa3pjZWZRc0JkYzJzVGt6KzRlcllDclZNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBQnF2ajJtazBFelg5SmIwYVRHMApnQ2s5MllPT1h1RHd0L1UyVEd2dWlRY3lsODAxRWs4VmVKY2hCQUswRVFqRjVBQzJiSWw0OGlnN0RrTTluSTZ5CmJ0ZW1HTUM2YXhKNlZTUlZFQnFtWHliNW11TVYrMVZVTEFtdjR3WVNFUlFsYm1nTXpsM2JORDVQZlVoMDRiR20KNVlJRk9vVkxEUTMzRHc3RmdvV1YvQ3JtNG9nd3MyVjJQdkNXdzFCeGN4SkwyanBpT0N6SnlOT01CMlhjUkRpYwpQSFV0bnlvSFlzZFRkbTlkNTJPemIxeDFmUHhsVFMwc0xDbTZoYkRJVFdPRUNrVnFxcVNvZTVrOG5TdStyYnc4CkdLVGhUdWswR3dqMk83UTBaZ1FvQlRVMzlJMGxyTTkxVGtVZExzelZYc3RUSE1tU3d4VEYwTmF0aGhuTXViNjEKRkJzPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    server: https://139.178.85.77:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJVENDQWdtZ0F3SUJBZ0lJVE55dXBlZmdVSzh3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TWpBNE1qa3lNelV4TlRoYUZ3MHlNekE0TWpreU16VXhOVGxhTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXZ1dVQwSjQya1hhejZqVS8KbGNBZzhIMUc0aDhiK0ltTGswL0xpK2p2WTFsTEREalI0YWozT1FYY2hQTnZjeFEyZkQ5b29BUDFnekk4bi8wdApKeUJTY1phNXZRRGRuSnNMclFTS2w0MENEUHcydTVxSktOOTVRUVZ4OVA3WkRjcDlXNUsvcUhBYWordXdqVzhNClJOWll0NjcvKzdRQWFsb29XNzFlVmw5SnJQenE2Z2k0dkE1MS9XUjFyVWdnb3FMNk94R2twY21vSFZXMVV1Sk0KWk05dTVqeU11Y3lrcEE5YjVWd1ZLYkdHc2E1WVlPN045eThKOGJrdjdPWGFzU3hPSDZ3K2dncXZLL1FteCt3QQpiWmxhMEEvOFFFbGpMaFRuQ1lBS3RmK2Vsb3psOWkxeVFpa0gxMFlFa044Sk5mWklBTkREWXRJaEFDT2s4dXpvCk1GQUYwd0lEQVFBQm8xWXdWREFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0RBWURWUjBUQVFIL0JBSXdBREFmQmdOVkhTTUVHREFXZ0JUSWJSWk0zSG4wTEFYWE5yRTVNL3VIcTJBcQoxVEFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBZ3NaTzZ2VXRZd2xrUkJDbDlibmFuNTA0Wi93QXN5ejhMU1V5CnI1Y3JnQUFIR2FQZGE0dTNXWWtEVStoNG1zTVVNN1lTVFNDQ05UMmlDTWFURjR3L3ZmQ3B4T3VnR0J1QVUwMEYKRitxU3MybzJsUko0V1h5NUZoOVVzQnF3anFMSjl0RFpzSHZ1R08yakpoUnp2dEN5SGxncTJLNnhLWUxjMGQwQwpLQzdkVWtrN2xQMHlZZUErVG9UcU5MRGdjVklsNGZrZXh6OXo4QW1WNFB0a0tlQWFPV1cwa3A0NWx0ckdSYXZjCm15VEtZSnBFWGUybDNqVXhGTXJRSFhqeXRoU0ErL1JnbWdyWDlRblIxT1Yveksrc3BzY1dRdEMzQ2FRNGlKclIKNFdiRi9ESEMyU1NUbUpwcVpwa3BwTjk1RDIxZHN4U09qVkFGVm5SM2RYVEFpR3hjUGc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBdnV1VDBKNDJrWGF6NmpVL2xjQWc4SDFHNGg4YitJbUxrMC9MaStqdlkxbExERGpSCjRhajNPUVhjaFBOdmN4UTJmRDlvb0FQMWd6SThuLzB0SnlCU2NaYTV2UURkbkpzTHJRU0tsNDBDRFB3MnU1cUoKS045NVFRVng5UDdaRGNwOVc1Sy9xSEFhait1d2pXOE1STlpZdDY3Lys3UUFhbG9vVzcxZVZsOUpyUHpxNmdpNAp2QTUxL1dSMXJVZ2dvcUw2T3hHa3BjbW9IVlcxVXVKTVpNOXU1anlNdWN5a3BBOWI1VndWS2JHR3NhNVlZTzdOCjl5OEo4Ymt2N09YYXNTeE9INncrZ2dxdksvUW14K3dBYlpsYTBBLzhRRWxqTGhUbkNZQUt0ZitlbG96bDlpMXkKUWlrSDEwWUVrTjhKTmZaSUFORERZdEloQUNPazh1em9NRkFGMHdJREFRQUJBb0lCQUM2cEFwSTg2SmM2akpRVAorWHRPM240SUVCZlpoSXVFaWpFeGtreWFYRTlLbG5YaE9TSk9ta1U4Y24ybnhUZzUyMnNZVUNpemJ3Qm1lYnljCk1ybmFRMnZ4YTJtTzJacVpwZ3ZlRFVVbXVEYVdPWVkyS1lsc3ZJU3dvUDVBZnFuSk1FUCtKSXMxQXJqajRGMWcKbzMzN2FPbFRnc3B3WHAyZmRUZWVtM3krZ3hJY3ZULy9jME5nVGMvK05vMnh0bTJIdlpmeUxxb2tXQmY0K3d5MQp1eDZtTU5HUW96bEF0TzM2MXRLZUNJZ1hqRVhwZm52cFRqWkJVUmNtWTRhQnBUeGhYaEMxamsyMTNBSlF0cW5LCjllR0hNcS9PZkpzWTAzZXFSejJqVkJxY3VZR2gzb3d5b2t2WEloMk9EZXIwWTNuamV4NE5OZml5UER0ZCt6VDQKdmNoM3FuRUNnWUVBK0NmMU0ybWlObW9xbXZnQ0g3dzVIRGtMcTEwbzB6dVRBNEJJNmJBYWlrZkd3TUhBQ3VnWQpEcG9Ud3lsbWtldnpuT2dicXo2cEk1R1RiaUlyK1RyRzNYRlBacVlMcTRmc2NONWE4QkdkdXFpMldOTjV6UzIyCm41WjZxV1hUQk1nTHFpcFJEaUVkTHh5UWZDQjJnbTFnd0k5K0NTZEpJMzJ1RStQd2FBNXI5Z3NDZ1lFQXhQUjUKdWw5VCs2eXJxU0ZZcTNOeDY3SENuSStmNnJHU0R0VXhJWTJUUWQ0cFFlak5jdDVaWkpMejRURGxXS1NWbVBFeQpPNHlvUGV4UGx2bWVGeUlQYVpWYTlQMzlTdVBuRnUvcS9WVHF5c090WWY5SjBLYTVQVzNsdU00ZmhsbUF6SlhlCkM2TzNjT1NFbWZUU25XazY1Nzl4WWUySTRTbCtqazlxS2ZidjlGa0NnWUVBbUhpY25NRTdyS2xna2lUdDBTZnEKQXlBOXZrV1lEdWxjczlyL2NhNEZNSTlYWEJudmNBUVl1K2dKV25FMmwxUGRNN3dkUEFOZEV3Q2dFQndvM3BJeAptOS9DQkhUaldMcEVHVGxWc0lseVd6ek1CUm15amRHWGtzaDNoMXVMNHpVeWpaUkFoeWpyY0lYaGRKTFJuZU9zCmZjUHNrWjAwdi95NWwza0d2amlXTnU4Q2dZRUFxKzRtblRVK1lRTDR6eW5XOThSTmZFeXU4SERJVHQ0My9FN0wKRnRrNTVWUUVmQTYzMmtDVGxLSmIxd2NTRG5HT1RmYXZ2U0FxZGZQbC9vdGxJQmlSajcvYnFPWlh5SnB1VHEyZApXd3hYOGkwakc5cjVHdldQMnpvbVFVOWVZYStjS2Z2aDNCTk12WFllOHk2dTlNNjVwemlOeDhqTnBwRE1jM3FMCjJKcENHZkVDZ1lFQXl2aEc2RVdvVnlmSmo2K2RuY3dRL2NMcTY5ckZVSWx4VWZXLzZZREFNQUhVcEw5YVBwRTgKelpwMHI0Q1FaQXIrRFBzd3h3dmZpejZBMUVrbXY4WCt1WjlBYlRUb2MrM3VjSlFpR3E5dU1wdGVCTDFrM0ZMWApJT0hsMWtPTlUyMXFwWTRteEpCeGNxZjdGbmcraTVxV05QY2tzL0x2dUdTODQ0SlVzNkVySlJzPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+ubuntu@wv05:/home/ubuntu/.kube$ cd we
+-bash: cd: we: No such file or directory
+ubuntu@wv05:/home/ubuntu/.kube$ :q
+:q: command not found
+ubuntu@wv05:/home/ubuntu/.kube$ jobs
+ubuntu@wv05:/home/ubuntu/.kube$ vi *.q*
+ubuntu@wv05:/home/ubuntu/.kube$ cd
+ubuntu@wv05:/home/ubuntu$ cd we
+-bash: cd: we: No such file or directory
+ubuntu@wv05:/home/ubuntu$ cd weathervane/
+ubuntu@wv05:/home/ubuntu/weathervane$ vi *.q*
+ubuntu@wv05:/home/ubuntu/weathervane$ ubuntu@wv05:/home/ubuntu/weathervane$  z
+z: command not found
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830154706
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            15h
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            15h
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get node -A
+NAME    STATUS   ROLES           AGE   VERSION
+node1   Ready    <none>          15h   v1.25.0
+node2   Ready    <none>          15h   v1.25.0
+wv05    Ready    control-plane   15h   v1.25.0
+ubuntu@wv05:/home/ubuntu/weathervane$ ls
+BRANCHING.md            auctionWeb                  gradlew            version.txt
+Branches.md             build.gradle                gradlew.bat        weathervane.config.k8s.micro
+CODE-OF-CONDUCT.md      buildDockerImages.pl        output             weathervane.config.k8s.quickstart
+CONTRIBUTING.md         configFiles                 pv01.yaml          weathervane.config.k8s.small2
+ISSUES.md               create-persistent-vol.yaml  pv02.yaml          weathervane.pl
+LICENSE.txt             create-storage-class.yaml   pv03.yaml          weathervaneResults.csv
+Notice.txt              dbLoader                    runHarness         workloadConfiguration
+README.md               doc                         runWeathervane.pl  workloadDriver
+auctionApp              dockerImages                runmany.sh         z
+auctionAppServerWarmer  gradle                      settings.gradle
+auctionBidService       gradle.properties           testing
+ubuntu@wv05:/home/ubuntu/weathervane$ vi pv0?.yaml
+3 files to edit
+ubuntu@wv05:/home/ubuntu/weathervane$ ubuntu@wv05:/home/ubuntu/weathervane$ vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv --all-namespaces
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            15h
+ubuntu@wv05:/home/ubuntu/weathervane$ cat z
+
+TS="$(date +%y%m%d%H%M%S)"
+Z_DIR="/tmp/$TS"
+mkdir -p $Z_DIR
+echo "Z_DIR=$Z_DIR"
+cp z $Z_DIR
+cp weathervane.config.k8s.quickstart $Z_DIR
+cp *.yaml $Z_DIR
+cp runWeathervane.pl $Z_DIR
+
+
+#kubectl delete pvc --namespace auctionw1i1 cassandra-data-cassandra-0
+#kubectl delete pvc --namespace auctionw1i1 postgresql-postgresql-0
+
+#kubectl delete pv weathervane-pv1
+#kubectl delete pv weathervane-pv2
+#kubectl delete pv weathervane-pv3
+
+#kubectl delete sc local-storage
+
+#kubectl create -f create-storage-class.yaml
+
+kubectl apply -f pv01.yaml
+kubectl apply -f pv02.yaml
+kubectl apply -f pv03.yaml
+
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "$ kubectl get sc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get sc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pv --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pv --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pvc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pvc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT" | tee -a $Z_DIR/ZOUT
+
+
+./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart --outputDir $Z_DIR/outDir --tmpDir $Z_DIR/tmpDir 2>&1 | tee -a $Z_DIR/ZOUT
+#./runWeathervane.pl --skipPvTest --configFile=weathervane.config.k8s.quickstart --outputDir $Z_DIR/outDir --tmpDir $Z_DIR/tmpDir 2>&1 | tee -a $Z_DIR/ZOUT
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "END OF WEATHERVANE PERL SCRIPT OUTPUT" | tee -a $Z_DIR/ZOUT
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "$ kubectl get sc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get sc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pv --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pv --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pvc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pvc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl deletee pv weathervane-pv
+error: unknown command "deletee" for "kubectl"
+
+Did you mean this?
+        delete
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl delete pv weathervane-pv
+persistentvolume "weathervane-pv" deleted
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv --all-namespaces
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ cat z
+
+TS="$(date +%y%m%d%H%M%S)"
+Z_DIR="/tmp/$TS"
+mkdir -p $Z_DIR
+echo "Z_DIR=$Z_DIR"
+cp z $Z_DIR
+cp weathervane.config.k8s.quickstart $Z_DIR
+cp *.yaml $Z_DIR
+cp runWeathervane.pl $Z_DIR
+
+
+#kubectl delete pvc --namespace auctionw1i1 cassandra-data-cassandra-0
+#kubectl delete pvc --namespace auctionw1i1 postgresql-postgresql-0
+
+#kubectl delete pv weathervane-pv1
+#kubectl delete pv weathervane-pv2
+#kubectl delete pv weathervane-pv3
+
+#kubectl delete sc local-storage
+
+#kubectl create -f create-storage-class.yaml
+
+kubectl apply -f pv01.yaml
+kubectl apply -f pv02.yaml
+kubectl apply -f pv03.yaml
+
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "$ kubectl get sc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get sc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pv --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pv --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pvc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pvc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT" | tee -a $Z_DIR/ZOUT
+
+
+./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart --outputDir $Z_DIR/outDir --tmpDir $Z_DIR/tmpDir 2>&1 | tee -a $Z_DIR/ZOUT
+#./runWeathervane.pl --skipPvTest --configFile=weathervane.config.k8s.quickstart --outputDir $Z_DIR/outDir --tmpDir $Z_DIR/tmpDir 2>&1 | tee -a $Z_DIR/ZOUT
+
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "END OF WEATHERVANE PERL SCRIPT OUTPUT" | tee -a $Z_DIR/ZOUT
+
+echo "" | tee -a $Z_DIR/ZOUT
+echo "$ kubectl get sc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get sc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pv --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pv --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+echo "$ kubectl get pvc --all-namespaces" | tee -a $Z_DIR/ZOUT
+kubectl get pvc --all-namespaces 2>&1 | tee -a $Z_DIR/ZOUT
+echo "" | tee -a $Z_DIR/ZOUT
+
+ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830155344
+persistentvolume/weathervane-pv1 created
+persistentvolume/weathervane-pv2 created
+persistentvolume/weathervane-pv3 created
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Available           local-storage            0s
+weathervane-pv2   15Gi       RWO            Retain           Available           local-storage            0s
+weathervane-pv3   15Gi       RWO            Retain           Available           local-storage            0s
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Starting Weathervane Run-Harness.  Pulling container image may take a few minutes.
+Can't open docker logs pipe (docker logs --follow weathervane |) : No such file or directory
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Available                                    local-storage            1s
+weathervane-pv2   15Gi       RWO            Retain           Available                                    local-storage            1s
+weathervane-pv3   15Gi       RWO            Retain           Released    default/weathervane-test-claim   local-storage            1s
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ ps -a
+    PID TTY          TIME CMD
+ 733264 pts/0    00:00:00 ps
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830155419
+persistentvolume/weathervane-pv1 unchanged
+persistentvolume/weathervane-pv2 unchanged
+persistentvolume/weathervane-pv3 unchanged
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Available                                    local-storage            35s
+weathervane-pv2   15Gi       RWO            Retain           Available                                    local-storage            35s
+weathervane-pv3   15Gi       RWO            Retain           Released    default/weathervane-test-claim   local-storage            35s
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Starting Weathervane Run-Harness.  Pulling container image may take a few minutes.
+Can't open docker logs pipe (docker logs --follow weathervane |) : No such file or directory
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Released    default/weathervane-test-claim   local-storage            35s
+weathervane-pv2   15Gi       RWO            Retain           Available                                    local-storage            35s
+weathervane-pv3   15Gi       RWO            Retain           Released    default/weathervane-test-claim   local-storage            35s
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ sudo bash
+[sudo] password for ubuntu:
+root@wv05:/home/ubuntu/weathervane# . z
+Z_DIR=/tmp/220830155441
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+$ kubectl get sc --all-namespaces
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+$ kubectl get pv --all-namespaces
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+$ kubectl get pvc --all-namespaces
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Starting Weathervane Run-Harness.  Pulling container image may take a few minutes.
+Can't open docker logs pipe (docker logs --follow weathervane |) : No such file or directory
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+$ kubectl get pv --all-namespaces
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+$ kubectl get pvc --all-namespaces
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+root@wv05:/home/ubuntu/weathervane# exit
+exit
+ubuntu@wv05:/home/ubuntu/weathervane$ cat *.q*
+{
+  "description" : "micro",
+  "configurationSize": "micro",
+  "runStrategy" : "fixed",
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "kubernetes",
+      "kubeconfigFile" : "/home/ubuntu/.kube/config",
+      "kubeconfigContext" : "kubernetes-admin@kubernetes",
+    },
+  ],
+  "driverCluster" : "kubernetes",
+  "appInstanceCluster" : "kubernetes",
+  "appIngressMethod" : "clusterip",
+  "cassandraDataStorageClass" : "local-storage",
+  "postgresqlStorageClass" : "local-storage",
+  "nginxCacheStorageClass" : "local-storage",
+}
+ubuntu@wv05:/home/ubuntu/weathervane$ docker logs --follow weathervane
+Command 'docker' not found, but can be installed with:
+sudo apt install docker.io      # version 20.10.12-0ubuntu4, or
+sudo apt install podman-docker  # version 3.4.4+ds1-1ubuntu1
+ubuntu@wv05:/home/ubuntu/weathervane$ sudo apt install docker.io
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ containerd.io : Conflicts: containerd
+                 Conflicts: runc
+E: Error, pkgProblemResolver::Resolve generated breaks, this may be caused by held packages.
+ubuntu@wv05:/home/ubuntu/weathervane$ sudo apt install podman-docker
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  buildah catatonit conmon containernetworking-plugins crun dconf-gsettings-backend dconf-service dns-root-data
+  dnsmasq-base docker-compose fuse-overlayfs glib-networking glib-networking-common glib-networking-services
+  golang-github-containernetworking-plugin-dnsname golang-github-containers-common golang-github-containers-image
+  gsettings-desktop-schemas libavahi-client3 libavahi-common-data libavahi-common3 libavahi-glib1 libdconf1
+  libostree-1-1 libproxy1v5 libslirp0 libsoup2.4-1 libsoup2.4-common libyajl2 podman python3-docker python3-dockerpty
+  python3-docopt python3-dotenv python3-texttable python3-websocket session-migration slirp4netns uidmap
+Suggested packages:
+  containers-storage
+Recommended packages:
+  docker.io
+The following NEW packages will be installed:
+  buildah catatonit conmon containernetworking-plugins crun dconf-gsettings-backend dconf-service dns-root-data
+  dnsmasq-base docker-compose fuse-overlayfs glib-networking glib-networking-common glib-networking-services
+  golang-github-containernetworking-plugin-dnsname golang-github-containers-common golang-github-containers-image
+  gsettings-desktop-schemas libavahi-client3 libavahi-common-data libavahi-common3 libavahi-glib1 libdconf1
+  libostree-1-1 libproxy1v5 libslirp0 libsoup2.4-1 libsoup2.4-common libyajl2 podman podman-docker python3-docker
+  python3-dockerpty python3-docopt python3-dotenv python3-texttable python3-websocket session-migration slirp4netns
+  uidmap
+0 upgraded, 40 newly installed, 0 to remove and 5 not upgraded.
+Need to get 26.5 MB of archives.
+After this operation, 116 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://archive.ubuntu.com/ubuntu jammy/universe amd64 uidmap amd64 1:4.8.1-2ubuntu2 [22.1 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy/universe amd64 golang-github-containers-image all 5.16.0-3 [29.3 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/universe amd64 golang-github-containers-common all 0.44.4+ds1-1 [28.1 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy/main amd64 libavahi-common-data amd64 0.8-5ubuntu5 [23.9 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy/main amd64 libavahi-common3 amd64 0.8-5ubuntu5 [23.7 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 libavahi-client3 amd64 0.8-5ubuntu5 [28.1 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 libavahi-glib1 amd64 0.8-5ubuntu5 [8294 B]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 libproxy1v5 amd64 0.4.17-2 [51.9 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy/main amd64 glib-networking-common all 2.72.0-1 [3718 B]
+Get:10 http://archive.ubuntu.com/ubuntu jammy/main amd64 glib-networking-services amd64 2.72.0-1 [9982 B]
+Get:11 http://archive.ubuntu.com/ubuntu jammy/main amd64 libdconf1 amd64 0.40.0-3 [40.5 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy/main amd64 dconf-service amd64 0.40.0-3 [28.5 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy/main amd64 dconf-gsettings-backend amd64 0.40.0-3 [22.8 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy/main amd64 session-migration amd64 0.3.6 [9774 B]
+Get:15 http://archive.ubuntu.com/ubuntu jammy/main amd64 gsettings-desktop-schemas all 42.0-1ubuntu1 [31.1 kB]
+Get:16 http://archive.ubuntu.com/ubuntu jammy/main amd64 glib-networking amd64 2.72.0-1 [69.8 kB]
+Get:17 http://archive.ubuntu.com/ubuntu jammy/main amd64 libsoup2.4-common all 2.74.2-3 [4008 B]
+Get:18 http://archive.ubuntu.com/ubuntu jammy/main amd64 libsoup2.4-1 amd64 2.74.2-3 [287 kB]
+Get:19 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libostree-1-1 amd64 2022.2-3 [333 kB]
+Get:20 http://archive.ubuntu.com/ubuntu jammy/universe amd64 buildah amd64 1.23.1+ds1-2 [6094 kB]
+Get:21 http://archive.ubuntu.com/ubuntu jammy/universe amd64 catatonit amd64 0.1.7-1 [307 kB]
+Get:22 http://archive.ubuntu.com/ubuntu jammy/universe amd64 conmon amd64 2.0.25+ds1-1.1 [35.1 kB]
+Get:23 http://archive.ubuntu.com/ubuntu jammy/universe amd64 containernetworking-plugins amd64 0.9.1+ds1-1 [6422 kB]
+Get:24 http://archive.ubuntu.com/ubuntu jammy/main amd64 libyajl2 amd64 2.1.0-3build2 [20.6 kB]
+Get:25 http://archive.ubuntu.com/ubuntu jammy/universe amd64 crun amd64 0.17+dfsg-1.1 [300 kB]
+Get:26 http://archive.ubuntu.com/ubuntu jammy/main amd64 dns-root-data all 2021011101 [5256 B]
+Get:27 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 dnsmasq-base amd64 2.86-1.1ubuntu0.1 [354 kB]
+Get:28 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-websocket all 1.2.3-1 [34.7 kB]
+Get:29 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-docker all 5.0.3-1 [89.3 kB]
+Get:30 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-dockerpty all 0.4.1-2 [11.1 kB]
+Get:31 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-docopt all 0.6.2-4 [26.9 kB]
+Get:32 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-dotenv all 0.19.2-1 [20.5 kB]
+Get:33 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-texttable all 1.6.4-1 [11.4 kB]
+Get:34 http://archive.ubuntu.com/ubuntu jammy/universe amd64 docker-compose all 1.29.2-1 [95.8 kB]
+Get:35 http://archive.ubuntu.com/ubuntu jammy/universe amd64 fuse-overlayfs amd64 1.7.1-1 [44.7 kB]
+Get:36 http://archive.ubuntu.com/ubuntu jammy/universe amd64 golang-github-containernetworking-plugin-dnsname amd64 1.3.1+ds1-2 [1083 kB]
+Get:37 http://archive.ubuntu.com/ubuntu jammy/main amd64 libslirp0 amd64 4.6.1-1build1 [61.5 kB]
+Get:38 http://archive.ubuntu.com/ubuntu jammy/universe amd64 podman amd64 3.4.4+ds1-1ubuntu1 [10.4 MB]
+Get:39 http://archive.ubuntu.com/ubuntu jammy/universe amd64 podman-docker amd64 3.4.4+ds1-1ubuntu1 [14.1 kB]
+Get:40 http://archive.ubuntu.com/ubuntu jammy/universe amd64 slirp4netns amd64 1.0.1-2 [28.2 kB]
+Fetched 26.5 MB in 2s (11.4 MB/s)
+Extracting templates from packages: 100%
+Selecting previously unselected package uidmap.
+(Reading database ... 73829 files and directories currently installed.)
+Preparing to unpack .../00-uidmap_1%3a4.8.1-2ubuntu2_amd64.deb ...
+Unpacking uidmap (1:4.8.1-2ubuntu2) ...
+Selecting previously unselected package golang-github-containers-image.
+Preparing to unpack .../01-golang-github-containers-image_5.16.0-3_all.deb ...
+Unpacking golang-github-containers-image (5.16.0-3) ...
+Selecting previously unselected package golang-github-containers-common.
+Preparing to unpack .../02-golang-github-containers-common_0.44.4+ds1-1_all.deb ...
+Unpacking golang-github-containers-common (0.44.4+ds1-1) ...
+Selecting previously unselected package libavahi-common-data:amd64.
+Preparing to unpack .../03-libavahi-common-data_0.8-5ubuntu5_amd64.deb ...
+Unpacking libavahi-common-data:amd64 (0.8-5ubuntu5) ...
+Selecting previously unselected package libavahi-common3:amd64.
+Preparing to unpack .../04-libavahi-common3_0.8-5ubuntu5_amd64.deb ...
+Unpacking libavahi-common3:amd64 (0.8-5ubuntu5) ...
+Selecting previously unselected package libavahi-client3:amd64.
+Preparing to unpack .../05-libavahi-client3_0.8-5ubuntu5_amd64.deb ...
+Unpacking libavahi-client3:amd64 (0.8-5ubuntu5) ...
+Selecting previously unselected package libavahi-glib1:amd64.
+Preparing to unpack .../06-libavahi-glib1_0.8-5ubuntu5_amd64.deb ...
+Unpacking libavahi-glib1:amd64 (0.8-5ubuntu5) ...
+Selecting previously unselected package libproxy1v5:amd64.
+Preparing to unpack .../07-libproxy1v5_0.4.17-2_amd64.deb ...
+Unpacking libproxy1v5:amd64 (0.4.17-2) ...
+Selecting previously unselected package glib-networking-common.
+Preparing to unpack .../08-glib-networking-common_2.72.0-1_all.deb ...
+Unpacking glib-networking-common (2.72.0-1) ...
+Selecting previously unselected package glib-networking-services.
+Preparing to unpack .../09-glib-networking-services_2.72.0-1_amd64.deb ...
+Unpacking glib-networking-services (2.72.0-1) ...
+Selecting previously unselected package libdconf1:amd64.
+Preparing to unpack .../10-libdconf1_0.40.0-3_amd64.deb ...
+Unpacking libdconf1:amd64 (0.40.0-3) ...
+Selecting previously unselected package dconf-service.
+Preparing to unpack .../11-dconf-service_0.40.0-3_amd64.deb ...
+Unpacking dconf-service (0.40.0-3) ...
+Selecting previously unselected package dconf-gsettings-backend:amd64.
+Preparing to unpack .../12-dconf-gsettings-backend_0.40.0-3_amd64.deb ...
+Unpacking dconf-gsettings-backend:amd64 (0.40.0-3) ...
+Selecting previously unselected package session-migration.
+Preparing to unpack .../13-session-migration_0.3.6_amd64.deb ...
+Unpacking session-migration (0.3.6) ...
+Selecting previously unselected package gsettings-desktop-schemas.
+Preparing to unpack .../14-gsettings-desktop-schemas_42.0-1ubuntu1_all.deb ...
+Unpacking gsettings-desktop-schemas (42.0-1ubuntu1) ...
+Selecting previously unselected package glib-networking:amd64.
+Preparing to unpack .../15-glib-networking_2.72.0-1_amd64.deb ...
+Unpacking glib-networking:amd64 (2.72.0-1) ...
+Selecting previously unselected package libsoup2.4-common.
+Preparing to unpack .../16-libsoup2.4-common_2.74.2-3_all.deb ...
+Unpacking libsoup2.4-common (2.74.2-3) ...
+Selecting previously unselected package libsoup2.4-1:amd64.
+Preparing to unpack .../17-libsoup2.4-1_2.74.2-3_amd64.deb ...
+Unpacking libsoup2.4-1:amd64 (2.74.2-3) ...
+Selecting previously unselected package libostree-1-1:amd64.
+Preparing to unpack .../18-libostree-1-1_2022.2-3_amd64.deb ...
+Unpacking libostree-1-1:amd64 (2022.2-3) ...
+Selecting previously unselected package buildah.
+Preparing to unpack .../19-buildah_1.23.1+ds1-2_amd64.deb ...
+Unpacking buildah (1.23.1+ds1-2) ...
+Selecting previously unselected package catatonit.
+Preparing to unpack .../20-catatonit_0.1.7-1_amd64.deb ...
+Unpacking catatonit (0.1.7-1) ...
+Selecting previously unselected package conmon.
+Preparing to unpack .../21-conmon_2.0.25+ds1-1.1_amd64.deb ...
+Unpacking conmon (2.0.25+ds1-1.1) ...
+Selecting previously unselected package containernetworking-plugins.
+Preparing to unpack .../22-containernetworking-plugins_0.9.1+ds1-1_amd64.deb ...
+Unpacking containernetworking-plugins (0.9.1+ds1-1) ...
+Selecting previously unselected package libyajl2:amd64.
+Preparing to unpack .../23-libyajl2_2.1.0-3build2_amd64.deb ...
+Unpacking libyajl2:amd64 (2.1.0-3build2) ...
+Selecting previously unselected package crun.
+Preparing to unpack .../24-crun_0.17+dfsg-1.1_amd64.deb ...
+Unpacking crun (0.17+dfsg-1.1) ...
+Selecting previously unselected package dns-root-data.
+Preparing to unpack .../25-dns-root-data_2021011101_all.deb ...
+Unpacking dns-root-data (2021011101) ...
+Selecting previously unselected package dnsmasq-base.
+Preparing to unpack .../26-dnsmasq-base_2.86-1.1ubuntu0.1_amd64.deb ...
+Unpacking dnsmasq-base (2.86-1.1ubuntu0.1) ...
+Selecting previously unselected package python3-websocket.
+Preparing to unpack .../27-python3-websocket_1.2.3-1_all.deb ...
+Unpacking python3-websocket (1.2.3-1) ...
+Selecting previously unselected package python3-docker.
+Preparing to unpack .../28-python3-docker_5.0.3-1_all.deb ...
+Unpacking python3-docker (5.0.3-1) ...
+Selecting previously unselected package python3-dockerpty.
+Preparing to unpack .../29-python3-dockerpty_0.4.1-2_all.deb ...
+Unpacking python3-dockerpty (0.4.1-2) ...
+Selecting previously unselected package python3-docopt.
+Preparing to unpack .../30-python3-docopt_0.6.2-4_all.deb ...
+Unpacking python3-docopt (0.6.2-4) ...
+Selecting previously unselected package python3-dotenv.
+Preparing to unpack .../31-python3-dotenv_0.19.2-1_all.deb ...
+Unpacking python3-dotenv (0.19.2-1) ...
+Selecting previously unselected package python3-texttable.
+Preparing to unpack .../32-python3-texttable_1.6.4-1_all.deb ...
+Unpacking python3-texttable (1.6.4-1) ...
+Selecting previously unselected package docker-compose.
+Preparing to unpack .../33-docker-compose_1.29.2-1_all.deb ...
+Unpacking docker-compose (1.29.2-1) ...
+Selecting previously unselected package fuse-overlayfs.
+Preparing to unpack .../34-fuse-overlayfs_1.7.1-1_amd64.deb ...
+Unpacking fuse-overlayfs (1.7.1-1) ...
+Selecting previously unselected package golang-github-containernetworking-plugin-dnsname.
+Preparing to unpack .../35-golang-github-containernetworking-plugin-dnsname_1.3.1+ds1-2_amd64.deb ...
+Unpacking golang-github-containernetworking-plugin-dnsname (1.3.1+ds1-2) ...
+Selecting previously unselected package libslirp0:amd64.
+Preparing to unpack .../36-libslirp0_4.6.1-1build1_amd64.deb ...
+Unpacking libslirp0:amd64 (4.6.1-1build1) ...
+Selecting previously unselected package podman.
+Preparing to unpack .../37-podman_3.4.4+ds1-1ubuntu1_amd64.deb ...
+Unpacking podman (3.4.4+ds1-1ubuntu1) ...
+Selecting previously unselected package podman-docker.
+Preparing to unpack .../38-podman-docker_3.4.4+ds1-1ubuntu1_amd64.deb ...
+Unpacking podman-docker (3.4.4+ds1-1ubuntu1) ...
+Selecting previously unselected package slirp4netns.
+Preparing to unpack .../39-slirp4netns_1.0.1-2_amd64.deb ...
+Unpacking slirp4netns (1.0.1-2) ...
+Setting up python3-dotenv (0.19.2-1) ...
+Setting up python3-texttable (1.6.4-1) ...
+Setting up session-migration (0.3.6) ...
+Created symlink /etc/systemd/user/graphical-session-pre.target.wants/session-migration.service → /usr/lib/systemd/user/session-migration.service.
+Setting up python3-docopt (0.6.2-4) ...
+Setting up libproxy1v5:amd64 (0.4.17-2) ...
+Setting up uidmap (1:4.8.1-2ubuntu2) ...
+Setting up libyajl2:amd64 (2.1.0-3build2) ...
+Setting up dnsmasq-base (2.86-1.1ubuntu0.1) ...
+Setting up dns-root-data (2021011101) ...
+Setting up libdconf1:amd64 (0.40.0-3) ...
+Setting up golang-github-containers-image (5.16.0-3) ...
+Setting up conmon (2.0.25+ds1-1.1) ...
+Setting up containernetworking-plugins (0.9.1+ds1-1) ...
+Setting up catatonit (0.1.7-1) ...
+Setting up libavahi-common-data:amd64 (0.8-5ubuntu5) ...
+Setting up golang-github-containernetworking-plugin-dnsname (1.3.1+ds1-2) ...
+Setting up libsoup2.4-common (2.74.2-3) ...
+Setting up libslirp0:amd64 (4.6.1-1build1) ...
+Setting up fuse-overlayfs (1.7.1-1) ...
+Setting up golang-github-containers-common (0.44.4+ds1-1) ...
+Setting up glib-networking-common (2.72.0-1) ...
+Setting up python3-websocket (1.2.3-1) ...
+Setting up python3-dockerpty (0.4.1-2) ...
+Setting up glib-networking-services (2.72.0-1) ...
+Setting up slirp4netns (1.0.1-2) ...
+Setting up crun (0.17+dfsg-1.1) ...
+Setting up python3-docker (5.0.3-1) ...
+Setting up libavahi-common3:amd64 (0.8-5ubuntu5) ...
+Setting up podman (3.4.4+ds1-1ubuntu1) ...
+Created symlink /etc/systemd/user/default.target.wants/podman.service → /usr/lib/systemd/user/podman.service.
+Created symlink /etc/systemd/user/sockets.target.wants/podman.socket → /usr/lib/systemd/user/podman.socket.
+Created symlink /etc/systemd/system/default.target.wants/podman.service → /lib/systemd/system/podman.service.
+Created symlink /etc/systemd/system/sockets.target.wants/podman.socket → /lib/systemd/system/podman.socket.
+Could not execute systemctl:  at /usr/bin/deb-systemd-invoke line 142.
+Created symlink /etc/systemd/system/default.target.wants/podman-auto-update.service → /lib/systemd/system/podman-auto-update.service.
+Created symlink /etc/systemd/system/timers.target.wants/podman-auto-update.timer → /lib/systemd/system/podman-auto-update.timer.
+Created symlink /etc/systemd/system/default.target.wants/podman-restart.service → /lib/systemd/system/podman-restart.service.
+Setting up dconf-service (0.40.0-3) ...
+Setting up libavahi-glib1:amd64 (0.8-5ubuntu5) ...
+Setting up podman-docker (3.4.4+ds1-1ubuntu1) ...
+Setting up libavahi-client3:amd64 (0.8-5ubuntu5) ...
+Setting up docker-compose (1.29.2-1) ...
+Setting up dconf-gsettings-backend:amd64 (0.40.0-3) ...
+Setting up gsettings-desktop-schemas (42.0-1ubuntu1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for dbus (1.12.20-2ubuntu4) ...
+Processing triggers for libglib2.0-0:amd64 (2.72.1-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+Setting up glib-networking:amd64 (2.72.0-1) ...
+Setting up libsoup2.4-1:amd64 (2.74.2-3) ...
+Setting up libostree-1-1:amd64 (2022.2-3) ...
+Setting up buildah (1.23.1+ds1-2) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830160359
+persistentvolume/weathervane-pv1 unchanged
+persistentvolume/weathervane-pv2 unchanged
+persistentvolume/weathervane-pv3 unchanged
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            10m
+weathervane-pv2   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            10m
+weathervane-pv3   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            10m
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            10m
+weathervane-pv2   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            10m
+weathervane-pv3   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            10m
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830161003
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            16m
+weathervane-pv2   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            16m
+weathervane-pv3   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            16m
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  15h
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            16m
+weathervane-pv2   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            16m
+weathervane-pv3   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            16m
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ ll
+total 284
+drwxrwxr-x 17 ubuntu ubuntu  4096 Aug 30 16:09 ./
+drwxr-x--- 10 ubuntu ubuntu  4096 Aug 30 16:09 ../
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 .accept-weathervane
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 .git/
+-rw-rw-r--  1 ubuntu ubuntu  2411 Aug 30 00:15 .gitignore
+-rw-rw-r--  1 ubuntu ubuntu  2959 Aug 30 00:15 BRANCHING.md
+-rw-rw-r--  1 ubuntu ubuntu   200 Aug 30 00:15 Branches.md
+-rw-rw-r--  1 ubuntu ubuntu  5247 Aug 30 00:15 CODE-OF-CONDUCT.md
+-rw-rw-r--  1 ubuntu ubuntu  9540 Aug 30 00:15 CONTRIBUTING.md
+-rw-rw-r--  1 ubuntu ubuntu  4952 Aug 30 00:15 ISSUES.md
+-rw-rw-r--  1 ubuntu ubuntu  1485 Aug 30 00:15 LICENSE.txt
+-rw-rw-r--  1 ubuntu ubuntu   454 Aug 30 00:15 Notice.txt
+-rw-rw-r--  1 ubuntu ubuntu  4585 Aug 30 00:15 README.md
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionApp/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionAppServerWarmer/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionBidService/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 auctionWeb/
+-rw-rw-r--  1 ubuntu ubuntu 10152 Aug 30 00:15 build.gradle
+-rwxrwxr-x  1 ubuntu ubuntu 13779 Aug 30 00:15 buildDockerImages.pl*
+drwxrwxr-x  4 ubuntu ubuntu  4096 Aug 30 00:15 configFiles/
+-rw-rw-r--  1 ubuntu ubuntu   432 Aug 30 00:17 create-persistent-vol.yaml
+-rw-rw-r--  1 ubuntu ubuntu   152 Aug 30 00:19 create-storage-class.yaml
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 dbLoader/
+drwxrwxr-x  8 ubuntu ubuntu  4096 Aug 30 00:15 doc/
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 dockerImages/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 gradle/
+-rw-rw-r--  1 ubuntu ubuntu    20 Aug 30 00:15 gradle.properties
+-rwxrwxr-x  1 ubuntu ubuntu  5305 Aug 30 00:15 gradlew*
+-rwxrwxr-x  1 ubuntu ubuntu  2185 Aug 30 00:15 gradlew.bat*
+drwxrwxr-x  2 ubuntu ubuntu  4096 Aug 30 00:34 output/
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv01.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv02.yaml
+-rw-rw-r--  1 ubuntu ubuntu   462 Aug 30 15:49 pv03.yaml
+drwxrwxr-x 14 ubuntu ubuntu  4096 Aug 30 00:15 runHarness/
+-rwxrwxr-x  1 ubuntu ubuntu 20497 Aug 30 00:15 runWeathervane.pl*
+-rwxrwxr-x  1 ubuntu ubuntu  2527 Aug 30 00:15 runmany.sh*
+-rw-rw-r--  1 ubuntu ubuntu   145 Aug 30 00:15 settings.gradle
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 testing/
+-rw-rw-r--  1 ubuntu ubuntu     6 Aug 30 00:15 version.txt
+-rw-rw-r--  1 ubuntu ubuntu   708 Aug 30 00:15 weathervane.config.k8s.micro
+-rw-rw-r--  1 ubuntu ubuntu   565 Aug 30 15:46 weathervane.config.k8s.quickstart
+-rw-rw-r--  1 ubuntu ubuntu   721 Aug 30 00:15 weathervane.config.k8s.small2
+-rwxrwxr-x  1 ubuntu ubuntu 42556 Aug 30 00:15 weathervane.pl*
+-rw-rw-r--  1 ubuntu ubuntu     0 Aug 30 00:34 weathervaneResults.csv
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadConfiguration/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Aug 30 00:15 workloadDriver/
+-rw-rw-r--  1 ubuntu ubuntu  2055 Aug 30 16:09 z
+ubuntu@wv05:/home/ubuntu/weathervane$ cat create-storage-class.yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv -A
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv1   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            25m
+weathervane-pv2   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            25m
+weathervane-pv3   15Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            25m
+ubuntu@wv05:/home/ubuntu/weathervane$ vi create_pv.yaml
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl delete pv weathervane-pv1
+persistentvolume "weathervane-pv1" deleted
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl delete pv weathervane-pv2
+persistentvolume "weathervane-pv2" deleted
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl delete pv weathervane-pv3
+persistentvolume "weathervane-pv3" deleted
+ubuntu@wv05:/home/ubuntu/weathervane$ vi create_pv.yaml
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv -A
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pc -A
+NAME                      VALUE        GLOBAL-DEFAULT   AGE
+system-cluster-critical   2000000000   false            16h
+system-node-critical      2000001000   false            16h
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sv -A
+error: the server doesn't have a resource type "sv"
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc -A
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  16h
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  16h
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv --all-namespaces
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc --all-namespaces
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl delete sc local-storage
+storageclass.storage.k8s.io "local-storage" deleted
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc -A
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl apply -f create_pv.yaml
+storageclass.storage.k8s.io/local-storage created
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc -A
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  9s
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830162250
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  15s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  36s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv --all-namespaces
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc --all-namespaces
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ vi debugWeathervane.pl
+ubuntu@wv05:/home/ubuntu/weathervane$ vi z
+
+[1]+  Stopped                 vi z
+ubuntu@wv05:/home/ubuntu/weathervane$
+[1]+  Stopped                 vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830163230
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  9m55s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+-bash: ./debugWeathervane.pl: Permission denied
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  9m56s
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$ chmod +x debugWeathervane.pl
+ubuntu@wv05:/home/ubuntu/weathervane$ . z
+Z_DIR=/tmp/220830163255
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  10m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  10m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ jobs
+[1]+  Stopped                 vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ fg
+vi z
+ubuntu@wv05:/home/ubuntu/weathervane$ vi debugWeathervane.pl
+ubuntu@wv05:/home/ubuntu/weathervane$ history
+    1  git clone http://github.com/mike-moran-amd/my_python.git
+    2  cd my_python/
+    3  . install_k8s
+    4  sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+    5  mkdir -p $HOME/.kube
+    6  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    7  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    8  kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+    9  kubectl create -f https://projectcalico.docs.tigera.io/manifests/custom-resources.yaml
+   10  kubectl get nodes --show-labels
+   11  sudo snap install multipass
+   12  multipass launch -c 4 -d 50G -m 8G -n node1
+   13  multipass shell node1
+   14  multipass launch -c 4 -d 50G -m 8G -n node2
+   15  multipass shell node2
+   16  kubectl get nodes --show-labels
+   17  sudo mkdir -p /k8s/weathervane/vol
+   18  sudo chmod -R 777 /k8s
+   19  cd
+   20  git clone http://github.com/vmware/weathervane
+   21  cd weathervane/
+   22  cat > create-persistent-vol.yaml << EOF
+   23  apiVersion: v1
+   24  kind: PersistentVolume
+   25  metadata:
+   26    name: weathervane-pv
+   27  spec:
+   28    capacity:
+   29      storage: 40Gi
+   30    accessModes:
+   31    - ReadWriteOnce
+   32    persistentVolumeReclaimPolicy: Retain
+   33    storageClassName: local-storage
+   34    local:
+   35      path: /k8s/weathervane/vol
+   36    nodeAffinity:
+   37      required:
+   38        nodeSelectorTerms:
+   39        - matchExpressions:
+   40          - key: kubernetes.io/hostname
+   41            operator: In
+   42            values:
+   43            - node1
+   44  EOF
+   45  kubectl create -f create-persistent-vol.yaml
+   46  kubectl get pv
+   47  cat > create-storage-class.yaml << EOF
+   48  kind: StorageClass
+   49  apiVersion: storage.k8s.io/v1
+   50  metadata:
+   51    name: local-storage
+   52  provisioner: kubernetes.io/no-provisioner
+   53  volumeBindingMode: Immediate
+   54  EOF
+   55  kubectl create -f create-storage-class.yaml
+   56  kubectl get sc
+   57  cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+   58  vi weathervane.config.k8s.quickstart
+   59  cat weathervane.config.k8s.quickstart
+   60  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   61  vi weathervane.config.k8s.quickstart
+   62  cat weathervane.config.k8s.quickstart
+   63  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+   64  kubectl get ps
+   65  kubectl get pv
+   66  kubectl get pvc
+   67  kubectl get sc
+   68  kubectl get sc- -A
+   69  kubectl get sc -A
+   70  kubectl get pv -A
+   71  kubectl get pvc -A
+   72  kubectl config view
+   73  kubectl get node -A
+   74  kubectl describe node node1
+   75  kubectl config get-contexts
+   76  kubectl config view -o jsonpath='{.contexts[*].name}' | tr " " "\n"
+   77  cd weathervane/
+   78  ll
+   79  vi z
+   80  kubectl get sc
+   81  kubectl get pv
+   82  kubectl get pvc
+   83  kubectl get pvc -A
+   84  kubectl get pv -A
+   85  jobs
+   86  fg
+   87  ls
+   88  . z
+   89  vi z
+   90  ll
+   91  . z
+   92  vi pv01.yaml
+   93  vi pv02.yaml
+   94  vi pv03.yaml
+   95  ll
+   96  jobs
+   97  vi z
+   98  vi *q.
+   99  vi *.q*
+  100  cat z
+  101  kubectl get sc --all-namespaces
+  102  kubectl get pv --all-namespaces
+  103  kubectl get pvc --all-namespaces
+  104  jobs
+  105  vi z
+  106  fg
+  107  . z
+  108  cd
+  109  cd .kube
+  110  ll
+  111  cat config
+  112  cd we
+  113  :q
+  114  jobs
+  115  vi *.q*
+  116  cd
+  117  cd we
+  118  cd weathervane/
+  119  vi *.q*
+  120  . z
+  121  kubectl get node -A
+  122  ls
+  123  vi pv0?.yaml
+  124  vi z
+  125  kubectl get pv --all-namespaces
+  126  cat z
+  127  kubectl deletee pv weathervane-pv
+  128  kubectl delete pv weathervane-pv
+  129  kubectl get pv --all-namespaces
+  130  cat z
+  131  . z
+  132  ps -a
+  133  . z
+  134  sudo bash
+  135  cat *.q*
+  136  docker logs --follow weathervane
+  137  sudo apt install docker.io
+  138  sudo apt install podman-docker
+  139  . z
+  140  vi z
+  141  . z
+  142  ll
+  143  cat create-storage-class.yaml
+  144  kubectl get pv -A
+  145  vi create_pv.yaml
+  146  kubectl delete pv weathervane-pv1
+  147  kubectl delete pv weathervane-pv2
+  148  kubectl delete pv weathervane-pv3
+  149  vi create_pv.yaml
+  150  kubectl get pv -A
+  151  kubectl get pc -A
+  152  kubectl get sv -A
+  153  kubectl get sc -A
+  154  kubectl get sc --all-namespaces
+  155  kubectl get pv --all-namespaces
+  156  kubectl get pvc --all-namespaces
+  157  kubectl delete sc local-storage
+  158  kubectl get sc -A
+  159  kubectl apply -f create_pv.yaml
+  160  kubectl get sc -A
+  161  . z
+  162  kubectl get pv --all-namespaces
+  163  kubectl get pvc --all-namespaces
+  164  vi debugWeathervane.pl
+  165  vi z
+  166  . z
+  167  chmod +x debugWeathervane.pl
+  168  . z
+  169  jobs
+  170  fg
+  171  vi debugWeathervane.pl
+  172  history
+ubuntu@wv05:/home/ubuntu/weathervane$
+
+

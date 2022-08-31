@@ -1,0 +1,2180 @@
+sudo kubeadm join 139.178.85.77:6443 --token tuyrnk.hq8s1ogs0oog9atx --discovery-token-ca-cert-hash sha256:d630b9abb288254dd129d0cc02cccf3c4cb983bd28fdba4ffb2fab3b40a291ca
+
+Microsoft Windows [Version 10.0.19044.1889]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@139.178.85.77
+The authenticity of host '139.178.85.77 (139.178.85.77)' can't be established.
+ECDSA key fingerprint is SHA256:ir9w2nJv0Plw/hnsAUrWO957Uwcvm/7X81jRI/UCqM4.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '139.178.85.77' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-46-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon Aug 29 23:26:21 UTC 2022
+
+  System load:            0.1826171875
+  Usage of /:             1.3% of 218.00GB
+  Memory usage:           1%
+  Swap usage:             0%
+  Processes:              542
+  Users logged in:        0
+  IPv4 address for bond0: 139.178.85.77
+  IPv6 address for bond0: 2604:1380:4641:3b00::15
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@wv05:~# git clone http://github.com/mike-moran-amd/my_python.git
+Cloning into 'my_python'...
+warning: redirecting to https://github.com/mike-moran-amd/my_python.git/
+remote: Enumerating objects: 665, done.
+remote: Counting objects: 100% (308/308), done.
+remote: Compressing objects: 100% (218/218), done.
+remote: Total 665 (delta 185), reused 204 (delta 86), pack-reused 357
+Receiving objects: 100% (665/665), 374.97 KiB | 2.86 MiB/s, done.
+Resolving deltas: 100% (369/369), done.
+root@wv05:~# cd my_python/
+root@wv05:~/my_python# . create_ubuntu_user
+New password:
+Retype new password:
+passwd: password updated successfully
+root@wv05:~/my_python# exit
+logout
+Connection to 139.178.85.77 closed.
+
+C:\Users\mikmoran>ssh ubuntu@139.178.85.77
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-46-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon Aug 29 23:40:40 UTC 2022
+
+  System load:            0.0
+  Usage of /:             1.3% of 218.00GB
+  Memory usage:           1%
+  Swap usage:             0%
+  Processes:              492
+  Users logged in:        0
+  IPv4 address for bond0: 139.178.85.77
+  IPv6 address for bond0: 2604:1380:4641:3b00::15
+
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@wv05:~$ git clone http://github.com/mike-moran-amd/my_python.git
+Cloning into 'my_python'...
+warning: redirecting to https://github.com/mike-moran-amd/my_python.git/
+remote: Enumerating objects: 665, done.
+remote: Counting objects: 100% (308/308), done.
+remote: Compressing objects: 100% (218/218), done.
+remote: Total 665 (delta 185), reused 204 (delta 86), pack-reused 357
+Receiving objects: 100% (665/665), 374.97 KiB | 2.98 MiB/s, done.
+Resolving deltas: 100% (369/369), done.
+ubuntu@wv05:~$ cd my_python/
+ubuntu@wv05:/home/ubuntu/my_python$ . install_k8s
+[sudo] password for ubuntu:
+Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:3 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [520 kB]
+Get:6 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [275 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [125 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [8020 B]
+Get:9 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [282 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [43.8 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [221 kB]
+Get:12 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [66.8 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [74.8 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [3008 B]
+Get:15 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [250 kB]
+Get:16 http://archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [1432 B]
+Get:17 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 c-n-f Metadata [272 B]
+Get:18 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [6724 B]
+Get:19 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [38.6 kB]
+Get:20 http://archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [9216 B]
+Get:21 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [116 kB]
+Get:22 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [352 B]
+Get:23 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [40.7 kB]
+Fetched 2407 kB in 2s (1516 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+8 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20211016).
+ca-certificates set to manually installed.
+lsb-release is already the newest version (11.1.0ubuntu4).
+lsb-release set to manually installed.
+curl is already the newest version (7.81.0-1ubuntu1.3).
+curl set to manually installed.
+gnupg is already the newest version (2.2.27-3ubuntu2.1).
+gnupg set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 8 not upgraded.
+deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu jammy stable
+Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.9 kB]
+Get:2 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [6439 B]
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Fetched 55.3 kB in 0s (111 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+8 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  containerd.io
+0 upgraded, 1 newly installed, 0 to remove and 8 not upgraded.
+Need to get 28.1 MB of archives.
+After this operation, 127 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu jammy/stable amd64 containerd.io amd64 1.6.8-1 [28.1 MB]
+Fetched 28.1 MB in 0s (101 MB/s)
+Selecting previously unselected package containerd.io.
+(Reading database ... 73720 files and directories currently installed.)
+Preparing to unpack .../containerd.io_1.6.8-1_amd64.deb ...
+Unpacking containerd.io (1.6.8-1) ...
+Setting up containerd.io (1.6.8-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+--2022-08-29 23:41:57--  https://github.com/opencontainers/runc/releases/download/v1.1.1/runc.amd64
+Resolving github.com (github.com)... 140.82.113.3
+Connecting to github.com (github.com)|140.82.113.3|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://objects.githubusercontent.com/github-production-release-asset-2e65be/36960321/decb03b0-76a4-4ee7-bd06-4e3a548d9f87?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220829%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220829T234157Z&X-Amz-Expires=300&X-Amz-Signature=5bdd05144dadd218a5911e8a6c0594c9501bd537bc638a65c6a2174286b822b9&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=36960321&response-content-disposition=attachment%3B%20filename%3Drunc.amd64&response-content-type=application%2Foctet-stream [following]
+--2022-08-29 23:41:57--  https://objects.githubusercontent.com/github-production-release-asset-2e65be/36960321/decb03b0-76a4-4ee7-bd06-4e3a548d9f87?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220829%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220829T234157Z&X-Amz-Expires=300&X-Amz-Signature=5bdd05144dadd218a5911e8a6c0594c9501bd537bc638a65c6a2174286b822b9&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=36960321&response-content-disposition=attachment%3B%20filename%3Drunc.amd64&response-content-type=application%2Foctet-stream
+Resolving objects.githubusercontent.com (objects.githubusercontent.com)... 185.199.110.133, 185.199.108.133, 185.199.109.133, ...
+Connecting to objects.githubusercontent.com (objects.githubusercontent.com)|185.199.110.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 9415040 (9.0M) [application/octet-stream]
+Saving to: ‘runc.amd64’
+
+runc.amd64                    100%[=================================================>]   8.98M  54.4MB/s    in 0.2s
+
+2022-08-29 23:41:57 (54.4 MB/s) - ‘runc.amd64’ saved [9415040/9415040]
+
+disabled_plugins = []
+imports = []
+oom_score = 0
+plugin_dir = ""
+required_plugins = []
+root = "/var/lib/containerd"
+state = "/run/containerd"
+temp = ""
+version = 2
+
+[cgroup]
+  path = ""
+
+[debug]
+  address = ""
+  format = ""
+  gid = 0
+  level = ""
+  uid = 0
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+  tcp_address = ""
+  tcp_tls_ca = ""
+  tcp_tls_cert = ""
+  tcp_tls_key = ""
+  uid = 0
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+
+  [plugins."io.containerd.gc.v1.scheduler"]
+    deletion_threshold = 0
+    mutation_threshold = 100
+    pause_threshold = 0.02
+    schedule_delay = "0s"
+    startup_delay = "100ms"
+
+  [plugins."io.containerd.grpc.v1.cri"]
+    device_ownership_from_security_context = false
+    disable_apparmor = false
+    disable_cgroup = false
+    disable_hugetlb_controller = true
+    disable_proc_mount = false
+    disable_tcp_service = true
+    enable_selinux = false
+    enable_tls_streaming = false
+    enable_unprivileged_icmp = false
+    enable_unprivileged_ports = false
+    ignore_image_defined_volumes = false
+    max_concurrent_downloads = 3
+    max_container_log_line_size = 16384
+    netns_mounts_under_state_dir = false
+    restrict_oom_score_adj = false
+    sandbox_image = "k8s.gcr.io/pause:3.6"
+    selinux_category_range = 1024
+    stats_collect_period = 10
+    stream_idle_timeout = "4h0m0s"
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    systemd_cgroup = false
+    tolerate_missing_hugetlb_controller = true
+    unset_seccomp_profile = ""
+
+    [plugins."io.containerd.grpc.v1.cri".cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = ""
+      ip_pref = ""
+      max_conf_num = 1
+
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      disable_snapshot_annotations = true
+      discard_unpacked_layers = false
+      ignore_rdt_not_enabled_errors = false
+      no_pivot = false
+      snapshotter = "overlayfs"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options]
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            BinaryName = ""
+            CriuImagePath = ""
+            CriuPath = ""
+            CriuWorkPath = ""
+            IoGid = 0
+            IoUid = 0
+            NoNewKeyring = false
+            NoPivotRoot = false
+            Root = ""
+            ShimCgroup = ""
+            SystemdCgroup = false
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options]
+
+    [plugins."io.containerd.grpc.v1.cri".image_decryption]
+      key_model = "node"
+
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = ""
+
+      [plugins."io.containerd.grpc.v1.cri".registry.auths]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.configs]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.headers]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+
+    [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+
+  [plugins."io.containerd.internal.v1.opt"]
+    path = "/opt/containerd"
+
+  [plugins."io.containerd.internal.v1.restart"]
+    interval = "10s"
+
+  [plugins."io.containerd.internal.v1.tracing"]
+    sampling_ratio = 1.0
+    service_name = "containerd"
+
+  [plugins."io.containerd.metadata.v1.bolt"]
+    content_sharing_policy = "shared"
+
+  [plugins."io.containerd.monitor.v1.cgroups"]
+    no_prometheus = false
+
+  [plugins."io.containerd.runtime.v1.linux"]
+    no_shim = false
+    runtime = "runc"
+    runtime_root = ""
+    shim = "containerd-shim"
+    shim_debug = false
+
+  [plugins."io.containerd.runtime.v2.task"]
+    platforms = ["linux/amd64"]
+    sched_core = false
+
+  [plugins."io.containerd.service.v1.diff-service"]
+    default = ["walking"]
+
+  [plugins."io.containerd.service.v1.tasks-service"]
+    rdt_config_file = ""
+
+  [plugins."io.containerd.snapshotter.v1.aufs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.btrfs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.devmapper"]
+    async_remove = false
+    base_image_size = ""
+    discard_blocks = false
+    fs_options = ""
+    fs_type = ""
+    pool_name = ""
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.native"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.overlayfs"]
+    root_path = ""
+    upperdir_label = false
+
+  [plugins."io.containerd.snapshotter.v1.zfs"]
+    root_path = ""
+
+  [plugins."io.containerd.tracing.processor.v1.otlp"]
+    endpoint = ""
+    insecure = false
+    protocol = ""
+
+[proxy_plugins]
+
+[stream_processors]
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar"
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+gzip+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar+gzip"
+
+[timeouts]
+  "io.containerd.timeout.bolt.open" = "0s"
+  "io.containerd.timeout.shim.cleanup" = "5s"
+  "io.containerd.timeout.shim.load" = "5s"
+  "io.containerd.timeout.shim.shutdown" = "3s"
+  "io.containerd.timeout.task.state" = "2s"
+
+[ttrpc]
+  address = ""
+  gid = 0
+  uid = 0
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Firewall not enabled (skipping reload)
+Skipping adding existing rule
+Skipping adding existing rule (v6)
+Rules updated
+Rules updated (v6)
+Firewall not enabled (skipping reload)
+br_netfilter
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 65536
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+kernel.core_uses_pid = 1
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.default.accept_source_route = 0
+sysctl: setting key "net.ipv4.conf.all.accept_source_route": Invalid argument
+net.ipv4.conf.default.promote_secondaries = 1
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /usr/lib/sysctl.d/99-protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+net.core.rmem_default = 12582912
+net.core.wmem_default = 12582912
+net.core.rmem_max = 12582912
+net.core.wmem_max = 12582912
+net.ipv4.tcp_rmem = 10240 87380 12582912
+net.ipv4.tcp_wmem = 10240 87380 12582912
+net.ipv4.tcp_congestion_control = westwood
+* Applying /etc/sysctl.d/k8s.conf ...
+net.ipv4.ip_forward = 1
+* Applying /etc/sysctl.conf ...
+net.core.rmem_default = 12582912
+net.core.wmem_default = 12582912
+net.core.rmem_max = 12582912
+net.core.wmem_max = 12582912
+net.ipv4.tcp_rmem = 10240 87380 12582912
+net.ipv4.tcp_wmem = 10240 87380 12582912
+net.ipv4.tcp_congestion_control = westwood
+UUID=5e2174c7-fb5f-44b6-bba8-3e4dc1b66860       /       ext4    errors=remount-ro       0       1
+#UUID=f9c2cb63-7de5-455f-bb53-b3fbece6b28b      none    swap    none    0       0
+
+net.bridge.bridge-nf-call-iptables = 1
+Hit:1 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+8 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20211016).
+curl is already the newest version (7.81.0-1ubuntu1.3).
+apt-transport-https is already the newest version (2.4.7).
+0 upgraded, 0 newly installed, 0 to remove and 8 not upgraded.
+deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
+Hit:1 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Get:7 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [58.4 kB]
+Fetched 67.8 kB in 1s (112 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+8 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 8 not upgraded.
+Need to get 75.9 MB of archives.
+After this operation, 310 MB of additional disk space will be used.
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.24.2-00 [12.3 MB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 conntrack amd64 1:1.4.6-2build2 [33.5 kB]
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.8.7-00 [25.0 MB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 ebtables amd64 2.0.11-4build2 [84.9 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 socat amd64 1.7.4.1-3ubuntu4 [349 kB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.25.0-00 [19.5 MB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.25.0-00 [9500 kB]
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.25.0-00 [9213 kB]
+Fetched 75.9 MB in 1s (60.9 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 73736 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.6-2build2_amd64.deb ...
+Unpacking conntrack (1:1.4.6-2build2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.24.2-00_amd64.deb ...
+Unpacking cri-tools (1.24.2-00) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-4build2_amd64.deb ...
+Unpacking ebtables (2.0.11-4build2) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../3-kubernetes-cni_0.8.7-00_amd64.deb ...
+Unpacking kubernetes-cni (0.8.7-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../4-socat_1.7.4.1-3ubuntu4_amd64.deb ...
+Unpacking socat (1.7.4.1-3ubuntu4) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../5-kubelet_1.25.0-00_amd64.deb ...
+Unpacking kubelet (1.25.0-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../6-kubectl_1.25.0-00_amd64.deb ...
+Unpacking kubectl (1.25.0-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../7-kubeadm_1.25.0-00_amd64.deb ...
+Unpacking kubeadm (1.25.0-00) ...
+Setting up conntrack (1:1.4.6-2build2) ...
+Setting up kubectl (1.25.0-00) ...
+Setting up ebtables (2.0.11-4build2) ...
+Setting up socat (1.7.4.1-3ubuntu4) ...
+Setting up cri-tools (1.24.2-00) ...
+Setting up kubernetes-cni (0.8.7-00) ...
+Setting up kubelet (1.25.0-00) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+Setting up kubeadm (1.25.0-00) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv05:/home/ubuntu/my_python$ sudo kubeadm init --pod-network-cidr=192.168.0.0/16
+[init] Using Kubernetes version: v1.25.0
+[preflight] Running pre-flight checks
+        [WARNING SystemVerification]: missing optional cgroups: blkio
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local wv05] and IPs [10.96.0.1 139.178.85.77]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [localhost wv05] and IPs [139.178.85.77 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [localhost wv05] and IPs [139.178.85.77 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+[apiclient] All control plane components are healthy after 5.001827 seconds
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+[upload-certs] Skipping phase. Please see --upload-certs
+[mark-control-plane] Marking the node wv05 as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+[mark-control-plane] Marking the node wv05 as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]
+[bootstrap-token] Using token: tuyrnk.hq8s1ogs0oog9atx
+[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 139.178.85.77:6443 --token tuyrnk.hq8s1ogs0oog9atx \
+        --discovery-token-ca-cert-hash sha256:d630b9abb288254dd129d0cc02cccf3c4cb983bd28fdba4ffb2fab3b40a291ca
+ubuntu@wv05:/home/ubuntu/my_python$ mkdir -p $HOME/.kube
+ubuntu@wv05:/home/ubuntu/my_python$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ubuntu@wv05:/home/ubuntu/my_python$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+ubuntu@wv05:/home/ubuntu/my_python$ kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+namespace/tigera-operator created
+customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/bgppeers.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/blockaffinities.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/caliconodestatuses.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/clusterinformations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/globalnetworkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/globalnetworksets.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/hostendpoints.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamblocks.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamconfigs.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamhandles.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ippools.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipreservations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/kubecontrollersconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/networkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/networksets.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/apiservers.operator.tigera.io created
+customresourcedefinition.apiextensions.k8s.io/imagesets.operator.tigera.io created
+customresourcedefinition.apiextensions.k8s.io/installations.operator.tigera.io created
+customresourcedefinition.apiextensions.k8s.io/tigerastatuses.operator.tigera.io created
+serviceaccount/tigera-operator created
+clusterrole.rbac.authorization.k8s.io/tigera-operator created
+clusterrolebinding.rbac.authorization.k8s.io/tigera-operator created
+deployment.apps/tigera-operator created
+ubuntu@wv05:/home/ubuntu/my_python$ kubectl create -f https://projectcalico.docs.tigera.io/manifests/custom-resources.yaml
+installation.operator.tigera.io/default created
+apiserver.operator.tigera.io/default created
+ubuntu@wv05:/home/ubuntu/my_python$ kubectl get nodes --show-labels
+NAME   STATUS     ROLES           AGE     VERSION   LABELS
+wv05   NotReady   control-plane   4m52s   v1.25.0   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=wv05,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node.kubernetes.io/exclude-from-external-load-balancers=
+ubuntu@wv05:/home/ubuntu/my_python$ sudo snap install multipass
+multipass 1.10.1 from Canonical✓ installed
+ubuntu@wv05:/home/ubuntu/my_python$ multipass launch -c 4 -d 50G -m 8G -n node1
+Launched: node1
+ubuntu@wv05:/home/ubuntu/my_python$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 30 00:00:17 UTC 2022
+
+  System load:  0.37              Processes:             154
+  Usage of /:   2.8% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.226.243.222
+  Swap usage:   0%
+
+
+0 updates can be applied immediately.
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@node1:~$ git clone http://github.com/mike-moran-amd/my_python.git
+Cloning into 'my_python'...
+warning: redirecting to https://github.com/mike-moran-amd/my_python.git/
+remote: Enumerating objects: 665, done.
+remote: Counting objects: 100% (308/308), done.
+remote: Compressing objects: 100% (218/218), done.
+remote: Total 665 (delta 185), reused 204 (delta 86), pack-reused 357
+Receiving objects: 100% (665/665), 374.97 KiB | 3.35 MiB/s, done.
+Resolving deltas: 100% (369/369), done.
+ubuntu@node1:~$ cd my_python/
+ubuntu@node1:~/my_python$ . install_k8s
+Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:5 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [1683 kB]
+Get:6 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [8628 kB]
+Get:7 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [284 kB]
+Get:8 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [11.0 kB]
+Get:9 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [1147 kB]
+Get:10 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [163 kB]
+Get:11 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [715 kB]
+Get:12 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [130 kB]
+Get:13 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [14.8 kB]
+Get:14 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [22.2 kB]
+Get:15 http://security.ubuntu.com/ubuntu focal-security/multiverse Translation-en [5376 B]
+Get:16 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [508 B]
+Get:17 http://archive.ubuntu.com/ubuntu focal/universe Translation-en [5124 kB]
+Get:18 http://archive.ubuntu.com/ubuntu focal/universe amd64 c-n-f Metadata [265 kB]
+Get:19 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [144 kB]
+Get:20 http://archive.ubuntu.com/ubuntu focal/multiverse Translation-en [104 kB]
+Get:21 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 c-n-f Metadata [9136 B]
+Get:22 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [2051 kB]
+Get:23 http://archive.ubuntu.com/ubuntu focal-updates/main Translation-en [366 kB]
+Get:24 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 c-n-f Metadata [15.8 kB]
+Get:25 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [1234 kB]
+Get:26 http://archive.ubuntu.com/ubuntu focal-updates/restricted Translation-en [175 kB]
+Get:27 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [941 kB]
+Get:28 http://archive.ubuntu.com/ubuntu focal-updates/universe Translation-en [213 kB]
+Get:29 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [21.2 kB]
+Get:30 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [24.4 kB]
+Get:31 http://archive.ubuntu.com/ubuntu focal-updates/multiverse Translation-en [7336 B]
+Get:32 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [588 B]
+Get:33 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 Packages [45.6 kB]
+Get:34 http://archive.ubuntu.com/ubuntu focal-backports/main Translation-en [16.3 kB]
+Get:35 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 c-n-f Metadata [1420 B]
+Get:36 http://archive.ubuntu.com/ubuntu focal-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:37 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [23.9 kB]
+Get:38 http://archive.ubuntu.com/ubuntu focal-backports/universe Translation-en [16.0 kB]
+Get:39 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [860 B]
+Get:40 http://archive.ubuntu.com/ubuntu focal-backports/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 23.9 MB in 4s (6057 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+lsb-release is already the newest version (11.1.0ubuntu2).
+lsb-release set to manually installed.
+ca-certificates is already the newest version (20211016~20.04.1).
+ca-certificates set to manually installed.
+curl is already the newest version (7.68.0-1ubuntu2.12).
+curl set to manually installed.
+gnupg is already the newest version (2.2.19-3ubuntu2.2).
+gnupg set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 7 not upgraded.
+deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable
+Get:1 https://download.docker.com/linux/ubuntu focal InRelease [57.7 kB]
+Get:2 https://download.docker.com/linux/ubuntu focal/stable amd64 Packages [17.9 kB]
+Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Fetched 75.6 kB in 1s (93.3 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  containerd.io
+0 upgraded, 1 newly installed, 0 to remove and 7 not upgraded.
+Need to get 28.1 MB of archives.
+After this operation, 127 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu focal/stable amd64 containerd.io amd64 1.6.8-1 [28.1 MB]
+Fetched 28.1 MB in 0s (110 MB/s)
+Selecting previously unselected package containerd.io.
+(Reading database ... 63818 files and directories currently installed.)
+Preparing to unpack .../containerd.io_1.6.8-1_amd64.deb ...
+Unpacking containerd.io (1.6.8-1) ...
+Setting up containerd.io (1.6.8-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Processing triggers for man-db (2.9.1-1) ...
+--2022-08-30 00:01:23--  https://github.com/opencontainers/runc/releases/download/v1.1.1/runc.amd64
+Resolving github.com (github.com)... 140.82.112.3
+Connecting to github.com (github.com)|140.82.112.3|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://objects.githubusercontent.com/github-production-release-asset-2e65be/36960321/decb03b0-76a4-4ee7-bd06-4e3a548d9f87?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220830T000123Z&X-Amz-Expires=300&X-Amz-Signature=8e3b8001cd56bd7651e01e815dc57ae36aadbb043dcc900082fd2001321a4e0a&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=36960321&response-content-disposition=attachment%3B%20filename%3Drunc.amd64&response-content-type=application%2Foctet-stream [following]
+--2022-08-30 00:01:23--  https://objects.githubusercontent.com/github-production-release-asset-2e65be/36960321/decb03b0-76a4-4ee7-bd06-4e3a548d9f87?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220830T000123Z&X-Amz-Expires=300&X-Amz-Signature=8e3b8001cd56bd7651e01e815dc57ae36aadbb043dcc900082fd2001321a4e0a&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=36960321&response-content-disposition=attachment%3B%20filename%3Drunc.amd64&response-content-type=application%2Foctet-stream
+Resolving objects.githubusercontent.com (objects.githubusercontent.com)... 185.199.111.133, 185.199.109.133, 185.199.108.133, ...
+Connecting to objects.githubusercontent.com (objects.githubusercontent.com)|185.199.111.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 9415040 (9.0M) [application/octet-stream]
+Saving to: ‘runc.amd64’
+
+runc.amd64                                 100%[======================================================================================>]   8.98M  26.0MB/s    in 0.3s
+
+2022-08-30 00:01:24 (26.0 MB/s) - ‘runc.amd64’ saved [9415040/9415040]
+
+disabled_plugins = []
+imports = []
+oom_score = 0
+plugin_dir = ""
+required_plugins = []
+root = "/var/lib/containerd"
+state = "/run/containerd"
+temp = ""
+version = 2
+
+[cgroup]
+  path = ""
+
+[debug]
+  address = ""
+  format = ""
+  gid = 0
+  level = ""
+  uid = 0
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+  tcp_address = ""
+  tcp_tls_ca = ""
+  tcp_tls_cert = ""
+  tcp_tls_key = ""
+  uid = 0
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+
+  [plugins."io.containerd.gc.v1.scheduler"]
+    deletion_threshold = 0
+    mutation_threshold = 100
+    pause_threshold = 0.02
+    schedule_delay = "0s"
+    startup_delay = "100ms"
+
+  [plugins."io.containerd.grpc.v1.cri"]
+    device_ownership_from_security_context = false
+    disable_apparmor = false
+    disable_cgroup = false
+    disable_hugetlb_controller = true
+    disable_proc_mount = false
+    disable_tcp_service = true
+    enable_selinux = false
+    enable_tls_streaming = false
+    enable_unprivileged_icmp = false
+    enable_unprivileged_ports = false
+    ignore_image_defined_volumes = false
+    max_concurrent_downloads = 3
+    max_container_log_line_size = 16384
+    netns_mounts_under_state_dir = false
+    restrict_oom_score_adj = false
+    sandbox_image = "k8s.gcr.io/pause:3.6"
+    selinux_category_range = 1024
+    stats_collect_period = 10
+    stream_idle_timeout = "4h0m0s"
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    systemd_cgroup = false
+    tolerate_missing_hugetlb_controller = true
+    unset_seccomp_profile = ""
+
+    [plugins."io.containerd.grpc.v1.cri".cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = ""
+      ip_pref = ""
+      max_conf_num = 1
+
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      disable_snapshot_annotations = true
+      discard_unpacked_layers = false
+      ignore_rdt_not_enabled_errors = false
+      no_pivot = false
+      snapshotter = "overlayfs"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options]
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            BinaryName = ""
+            CriuImagePath = ""
+            CriuPath = ""
+            CriuWorkPath = ""
+            IoGid = 0
+            IoUid = 0
+            NoNewKeyring = false
+            NoPivotRoot = false
+            Root = ""
+            ShimCgroup = ""
+            SystemdCgroup = false
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options]
+
+    [plugins."io.containerd.grpc.v1.cri".image_decryption]
+      key_model = "node"
+
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = ""
+
+      [plugins."io.containerd.grpc.v1.cri".registry.auths]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.configs]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.headers]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+
+    [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+
+  [plugins."io.containerd.internal.v1.opt"]
+    path = "/opt/containerd"
+
+  [plugins."io.containerd.internal.v1.restart"]
+    interval = "10s"
+
+  [plugins."io.containerd.internal.v1.tracing"]
+    sampling_ratio = 1.0
+    service_name = "containerd"
+
+  [plugins."io.containerd.metadata.v1.bolt"]
+    content_sharing_policy = "shared"
+
+  [plugins."io.containerd.monitor.v1.cgroups"]
+    no_prometheus = false
+
+  [plugins."io.containerd.runtime.v1.linux"]
+    no_shim = false
+    runtime = "runc"
+    runtime_root = ""
+    shim = "containerd-shim"
+    shim_debug = false
+
+  [plugins."io.containerd.runtime.v2.task"]
+    platforms = ["linux/amd64"]
+    sched_core = false
+
+  [plugins."io.containerd.service.v1.diff-service"]
+    default = ["walking"]
+
+  [plugins."io.containerd.service.v1.tasks-service"]
+    rdt_config_file = ""
+
+  [plugins."io.containerd.snapshotter.v1.aufs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.btrfs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.devmapper"]
+    async_remove = false
+    base_image_size = ""
+    discard_blocks = false
+    fs_options = ""
+    fs_type = ""
+    pool_name = ""
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.native"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.overlayfs"]
+    root_path = ""
+    upperdir_label = false
+
+  [plugins."io.containerd.snapshotter.v1.zfs"]
+    root_path = ""
+
+  [plugins."io.containerd.tracing.processor.v1.otlp"]
+    endpoint = ""
+    insecure = false
+    protocol = ""
+
+[proxy_plugins]
+
+[stream_processors]
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar"
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+gzip+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar+gzip"
+
+[timeouts]
+  "io.containerd.timeout.bolt.open" = "0s"
+  "io.containerd.timeout.shim.cleanup" = "5s"
+  "io.containerd.timeout.shim.load" = "5s"
+  "io.containerd.timeout.shim.shutdown" = "3s"
+  "io.containerd.timeout.task.state" = "2s"
+
+[ttrpc]
+  address = ""
+  gid = 0
+  uid = 0
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Firewall not enabled (skipping reload)
+Skipping adding existing rule
+Skipping adding existing rule (v6)
+Rules updated
+Rules updated (v6)
+Firewall not enabled (skipping reload)
+br_netfilter
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-link-restrictions.conf ...
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 65536
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+net.ipv4.conf.default.promote_secondaries = 1
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.d/k8s.conf ...
+net.ipv4.ip_forward = 1
+* Applying /usr/lib/sysctl.d/protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.conf ...
+LABEL=cloudimg-rootfs   /        ext4   defaults        0 1
+LABEL=UEFI      /boot/efi       vfat    umask=0077      0 1
+net.bridge.bridge-nf-call-iptables = 1
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:2 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+ca-certificates is already the newest version (20211016~20.04.1).
+curl is already the newest version (7.68.0-1ubuntu2.12).
+The following NEW packages will be installed:
+  apt-transport-https
+0 upgraded, 1 newly installed, 0 to remove and 7 not upgraded.
+Need to get 1704 B of archives.
+After this operation, 162 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 apt-transport-https all 2.0.9 [1704 B]
+Fetched 1704 B in 0s (4948 B/s)
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 63834 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.0.9_all.deb ...
+Unpacking apt-transport-https (2.0.9) ...
+Setting up apt-transport-https (2.0.9) ...
+deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:2 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Get:7 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [58.4 kB]
+Fetched 67.8 kB in 0s (139 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+Suggested packages:
+  nftables
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 7 not upgraded.
+Need to get 75.9 MB of archives.
+After this operation, 310 MB of additional disk space will be used.
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.24.2-00 [12.3 MB]
+Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 conntrack amd64 1:1.4.5-2 [30.3 kB]
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.8.7-00 [25.0 MB]
+Get:7 http://archive.ubuntu.com/ubuntu focal/main amd64 ebtables amd64 2.0.11-3build1 [80.3 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal/main amd64 socat amd64 1.7.3.3-2 [323 kB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.25.0-00 [19.5 MB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.25.0-00 [9500 kB]
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.25.0-00 [9213 kB]
+Fetched 75.9 MB in 1s (57.2 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 63838 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.5-2_amd64.deb ...
+Unpacking conntrack (1:1.4.5-2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.24.2-00_amd64.deb ...
+Unpacking cri-tools (1.24.2-00) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-3build1_amd64.deb ...
+Unpacking ebtables (2.0.11-3build1) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../3-kubernetes-cni_0.8.7-00_amd64.deb ...
+Unpacking kubernetes-cni (0.8.7-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../4-socat_1.7.3.3-2_amd64.deb ...
+Unpacking socat (1.7.3.3-2) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../5-kubelet_1.25.0-00_amd64.deb ...
+Unpacking kubelet (1.25.0-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../6-kubectl_1.25.0-00_amd64.deb ...
+Unpacking kubectl (1.25.0-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../7-kubeadm_1.25.0-00_amd64.deb ...
+Unpacking kubeadm (1.25.0-00) ...
+Setting up conntrack (1:1.4.5-2) ...
+Setting up kubectl (1.25.0-00) ...
+Setting up ebtables (2.0.11-3build1) ...
+Setting up socat (1.7.3.3-2) ...
+Setting up cri-tools (1.24.2-00) ...
+Setting up kubernetes-cni (0.8.7-00) ...
+Setting up kubelet (1.25.0-00) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+Setting up kubeadm (1.25.0-00) ...
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node1:~/my_python$ sudo kubeadm join 139.178.85.77:6443 --token tuyrnk.hq8s1ogs0oog9atx --discovery-token-ca-cert-hash sha256:d630b9abb288254dd129d0cc02cccf3c4cb983bd28fdba4ffb2fab3b40a291ca
+[preflight] Running pre-flight checks
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+
+ubuntu@node1:~/my_python$ exit
+logout
+ubuntu@wv05:/home/ubuntu/my_python$ multipass launch -c 4 -d 50G -m 8G -n node2
+Launched: node2
+ubuntu@wv05:/home/ubuntu/my_python$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 30 00:03:47 UTC 2022
+
+  System load:  0.07              Processes:             139
+  Usage of /:   2.8% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.226.243.50
+  Swap usage:   0%
+
+
+0 updates can be applied immediately.
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@node2:~$ git clone http://github.com/mike-moran-amd/my_python.git
+Cloning into 'my_python'...
+warning: redirecting to https://github.com/mike-moran-amd/my_python.git/
+remote: Enumerating objects: 665, done.
+remote: Counting objects: 100% (308/308), done.
+remote: Compressing objects: 100% (218/218), done.
+remote: Total 665 (delta 185), reused 204 (delta 86), pack-reused 357
+Receiving objects: 100% (665/665), 374.97 KiB | 3.99 MiB/s, done.
+Resolving deltas: 100% (369/369), done.
+ubuntu@node2:~$ cd my_python/
+ubuntu@node2:~/my_python$ . install_k8s
+Hit:1 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:3 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [8628 kB]
+Get:6 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [1683 kB]
+Get:7 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [284 kB]
+Get:8 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [11.0 kB]
+Get:9 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [1147 kB]
+Get:10 http://archive.ubuntu.com/ubuntu focal/universe Translation-en [5124 kB]
+Get:11 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [163 kB]
+Get:12 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [715 kB]
+Get:13 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [130 kB]
+Get:14 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [14.8 kB]
+Get:15 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [22.2 kB]
+Get:16 http://security.ubuntu.com/ubuntu focal-security/multiverse Translation-en [5376 B]
+Get:17 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [508 B]
+Get:18 http://archive.ubuntu.com/ubuntu focal/universe amd64 c-n-f Metadata [265 kB]
+Get:19 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [144 kB]
+Get:20 http://archive.ubuntu.com/ubuntu focal/multiverse Translation-en [104 kB]
+Get:21 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 c-n-f Metadata [9136 B]
+Get:22 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [2051 kB]
+Get:23 http://archive.ubuntu.com/ubuntu focal-updates/main Translation-en [366 kB]
+Get:24 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 c-n-f Metadata [15.8 kB]
+Get:25 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [1234 kB]
+Get:26 http://archive.ubuntu.com/ubuntu focal-updates/restricted Translation-en [175 kB]
+Get:27 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [941 kB]
+Get:28 http://archive.ubuntu.com/ubuntu focal-updates/universe Translation-en [213 kB]
+Get:29 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [21.2 kB]
+Get:30 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [24.4 kB]
+Get:31 http://archive.ubuntu.com/ubuntu focal-updates/multiverse Translation-en [7336 B]
+Get:32 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [588 B]
+Get:33 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 Packages [45.6 kB]
+Get:34 http://archive.ubuntu.com/ubuntu focal-backports/main Translation-en [16.3 kB]
+Get:35 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 c-n-f Metadata [1420 B]
+Get:36 http://archive.ubuntu.com/ubuntu focal-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:37 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [23.9 kB]
+Get:38 http://archive.ubuntu.com/ubuntu focal-backports/universe Translation-en [16.0 kB]
+Get:39 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [860 B]
+Get:40 http://archive.ubuntu.com/ubuntu focal-backports/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 23.9 MB in 4s (5597 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+lsb-release is already the newest version (11.1.0ubuntu2).
+lsb-release set to manually installed.
+ca-certificates is already the newest version (20211016~20.04.1).
+ca-certificates set to manually installed.
+curl is already the newest version (7.68.0-1ubuntu2.12).
+curl set to manually installed.
+gnupg is already the newest version (2.2.19-3ubuntu2.2).
+gnupg set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 7 not upgraded.
+deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable
+Get:1 https://download.docker.com/linux/ubuntu focal InRelease [57.7 kB]
+Get:2 https://download.docker.com/linux/ubuntu focal/stable amd64 Packages [17.9 kB]
+Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Fetched 75.6 kB in 0s (152 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  containerd.io
+0 upgraded, 1 newly installed, 0 to remove and 7 not upgraded.
+Need to get 28.1 MB of archives.
+After this operation, 127 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu focal/stable amd64 containerd.io amd64 1.6.8-1 [28.1 MB]
+Fetched 28.1 MB in 0s (104 MB/s)
+Selecting previously unselected package containerd.io.
+(Reading database ... 63818 files and directories currently installed.)
+Preparing to unpack .../containerd.io_1.6.8-1_amd64.deb ...
+Unpacking containerd.io (1.6.8-1) ...
+Setting up containerd.io (1.6.8-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Processing triggers for man-db (2.9.1-1) ...
+--2022-08-30 00:05:16--  https://github.com/opencontainers/runc/releases/download/v1.1.1/runc.amd64
+Resolving github.com (github.com)... 140.82.113.4
+Connecting to github.com (github.com)|140.82.113.4|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://objects.githubusercontent.com/github-production-release-asset-2e65be/36960321/decb03b0-76a4-4ee7-bd06-4e3a548d9f87?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220830T000516Z&X-Amz-Expires=300&X-Amz-Signature=85bbc197a4b21d5b51fb20c821cd813d834a7af9589e06ff579082474788d31d&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=36960321&response-content-disposition=attachment%3B%20filename%3Drunc.amd64&response-content-type=application%2Foctet-stream [following]
+--2022-08-30 00:05:16--  https://objects.githubusercontent.com/github-production-release-asset-2e65be/36960321/decb03b0-76a4-4ee7-bd06-4e3a548d9f87?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220830T000516Z&X-Amz-Expires=300&X-Amz-Signature=85bbc197a4b21d5b51fb20c821cd813d834a7af9589e06ff579082474788d31d&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=36960321&response-content-disposition=attachment%3B%20filename%3Drunc.amd64&response-content-type=application%2Foctet-stream
+Resolving objects.githubusercontent.com (objects.githubusercontent.com)... 185.199.110.133, 185.199.108.133, 185.199.109.133, ...
+Connecting to objects.githubusercontent.com (objects.githubusercontent.com)|185.199.110.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 9415040 (9.0M) [application/octet-stream]
+Saving to: ‘runc.amd64’
+
+runc.amd64                                 100%[======================================================================================>]   8.98M  --.-KB/s    in 0.02s
+
+2022-08-30 00:05:16 (441 MB/s) - ‘runc.amd64’ saved [9415040/9415040]
+
+disabled_plugins = []
+imports = []
+oom_score = 0
+plugin_dir = ""
+required_plugins = []
+root = "/var/lib/containerd"
+state = "/run/containerd"
+temp = ""
+version = 2
+
+[cgroup]
+  path = ""
+
+[debug]
+  address = ""
+  format = ""
+  gid = 0
+  level = ""
+  uid = 0
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+  tcp_address = ""
+  tcp_tls_ca = ""
+  tcp_tls_cert = ""
+  tcp_tls_key = ""
+  uid = 0
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+
+  [plugins."io.containerd.gc.v1.scheduler"]
+    deletion_threshold = 0
+    mutation_threshold = 100
+    pause_threshold = 0.02
+    schedule_delay = "0s"
+    startup_delay = "100ms"
+
+  [plugins."io.containerd.grpc.v1.cri"]
+    device_ownership_from_security_context = false
+    disable_apparmor = false
+    disable_cgroup = false
+    disable_hugetlb_controller = true
+    disable_proc_mount = false
+    disable_tcp_service = true
+    enable_selinux = false
+    enable_tls_streaming = false
+    enable_unprivileged_icmp = false
+    enable_unprivileged_ports = false
+    ignore_image_defined_volumes = false
+    max_concurrent_downloads = 3
+    max_container_log_line_size = 16384
+    netns_mounts_under_state_dir = false
+    restrict_oom_score_adj = false
+    sandbox_image = "k8s.gcr.io/pause:3.6"
+    selinux_category_range = 1024
+    stats_collect_period = 10
+    stream_idle_timeout = "4h0m0s"
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    systemd_cgroup = false
+    tolerate_missing_hugetlb_controller = true
+    unset_seccomp_profile = ""
+
+    [plugins."io.containerd.grpc.v1.cri".cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = ""
+      ip_pref = ""
+      max_conf_num = 1
+
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      disable_snapshot_annotations = true
+      discard_unpacked_layers = false
+      ignore_rdt_not_enabled_errors = false
+      no_pivot = false
+      snapshotter = "overlayfs"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options]
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            BinaryName = ""
+            CriuImagePath = ""
+            CriuPath = ""
+            CriuWorkPath = ""
+            IoGid = 0
+            IoUid = 0
+            NoNewKeyring = false
+            NoPivotRoot = false
+            Root = ""
+            ShimCgroup = ""
+            SystemdCgroup = false
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options]
+
+    [plugins."io.containerd.grpc.v1.cri".image_decryption]
+      key_model = "node"
+
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = ""
+
+      [plugins."io.containerd.grpc.v1.cri".registry.auths]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.configs]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.headers]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+
+    [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+
+  [plugins."io.containerd.internal.v1.opt"]
+    path = "/opt/containerd"
+
+  [plugins."io.containerd.internal.v1.restart"]
+    interval = "10s"
+
+  [plugins."io.containerd.internal.v1.tracing"]
+    sampling_ratio = 1.0
+    service_name = "containerd"
+
+  [plugins."io.containerd.metadata.v1.bolt"]
+    content_sharing_policy = "shared"
+
+  [plugins."io.containerd.monitor.v1.cgroups"]
+    no_prometheus = false
+
+  [plugins."io.containerd.runtime.v1.linux"]
+    no_shim = false
+    runtime = "runc"
+    runtime_root = ""
+    shim = "containerd-shim"
+    shim_debug = false
+
+  [plugins."io.containerd.runtime.v2.task"]
+    platforms = ["linux/amd64"]
+    sched_core = false
+
+  [plugins."io.containerd.service.v1.diff-service"]
+    default = ["walking"]
+
+  [plugins."io.containerd.service.v1.tasks-service"]
+    rdt_config_file = ""
+
+  [plugins."io.containerd.snapshotter.v1.aufs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.btrfs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.devmapper"]
+    async_remove = false
+    base_image_size = ""
+    discard_blocks = false
+    fs_options = ""
+    fs_type = ""
+    pool_name = ""
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.native"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.overlayfs"]
+    root_path = ""
+    upperdir_label = false
+
+  [plugins."io.containerd.snapshotter.v1.zfs"]
+    root_path = ""
+
+  [plugins."io.containerd.tracing.processor.v1.otlp"]
+    endpoint = ""
+    insecure = false
+    protocol = ""
+
+[proxy_plugins]
+
+[stream_processors]
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar"
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+gzip+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar+gzip"
+
+[timeouts]
+  "io.containerd.timeout.bolt.open" = "0s"
+  "io.containerd.timeout.shim.cleanup" = "5s"
+  "io.containerd.timeout.shim.load" = "5s"
+  "io.containerd.timeout.shim.shutdown" = "3s"
+  "io.containerd.timeout.task.state" = "2s"
+
+[ttrpc]
+  address = ""
+  gid = 0
+  uid = 0
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Firewall not enabled (skipping reload)
+Skipping adding existing rule
+Skipping adding existing rule (v6)
+Rules updated
+Rules updated (v6)
+Firewall not enabled (skipping reload)
+br_netfilter
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-link-restrictions.conf ...
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 65536
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+net.ipv4.conf.default.promote_secondaries = 1
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.d/k8s.conf ...
+net.ipv4.ip_forward = 1
+* Applying /usr/lib/sysctl.d/protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.conf ...
+LABEL=cloudimg-rootfs   /        ext4   defaults        0 1
+LABEL=UEFI      /boot/efi       vfat    umask=0077      0 1
+net.bridge.bridge-nf-call-iptables = 1
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+ca-certificates is already the newest version (20211016~20.04.1).
+curl is already the newest version (7.68.0-1ubuntu2.12).
+The following NEW packages will be installed:
+  apt-transport-https
+0 upgraded, 1 newly installed, 0 to remove and 7 not upgraded.
+Need to get 1704 B of archives.
+After this operation, 162 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 apt-transport-https all 2.0.9 [1704 B]
+Fetched 1704 B in 0s (7901 B/s)
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 63834 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.0.9_all.deb ...
+Unpacking apt-transport-https (2.0.9) ...
+Setting up apt-transport-https (2.0.9) ...
+deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:4 http://security.ubuntu.com/ubuntu focal-security InRelease
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Get:6 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [58.4 kB]
+Hit:7 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Fetched 67.8 kB in 1s (135 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+Suggested packages:
+  nftables
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 7 not upgraded.
+Need to get 75.9 MB of archives.
+After this operation, 310 MB of additional disk space will be used.
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.24.2-00 [12.3 MB]
+Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 conntrack amd64 1:1.4.5-2 [30.3 kB]
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.8.7-00 [25.0 MB]
+Get:7 http://archive.ubuntu.com/ubuntu focal/main amd64 ebtables amd64 2.0.11-3build1 [80.3 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal/main amd64 socat amd64 1.7.3.3-2 [323 kB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.25.0-00 [19.5 MB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.25.0-00 [9500 kB]
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.25.0-00 [9213 kB]
+Fetched 75.9 MB in 1s (61.0 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 63838 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.5-2_amd64.deb ...
+Unpacking conntrack (1:1.4.5-2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.24.2-00_amd64.deb ...
+Unpacking cri-tools (1.24.2-00) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-3build1_amd64.deb ...
+Unpacking ebtables (2.0.11-3build1) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../3-kubernetes-cni_0.8.7-00_amd64.deb ...
+Unpacking kubernetes-cni (0.8.7-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../4-socat_1.7.3.3-2_amd64.deb ...
+Unpacking socat (1.7.3.3-2) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../5-kubelet_1.25.0-00_amd64.deb ...
+Unpacking kubelet (1.25.0-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../6-kubectl_1.25.0-00_amd64.deb ...
+Unpacking kubectl (1.25.0-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../7-kubeadm_1.25.0-00_amd64.deb ...
+Unpacking kubeadm (1.25.0-00) ...
+Setting up conntrack (1:1.4.5-2) ...
+Setting up kubectl (1.25.0-00) ...
+Setting up ebtables (2.0.11-3build1) ...
+Setting up socat (1.7.3.3-2) ...
+Setting up cri-tools (1.24.2-00) ...
+Setting up kubernetes-cni (0.8.7-00) ...
+Setting up kubelet (1.25.0-00) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+Setting up kubeadm (1.25.0-00) ...
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node2:~/my_python$ sudo kubeadm join 139.178.85.77:6443 --token tuyrnk.hq8s1ogs0oog9atx --discovery-token-ca-cert-hash sha256:d630b9abb288254dd129d0cc02cccf3c4cb983bd28fdba4ffb2fab3b40a291ca
+[preflight] Running pre-flight checks
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+
+ubuntu@node2:~/my_python$ history
+    1  git clone http://github.com/mike-moran-amd/my_python.git
+    2  cd my_python/
+    3  . install_k8s
+    4  sudo kubeadm join 139.178.85.77:6443 --token tuyrnk.hq8s1ogs0oog9atx --discovery-token-ca-cert-hash sha256:d630b9abb288254dd129d0cc02cccf3c4cb983bd28fdba4ffb2fab3b40a291ca
+    5  history
+ubuntu@node2:~/my_python$ exit
+logout
+ubuntu@wv05:/home/ubuntu/my_python$ kubectl get nodes --show-labels
+NAME    STATUS     ROLES           AGE     VERSION   LABELS
+node1   Ready      <none>          3m21s   v1.25.0   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=node1,kubernetes.io/os=linux
+node2   NotReady   <none>          19s     v1.25.0   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=node2,kubernetes.io/os=linux
+wv05    Ready      control-plane   14m     v1.25.0   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=wv05,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node.kubernetes.io/exclude-from-external-load-balancers=
+ubuntu@wv05:/home/ubuntu/my_python$ kubectl get nodes --show-labels
+NAME    STATUS   ROLES           AGE     VERSION   LABELS
+node1   Ready    <none>          4m51s   v1.25.0   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=node1,kubernetes.io/os=linux
+node2   Ready    <none>          109s    v1.25.0   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=node2,kubernetes.io/os=linux
+wv05    Ready    control-plane   15m     v1.25.0   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=wv05,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node.kubernetes.io/exclude-from-external-load-balancers=
+ubuntu@wv05:/home/ubuntu/my_python$ sudo mkdir -p /k8s/weathervane/vol
+[sudo] password for ubuntu:
+ubuntu@wv05:/home/ubuntu/my_python$ sudo chmod -R 777 /k8s
+ubuntu@wv05:/home/ubuntu/my_python$ cd
+ubuntu@wv05:/home/ubuntu$ git clone http://github.com/vmware/weathervane
+Cloning into 'weathervane'...
+warning: redirecting to https://github.com/vmware/weathervane/
+remote: Enumerating objects: 19164, done.
+remote: Counting objects: 100% (1955/1955), done.
+remote: Compressing objects: 100% (643/643), done.
+remote: Total 19164 (delta 1014), reused 1887 (delta 964), pack-reused 17209
+Receiving objects: 100% (19164/19164), 64.64 MiB | 62.15 MiB/s, done.
+Resolving deltas: 100% (11710/11710), done.
+ubuntu@wv05:/home/ubuntu$ cd weathervane/
+ubuntu@wv05:/home/ubuntu/weathervane$ cat > create-persistent-vol.yaml << EOF
+> apiVersion: v1
+> kind: PersistentVolume
+> metadata:
+>   name: weathervane-pv
+> spec:
+>   capacity:
+>     storage: 40Gi
+>   accessModes:
+>   - ReadWriteOnce
+>   persistentVolumeReclaimPolicy: Retain
+>   storageClassName: local-storage
+>   local:
+>     path: /k8s/weathervane/vol
+>   nodeAffinity:
+>     required:
+>       nodeSelectorTerms:
+>       - matchExpressions:
+>         - key: kubernetes.io/hostname
+>           operator: In
+>           values:
+>           - node1
+> EOF
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl create -f create-persistent-vol.yaml
+persistentvolume/weathervane-pv created
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Available           local-storage            7s
+ubuntu@wv05:/home/ubuntu/weathervane$ cat > create-storage-class.yaml << EOF
+> kind: StorageClass
+> apiVersion: storage.k8s.io/v1
+> metadata:
+>   name: local-storage
+> provisioner: kubernetes.io/no-provisioner
+> volumeBindingMode: Immediate
+> EOF
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl create -f create-storage-class.yaml
+storageclass.storage.k8s.io/local-storage created
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  10s
+ubuntu@wv05:/home/ubuntu/weathervane$ cp weathervane.config.k8s.micro weathervane.config.k8s.quickstart
+ubuntu@wv05:/home/ubuntu/weathervane$ vi weathervane.config.k8s.quickstart
+ubuntu@wv05:/home/ubuntu/weathervane$ ubuntu@wv05:/home/ubuntu/weathervane$ cat weathervane.config.k8s.quickstart
+{
+  "description" : "micro",
+
+  "configurationSize": "micro",
+
+  "runStrategy" : "fixed",
+
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/home/ubuntu/.kube/config",
+      "kubeconfigContext" : "cluster-context-1",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/home/ubuntu/.kube/config",
+      "kubeconfigContext" : "cluster-context-2",
+    },
+  ],
+
+  "driverCluster" : "driverCluster",
+
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "loadbalancer",
+
+  "cassandraDataStorageClass" : "local-storage",
+  "postgresqlStorageClass" : "local-storage",
+  "nginxCacheStorageClass" : "local-storage",
+
+}
+ubuntu@wv05:/home/ubuntu/weathervane$ ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane
+Copyright (c) 2019 VMware, Inc. All Rights Reserved.
+
+This product is licensed to you under the BSD-2 license (the "License").  You may not use this product except in compliance with the BSD-2 License.
+
+This product may include a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the subcomponent's license, as noted in the LICENSE file.
+
+Do you accept these terms and conditions (yes/no)? yes
+error: context "cluster-context-1" does not exist
+Error in configuration: context was not found for specified context: cluster-context-1
+Error in configuration: context was not found for specified context: cluster-context-1
+Error in configuration: context was not found for specified context: cluster-context-1
+^C
+ubuntu@wv05:/home/ubuntu/weathervane$ !vi
+vi weathervane.config.k8s.quickstart
+ubuntu@wv05:/home/ubuntu/weathervane$ cat weathervane.config.k8s.quickstart
+{
+  "description" : "micro",
+
+  "configurationSize": "micro",
+
+  "runStrategy" : "fixed",
+
+  "dockerNamespace" : "mikemoranamd",
+  "kubernetesClusters" : [
+    {
+      "name" : "appCluster",
+      "kubeconfigFile" : "/home/ubuntu/.kube/config",
+      "kubeconfigContext" : "",
+    },
+    {
+      "name" : "driverCluster",
+      "kubeconfigFile" : "/home/ubuntu/.kube/config",
+      "kubeconfigContext" : "",
+    },
+  ],
+
+  "driverCluster" : "driverCluster",
+
+  "appInstanceCluster" : "appCluster",
+  "appIngressMethod" : "loadbalancer",
+
+  "cassandraDataStorageClass" : "local-storage",
+  "postgresqlStorageClass" : "local-storage",
+  "nginxCacheStorageClass" : "local-storage",
+
+}
+ubuntu@wv05:/home/ubuntu/weathervane$ ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Starting Weathervane Run-Harness.  Pulling container image may take a few minutes.
+Can't open docker logs pipe (docker logs --follow weathervane |) : No such file or directory
+ubuntu@wv05:/home/ubuntu/weathervane$ ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster appCluster.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get ps
+error: the server doesn't have a resource type "ps"
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            18m
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc
+No resources found in default namespace.
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  17m
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc- -A
+error: the server doesn't have a resource type "sc-"
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get sc -A
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          Immediate           false                  18m
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pv -A
+NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                            STORAGECLASS    REASON   AGE
+weathervane-pv   40Gi       RWO            Retain           Released   default/weathervane-test-claim   local-storage            19m
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get pvc -A
+No resources found
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://139.178.85.77:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl get node -A
+NAME    STATUS   ROLES           AGE   VERSION
+node1   Ready    <none>          56m   v1.25.0
+node2   Ready    <none>          53m   v1.25.0
+wv05    Ready    control-plane   67m   v1.25.0
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl describe node node1
+Name:               node1
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node1
+                    kubernetes.io/os=linux
+Annotations:        csi.volume.kubernetes.io/nodeid: {"csi.tigera.io":"node1"}
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 10.226.243.222/24
+                    projectcalico.org/IPv4VXLANTunnelAddr: 192.168.166.128
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Tue, 30 Aug 2022 00:03:01 +0000
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node1
+  AcquireTime:     <unset>
+  RenewTime:       Tue, 30 Aug 2022 00:59:57 +0000
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Tue, 30 Aug 2022 00:03:26 +0000   Tue, 30 Aug 2022 00:03:26 +0000   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Tue, 30 Aug 2022 00:59:56 +0000   Tue, 30 Aug 2022 00:03:01 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Tue, 30 Aug 2022 00:59:56 +0000   Tue, 30 Aug 2022 00:03:01 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Tue, 30 Aug 2022 00:59:56 +0000   Tue, 30 Aug 2022 00:03:01 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Tue, 30 Aug 2022 00:59:56 +0000   Tue, 30 Aug 2022 00:03:32 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  10.226.243.222
+  Hostname:    node1
+Capacity:
+  cpu:                4
+  ephemeral-storage:  50620216Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             8148188Ki
+  pods:               110
+Allocatable:
+  cpu:                4
+  ephemeral-storage:  46651590989
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             8045788Ki
+  pods:               110
+System Info:
+  Machine ID:                 d6552bee50fa4109b8124762546a96d2
+  System UUID:                d6552bee50fa4109b8124762546a96d2
+  Boot ID:                    0dc49d79-a4ec-48ff-abf9-b4bc401af0a0
+  Kernel Version:             5.4.0-125-generic
+  OS Image:                   Ubuntu 20.04.4 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.8
+  Kubelet Version:            v1.25.0
+  Kube-Proxy Version:         v1.25.0
+PodCIDR:                      192.168.1.0/24
+PodCIDRs:                     192.168.1.0/24
+Non-terminated Pods:          (3 in total)
+  Namespace                   Name                     CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                     ------------  ----------  ---------------  -------------  ---
+  calico-system               calico-node-tqf4k        0 (0%)        0 (0%)      0 (0%)           0 (0%)         57m
+  calico-system               csi-node-driver-b8rpg    0 (0%)        0 (0%)      0 (0%)           0 (0%)         56m
+  kube-system                 kube-proxy-nhss5         0 (0%)        0 (0%)      0 (0%)           0 (0%)         57m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests  Limits
+  --------           --------  ------
+  cpu                0 (0%)    0 (0%)
+  memory             0 (0%)    0 (0%)
+  ephemeral-storage  0 (0%)    0 (0%)
+  hugepages-1Gi      0 (0%)    0 (0%)
+  hugepages-2Mi      0 (0%)    0 (0%)
+Events:
+  Type    Reason                   Age                From             Message
+  ----    ------                   ----               ----             -------
+  Normal  Starting                 56m                kube-proxy
+  Normal  NodeHasSufficientMemory  57m (x8 over 57m)  kubelet          Node node1 status is now: NodeHasSufficientMemory
+  Normal  RegisteredNode           56m                node-controller  Node node1 event: Registered Node node1 in Controller
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl config get-contexts
+CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE
+*         kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
+ubuntu@wv05:/home/ubuntu/weathervane$
+ubuntu@wv05:/home/ubuntu/weathervane$ kubectl config view -o jsonpath='{.contexts[*].name}' | tr " " "\n"
+kubernetes-admin@kubernetesubuntu@wv05:/home/ubuntu/weathervane$
+
+https://kubernetes.io/docs/concepts/storage/storage-classes/#provisioner
+https://www.google.com/search?rlz=1C1GCEU_enUS992US992&q=Pod+has+unbound+immediate+PersistentVolumeClaims&sa=X&ved=2ahUKEwjhjNnmqe35AhVXcDABHfseBrgQ1QJ6BAgpEAE&biw=1266&bih=567&dpr=1.5
+https://docs.vmware.com/en/VMware-vSphere-Container-Storage-Plug-in/2.0/vmware-vsphere-csp-getting-started/GUID-606E179E-4856-484C-8619-773848175396.html
+https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.5/vmware-tanzu-kubernetes-grid-15/GUID-tanzu-k8s-clusters-storage.html
+https://www.google.com/search?q=Weathervane+is+unable+to+create+a+persistant+volume+using+storage+class&rlz=1C1GCEU_enUS992US992&oq=Weathervane+is+unable+to+create+a+persistant+volume+using+storage+class&aqs=chrome..69i57j69i59l3.1694j0j15&sourceid=chrome&ie=UTF-8
+
+https://github.com/vmware/weathervane/blob/master/doc/userDocs/usersGuide.md#kubernetesClusters-name
+https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/
+
