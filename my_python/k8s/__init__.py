@@ -1,4 +1,29 @@
 
+TOUCHED_PATHS = [
+    "/usr/share/keyrings/docker-archive-keyring.gpg",
+    "/etc/apt/sources.list.d/docker.list",
+    "/usr/local/sbin/runc",
+    "/etc/containerd/config.toml",  # SystemCgroup = true  #disabled_plugins
+    "/etc/modules-load.d/k8s.conf",  # br_netfilter
+    "/etc/sysctl.d/k8s.conf",  # net.bridge.bridge-nf-call-ip6tables = 1; net.bridge.bridge-nf-call-iptables = 1; net.ipv4.ip_forward = 1
+    "/etc/fstab",  # comment out swap line
+    "/etc/apt/sources.list.d/kubernetes.list",
+    "$HOME/.kube/config",
+    "/etc/containers/registries.conf",  # append unqualified-search-registries=["docker.io"]
+]
+
+COMMANDS_TODO = [
+    "podman-compose up",
+    "sudo apt install mlocate",
+    "locate Term/ReadKey.pm",
+    "podman-compose up",
+    "sudo cpan Term::ReadKey",
+    "cpan",
+    "kubectl get events --all-namespaces",  # 1 pod has unbound immediate PersistentVolumeClaims
+    "kubectl get deployments",
+
+]
+
 
 class PersistentVolume:
     def __init__(self, **kwargs):

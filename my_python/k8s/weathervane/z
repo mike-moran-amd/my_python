@@ -6,17 +6,16 @@ echo "Z_DIR=$Z_DIR"
 cp z $Z_DIR
 cp weathervane.config.k8s.quickstart $Z_DIR
 cp *.yaml $Z_DIR
-cp runWeathervane.pl $Z_DIR
 
 
-kubectl delete pvc --namespace auctionw1i1 cassandra-data-cassandra-0
-kubectl delete pvc --namespace auctionw1i1 postgresql-postgresql-0
+#kubectl delete pvc --namespace auctionw1i1 cassandra-data-cassandra-0
+#kubectl delete pvc --namespace auctionw1i1 postgresql-postgresql-0
 #kubectl delete pv weathervane-pv1
 #kubectl delete pv weathervane-pv2
 #kubectl delete pv weathervane-pv3
 #kubectl delete sc local-storage
 
-#kubectl create -f create-storage-class.yaml
+kubectl create -f create-storage-class.yaml
 #kubectl apply -f pv01.yaml
 #kubectl apply -f pv02.yaml
 #kubectl apply -f pv03.yaml
