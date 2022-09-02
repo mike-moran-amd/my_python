@@ -5,7 +5,9 @@ TOUCHED_PATHS = [
     "/usr/local/sbin/runc",
     "/etc/containerd/config.toml",  # SystemCgroup = true  #disabled_plugins
     "/etc/modules-load.d/k8s.conf",  # br_netfilter
-    "/etc/sysctl.d/k8s.conf",  # net.bridge.bridge-nf-call-ip6tables = 1; net.bridge.bridge-nf-call-iptables = 1; net.ipv4.ip_forward = 1
+    "/etc/sysctl.d/k8s.conf",  # net.bridge.bridge-nf-call-ip6tables = 1
+                               # net.bridge.bridge-nf-call-iptables = 1
+                               # net.ipv4.ip_forward = 1
     "/etc/fstab",  # comment out swap line
     "/etc/apt/sources.list.d/kubernetes.list",
     "$HOME/.kube/config",
@@ -25,63 +27,43 @@ COMMANDS_TODO = [
 ]
 
 
-class PersistentVolume:
-    def __init__(self, **kwargs):
-        kwargs = dict(kwargs)  # get our own shallow copy
-        kwargs['kind'] = kwargs.get('kind') or 'StorageClass'
-        kwargs['metadata'] = kwargs.get('metadata') or {}
-        del_key_list = []
-        for key, val in kwargs.items():
-            if key.startswith('metadata_'):
-                # move the "metadata_" prefixed keys to the metadata dict
-                meta_key = key[len('metadata_'):]
-                kwargs['metadata'][meta_key] = val
-                # also delete the compound key in kwargs
-                del_key_list.append(key)
-        for key in del_key_list:
-            del kwargs[key]
-        # TODO parameters work like metadata...
-        self.kwargs = kwargs
+UBUNTU_2004_INSTALL_SCRIPT = """
+uname -a  # should be Ubuntu 20.04 or RAISE
+apt-get update
+apt-get -y upgrade <<EOF
+Y
+EOF
 
-    @property
-    def kind(self):
-        return self.kwargs['kind']
+apt install -y build-essential curl gnupg2 software-properties-common apt-transport-https ca-certificates
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt update
+apt upgrade -y
+apt install -y docker-ce containerd.io
+swapoff -a
+mkdir -p /etc/containerd
+containerd config default > /etc/containerd/config.toml
+systemctl restart containerd
+systemctl enable containerd
+curl -LO https://golang.org/dl/go1.18.1.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz
+mkdir -p ~/go/{bin,src,pkg}
+echo 'export GOROOT=/usr/local/go' >> ~/.profile
+echo 'export PATH="$PATH:/usr/local/go/bin"' >> ~/.profile 
+echo 'export GOPATH="$HOME/go"' >> ~/.profile
+echo 'export GOBIN="$GOPATH/bin"' >> ~/.profile
+. ~/.profile
 
-    def to_yaml(self):
-        yaml_lines = []
-        for key, val in sorted(self.kwargs.items()):
-            if key == 'metadata':
-                # this is a dict
-                yaml_lines.append('metadata:')
-                for meta_key, meta_val in val.items():
-                    yaml_lines.append(f'  {meta_key}: {meta_val}')
-                pass
-            else:
-                yaml_lines.append(f'{key}: {val}')
-        return '\n'.join(yaml_lines)
+mkdir -p ~/go/src/k8s.io
+cd ~/go/src/k8s.io
+git clone https://github.com/mike-moran-amd/kubernetes.git
+cd kubernetes
+git checkout uncore
+cd hack
+./install-etcd.sh
+echo 'PATH=/root/go/src/k8s.io/kubernetes/third_party/etcd:${PATH}' >> ~/.bashrc
+. ~/.bashrc
 
-
-class LocalPersistentVolume(PersistentVolume):
-    """
-    Example from: https://kubernetes.io/docs/concepts/storage/storage-classes/#local
-    >>> print(LocalPersistentVolume().to_yaml())
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
-    metadata:
-      name: local-storage
-    provisioner: kubernetes.io/no-provisioner
-    volumeBindingMode: WaitForFirstConsumer
-    """
-    def __init__(self,
-                 api_version="storage.k8s.io/v1",
-                 # kind="StorageClass",  subsumed
-                 metadata_name="local-storage",
-                 provisioner="kubernetes.io/no-provisioner",
-                 volume_binding_mode="WaitForFirstConsumer",  # delay volume binding until Pod scheduling
-                 **kwargs):
-        super(LocalPersistentVolume, self).__init__(
-            apiVersion=api_version,
-            metadata_name=metadata_name,
-            provisioner=provisioner,
-            volumeBindingMode=volume_binding_mode,
-            **kwargs)
+go install golang.org/x/tools/gopls@latest  # for MScode
+./local-up-cluster.sh  # this takes a minute AND BLOCKS!
+"""
