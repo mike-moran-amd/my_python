@@ -16,9 +16,9 @@ import pprint
 from my_python import data
 
 TOUCHED_PATHS = [
-    "/usr/share/keyrings/docker-archive-keyring.gpg",
+    #"/usr/share/keyrings/docker-archive-keyring.gpg",
     "/etc/apt/sources.list.d/docker.list",
-    "/usr/local/sbin/runc",
+    #"/usr/local/sbin/runc",
     "/etc/containerd/config.toml",  # SystemCgroup = true  #disabled_plugins
     "/etc/modules-load.d/k8s.conf",  # br_netfilter
     "/etc/sysctl.d/k8s.conf",  # net.bridge.bridge-nf-call-ip6tables = 1
