@@ -30,7 +30,7 @@ def path_gen(
     generate paths from (default here)
 
     >>> len(list(path_gen()))
-    39
+    75
     """
     for path in path.rglob(rglob_pattern):
         if is_file and path.is_file() or is_dir and path.is_dir():
@@ -67,15 +67,14 @@ def find_prompt(text, bbp=TEXT_BEFORE_PROMPT):
 
 
 class SessionData:
-    def __init__(self, text):
+    def __init__(self, text, prompt=None):
         """
-        >>> SessionData(text_from('mm18')).prompt
+        #>>> SessionData(text_from('mm18')).prompt
         'root@mm18:'
         """
-        prompt = find_prompt(text)
-        if not prompt:
-            raise ValueError("UNABLE TO FIND PROMPT IN TEXT")
-        self.prompt = prompt
+        self.prompt = prompt or find_prompt(text)
+        if not self.prompt:
+            raise ValueError(f"UNABLE TO FIND PROMPT {self.prompt} IN TEXT")
         self.blocks = text.split(self.prompt)
 
     def get_text(self):
@@ -131,3 +130,48 @@ def save_text(file, text, path=pathlib.Path(__file__).parent, rename_old=True):
         file.rename(new_path)
     with open(file, 'w') as fp:
         fp.write(text)
+
+
+class Content:
+    """
+    >>> c = Content(__file__, path=None)
+
+    #>>> len(c.content)
+    5701
+    """
+    def __init__(self,
+                 name,  # if this is an absolute or relative path then pass path=None below
+                 path=pathlib.Path(__file__).parent,  # this file's directory is the default path if not passed
+                 default=None,  # default {path/}file content
+                 ):
+        self.path = pathlib.Path(name) if path is None else pathlib.Path(path, name)
+        self.content = default or self.pull()
+
+    def exists(self):
+        return self.path.exists()
+
+    def pull(self):
+        try:
+            with open(self.path, "r", encoding='UTF-8') as fp:
+                return fp.read()
+        except FileNotFoundError:
+            return None
+
+    def push(self, content, rename_old=True):
+        """
+        #>>> c = Content("BOGUS")
+        #>>> c.push("Howdy")
+        """
+        if rename_old and self.exists():
+            old_content = self.pull()
+            if old_content == content:
+                return
+            # rename to a unique timestamp filename in the same directory
+            old_name = self.path.name
+            new_name = old_name + '_' + lib.dt_str()[:12]
+            new_path = pathlib.Path(self.path.parent, new_name)
+            self.path.rename(new_path)
+        with open(self.path, 'w') as fp:
+            fp.write(content)
+        self.content = content
+        return self

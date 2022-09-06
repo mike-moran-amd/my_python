@@ -1,3 +1,19 @@
+"""
+>>> pprint.pprint(PATH_CONTENTS)
+{'$HOME/.kube/config': None,
+ '/etc/apt/sources.list.d/docker.list': None,
+ '/etc/apt/sources.list.d/kubernetes.list': None,
+ '/etc/containerd/config.toml': None,
+ '/etc/containers/registries.conf': None,
+ '/etc/fstab': None,
+ '/etc/modules-load.d/k8s.conf': None,
+ '/etc/sysctl.d/k8s.conf': None,
+ '/usr/local/sbin/runc': None,
+ '/usr/share/keyrings/docker-archive-keyring.gpg': None}
+
+"""
+import pprint
+from my_python import data
 
 TOUCHED_PATHS = [
     "/usr/share/keyrings/docker-archive-keyring.gpg",
@@ -13,6 +29,9 @@ TOUCHED_PATHS = [
     "$HOME/.kube/config",
     "/etc/containers/registries.conf",  # append unqualified-search-registries=["docker.io"]
 ]
+
+PATH_CONTENTS = {k: data.Content(k).content for k in TOUCHED_PATHS}
+
 
 COMMANDS_TODO = [
     "podman-compose up",
