@@ -12,7 +12,7 @@
   ],
   "driverCluster" : "kubernetes",
   "appInstanceCluster" : "kubernetes",
-  "appIngressMethod" : "loadbalancer",
+  "appIngressMethod" : "clusterip",
   "cassandraDataStorageClass" : "local-storage",
   "postgresqlStorageClass" : "local-storage",
   "nginxCacheStorageClass" : "local-storage",
