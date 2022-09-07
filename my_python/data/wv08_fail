@@ -1,0 +1,194 @@
+Microsoft Windows [Version 10.0.19044.1889]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@139.178.85.249
+The authenticity of host '139.178.85.249 (139.178.85.249)' can't be established.
+ECDSA key fingerprint is SHA256:LQyNyabDXHwqGWLYJeE7Q041aweH5qr7s14wpU2QKBU.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '139.178.85.249' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-47-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 18:44:27 UTC 2022
+
+  System load:            0.01220703125
+  Usage of /:             1.3% of 217.51GB
+  Memory usage:           2%
+  Swap usage:             0%
+  Processes:              550
+  Users logged in:        0
+  IPv4 address for bond0: 139.178.85.249
+  IPv6 address for bond0: 2604:1380:4641:3b00::15
+
+6 updates can be applied immediately.
+6 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@wv08:~# uname -a
+Linux wv08 5.15.0-47-generic #51-Ubuntu SMP Thu Aug 11 07:51:15 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+root@wv08:~# useradd -s /bin/bash -d /home/ubuntu/ -m -G sudo ubuntu
+root@wv08:~# passwd ubuntu
+New password:
+Retype new password:
+passwd: password updated successfully
+root@wv08:~# cp -r ~/.ssh /home/ubuntu/.ssh
+root@wv08:~# chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+root@wv08:~# exit
+logout
+Connection to 139.178.85.249 closed.
+
+C:\Users\mikmoran>ssh ubuntu@139.178.85.249
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-47-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 18:47:20 UTC 2022
+
+  System load:            0.0
+  Usage of /:             1.4% of 217.51GB
+  Memory usage:           2%
+  Swap usage:             0%
+  Processes:              502
+  Users logged in:        0
+  IPv4 address for bond0: 139.178.85.249
+  IPv6 address for bond0: 2604:1380:4641:3b00::15
+
+
+6 updates can be applied immediately.
+6 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@wv08:~$ sudo apt update
+[sudo] password for ubuntu:
+Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Get:5 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [295 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [544 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [129 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [8168 B]
+Get:9 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [306 kB]
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [69.1 kB]
+Get:11 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [274 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [47.5 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [254 kB]
+Get:14 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [42.3 kB]
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [83.3 kB]
+Fetched 2376 kB in 1s (1758 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+9 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@wv08:~$ sudo apt-get install     ca-certificates     curl     gnupg     lsb-release
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20211016).
+ca-certificates set to manually installed.
+lsb-release is already the newest version (11.1.0ubuntu4).
+lsb-release set to manually installed.
+gnupg is already the newest version (2.2.27-3ubuntu2.1).
+gnupg set to manually installed.
+The following additional packages will be installed:
+  libcurl4
+The following packages will be upgraded:
+  curl libcurl4
+2 upgraded, 0 newly installed, 0 to remove and 7 not upgraded.
+Need to get 484 kB of archives.
+After this operation, 0 B of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 curl amd64 7.81.0-1ubuntu1.4 [194 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4 amd64 7.81.0-1ubuntu1.4 [290 kB]
+Fetched 484 kB in 1s (480 kB/s)
+(Reading database ... 75031 files and directories currently installed.)
+Preparing to unpack .../curl_7.81.0-1ubuntu1.4_amd64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.4) over (7.81.0-1ubuntu1.3) ...
+Preparing to unpack .../libcurl4_7.81.0-1ubuntu1.4_amd64.deb ...
+Unpacking libcurl4:amd64 (7.81.0-1ubuntu1.4) over (7.81.0-1ubuntu1.3) ...
+Setting up libcurl4:amd64 (7.81.0-1ubuntu1.4) ...
+Setting up curl (7.81.0-1ubuntu1.4) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv08:~$ sudo mkdir -p /etc/apt/keyrings
+ubuntu@wv08:~$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+ubuntu@wv08:~$ echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ubuntu@wv08:~$ sudo apt-get update
+Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.9 kB]
+Get:2 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [6439 B]
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Fetched 55.3 kB in 1s (99.9 kB/s)
+Reading package lists... Done
+ubuntu@wv08:~$ sudo apt-cache madison docker-ce
+ docker-ce | 5:20.10.17~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+ docker-ce | 5:20.10.16~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+ docker-ce | 5:20.10.15~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+ docker-ce | 5:20.10.14~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+ docker-ce | 5:20.10.13~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+ubuntu@wv08:~$ sudo apt-get install docker-ce=5:20.10.5~3-0~ubuntu-focal docker-ce-cli=5:20.10.5~3-0~ubuntu-focal containerd.io docker-compose-plugin
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Package docker-ce is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+However the following packages replace it:
+  docker-ce-cli
+
+Package docker-ce-cli is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+
+E: Version '5:20.10.5~3-0~ubuntu-focal' for 'docker-ce' was not found
+E: Version '5:20.10.5~3-0~ubuntu-focal' for 'docker-ce-cli' was not found
+ubuntu@wv08:~$ apt-cache madison docker-ce
+ docker-ce | 5:20.10.17~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+ docker-ce | 5:20.10.16~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+ docker-ce | 5:20.10.15~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+ docker-ce | 5:20.10.14~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+ docker-ce | 5:20.10.13~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+ubuntu@wv08:~$

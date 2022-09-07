@@ -1,0 +1,422 @@
+Microsoft Windows [Version 10.0.19044.1889]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh mfm@145.40.99.43
+Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.15.0-33-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Sep  6 19:20:55 UTC 2022
+
+  System load:                0.20849609375
+  Usage of /:                 15.9% of 218.06GB
+  Memory usage:               12%
+  Swap usage:                 0%
+  Processes:                  645
+  Users logged in:            1
+  IPv4 address for bond0:     145.40.99.43
+  IPv6 address for bond0:     2604:1380:4641:3b00::d
+  IPv4 address for mpqemubr0: 10.52.247.1
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+48 updates can be applied immediately.
+1 of these updates is a standard security update.
+To see these additional updates run: apt list --upgradable
+
+
+1 updates could not be installed automatically. For more details,
+see /var/log/unattended-upgrades/unattended-upgrades.log
+
+*** System restart required ***
+Last login: Tue Sep  6 17:38:06 2022 from 70.112.73.191
+mfm@mm74:~$ uname -a
+Linux mm74 5.15.0-33-generic #34-Ubuntu SMP Wed May 18 13:34:26 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+mfm@mm74:~$ cat /etc/apt/sources.list.d/docker.list
+deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu jammy stable
+mfm@mm74:~$ cat /etc/containerd/config.toml
+#disabled_plugins = []
+imports = []
+oom_score = 0
+plugin_dir = ""
+required_plugins = []
+root = "/var/lib/containerd"
+state = "/run/containerd"
+temp = ""
+version = 2
+
+[cgroup]
+  path = ""
+
+[debug]
+  address = ""
+  format = ""
+  gid = 0
+  level = ""
+  uid = 0
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+  tcp_address = ""
+  tcp_tls_ca = ""
+  tcp_tls_cert = ""
+  tcp_tls_key = ""
+  uid = 0
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+
+  [plugins."io.containerd.gc.v1.scheduler"]
+    deletion_threshold = 0
+    mutation_threshold = 100
+    pause_threshold = 0.02
+    schedule_delay = "0s"
+    startup_delay = "100ms"
+
+  [plugins."io.containerd.grpc.v1.cri"]
+    device_ownership_from_security_context = false
+    disable_apparmor = false
+    disable_cgroup = false
+    disable_hugetlb_controller = true
+    disable_proc_mount = false
+    disable_tcp_service = true
+    enable_selinux = false
+    enable_tls_streaming = false
+    enable_unprivileged_icmp = false
+    enable_unprivileged_ports = false
+    ignore_image_defined_volumes = false
+    max_concurrent_downloads = 3
+    max_container_log_line_size = 16384
+    netns_mounts_under_state_dir = false
+    restrict_oom_score_adj = false
+    sandbox_image = "k8s.gcr.io/pause:3.6"
+    selinux_category_range = 1024
+    stats_collect_period = 10
+    stream_idle_timeout = "4h0m0s"
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    systemd_cgroup = false
+    tolerate_missing_hugetlb_controller = true
+    unset_seccomp_profile = ""
+
+    [plugins."io.containerd.grpc.v1.cri".cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = ""
+      ip_pref = ""
+      max_conf_num = 1
+
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      disable_snapshot_annotations = true
+      discard_unpacked_layers = false
+      ignore_rdt_not_enabled_errors = false
+      no_pivot = false
+      snapshotter = "overlayfs"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options]
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            BinaryName = ""
+            CriuImagePath = ""
+            CriuPath = ""
+            CriuWorkPath = ""
+            IoGid = 0
+            IoUid = 0
+            NoNewKeyring = false
+            NoPivotRoot = false
+            Root = ""
+            ShimCgroup = ""
+            SystemdCgroup = true
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options]
+
+    [plugins."io.containerd.grpc.v1.cri".image_decryption]
+      key_model = "node"
+
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = ""
+
+      [plugins."io.containerd.grpc.v1.cri".registry.auths]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.configs]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.headers]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+
+    [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+
+  [plugins."io.containerd.internal.v1.opt"]
+    path = "/opt/containerd"
+
+  [plugins."io.containerd.internal.v1.restart"]
+    interval = "10s"
+
+  [plugins."io.containerd.internal.v1.tracing"]
+    sampling_ratio = 1.0
+    service_name = "containerd"
+
+  [plugins."io.containerd.metadata.v1.bolt"]
+    content_sharing_policy = "shared"
+
+  [plugins."io.containerd.monitor.v1.cgroups"]
+    no_prometheus = false
+
+  [plugins."io.containerd.runtime.v1.linux"]
+    no_shim = false
+    runtime = "runc"
+    runtime_root = ""
+    shim = "containerd-shim"
+    shim_debug = false
+
+  [plugins."io.containerd.runtime.v2.task"]
+    platforms = ["linux/amd64"]
+    sched_core = false
+
+  [plugins."io.containerd.service.v1.diff-service"]
+    default = ["walking"]
+
+  [plugins."io.containerd.service.v1.tasks-service"]
+    rdt_config_file = ""
+
+  [plugins."io.containerd.snapshotter.v1.aufs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.btrfs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.devmapper"]
+    async_remove = false
+    base_image_size = ""
+    discard_blocks = false
+    fs_options = ""
+    fs_type = ""
+    pool_name = ""
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.native"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.overlayfs"]
+    root_path = ""
+    upperdir_label = false
+
+  [plugins."io.containerd.snapshotter.v1.zfs"]
+    root_path = ""
+
+  [plugins."io.containerd.tracing.processor.v1.otlp"]
+    endpoint = ""
+    insecure = false
+    protocol = ""
+
+[proxy_plugins]
+
+[stream_processors]
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar"
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+gzip+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar+gzip"
+
+[timeouts]
+  "io.containerd.timeout.bolt.open" = "0s"
+  "io.containerd.timeout.shim.cleanup" = "5s"
+  "io.containerd.timeout.shim.load" = "5s"
+  "io.containerd.timeout.shim.shutdown" = "3s"
+  "io.containerd.timeout.task.state" = "2s"
+
+[ttrpc]
+  address = ""
+  gid = 0
+  uid = 0
+mfm@mm74:~$ cat /etc/modules-load.d/k8s.conf
+br_netfilter
+mfm@mm74:~$ cat /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+mfm@mm74:~$ cat /etc/fstab
+UUID=f3d0a9d8-d335-4d42-862a-ea76f43074b5       /       ext4    errors=remount-ro       0       1
+#UUID=15f9e25a-9dbf-4053-b54f-42209add753d      none    swap    none    0       0
+
+mfm@mm74:~$
+mfm@mm74:~$ cat /etc/hosts
+127.0.0.1       localhost       mm74
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+mfm@mm74:~$ cat /etc/apt/sources.list.d/kubernetes.list
+deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main
+mfm@mm74:~$ cat $HOME/.kube/config
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeU1EZ3hOekU1TkRJMU9Gb1hEVE15TURneE5ERTVOREkxT0Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTUxBCml2Vm16Q0t0S2ErSzFJMFNoT0ZkVHpTVEd4dno1bnVkbmhaeE82Z3ltRkt0a0tsYTk2Sm5oTDlEV2pmeFIveloKTTFNWnlwcUlRUmJSWmp6TTdCUG52NER6eTdlWEplMDNNdXRtSmM1R2doNG9VYTkzMG4zc00zWWhLODBRdUFMcwo1ZXNHcFRGZXovazl5TXdJY21YK3VYbDNMRmM0Z0szekdQdEtUNW8rU3M3U3pSdkVqQ3VJRWlLY2Nvdjd0aFVvCmNvK0tBL2xaYmc0TlBIdzc1clZ3TXk5UzQvK3h1NFNGckhLTzVGazdWcnF3ZTBKUCtCS3ZYazNFeUVNUGVYTTUKMFU3dkRSVHNnNkNGYlVvYjE1Y1dmL0psSTNjNnpxTUxDdXEzQzJSa2c1SXByTjhwOHVmS0lyZTlUTFROcTVBUgpYR2xpalhwV090UHFqbVZPcHBNQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZGVTFLOWZscGpXOWhMejRkcjZoOVBKMm5OZXFNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBRnpKdkkzOUpJbFl2R0J3TE1SeAp0ZGVHOXpSMW1UN3NobUdOMEQxYWgwWXQzclBvWXhudDd3cm1kTFd5T1dodUhMNWp5YzQ1Q3Y4d3l4TlFZT0FXCnlUY1pmekJyRHJBdmhjUm43c2o4djMvU0lmOWNReU1QWlhWWEMvYVN1b0R6cGxkM2tRL1UrMkt4WXVYeCtmUFEKVnRRa2Y0SVBjaEdJRXZFRHI3U0g0am90dDlxOW43MWk5bkRYK2lHeFhpb3djeGNteElWeENFSWx2aUJFTGd3eApuU0Z3ZEVZK0tsTldyT2o5Mk9jbGdHd3R3UnBWZTVHcTNzcHMzL3NIWThXZk9uVy96bmZLdkRZRFVXcDNlL3NCClVlN1Rub012REw0cFJmTC9jWnFaNml0dm5FaVF0QkRXWjh5bVIyWkdHSHpMQzRHQmRUdGZGWlVkSFdGRWgvNWkKRjlZPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    server: https://145.40.99.43:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJVENDQWdtZ0F3SUJBZ0lJUWRTeTA1bEdJL2N3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TWpBNE1UY3hPVFF5TlRoYUZ3MHlNekE0TVRjeE9UUXpNREJhTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXhEeFoySVNYYk8yV3p0Tk8KTVNlNStzMUZBMVJUSHRIKzlsdGhHNHk2UTVTTy8zOHA1cWhhOU9TS2hQT3ZWalQ4aGdieC9nYndNbGxSS1ZZawp2VDIwUDFiWjFZS3NvWGVGTVRYbnlpWTM0Zk41TkQzRGhuTGVreXE3ZjJ1SEtzVVh0Vngxd1d1TWdzZXZjbzVLCi9uM2tQR09Sc053WWZwOG9vbE1ONlVhREFhVVpqaktLV0g2cGdlWGUyOUJXSFdZdTZiK0VUbDJrUGJtL2M1bGgKTVZmeDdxb3dIandGK2QwelBmRTAvSTRWSURhRFdaRWVJa2NzVkhPYlF2Wll2cDFwdWMrakU4Z2dzTWI1SFk1TQpZTitoTnpLZW9QbUs3c1ZTb2lQVk9icGVDeGJPV3VCbGozanF2QS9aVTFNWTBRVEtzSnRMN25XNDVhRE5USlFWClMvazJBUUlEQVFBQm8xWXdWREFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0RBWURWUjBUQVFIL0JBSXdBREFmQmdOVkhTTUVHREFXZ0JSVk5Tdlg1YVkxdllTOCtIYStvZlR5ZHB6WApxakFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBWmkrMHdOamg1T2RMaTE2RzRKM01CdjhQdldEWjF4eXNJNW5PCk9raW5zZFE3ajZOeWFjaU9EMFdQMW02SWMzUVFNZHVra2lsUUpUWlV3NE5jS3NnZVJLUEl5Q1NPRXZRRmJiYTcKZXBKdFl1MDcwRllpeUFSVjI1RXE3RUVVYS9FMm90Mys1a2FrbmhLb2EvUUxVOUdhbUoyQU5xTWF6OXR0VkZRUQpsd2VEVjMxZStIbEhlMVRURjJZbk53NFV2MXZBRzB5NmdpTFFCbGpzbTE4R1pZVUdoUytob3NsL3QxZlpXenBsCnF0QmxtcGhJWU93bThuc1pybmpSb1VyQzVWK29NaXkxeG5HQll4akhtd1FqUG11SDVIKytxQW5ZRFJWdEV1Rm4KZlNhdW9BcHBWUXN0c3JHbVV0NVRhL3hrTnJtRHFXL0kwTG5DQnlkd2VUVFQ0U2hRV0E9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBeER4WjJJU1hiTzJXenROT01TZTUrczFGQTFSVEh0SCs5bHRoRzR5NlE1U08vMzhwCjVxaGE5T1NLaFBPdlZqVDhoZ2J4L2did01sbFJLVllrdlQyMFAxYloxWUtzb1hlRk1UWG55aVkzNGZONU5EM0QKaG5MZWt5cTdmMnVIS3NVWHRWeDF3V3VNZ3NldmNvNUsvbjNrUEdPUnNOd1lmcDhvb2xNTjZVYURBYVVaampLSwpXSDZwZ2VYZTI5QldIV1l1NmIrRVRsMmtQYm0vYzVsaE1WZng3cW93SGp3RitkMHpQZkUwL0k0VklEYURXWkVlCklrY3NWSE9iUXZaWXZwMXB1YytqRThnZ3NNYjVIWTVNWU4raE56S2VvUG1LN3NWU29pUFZPYnBlQ3hiT1d1QmwKajNqcXZBL1pVMU1ZMFFUS3NKdEw3blc0NWFETlRKUVZTL2syQVFJREFRQUJBb0lCQUQrSkZzSHV0Q1IxaklWcwpqdjJGVWticzNUSmx3Ly9QbUJCbHA3eEd4U3dLVm41TXl1RStreXlGTG9BN2NnS2taenB4MXpvYlB2dmVSVlB2CjZ6ZEdXaXpEendXOUtHMmpDQUhWNVRWalNHYWs4UkpFQ1NGbjRiNmVjRlNpR1FKMUMrY1JoNkxYVW9ncFpSbmYKRGxMMXFjY1BxZVVzYmRYWmJFdWFQbi9QNzZ6QkdOTDA1WmRMRHk2Z25YZUVnZ3BWSWdyZWhKRU9OdWpsK1M4dApqSEpzUHlkbmV6NEZiNzhTdnQrOXpuNnc1WENkUXpPdDdzcGI3S1RmN1U4MmVIcWprbmQ3a1MrN0p2UmhYYlYrCjNTOVJZSFkyQXB5YjV3dVpMOXNGWEZXS0RraWFUTzFsL0grcXNyVndxZTNON3dPWDNGV0FOMnFWT3hYTE54eW8KTjQraDcwRUNnWUVBeVBUd1BtUUJEczNyTGVHbjAwMmRTSHZNWFpRVWtmYitobzBFcDRsT0hwOWNMWWt2VUprOQo1VDQrZFVOenovckxlZDhsYUxFMWRrWWtKQnEyWVhaZVo0VnBPVDFGUDBKWklRTDgySFU0QWNYbjJ2SVVORUpwCm8remxGcUNzelEzWjlralQ4WXliMkxCUTMzby9pL3VycWZjODZDUmdqWGV2Wm1kRXBGd0RWMWtDZ1lFQStmeGYKbm9rTUNMQXhneEhPSnVyRmRRaWkxL21IOE5UcUxVcnRDd1ZUZGczZTA1Sis3V3gydm5LWUJkbFNsaHNlVlFjZAovcDlVR2xvUjBCV0tUTTZvYXBBMk1lb2wvNktGT1hGd1dldEREZktlbDM2MEVoZDZPWVY5bGNXekdIcTlRUDBJCmRnU2lldC9BOWxIRjJ4MVc2S2UvWnhqM041UUtINkdmcFBaRHB1a0NnWUFYbnFxS09zamhDNVVEN0kwRVNoQWQKaitlQ2JFQktzOFJRM2t4WXdNdTh6N0JPN2R2dzFrSXZLclMrcGJIOEZSZExlTTMxMHpaY2Mzd1Yva25IaE5rdAp3OEdOWjhVMjNUNktvY1pFVHVySlVwQ2c3R2t4aDBqUmFxdTJrQ1lmWit4aGhVZmNFVkhVRTAwK0p5bEc4OHJHCmpIZk5OVkZmNzF4ZlplM3NmNkFvNlFLQmdRRFVaUXJRNWR2bG5kM1RZTk5vMlZ1L0hnRk53dU12U1pkVnVDMUMKaWRucG1jdFNzMHRJYWpsUmdvZUxvS084aVhueUFFUUp6RkZtdWxRY0dkRVJoUnd1dml4dHFHVjBseDdlT1hXZAowSGQrYUQ4NnRCcEdyTS9hQTRNNk4yajlTWHQydGdYMFQrZkV3a3R1ZlBmQVBXTlQ5UUo0bEF1bm13NG01ZWwvCi9RUnAwUUtCZ0RiTHkrNThMbVZrWnJXQUVNQ0x1ZXdUdkVDVDJtOFZLY3BHT1dsSGpRdy9lV0VyNk9iRktYQlkKbXdWRktaU3ZHZXRBRTliZm5LeGxLSStuVzk1N1N3Sm5Vbi94NmphNVRQUHU4Sjk5OFY1SW8vQzQ2bkVQbU5BVQpNUGdyYXJIalRzdi9YMENnVDBuYjhEZ0VoYXdXNnlZOGx3Slo1WktKaG1GZng1ay81bGduCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+mfm@mm74:~$ cat /etc/containers/registries.conf
+# For more information on this configuration file, see containers-registries.conf(5).
+#
+# NOTE: RISK OF USING UNQUALIFIED IMAGE NAMES
+# We recommend always using fully qualified image names including the registry
+# server (full dns name), namespace, image name, and tag
+# (e.g., registry.redhat.io/ubi8/ubi:latest). Pulling by digest (i.e.,
+# quay.io/repository/name@digest) further eliminates the ambiguity of tags.
+# When using short names, there is always an inherent risk that the image being
+# pulled could be spoofed. For example, a user wants to pull an image named
+# `foobar` from a registry and expects it to come from myregistry.com. If
+# myregistry.com is not first in the search list, an attacker could place a
+# different `foobar` image at a registry earlier in the search list. The user
+# would accidentally pull and run the attacker's image and code rather than the
+# intended content. We recommend only adding registries which are completely
+# trusted (i.e., registries which don't allow unknown or anonymous users to
+# create accounts with arbitrary names). This will prevent an image from being
+# spoofed, squatted or otherwise made insecure.  If it is necessary to use one
+# of these registries, it should be added at the end of the list.
+#
+# # An array of host[:port] registries to try when pulling an unqualified image, in order.
+# unqualified-search-registries = ["example.com"]
+#
+# [[registry]]
+# # The "prefix" field is used to choose the relevant [[registry]] TOML table;
+# # (only) the TOML table with the longest match for the input image name
+# # (taking into account namespace/repo/tag/digest separators) is used.
+# #
+# # The prefix can also be of the form: *.example.com for wildcard subdomain
+# # matching.
+# #
+# # If the prefix field is missing, it defaults to be the same as the "location" field.
+# prefix = "example.com/foo"
+#
+# # If true, unencrypted HTTP as well as TLS connections with untrusted
+# # certificates are allowed.
+# insecure = false
+#
+# # If true, pulling images with matching names is forbidden.
+# blocked = false
+#
+# # The physical location of the "prefix"-rooted namespace.
+# #
+# # By default, this is equal to "prefix" (in which case "prefix" can be omitted
+# # and the [[registry]] TOML table can only specify "location").
+# #
+# # Example: Given
+# #   prefix = "example.com/foo"
+# #   location = "internal-registry-for-example.net/bar"
+# # requests for the image example.com/foo/myimage:latest will actually work with the
+# # internal-registry-for-example.net/bar/myimage:latest image.
+#
+# # The location can be empty iff prefix is in a
+# # wildcarded format: "*.example.com". In this case, the input reference will
+# # be used as-is without any rewrite.
+# location = internal-registry-for-example.com/bar"
+#
+# # (Possibly-partial) mirrors for the "prefix"-rooted namespace.
+# #
+# # The mirrors are attempted in the specified order; the first one that can be
+# # contacted and contains the image will be used (and if none of the mirrors contains the image,
+# # the primary location specified by the "registry.location" field, or using the unmodified
+# # user-specified reference, is tried last).
+# #
+# # Each TOML table in the "mirror" array can contain the following fields, with the same semantics
+# # as if specified in the [[registry]] TOML table directly:
+# # - location
+# # - insecure
+# [[registry.mirror]]
+# location = "example-mirror-0.local/mirror-for-foo"
+# [[registry.mirror]]
+# location = "example-mirror-1.local/mirrors/foo"
+# insecure = true
+# # Given the above, a pull of example.com/foo/image:latest will try:
+# # 1. example-mirror-0.local/mirror-for-foo/image:latest
+# # 2. example-mirror-1.local/mirrors/foo/image:latest
+# # 3. internal-registry-for-example.net/bar/image:latest
+# # in order, and use the first one that exists.
+unqualified-search-registries=["docker.io"]
+mfm@mm74:~$ kubectl version
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"24", GitVersion:"v1.24.3", GitCommit:"aef86a93758dc3cb2c658dd9657ab4ad4afc21cb", GitTreeState:"clean", BuildDate:"2022-07-13T14:30:46Z", GoVersion:"go1.18.3", Compiler:"gc", Platform:"linux/amd64"}
+Kustomize Version: v4.5.4
+Server Version: version.Info{Major:"1", Minor:"24", GitVersion:"v1.24.3", GitCommit:"aef86a93758dc3cb2c658dd9657ab4ad4afc21cb", GitTreeState:"clean", BuildDate:"2022-07-13T14:23:26Z", GoVersion:"go1.18.3", Compiler:"gc", Platform:"linux/amd64"}
+mfm@mm74:~$ docker --version
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+podman version 3.4.4
+mfm@mm74:~$ containerd --version
+containerd containerd.io 1.6.7 0197261a30bf81f1ee8e6a4dd2dea0ef95d67ccb
+mfm@mm74:~$

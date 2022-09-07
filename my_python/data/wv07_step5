@@ -1,0 +1,2267 @@
+Microsoft Windows [Version 10.0.19044.1889]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@139.178.81.45
+The authenticity of host '139.178.81.45 (139.178.81.45)' can't be established.
+ECDSA key fingerprint is SHA256:FV10E66fxOXZixnxypWbl6tmN9BOZWq91EITqrwPd4c.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '139.178.81.45' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-47-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Sep  6 23:16:04 UTC 2022
+
+  System load:            0.23681640625
+  Usage of /:             1.3% of 218.00GB
+  Memory usage:           1%
+  Swap usage:             0%
+  Processes:              544
+  Users logged in:        0
+  IPv4 address for bond0: 139.178.81.45
+  IPv6 address for bond0: 2604:1380:4641:3b00::17
+
+6 updates can be applied immediately.
+6 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@wv07:~# useradd -s /bin/bash -d /home/ubuntu/ -m -G sudo ubuntu
+root@wv07:~# passwd ubuntu
+New password:
+Retype new password:
+passwd: password updated successfully
+root@wv07:~# cp -r ~/.ssh /home/ubuntu/.ssh
+root@wv07:~# chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+root@wv07:~# exit
+logout
+Connection to 139.178.81.45 closed.
+
+C:\Users\mikmoran>ssh ubuntu@139.178.81.45
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-47-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Sep  6 23:18:02 UTC 2022
+
+  System load:            0.03271484375
+  Usage of /:             1.3% of 218.00GB
+  Memory usage:           1%
+  Swap usage:             0%
+  Processes:              545
+  Users logged in:        0
+  IPv4 address for bond0: 139.178.81.45
+  IPv6 address for bond0: 2604:1380:4641:3b00::17
+
+
+6 updates can be applied immediately.
+6 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@wv07:~$ uname -a
+Linux wv07 5.15.0-47-generic #51-Ubuntu SMP Thu Aug 11 07:51:15 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+ubuntu@wv07:~$ sudo cat /etc/hosts
+[sudo] password for ubuntu:
+127.0.0.1       localhost       wv07
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ubuntu@wv07:~$ sudo apt update
+Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Get:5 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [295 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [544 kB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [69.1 kB]
+Get:8 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [274 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [128 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [8136 B]
+Get:11 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [306 kB]
+Get:12 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [42.3 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [47.5 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [254 kB]
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [83.3 kB]
+Fetched 2375 kB in 1s (1636 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+8 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@wv07:~$ sudo snap install multipass
+multipass 1.10.1 from Canonical✓ installed
+ubuntu@wv07:~$ multipass launch -c 8 -d 50G -m 8G -n node1
+Launched: node1
+ubuntu@wv07:~$ sudo cat /etc/hosts
+127.0.0.1       localhost       wv07
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ubuntu@wv07:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Sep  6 23:44:43 UTC 2022
+
+  System load:  0.0               Processes:             169
+  Usage of /:   2.8% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.172.198.43
+  Swap usage:   0%
+
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@node1:~$ uname -a
+Linux node1 5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+ubuntu@node1:~$ sudo cat /etc/hosts
+# Your system has configured 'manage_etc_hosts' as True.
+# As a result, if you wish for changes to this file to persist
+# then you will need to either
+# a.) make changes to the master file in /etc/cloud/templates/hosts.debian.tmpl
+# b.) change or remove the value of 'manage_etc_hosts' in
+#     /etc/cloud/cloud.cfg or cloud-config from user-data
+#
+127.0.1.1 node1 node1
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+ubuntu@node1:~$ sudo apt update
+Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:4 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [1705 kB]
+Get:5 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [286 kB]
+Get:6 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [11.0 kB]
+Get:7 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [1165 kB]
+Get:8 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [165 kB]
+Get:9 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [717 kB]
+Get:10 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [131 kB]
+Get:11 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [14.8 kB]
+Get:12 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [22.2 kB]
+Get:13 http://security.ubuntu.com/ubuntu focal-security/multiverse Translation-en [5376 B]
+Get:14 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [508 B]
+Get:15 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:16 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [8628 kB]
+Get:17 http://archive.ubuntu.com/ubuntu focal/universe Translation-en [5124 kB]
+Get:18 http://archive.ubuntu.com/ubuntu focal/universe amd64 c-n-f Metadata [265 kB]
+Get:19 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [144 kB]
+Get:20 http://archive.ubuntu.com/ubuntu focal/multiverse Translation-en [104 kB]
+Get:21 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 c-n-f Metadata [9136 B]
+Get:22 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [2077 kB]
+Get:23 http://archive.ubuntu.com/ubuntu focal-updates/main Translation-en [369 kB]
+Get:24 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 c-n-f Metadata [15.8 kB]
+Get:25 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [1256 kB]
+Get:26 http://archive.ubuntu.com/ubuntu focal-updates/restricted Translation-en [178 kB]
+Get:27 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [949 kB]
+Get:28 http://archive.ubuntu.com/ubuntu focal-updates/universe Translation-en [216 kB]
+Get:29 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [21.4 kB]
+Get:30 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [24.4 kB]
+Get:31 http://archive.ubuntu.com/ubuntu focal-updates/multiverse Translation-en [7336 B]
+Get:32 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [588 B]
+Get:33 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 Packages [45.6 kB]
+Get:34 http://archive.ubuntu.com/ubuntu focal-backports/main Translation-en [16.3 kB]
+Get:35 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 c-n-f Metadata [1420 B]
+Get:36 http://archive.ubuntu.com/ubuntu focal-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:37 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [23.9 kB]
+Get:38 http://archive.ubuntu.com/ubuntu focal-backports/universe Translation-en [16.0 kB]
+Get:39 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [860 B]
+Get:40 http://archive.ubuntu.com/ubuntu focal-backports/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 24.1 MB in 4s (5908 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+12 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv07:~$ multipass launch -c 8 -d 50G -m 8G -n node2
+Launched: node2
+ubuntu@wv07:~$ sudo cat /etc/hosts
+[sudo] password for ubuntu:
+127.0.0.1       localhost       wv07
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ubuntu@wv07:~$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Sep  6 23:56:30 UTC 2022
+
+  System load:  0.19              Processes:             188
+  Usage of /:   2.8% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.172.198.197
+  Swap usage:   0%
+
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@node2:~$ uname -a
+Linux node2 5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+ubuntu@node2:~$ sudo cat /etc/hosts
+# Your system has configured 'manage_etc_hosts' as True.
+# As a result, if you wish for changes to this file to persist
+# then you will need to either
+# a.) make changes to the master file in /etc/cloud/templates/hosts.debian.tmpl
+# b.) change or remove the value of 'manage_etc_hosts' in
+#     /etc/cloud/cloud.cfg or cloud-config from user-data
+#
+127.0.1.1 node2 node2
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+ubuntu@node2:~$ ifconfig | grep inet
+
+Command 'ifconfig' not found, but can be installed with:
+
+sudo apt install net-tools
+
+ubuntu@node2:~$ sudo apt install net-tools
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  net-tools
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 196 kB of archives.
+After this operation, 864 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal/main amd64 net-tools amd64 1.60+git20180626.aebd88e-1ubuntu1 [196 kB]
+Fetched 196 kB in 1s (255 kB/s)
+Selecting previously unselected package net-tools.
+(Reading database ... 63818 files and directories currently installed.)
+Preparing to unpack .../net-tools_1.60+git20180626.aebd88e-1ubuntu1_amd64.deb ...
+Unpacking net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Setting up net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node2:~$ ifconfig | grep inet
+        inet 10.172.198.197  netmask 255.255.255.0  broadcast 10.172.198.255
+        inet6 fe80::5054:ff:fef1:a353  prefixlen 64  scopeid 0x20<link>
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+ubuntu@node2:~$ sudo apt update
+Hit:1 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:3 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [8628 kB]
+Get:6 http://archive.ubuntu.com/ubuntu focal/universe Translation-en [5124 kB]
+Get:7 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [1705 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal/universe amd64 c-n-f Metadata [265 kB]
+Get:9 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [144 kB]
+Get:10 http://archive.ubuntu.com/ubuntu focal/multiverse Translation-en [104 kB]
+Get:11 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 c-n-f Metadata [9136 B]
+Get:12 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [2077 kB]
+Get:13 http://archive.ubuntu.com/ubuntu focal-updates/main Translation-en [369 kB]
+Get:14 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 c-n-f Metadata [15.8 kB]
+Get:15 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [1256 kB]
+Get:16 http://archive.ubuntu.com/ubuntu focal-updates/restricted Translation-en [178 kB]
+Get:17 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [949 kB]
+Get:18 http://archive.ubuntu.com/ubuntu focal-updates/universe Translation-en [216 kB]
+Get:19 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [21.4 kB]
+Get:20 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [24.4 kB]
+Get:21 http://archive.ubuntu.com/ubuntu focal-updates/multiverse Translation-en [7336 B]
+Get:22 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [588 B]
+Get:23 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 Packages [45.6 kB]
+Get:24 http://archive.ubuntu.com/ubuntu focal-backports/main Translation-en [16.3 kB]
+Get:25 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 c-n-f Metadata [1420 B]
+Get:26 http://archive.ubuntu.com/ubuntu focal-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:27 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [23.9 kB]
+Get:28 http://archive.ubuntu.com/ubuntu focal-backports/universe Translation-en [16.0 kB]
+Get:29 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [860 B]
+Get:30 http://archive.ubuntu.com/ubuntu focal-backports/multiverse amd64 c-n-f Metadata [116 B]
+Get:31 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [286 kB]
+Get:32 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [11.0 kB]
+Get:33 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [1165 kB]
+Get:34 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [165 kB]
+Get:35 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [717 kB]
+Get:36 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [131 kB]
+Get:37 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [14.8 kB]
+Get:38 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [22.2 kB]
+Get:39 http://security.ubuntu.com/ubuntu focal-security/multiverse Translation-en [5376 B]
+Get:40 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [508 B]
+Fetched 24.1 MB in 4s (5996 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+12 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node2:~$
+ubuntu@node2:~$ ping -c 1 10.172.198.197
+PING 10.172.198.197 (10.172.198.197) 56(84) bytes of data.
+64 bytes from 10.172.198.197: icmp_seq=1 ttl=64 time=0.016 ms
+
+--- 10.172.198.197 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.016/0.016/0.016/0.000 ms
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv07:~$ ping -c 1 10.172.198.197
+PING 10.172.198.197 (10.172.198.197) 56(84) bytes of data.
+64 bytes from 10.172.198.197: icmp_seq=1 ttl=64 time=0.176 ms
+
+--- 10.172.198.197 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.176/0.176/0.176/0.000 ms
+ubuntu@wv07:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 00:10:28 UTC 2022
+
+  System load:  0.0               Processes:             170
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.172.198.43
+  Swap usage:   0%
+
+
+11 updates can be applied immediately.
+4 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Tue Sep  6 23:44:44 2022 from 10.172.198.1
+ubuntu@node1:~$ sudo apt update
+Hit:1 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:2 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Fetched 336 kB in 1s (336 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+12 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node1:~$ sudo apt install net-tools
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  net-tools
+0 upgraded, 1 newly installed, 0 to remove and 12 not upgraded.
+Need to get 196 kB of archives.
+After this operation, 864 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal/main amd64 net-tools amd64 1.60+git20180626.aebd88e-1ubuntu1 [196 kB]
+Fetched 196 kB in 0s (607 kB/s)
+Selecting previously unselected package net-tools.
+(Reading database ... 63818 files and directories currently installed.)
+Preparing to unpack .../net-tools_1.60+git20180626.aebd88e-1ubuntu1_amd64.deb ...
+Unpacking net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Setting up net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node1:~$ ifconfig | grep inet
+        inet 10.172.198.43  netmask 255.255.255.0  broadcast 10.172.198.255
+        inet6 fe80::5054:ff:fec0:1ee3  prefixlen 64  scopeid 0x20<link>
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+ubuntu@node1:~$ ping -c 1 10.172.198.197
+PING 10.172.198.197 (10.172.198.197) 56(84) bytes of data.
+64 bytes from 10.172.198.197: icmp_seq=1 ttl=64 time=0.311 ms
+
+--- 10.172.198.197 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.311/0.311/0.311/0.000 ms
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv07:~$ ifconfig | grep inet
+        inet 139.178.81.45  netmask 255.255.255.254  broadcast 255.255.255.255
+        inet6 2604:1380:4641:3b00::17  prefixlen 127  scopeid 0x0<global>
+        inet6 fe80::faf2:1eff:fea6:d00  prefixlen 64  scopeid 0x20<link>
+        inet 10.70.29.151  netmask 255.255.255.254  broadcast 255.255.255.255
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        inet 10.172.198.1  netmask 255.255.255.0  broadcast 10.172.198.255
+        inet6 fe80::5054:ff:fe22:481a  prefixlen 64  scopeid 0x20<link>
+        inet6 fe80::5446:50ff:fe85:4ec9  prefixlen 64  scopeid 0x20<link>
+        inet6 fe80::acab:1cff:fe30:254c  prefixlen 64  scopeid 0x20<link>
+ubuntu@wv07:~$
+ubuntu@wv07:~$ sudo cat /etc/hosts
+[sudo] password for ubuntu:
+127.0.0.1       localhost       wv07
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ubuntu@wv07:~$ sudo vi /etc/hosts
+ubuntu@wv07:~$ ping -c 1 node1
+PING node1 (10.172.198.43) 56(84) bytes of data.
+64 bytes from node1 (10.172.198.43): icmp_seq=1 ttl=64 time=0.149 ms
+
+--- node1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.149/0.149/0.149/0.000 ms
+ubuntu@wv07:~$ ping -c 1 node2
+PING node2 (10.172.198.197) 56(84) bytes of data.
+64 bytes from node2 (10.172.198.197): icmp_seq=1 ttl=64 time=0.138 ms
+
+--- node2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.138/0.138/0.138/0.000 ms
+ubuntu@wv07:~$ ping -c 1 wv07
+PING localhost (127.0.0.1) 56(84) bytes of data.
+64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.016 ms
+
+--- localhost ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.016/0.016/0.016/0.000 ms
+ubuntu@wv07:~$ sudo cat /etc/hosts
+127.0.0.1       localhost       wv07
+10.172.198.43   node1
+10.172.198.197  node2
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ubuntu@wv07:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 02:44:33 UTC 2022
+
+  System load:  0.16              Processes:             168
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.172.198.43
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+11 updates can be applied immediately.
+4 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 00:10:28 2022 from 10.172.198.1
+ubuntu@node1:~$ sudo vi /etc/hosts
+ubuntu@node1:~$ ping -c 1 wv07
+PING wv07 (10.172.198.1) 56(84) bytes of data.
+64 bytes from wv07 (10.172.198.1): icmp_seq=1 ttl=64 time=0.085 ms
+
+--- wv07 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.085/0.085/0.085/0.000 ms
+ubuntu@node1:~$ ping -c 1 node1
+PING node1 (127.0.1.1) 56(84) bytes of data.
+64 bytes from node1 (127.0.1.1): icmp_seq=1 ttl=64 time=0.017 ms
+
+--- node1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.017/0.017/0.017/0.000 ms
+ubuntu@node1:~$ ping -c 1 node2
+PING node2 (10.172.198.197) 56(84) bytes of data.
+64 bytes from node2 (10.172.198.197): icmp_seq=1 ttl=64 time=0.217 ms
+
+--- node2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.217/0.217/0.217/0.000 ms
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv07:~$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 02:48:37 UTC 2022
+
+  System load:  0.0               Processes:             168
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.172.198.197
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Tue Sep  6 23:56:30 2022 from 10.172.198.1
+ubuntu@node2:~$ sudo vi /etc/hosts
+ubuntu@node2:~$ ubuntu@node2:~$ ping -c 1 wv07
+PING wv07 (10.172.198.1) 56(84) bytes of data.
+64 bytes from wv07 (10.172.198.1): icmp_seq=1 ttl=64 time=0.090 ms
+
+--- wv07 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.090/0.090/0.090/0.000 ms
+ubuntu@node2:~$ ping -c 1 node1
+PING node1 (10.172.198.43) 56(84) bytes of data.
+64 bytes from node1 (10.172.198.43): icmp_seq=1 ttl=64 time=0.207 ms
+
+--- node1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.207/0.207/0.207/0.000 ms
+ubuntu@node2:~$ ping -c 1 node2
+PING node2 (127.0.1.1) 56(84) bytes of data.
+64 bytes from node2 (127.0.1.1): icmp_seq=1 ttl=64 time=0.013 ms
+
+--- node2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.013/0.013/0.013/0.000 ms
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv07:~$ history
+    1  uname -a
+    2  sudo cat /etc/hosts
+    3  sudo apt update
+    4  sudo snap install multipass
+    5  multipass launch -c 8 -d 50G -m 8G -n node1
+    6  sudo cat /etc/hosts
+    7  multipass shell node1
+    8  multipass launch -c 8 -d 50G -m 8G -n node2
+    9  sudo cat /etc/hosts
+   10  multipass shell node2
+   11  ping -c 1 10.172.198.197
+   12  multipass shell node1
+   13  ifconfig | grep inet
+   14  sudo cat /etc/hosts
+   15  sudo vi /etc/hosts
+   16  ping -c 1 node1
+   17  ping -c 1 node2
+   18  ping -c 1 wv07
+   19  sudo cat /etc/hosts
+   20  multipass shell node1
+   21  multipass shell node2
+   22  history
+ubuntu@wv07:~$ sudo swapoff -a
+[sudo] password for ubuntu:
+ubuntu@wv07:~$ sudo cat /etc/fstab
+UUID=b3d9d21d-f127-4b52-b2da-ceb69ad300ab       /       ext4    errors=remount-ro       0       1
+UUID=e60accd6-2378-4ced-8023-9d518771515c       none    swap    none    0       0
+
+ubuntu@wv07:~$ sudo cat /etc/fstab'/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+cat: '/etc/fstab/ swap / s/^\(.*\)$/#\1/g': Not a directory
+UUID=b3d9d21d-f127-4b52-b2da-ceb69ad300ab       /       ext4    errors=remount-ro       0       1
+UUID=e60accd6-2378-4ced-8023-9d518771515c       none    swap    none    0       0
+
+ubuntu@wv07:~$ sudo sed /etc/fstab'/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+sed: -e expression #1, char 6: unknown command: `f'
+ubuntu@wv07:~$ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+ubuntu@wv07:~$ sudo cat /etc/fstab
+UUID=b3d9d21d-f127-4b52-b2da-ceb69ad300ab       /       ext4    errors=remount-ro       0       1
+UUID=e60accd6-2378-4ced-8023-9d518771515c       none    swap    none    0       0
+
+ubuntu@wv07:~$ sudo vi /etc/fstab
+ubuntu@wv07:~$ sudo cat /etc/fstab
+UUID=b3d9d21d-f127-4b52-b2da-ceb69ad300ab       /       ext4    errors=remount-ro       0       1
+#UUID=e60accd6-2378-4ced-8023-9d518771515c      none    swap    none    0       0
+
+ubuntu@wv07:~$  sudo tee /etc/modules-load.d/containerd.conf <<EOF
+> overlay
+> br_netfilter
+> EOF
+overlay
+br_netfilter
+ubuntu@wv07:~$ sudo cat /etc/modules-load.d/containerd.conf
+overlay
+br_netfilter
+ubuntu@wv07:~$ sudo modprobe overlay
+ubuntu@wv07:~$ sudo modprobe br_netfilter
+ubuntu@wv07:~$ sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+> net.bridge.bridge-nf-call-ip6tables = 1
+> net.bridge.bridge-nf-call-iptables = 1
+> net.ipv4.ip_forward = 1
+> EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+ubuntu@wv07:~$ sudo sysctl --system
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 65536
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+kernel.core_uses_pid = 1
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.default.accept_source_route = 0
+sysctl: setting key "net.ipv4.conf.all.accept_source_route": Invalid argument
+net.ipv4.conf.default.promote_secondaries = 1
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /usr/lib/sysctl.d/99-protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+net.core.rmem_default = 12582912
+net.core.wmem_default = 12582912
+net.core.rmem_max = 12582912
+net.core.wmem_max = 12582912
+net.ipv4.tcp_rmem = 10240 87380 12582912
+net.ipv4.tcp_wmem = 10240 87380 12582912
+net.ipv4.tcp_congestion_control = westwood
+* Applying /etc/sysctl.d/kubernetes.conf ...
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+* Applying /etc/sysctl.conf ...
+net.core.rmem_default = 12582912
+net.core.wmem_default = 12582912
+net.core.rmem_max = 12582912
+net.core.wmem_max = 12582912
+net.ipv4.tcp_rmem = 10240 87380 12582912
+net.ipv4.tcp_wmem = 10240 87380 12582912
+net.ipv4.tcp_congestion_control = westwood
+ubuntu@wv07:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 03:36:21 UTC 2022
+
+  System load:  0.0               Processes:             171
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.172.198.43
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+11 updates can be applied immediately.
+4 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 02:44:34 2022 from 10.172.198.1
+ubuntu@node1:~$ sudo swapoff -a
+ubuntu@node1:~$ sudo vi /etc/fstab
+ubuntu@node1:~$ sudo cat /etc/fstab
+LABEL=cloudimg-rootfs   /        ext4   defaults        0 1
+LABEL=UEFI      /boot/efi       vfat    umask=0077      0 1
+ubuntu@node1:~$ sudo tee /etc/modules-load.d/containerd.conf <<EOF
+> overlay
+> br_netfilter
+> EOF
+overlay
+br_netfilter
+ubuntu@node1:~$ sudo modprobe overlay
+ubuntu@node1:~$ sudo modprobe br_netfilter
+ubuntu@node1:~$ sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+
+net.ipv4.ip_forward = 1
+EOF > net.bridge.bridge-nf-call-ip6tables = 1
+> net.bridge.bridge-nf-call-iptables = 1
+> net.ipv4.ip_forward = 1
+> EOF
+>
+> ^C
+ubuntu@node1:~$ sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF^C
+ubuntu@node1:~$ sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+> net.bridge.bridge-nf-call-ip6tables = 1
+> net.bridge.bridge-nf-call-iptables = 1
+> net.ipv4.ip_forward = 1
+> EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+ubuntu@node1:~$ sudo sysctl --system
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-link-restrictions.conf ...
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 65536
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+net.ipv4.conf.default.promote_secondaries = 1
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.d/kubernetes.conf ...
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+* Applying /usr/lib/sysctl.d/protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.conf ...
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv07:~$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 03:38:33 UTC 2022
+
+  System load:  0.0               Processes:             171
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.172.198.197
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 02:48:37 2022 from 10.172.198.1
+ubuntu@node2:~$ sudo swapoff -a
+ubuntu@node2:~$ sudo vi /etc/fstab
+ubuntu@node2:~$ ubuntu@node2:~$ sudo cat /etc/fstab
+LABEL=cloudimg-rootfs   /        ext4   defaults        0 1
+LABEL=UEFI      /boot/efi       vfat    umask=0077      0 1
+ubuntu@node2:~$ sudo tee /etc/modules-load.d/containerd.conf <<EOF
+br_netfilter
+EOF> overlay
+> br_netfilter
+> EOF
+overlay
+br_netfilter
+ubuntu@node2:~$ sudo modprobe overlay
+ubuntu@node2:~$ sudo modprobe br_netfilter
+ubuntu@node2:~$ sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+> net.bridge.bridge-nf-call-ip6tables = 1
+> net.bridge.bridge-nf-call-iptables = 1
+> net.ipv4.ip_forward = 1
+> EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+ubuntu@node2:~$ sudo sysctl --system
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-link-restrictions.conf ...
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 65536
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+net.ipv4.conf.default.promote_secondaries = 1
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.d/kubernetes.conf ...
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+* Applying /usr/lib/sysctl.d/protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.conf ...
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv07:~$ sudo apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20211016).
+ca-certificates set to manually installed.
+software-properties-common is already the newest version (0.99.22.3).
+software-properties-common set to manually installed.
+apt-transport-https is already the newest version (2.4.7).
+The following additional packages will be installed:
+  libcurl4
+The following NEW packages will be installed:
+  gnupg2
+The following packages will be upgraded:
+  curl libcurl4
+2 upgraded, 1 newly installed, 0 to remove and 6 not upgraded.
+Need to get 490 kB of archives.
+After this operation, 52.2 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 curl amd64 7.81.0-1ubuntu1.4 [194 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4 amd64 7.81.0-1ubuntu1.4 [290 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 gnupg2 all 2.2.27-3ubuntu2.1 [5548 B]
+Fetched 490 kB in 1s (509 kB/s)
+(Reading database ... 75031 files and directories currently installed.)
+Preparing to unpack .../curl_7.81.0-1ubuntu1.4_amd64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.4) over (7.81.0-1ubuntu1.3) ...
+Preparing to unpack .../libcurl4_7.81.0-1ubuntu1.4_amd64.deb ...
+Unpacking libcurl4:amd64 (7.81.0-1ubuntu1.4) over (7.81.0-1ubuntu1.3) ...
+Selecting previously unselected package gnupg2.
+Preparing to unpack .../gnupg2_2.2.27-3ubuntu2.1_all.deb ...
+Unpacking gnupg2 (2.2.27-3ubuntu2.1) ...
+Setting up gnupg2 (2.2.27-3ubuntu2.1) ...
+Setting up libcurl4:amd64 (7.81.0-1ubuntu1.4) ...
+Setting up curl (7.81.0-1ubuntu1.4) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv07:~$ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
+ubuntu@wv07:~$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+Repository: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable'
+Description:
+Archive for codename: jammy components: stable
+More info: https://download.docker.com/linux/ubuntu
+Adding repository.
+Press [ENTER] to continue or Ctrl-c to cancel.
+Adding deb entry to /etc/apt/sources.list.d/archive_uri-https_download_docker_com_linux_ubuntu-jammy.list
+Adding disabled deb-src entry to /etc/apt/sources.list.d/archive_uri-https_download_docker_com_linux_ubuntu-jammy.list
+Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.9 kB]
+Get:2 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [6439 B]
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:4 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [544 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [254 kB]
+Fetched 1177 kB in 1s (838 kB/s)
+Reading package lists... Done
+ubuntu@wv07:~$ sudo apt update
+Hit:1 https://download.docker.com/linux/ubuntu jammy InRelease
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Fetched 324 kB in 1s (323 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+6 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@wv07:~$ sudo apt install -y containerd.io
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  containerd.io
+0 upgraded, 1 newly installed, 0 to remove and 6 not upgraded.
+Need to get 28.1 MB of archives.
+After this operation, 127 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu jammy/stable amd64 containerd.io amd64 1.6.8-1 [28.1 MB]
+Fetched 28.1 MB in 0s (76.7 MB/s)
+Selecting previously unselected package containerd.io.
+(Reading database ... 75037 files and directories currently installed.)
+Preparing to unpack .../containerd.io_1.6.8-1_amd64.deb ...
+Unpacking containerd.io (1.6.8-1) ...
+Setting up containerd.io (1.6.8-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv07:~$ containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+ubuntu@wv07:~$ sudo cat /etc/containerd/config.toml
+disabled_plugins = []
+imports = []
+oom_score = 0
+plugin_dir = ""
+required_plugins = []
+root = "/var/lib/containerd"
+state = "/run/containerd"
+temp = ""
+version = 2
+
+[cgroup]
+  path = ""
+
+[debug]
+  address = ""
+  format = ""
+  gid = 0
+  level = ""
+  uid = 0
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+  tcp_address = ""
+  tcp_tls_ca = ""
+  tcp_tls_cert = ""
+  tcp_tls_key = ""
+  uid = 0
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+
+  [plugins."io.containerd.gc.v1.scheduler"]
+    deletion_threshold = 0
+    mutation_threshold = 100
+    pause_threshold = 0.02
+    schedule_delay = "0s"
+    startup_delay = "100ms"
+
+  [plugins."io.containerd.grpc.v1.cri"]
+    device_ownership_from_security_context = false
+    disable_apparmor = false
+    disable_cgroup = false
+    disable_hugetlb_controller = true
+    disable_proc_mount = false
+    disable_tcp_service = true
+    enable_selinux = false
+    enable_tls_streaming = false
+    enable_unprivileged_icmp = false
+    enable_unprivileged_ports = false
+    ignore_image_defined_volumes = false
+    max_concurrent_downloads = 3
+    max_container_log_line_size = 16384
+    netns_mounts_under_state_dir = false
+    restrict_oom_score_adj = false
+    sandbox_image = "k8s.gcr.io/pause:3.6"
+    selinux_category_range = 1024
+    stats_collect_period = 10
+    stream_idle_timeout = "4h0m0s"
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    systemd_cgroup = false
+    tolerate_missing_hugetlb_controller = true
+    unset_seccomp_profile = ""
+
+    [plugins."io.containerd.grpc.v1.cri".cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = ""
+      ip_pref = ""
+      max_conf_num = 1
+
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      disable_snapshot_annotations = true
+      discard_unpacked_layers = false
+      ignore_rdt_not_enabled_errors = false
+      no_pivot = false
+      snapshotter = "overlayfs"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options]
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            BinaryName = ""
+            CriuImagePath = ""
+            CriuPath = ""
+            CriuWorkPath = ""
+            IoGid = 0
+            IoUid = 0
+            NoNewKeyring = false
+            NoPivotRoot = false
+            Root = ""
+            ShimCgroup = ""
+            SystemdCgroup = false
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options]
+
+    [plugins."io.containerd.grpc.v1.cri".image_decryption]
+      key_model = "node"
+
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = ""
+
+      [plugins."io.containerd.grpc.v1.cri".registry.auths]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.configs]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.headers]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+
+    [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+
+  [plugins."io.containerd.internal.v1.opt"]
+    path = "/opt/containerd"
+
+  [plugins."io.containerd.internal.v1.restart"]
+    interval = "10s"
+
+  [plugins."io.containerd.internal.v1.tracing"]
+    sampling_ratio = 1.0
+    service_name = "containerd"
+
+  [plugins."io.containerd.metadata.v1.bolt"]
+    content_sharing_policy = "shared"
+
+  [plugins."io.containerd.monitor.v1.cgroups"]
+    no_prometheus = false
+
+  [plugins."io.containerd.runtime.v1.linux"]
+    no_shim = false
+    runtime = "runc"
+    runtime_root = ""
+    shim = "containerd-shim"
+    shim_debug = false
+
+  [plugins."io.containerd.runtime.v2.task"]
+    platforms = ["linux/amd64"]
+    sched_core = false
+
+  [plugins."io.containerd.service.v1.diff-service"]
+    default = ["walking"]
+
+  [plugins."io.containerd.service.v1.tasks-service"]
+    rdt_config_file = ""
+
+  [plugins."io.containerd.snapshotter.v1.aufs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.btrfs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.devmapper"]
+    async_remove = false
+    base_image_size = ""
+    discard_blocks = false
+    fs_options = ""
+    fs_type = ""
+    pool_name = ""
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.native"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.overlayfs"]
+    root_path = ""
+    upperdir_label = false
+
+  [plugins."io.containerd.snapshotter.v1.zfs"]
+    root_path = ""
+
+  [plugins."io.containerd.tracing.processor.v1.otlp"]
+    endpoint = ""
+    insecure = false
+    protocol = ""
+
+[proxy_plugins]
+
+[stream_processors]
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar"
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+gzip+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar+gzip"
+
+[timeouts]
+  "io.containerd.timeout.bolt.open" = "0s"
+  "io.containerd.timeout.shim.cleanup" = "5s"
+  "io.containerd.timeout.shim.load" = "5s"
+  "io.containerd.timeout.shim.shutdown" = "3s"
+  "io.containerd.timeout.task.state" = "2s"
+
+[ttrpc]
+  address = ""
+  gid = 0
+  uid = 0
+ubuntu@wv07:~$ sudo cat /etc/containerd/config.toml | grep SystemdCgroup
+            SystemdCgroup = false
+ubuntu@wv07:~$ sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+ubuntu@wv07:~$ sudo cat /etc/containerd/config.toml | grep SystemdCgroup
+            SystemdCgroup = true
+ubuntu@wv07:~$ sudo systemctl restart containerd
+ubuntu@wv07:~$ sudo systemctl enable containerd
+ubuntu@wv07:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 03:58:42 UTC 2022
+
+  System load:  0.0               Processes:             170
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.172.198.43
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+11 updates can be applied immediately.
+4 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 03:36:21 2022 from 10.172.198.1
+ubuntu@node1:~$ sudo apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+ca-certificates is already the newest version (20211016~20.04.1).
+ca-certificates set to manually installed.
+software-properties-common is already the newest version (0.99.9.8).
+software-properties-common set to manually installed.
+The following additional packages will be installed:
+  libcurl4
+The following NEW packages will be installed:
+  apt-transport-https gnupg2
+The following packages will be upgraded:
+  curl libcurl4
+2 upgraded, 2 newly installed, 0 to remove and 10 not upgraded.
+Need to get 403 kB of archives.
+After this operation, 213 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 apt-transport-https all 2.0.9 [1704 B]
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 curl amd64 7.68.0-1ubuntu2.13 [161 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libcurl4 amd64 7.68.0-1ubuntu2.13 [235 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 gnupg2 all 2.2.19-3ubuntu2.2 [5316 B]
+Fetched 403 kB in 1s (429 kB/s)
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 63867 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.0.9_all.deb ...
+Unpacking apt-transport-https (2.0.9) ...
+Preparing to unpack .../curl_7.68.0-1ubuntu2.13_amd64.deb ...
+Unpacking curl (7.68.0-1ubuntu2.13) over (7.68.0-1ubuntu2.12) ...
+Preparing to unpack .../libcurl4_7.68.0-1ubuntu2.13_amd64.deb ...
+Unpacking libcurl4:amd64 (7.68.0-1ubuntu2.13) over (7.68.0-1ubuntu2.12) ...
+Selecting previously unselected package gnupg2.
+Preparing to unpack .../gnupg2_2.2.19-3ubuntu2.2_all.deb ...
+Unpacking gnupg2 (2.2.19-3ubuntu2.2) ...
+Setting up gnupg2 (2.2.19-3ubuntu2.2) ...
+Setting up apt-transport-https (2.0.9) ...
+Setting up libcurl4:amd64 (7.68.0-1ubuntu2.13) ...
+Setting up curl (7.68.0-1ubuntu2.13) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+ubuntu@node1:~$ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
+ubuntu@node1:~$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+Get:1 https://download.docker.com/linux/ubuntu focal InRelease [57.7 kB]
+Get:2 https://download.docker.com/linux/ubuntu focal/stable amd64 Packages [17.9 kB]
+Get:3 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:7 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [2077 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [949 kB]
+Fetched 3437 kB in 2s (1927 kB/s)
+Reading package lists... Done
+ubuntu@node1:~$ sudo apt update
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+10 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node1:~$  sudo apt install -y containerd.io
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  containerd.io
+0 upgraded, 1 newly installed, 0 to remove and 10 not upgraded.
+Need to get 28.1 MB of archives.
+After this operation, 127 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu focal/stable amd64 containerd.io amd64 1.6.8-1 [28.1 MB]
+Fetched 28.1 MB in 3s (10.4 MB/s)
+Selecting previously unselected package containerd.io.
+(Reading database ... 63877 files and directories currently installed.)
+Preparing to unpack .../containerd.io_1.6.8-1_amd64.deb ...
+Unpacking containerd.io (1.6.8-1) ...
+Setting up containerd.io (1.6.8-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node1:~$ containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+ubuntu@node1:~$ sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+ubuntu@node1:~$ sudo cat /etc/containerd/config.toml | grep SystemdCgroup
+            SystemdCgroup = true
+ubuntu@node1:~$ sudo systemctl restart containerd
+ubuntu@node1:~$ sudo systemctl enable containerd
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv07:~$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 04:01:55 UTC 2022
+
+  System load:  0.0               Processes:             167
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.172.198.197
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 03:38:33 2022 from 10.172.198.1
+ubuntu@node2:~$ sudo apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+ca-certificates is already the newest version (20211016~20.04.1).
+ca-certificates set to manually installed.
+software-properties-common is already the newest version (0.99.9.8).
+software-properties-common set to manually installed.
+The following additional packages will be installed:
+  libcurl4
+The following NEW packages will be installed:
+  apt-transport-https gnupg2
+The following packages will be upgraded:
+  curl libcurl4
+2 upgraded, 2 newly installed, 0 to remove and 10 not upgraded.
+Need to get 403 kB of archives.
+After this operation, 213 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 apt-transport-https all 2.0.9 [1704 B]
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 curl amd64 7.68.0-1ubuntu2.13 [161 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libcurl4 amd64 7.68.0-1ubuntu2.13 [235 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 gnupg2 all 2.2.19-3ubuntu2.2 [5316 B]
+Fetched 403 kB in 0s (844 kB/s)
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 63867 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.0.9_all.deb ...
+Unpacking apt-transport-https (2.0.9) ...
+Preparing to unpack .../curl_7.68.0-1ubuntu2.13_amd64.deb ...
+Unpacking curl (7.68.0-1ubuntu2.13) over (7.68.0-1ubuntu2.12) ...
+Preparing to unpack .../libcurl4_7.68.0-1ubuntu2.13_amd64.deb ...
+Unpacking libcurl4:amd64 (7.68.0-1ubuntu2.13) over (7.68.0-1ubuntu2.12) ...
+Selecting previously unselected package gnupg2.
+Preparing to unpack .../gnupg2_2.2.19-3ubuntu2.2_all.deb ...
+Unpacking gnupg2 (2.2.19-3ubuntu2.2) ...
+Setting up gnupg2 (2.2.19-3ubuntu2.2) ...
+Setting up apt-transport-https (2.0.9) ...
+Setting up libcurl4:amd64 (7.68.0-1ubuntu2.13) ...
+Setting up curl (7.68.0-1ubuntu2.13) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+ubuntu@node2:~$ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
+ubuntu@node2:~$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+Get:1 https://download.docker.com/linux/ubuntu focal InRelease [57.7 kB]
+Get:2 https://download.docker.com/linux/ubuntu focal/stable amd64 Packages [17.9 kB]
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:5 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:7 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [2077 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [949 kB]
+Fetched 3437 kB in 2s (1927 kB/s)
+Reading package lists... Done
+ubuntu@node2:~$ sudo apt update
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:4 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+10 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node2:~$ sudo apt install -y containerd.io
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  containerd.io
+0 upgraded, 1 newly installed, 0 to remove and 10 not upgraded.
+Need to get 28.1 MB of archives.
+After this operation, 127 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu focal/stable amd64 containerd.io amd64 1.6.8-1 [28.1 MB]
+Fetched 28.1 MB in 0s (93.1 MB/s)
+Selecting previously unselected package containerd.io.
+(Reading database ... 63877 files and directories currently installed.)
+Preparing to unpack .../containerd.io_1.6.8-1_amd64.deb ...
+Unpacking containerd.io (1.6.8-1) ...
+Setting up containerd.io (1.6.8-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node2:~$ containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+ubuntu@node2:~$ sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+ubuntu@node2:~$ sudo cat /etc/containerd/config.toml
+disabled_plugins = []
+imports = []
+oom_score = 0
+plugin_dir = ""
+required_plugins = []
+root = "/var/lib/containerd"
+state = "/run/containerd"
+temp = ""
+version = 2
+
+[cgroup]
+  path = ""
+
+[debug]
+  address = ""
+  format = ""
+  gid = 0
+  level = ""
+  uid = 0
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  gid = 0
+  max_recv_message_size = 16777216
+  max_send_message_size = 16777216
+  tcp_address = ""
+  tcp_tls_ca = ""
+  tcp_tls_cert = ""
+  tcp_tls_key = ""
+  uid = 0
+
+[metrics]
+  address = ""
+  grpc_histogram = false
+
+[plugins]
+
+  [plugins."io.containerd.gc.v1.scheduler"]
+    deletion_threshold = 0
+    mutation_threshold = 100
+    pause_threshold = 0.02
+    schedule_delay = "0s"
+    startup_delay = "100ms"
+
+  [plugins."io.containerd.grpc.v1.cri"]
+    device_ownership_from_security_context = false
+    disable_apparmor = false
+    disable_cgroup = false
+    disable_hugetlb_controller = true
+    disable_proc_mount = false
+    disable_tcp_service = true
+    enable_selinux = false
+    enable_tls_streaming = false
+    enable_unprivileged_icmp = false
+    enable_unprivileged_ports = false
+    ignore_image_defined_volumes = false
+    max_concurrent_downloads = 3
+    max_container_log_line_size = 16384
+    netns_mounts_under_state_dir = false
+    restrict_oom_score_adj = false
+    sandbox_image = "k8s.gcr.io/pause:3.6"
+    selinux_category_range = 1024
+    stats_collect_period = 10
+    stream_idle_timeout = "4h0m0s"
+    stream_server_address = "127.0.0.1"
+    stream_server_port = "0"
+    systemd_cgroup = false
+    tolerate_missing_hugetlb_controller = true
+    unset_seccomp_profile = ""
+
+    [plugins."io.containerd.grpc.v1.cri".cni]
+      bin_dir = "/opt/cni/bin"
+      conf_dir = "/etc/cni/net.d"
+      conf_template = ""
+      ip_pref = ""
+      max_conf_num = 1
+
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      default_runtime_name = "runc"
+      disable_snapshot_annotations = true
+      discard_unpacked_layers = false
+      ignore_rdt_not_enabled_errors = false
+      no_pivot = false
+      snapshotter = "overlayfs"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.default_runtime.options]
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          base_runtime_spec = ""
+          cni_conf_dir = ""
+          cni_max_conf_num = 0
+          container_annotations = []
+          pod_annotations = []
+          privileged_without_host_devices = false
+          runtime_engine = ""
+          runtime_path = ""
+          runtime_root = ""
+          runtime_type = "io.containerd.runc.v2"
+
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            BinaryName = ""
+            CriuImagePath = ""
+            CriuPath = ""
+            CriuWorkPath = ""
+            IoGid = 0
+            IoUid = 0
+            NoNewKeyring = false
+            NoPivotRoot = false
+            Root = ""
+            ShimCgroup = ""
+            SystemdCgroup = true
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
+        base_runtime_spec = ""
+        cni_conf_dir = ""
+        cni_max_conf_num = 0
+        container_annotations = []
+        pod_annotations = []
+        privileged_without_host_devices = false
+        runtime_engine = ""
+        runtime_path = ""
+        runtime_root = ""
+        runtime_type = ""
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime.options]
+
+    [plugins."io.containerd.grpc.v1.cri".image_decryption]
+      key_model = "node"
+
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = ""
+
+      [plugins."io.containerd.grpc.v1.cri".registry.auths]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.configs]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.headers]
+
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+
+    [plugins."io.containerd.grpc.v1.cri".x509_key_pair_streaming]
+      tls_cert_file = ""
+      tls_key_file = ""
+
+  [plugins."io.containerd.internal.v1.opt"]
+    path = "/opt/containerd"
+
+  [plugins."io.containerd.internal.v1.restart"]
+    interval = "10s"
+
+  [plugins."io.containerd.internal.v1.tracing"]
+    sampling_ratio = 1.0
+    service_name = "containerd"
+
+  [plugins."io.containerd.metadata.v1.bolt"]
+    content_sharing_policy = "shared"
+
+  [plugins."io.containerd.monitor.v1.cgroups"]
+    no_prometheus = false
+
+  [plugins."io.containerd.runtime.v1.linux"]
+    no_shim = false
+    runtime = "runc"
+    runtime_root = ""
+    shim = "containerd-shim"
+    shim_debug = false
+
+  [plugins."io.containerd.runtime.v2.task"]
+    platforms = ["linux/amd64"]
+    sched_core = false
+
+  [plugins."io.containerd.service.v1.diff-service"]
+    default = ["walking"]
+
+  [plugins."io.containerd.service.v1.tasks-service"]
+    rdt_config_file = ""
+
+  [plugins."io.containerd.snapshotter.v1.aufs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.btrfs"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.devmapper"]
+    async_remove = false
+    base_image_size = ""
+    discard_blocks = false
+    fs_options = ""
+    fs_type = ""
+    pool_name = ""
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.native"]
+    root_path = ""
+
+  [plugins."io.containerd.snapshotter.v1.overlayfs"]
+    root_path = ""
+    upperdir_label = false
+
+  [plugins."io.containerd.snapshotter.v1.zfs"]
+    root_path = ""
+
+  [plugins."io.containerd.tracing.processor.v1.otlp"]
+    endpoint = ""
+    insecure = false
+    protocol = ""
+
+[proxy_plugins]
+
+[stream_processors]
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar"
+
+  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
+    accepts = ["application/vnd.oci.image.layer.v1.tar+gzip+encrypted"]
+    args = ["--decryption-keys-path", "/etc/containerd/ocicrypt/keys"]
+    env = ["OCICRYPT_KEYPROVIDER_CONFIG=/etc/containerd/ocicrypt/ocicrypt_keyprovider.conf"]
+    path = "ctd-decoder"
+    returns = "application/vnd.oci.image.layer.v1.tar+gzip"
+
+[timeouts]
+  "io.containerd.timeout.bolt.open" = "0s"
+  "io.containerd.timeout.shim.cleanup" = "5s"
+  "io.containerd.timeout.shim.load" = "5s"
+  "io.containerd.timeout.shim.shutdown" = "3s"
+  "io.containerd.timeout.task.state" = "2s"
+
+[ttrpc]
+  address = ""
+  gid = 0
+  uid = 0
+ubuntu@node2:~$ sudo systemctl restart containerd
+ubuntu@node2:~$ sudo systemctl enable containerd
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv07:~$ # step 4
+ubuntu@wv07:~$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+[sudo] password for ubuntu:
+Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+OK
+ubuntu@wv07:~$ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-jammy main"
+Repository: 'deb http://apt.kubernetes.io/ kubernetes-jammy main'
+Description:
+Archive for codename: kubernetes-jammy components: main
+More info: http://apt.kubernetes.io/
+Adding repository.
+Press [ENTER] to continue or Ctrl-c to cancel.
+Adding deb entry to /etc/apt/sources.list.d/archive_uri-http_apt_kubernetes_io_-jammy.list
+Adding disabled deb-src entry to /etc/apt/sources.list.d/archive_uri-http_apt_kubernetes_io_-jammy.list
+Ign:1 https://packages.cloud.google.com/apt kubernetes-jammy InRelease
+Hit:3 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu jammy InRelease
+Err:2 https://packages.cloud.google.com/apt kubernetes-jammy Release
+  404  Not Found [IP: 2607:f8b0:4000:80a::200e 443]
+Hit:5 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:7 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+E: The repository 'http://apt.kubernetes.io kubernetes-jammy Release' does not have a Release file.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+ubuntu@wv07:~$ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+Repository: 'deb http://apt.kubernetes.io/ kubernetes-xenial main'
+Description:
+Archive for codename: kubernetes-xenial components: main
+More info: http://apt.kubernetes.io/
+Adding repository.
+Press [ENTER] to continue or Ctrl-c to cancel.
+Adding deb entry to /etc/apt/sources.list.d/archive_uri-http_apt_kubernetes_io_-jammy.list
+Adding disabled deb-src entry to /etc/apt/sources.list.d/archive_uri-http_apt_kubernetes_io_-jammy.list
+Hit:3 https://download.docker.com/linux/ubuntu jammy InRelease
+Ign:1 https://packages.cloud.google.com/apt kubernetes-jammy InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:6 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:7 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Err:4 https://packages.cloud.google.com/apt kubernetes-jammy Release
+  404  Not Found [IP: 2607:f8b0:4000:80a::200e 443]
+Hit:8 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Get:9 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [58.4 kB]
+Reading package lists... Done
+E: The repository 'http://apt.kubernetes.io kubernetes-jammy Release' does not have a Release file.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+W: http://apt.kubernetes.io/dists/kubernetes-xenial/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+ubuntu@wv07:~$ sudo apt-add-repository --remove "deb http://apt.kubernetes.io/ kubernetes-jammy main"
+Repository: 'deb http://apt.kubernetes.io/ kubernetes-jammy main'
+Description:
+Archive for codename: kubernetes-jammy components: main
+More info: http://apt.kubernetes.io/
+Removing repository.
+Press [ENTER] to continue or Ctrl-c to cancel.
+Disabling deb entry in /etc/apt/sources.list.d/archive_uri-http_apt_kubernetes_io_-jammy.list
+Hit:1 https://download.docker.com/linux/ubuntu jammy InRelease
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Hit:3 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Fetched 9383 B in 1s (15.3 kB/s)
+Reading package lists... Done
+W: http://apt.kubernetes.io/dists/kubernetes-xenial/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+ubuntu@wv07:~$ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+Repository: 'deb http://apt.kubernetes.io/ kubernetes-xenial main'
+Description:
+Archive for codename: kubernetes-xenial components: main
+More info: http://apt.kubernetes.io/
+Adding repository.
+Press [ENTER] to continue or Ctrl-c to cancel.
+Found existing deb entry in /etc/apt/sources.list.d/archive_uri-http_apt_kubernetes_io_-jammy.list
+Adding deb entry to /etc/apt/sources.list.d/archive_uri-http_apt_kubernetes_io_-jammy.list
+Found existing deb-src entry in /etc/apt/sources.list.d/archive_uri-http_apt_kubernetes_io_-jammy.list
+Adding disabled deb-src entry to /etc/apt/sources.list.d/archive_uri-http_apt_kubernetes_io_-jammy.list
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Hit:2 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:3 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Fetched 9383 B in 1s (15.0 kB/s)
+Reading package lists... Done
+W: http://apt.kubernetes.io/dists/kubernetes-xenial/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+ubuntu@wv07:~$
+ubuntu@wv07:~$ sudo vi /etc/apt/sources.list.d
+ubuntu@wv07:~$ cd /etc/apt/sources.list.d
+ubuntu@wv07:/etc/apt/sources.list.d$ ll
+total 16
+drwxr-xr-x 2 root root 4096 Sep  7 04:30 ./
+drwxr-xr-x 8 root root 4096 Sep  7 04:15 ../
+-rw-r--r-- 1 root root  224 Sep  7 04:23 archive_uri-http_apt_kubernetes_io_-jammy.list
+-rw-r--r-- 1 root root  148 Sep  7 04:23 archive_uri-https_download_docker_com_linux_ubuntu-jammy.list
+ubuntu@wv07:/etc/apt/sources.list.d$ ll
+total 16
+drwxr-xr-x 2 root root 4096 Sep  7 04:30 ./
+drwxr-xr-x 8 root root 4096 Sep  7 04:15 ../
+-rw-r--r-- 1 root root  224 Sep  7 04:23 archive_uri-http_apt_kubernetes_io_-jammy.list
+-rw-r--r-- 1 root root  148 Sep  7 04:23 archive_uri-https_download_docker_com_linux_ubuntu-jammy.list
+ubuntu@wv07:/etc/apt/sources.list.d$ cd
+ubuntu@wv07:/home/ubuntu$ sudo apt update
+Hit:2 https://download.docker.com/linux/ubuntu jammy InRelease
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Hit:6 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Fetched 9383 B in 1s (14.6 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+6 packages can be upgraded. Run 'apt list --upgradable' to see them.
+W: http://apt.kubernetes.io/dists/kubernetes-xenial/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+ubuntu@wv07:/home/ubuntu$ # step #5
+ubuntu@wv07:/home/ubuntu$ sudo apt install -y kubelet kubeadm kubectl
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 6 not upgraded.
+Need to get 75.9 MB of archives.
+After this operation, 310 MB of additional disk space will be used.
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.24.2-00 [12.3 MB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 conntrack amd64 1:1.4.6-2build2 [33.5 kB]
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.8.7-00 [25.0 MB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 ebtables amd64 2.0.11-4build2 [84.9 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 socat amd64 1.7.4.1-3ubuntu4 [349 kB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.25.0-00 [19.5 MB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.25.0-00 [9500 kB]
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.25.0-00 [9213 kB]
+Fetched 75.9 MB in 2s (39.3 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 75053 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.6-2build2_amd64.deb ...
+Unpacking conntrack (1:1.4.6-2build2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.24.2-00_amd64.deb ...
+Unpacking cri-tools (1.24.2-00) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-4build2_amd64.deb ...
+Unpacking ebtables (2.0.11-4build2) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../3-kubernetes-cni_0.8.7-00_amd64.deb ...
+Unpacking kubernetes-cni (0.8.7-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../4-socat_1.7.4.1-3ubuntu4_amd64.deb ...
+Unpacking socat (1.7.4.1-3ubuntu4) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../5-kubelet_1.25.0-00_amd64.deb ...
+Unpacking kubelet (1.25.0-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../6-kubectl_1.25.0-00_amd64.deb ...
+Unpacking kubectl (1.25.0-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../7-kubeadm_1.25.0-00_amd64.deb ...
+Unpacking kubeadm (1.25.0-00) ...
+Setting up conntrack (1:1.4.6-2build2) ...
+Setting up kubectl (1.25.0-00) ...
+Setting up ebtables (2.0.11-4build2) ...
+Setting up socat (1.7.4.1-3ubuntu4) ...
+Setting up cri-tools (1.24.2-00) ...
+Setting up kubernetes-cni (0.8.7-00) ...
+Setting up kubelet (1.25.0-00) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+Setting up kubeadm (1.25.0-00) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv07:/home/ubuntu$ sudo apt-mark hold kubelet kubeadm kubectl
+kubelet set on hold.
+kubeadm set on hold.
+kubectl set on hold.
+ubuntu@wv07:/home/ubuntu$ # doing step 4 for node1 and node2
+ubuntu@wv07:/home/ubuntu$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 04:36:22 UTC 2022
+
+  System load:  0.0               Processes:             168
+  Usage of /:   3.4% of 48.27GB   Users logged in:       0
+  Memory usage: 4%                IPv4 address for ens3: 10.172.198.43
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+9 updates can be applied immediately.
+2 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 03:58:42 2022 from 10.172.198.1
+ubuntu@node1:~$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+OK
+ubuntu@node1:~$ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Hit:2 https://download.docker.com/linux/ubuntu focal InRelease
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [58.4 kB]
+Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:6 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:7 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Fetched 67.8 kB in 1s (111 kB/s)
+Reading package lists... Done
+ubuntu@node1:~$ sudo apt update
+Hit:2 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:1 https://packages.cloud.google.com/apt kubernetes-xenial InRelease
+Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+10 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node1:~$ sudo apt install -y kubelet kubeadm kubectl
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+Suggested packages:
+  nftables
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 10 not upgraded.
+Need to get 75.9 MB of archives.
+After this operation, 310 MB of additional disk space will be used.
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.24.2-00 [12.3 MB]
+Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 conntrack amd64 1:1.4.5-2 [30.3 kB]
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.8.7-00 [25.0 MB]
+Get:7 http://archive.ubuntu.com/ubuntu focal/main amd64 ebtables amd64 2.0.11-3build1 [80.3 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal/main amd64 socat amd64 1.7.3.3-2 [323 kB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.25.0-00 [19.5 MB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.25.0-00 [9500 kB]
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.25.0-00 [9213 kB]
+Fetched 75.9 MB in 1s (58.1 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 63893 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.5-2_amd64.deb ...
+Unpacking conntrack (1:1.4.5-2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.24.2-00_amd64.deb ...
+Unpacking cri-tools (1.24.2-00) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-3build1_amd64.deb ...
+Unpacking ebtables (2.0.11-3build1) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../3-kubernetes-cni_0.8.7-00_amd64.deb ...
+Unpacking kubernetes-cni (0.8.7-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../4-socat_1.7.3.3-2_amd64.deb ...
+Unpacking socat (1.7.3.3-2) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../5-kubelet_1.25.0-00_amd64.deb ...
+Unpacking kubelet (1.25.0-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../6-kubectl_1.25.0-00_amd64.deb ...
+Unpacking kubectl (1.25.0-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../7-kubeadm_1.25.0-00_amd64.deb ...
+Unpacking kubeadm (1.25.0-00) ...
+Setting up conntrack (1:1.4.5-2) ...
+Setting up kubectl (1.25.0-00) ...
+Setting up ebtables (2.0.11-3build1) ...
+Setting up socat (1.7.3.3-2) ...
+Setting up cri-tools (1.24.2-00) ...
+Setting up kubernetes-cni (0.8.7-00) ...
+Setting up kubelet (1.25.0-00) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+Setting up kubeadm (1.25.0-00) ...
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node1:~$ sudo apt-mark hold kubelet kubeadm kubectl
+kubelet set on hold.
+kubeadm set on hold.
+kubectl set on hold.
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv07:/home/ubuntu$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 04:38:34 UTC 2022
+
+  System load:  0.24              Processes:             168
+  Usage of /:   3.4% of 48.27GB   Users logged in:       0
+  Memory usage: 4%                IPv4 address for ens3: 10.172.198.197
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+10 updates can be applied immediately.
+2 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 04:01:55 2022 from 10.172.198.1
+ubuntu@node2:~$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+OK
+ubuntu@node2:~$ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:2 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Get:7 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [58.4 kB]
+Fetched 67.8 kB in 1s (111 kB/s)
+Reading package lists... Done
+ubuntu@node2:~$ sudo apt update
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:2 https://packages.cloud.google.com/apt kubernetes-xenial InRelease
+Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+10 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node2:~$ sudo apt install -y kubelet kubeadm kubectl
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+Suggested packages:
+  nftables
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 10 not upgraded.
+Need to get 75.9 MB of archives.
+After this operation, 310 MB of additional disk space will be used.
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.24.2-00 [12.3 MB]
+Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 conntrack amd64 1:1.4.5-2 [30.3 kB]
+Get:7 http://archive.ubuntu.com/ubuntu focal/main amd64 ebtables amd64 2.0.11-3build1 [80.3 kB]
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.8.7-00 [25.0 MB]
+Get:8 http://archive.ubuntu.com/ubuntu focal/main amd64 socat amd64 1.7.3.3-2 [323 kB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.25.0-00 [19.5 MB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.25.0-00 [9500 kB]
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.25.0-00 [9213 kB]
+Fetched 75.9 MB in 2s (36.6 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 63893 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.5-2_amd64.deb ...
+Unpacking conntrack (1:1.4.5-2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.24.2-00_amd64.deb ...
+Unpacking cri-tools (1.24.2-00) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-3build1_amd64.deb ...
+Unpacking ebtables (2.0.11-3build1) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../3-kubernetes-cni_0.8.7-00_amd64.deb ...
+Unpacking kubernetes-cni (0.8.7-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../4-socat_1.7.3.3-2_amd64.deb ...
+Unpacking socat (1.7.3.3-2) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../5-kubelet_1.25.0-00_amd64.deb ...
+Unpacking kubelet (1.25.0-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../6-kubectl_1.25.0-00_amd64.deb ...
+Unpacking kubectl (1.25.0-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../7-kubeadm_1.25.0-00_amd64.deb ...
+Unpacking kubeadm (1.25.0-00) ...
+Setting up conntrack (1:1.4.5-2) ...
+Setting up kubectl (1.25.0-00) ...
+Setting up ebtables (2.0.11-3build1) ...
+Setting up socat (1.7.3.3-2) ...
+Setting up cri-tools (1.24.2-00) ...
+Setting up kubernetes-cni (0.8.7-00) ...
+Setting up kubelet (1.25.0-00) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+Setting up kubeadm (1.25.0-00) ...
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node2:~$ sudo apt-mark hold kubelet kubeadm kubectl
+kubelet set on hold.
+kubeadm set on hold.
+kubectl set on hold.
+ubuntu@node2:~$ kublet --version
+
+Command 'kublet' not found, did you mean:
+
+  command 'kubelet' from snap kubelet (1.24.4)
+
+See 'snap info <snapname>' for additional versions.
+
+ubuntu@node2:~$ kubelet --version
+Kubernetes v1.25.0
+ubuntu@node2:~$ kubeadm --version
+unknown flag: --version
+To see the stack trace of this error execute with --v=5 or higher
+ubuntu@node2:~$ kubeadm -v
+flag needs an argument: 'v' in -v
+To see the stack trace of this error execute with --v=5 or higher
+ubuntu@node2:~$ kubeadm
+
+
+    ┌──────────────────────────────────────────────────────────┐
+    │ KUBEADM                                                  │
+    │ Easily bootstrap a secure Kubernetes cluster             │
+    │                                                          │
+    │ Please give us feedback at:                              │
+    │ https://github.com/kubernetes/kubeadm/issues             │
+    └──────────────────────────────────────────────────────────┘
+
+Example usage:
+
+    Create a two-machine cluster with one control-plane node
+    (which controls the cluster), and one worker node
+    (where your workloads, like Pods and Deployments run).
+
+    ┌──────────────────────────────────────────────────────────┐
+    │ On the first machine:                                    │
+    ├──────────────────────────────────────────────────────────┤
+    │ control-plane# kubeadm init                              │
+    └──────────────────────────────────────────────────────────┘
+
+    ┌──────────────────────────────────────────────────────────┐
+    │ On the second machine:                                   │
+    ├──────────────────────────────────────────────────────────┤
+    │ worker# kubeadm join <arguments-returned-from-init>      │
+    └──────────────────────────────────────────────────────────┘
+
+    You can then repeat the second step on as many other machines as you like.
+
+Usage:
+  kubeadm [command]
+
+Available Commands:
+  certs       Commands related to handling kubernetes certificates
+  completion  Output shell completion code for the specified shell (bash or zsh)
+  config      Manage configuration for a kubeadm cluster persisted in a ConfigMap in the cluster
+  help        Help about any command
+  init        Run this command in order to set up the Kubernetes control plane
+  join        Run this on any machine you wish to join an existing cluster
+  kubeconfig  Kubeconfig file utilities
+  reset       Performs a best effort revert of changes made to this host by 'kubeadm init' or 'kubeadm join'
+  token       Manage bootstrap tokens
+  upgrade     Upgrade your cluster smoothly to a newer version with this command
+  version     Print the version of kubeadm
+
+Flags:
+      --add-dir-header           If true, adds the file directory to the header of the log messages
+  -h, --help                     help for kubeadm
+      --log-file string          If non-empty, use this log file (no effect when -logtostderr=true)
+      --log-file-max-size uint   Defines the maximum size a log file can grow to (no effect when -logtostderr=true). Unit is megabytes. If the value is 0, the maximum file size is unlimited. (default 1800)
+      --one-output               If true, only write logs to their native severity level (vs also writing to each lower severity level; no effect when -logtostderr=true)
+      --rootfs string            [EXPERIMENTAL] The path to the 'real' host root filesystem.
+      --skip-headers             If true, avoid header prefixes in the log messages
+      --skip-log-headers         If true, avoid headers when opening log files (no effect when -logtostderr=true)
+  -v, --v Level                  number for the log level verbosity
+
+Additional help topics:
+  kubeadm alpha      Kubeadm experimental sub-commands
+
+Use "kubeadm [command] --help" for more information about a command.
+ubuntu@node2:~$ kubeadm version
+kubeadm version: &version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.0", GitCommit:"a866cbe2e5bbaa01cfd5e969aa3e033f3282a8a2", GitTreeState:"clean", BuildDate:"2022-08-23T17:43:25Z", GoVersion:"go1.19", Compiler:"gc", Platform:"linux/amd64"}
+ubuntu@node2:~$ kubectl version
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.0", GitCommit:"a866cbe2e5bbaa01cfd5e969aa3e033f3282a8a2", GitTreeState:"clean", BuildDate:"2022-08-23T17:44:59Z", GoVersion:"go1.19", Compiler:"gc", Platform:"linux/amd64"}
+Kustomize Version: v4.5.7
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv07:/home/ubuntu$ who
+ubuntu   pts/0        2022-09-06 23:18 (70.112.73.191)
+ubuntu@wv07:/home/ubuntu$

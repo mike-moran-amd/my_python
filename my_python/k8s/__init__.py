@@ -1,4 +1,25 @@
 """
+>>> for path in TOUCHED_PATHS:
+...     print(f'cat {path}')
+cat /etc/apt/sources.list.d/docker.list
+cat /etc/containerd/config.toml
+cat /etc/modules-load.d/k8s.conf
+cat /etc/sysctl.d/k8s.conf
+cat /etc/fstab
+cat /etc/hosts
+cat /etc/apt/sources.list.d/kubernetes.list
+cat $HOME/.kube/config
+cat /etc/containers/registries.conf
+
+kubectl version
+docker --version
+containerd --version
+
+10.172.198.1  wv07  netmask 255.255.255.0  broadcast 10.172.198.255
+10.172.198.43  node1  netmask 255.255.255.0  broadcast 10.172.198.255
+10.172.198.197  node2  netmask 255.255.255.0  broadcast 10.172.198.255
+
+
 >>> pprint.pprint(PATH_CONTENTS)
 {'$HOME/.kube/config': None,
  '/etc/apt/sources.list.d/docker.list': None,
@@ -6,10 +27,9 @@
  '/etc/containerd/config.toml': None,
  '/etc/containers/registries.conf': None,
  '/etc/fstab': None,
+ '/etc/hosts': None,
  '/etc/modules-load.d/k8s.conf': None,
- '/etc/sysctl.d/k8s.conf': None,
- '/usr/local/sbin/runc': None,
- '/usr/share/keyrings/docker-archive-keyring.gpg': None}
+ '/etc/sysctl.d/k8s.conf': None}
 
 """
 import pprint
@@ -25,6 +45,7 @@ TOUCHED_PATHS = [
                                # net.bridge.bridge-nf-call-iptables = 1
                                # net.ipv4.ip_forward = 1
     "/etc/fstab",  # comment out swap line
+    "/etc/hosts",
     "/etc/apt/sources.list.d/kubernetes.list",
     "$HOME/.kube/config",
     "/etc/containers/registries.conf",  # append unqualified-search-registries=["docker.io"]
