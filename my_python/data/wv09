@@ -1977,3 +1977,2994 @@ drwxrwxr-x 3 ubuntu ubuntu  4096 Sep  7 20:11 ../
 ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$
 
 
+Microsoft Windows [Version 10.0.19044.1889]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\mikmoran>ssh root@147.75.55.235
+The authenticity of host '147.75.55.235 (147.75.55.235)' can't be established.
+ECDSA key fingerprint is SHA256:17PCsj4CqVC331ebYMpB8YmXWJqv581Gn8GLeZYAYOw.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '147.75.55.235' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-47-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:01:51 UTC 2022
+
+  System load:            0.17333984375
+  Usage of /:             1.3% of 218.00GB
+  Memory usage:           1%
+  Swap usage:             0%
+  Processes:              544
+  Users logged in:        0
+  IPv4 address for bond0: 147.75.55.235
+  IPv6 address for bond0: 2604:1380:4641:3b00::17
+
+6 updates can be applied immediately.
+6 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@wv09:~# useradd -s /bin/bash -d /home/ubuntu/ -m -G sudo ubuntu
+root@wv09:~# passwd ubuntu
+New password:
+Retype new password:
+passwd: password updated successfully
+root@wv09:~# cp -r ~/.ssh /home/ubuntu/.ssh
+root@wv09:~# chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+root@wv09:~# exit
+logout
+Connection to 147.75.55.235 closed.
+
+C:\Users\mikmoran>ssh ubuntu@147.75.55.235
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-47-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:05:40 UTC 2022
+
+  System load:            0.0205078125
+  Usage of /:             1.3% of 218.00GB
+  Memory usage:           1%
+  Swap usage:             0%
+  Processes:              496
+  Users logged in:        0
+  IPv4 address for bond0: 147.75.55.235
+  IPv6 address for bond0: 2604:1380:4641:3b00::17
+
+
+6 updates can be applied immediately.
+6 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@wv09:~$ uname -a
+Linux wv09 5.15.0-47-generic #51-Ubuntu SMP Thu Aug 11 07:51:15 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+ubuntu@wv09:~$ sudo snap install multipass
+[sudo] password for ubuntu:
+Sorry, try again.
+[sudo] password for ubuntu:
+multipass 1.10.1 from Canonical✓ installed
+ubuntu@wv09:~$ multipass launch -c 8 -d 50G -m 8G -n node1
+Launched: node1
+ubuntu@wv09:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:15:51 UTC 2022
+
+  System load:  0.04              Processes:             183
+  Usage of /:   2.8% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.26.45.13
+  Swap usage:   0%
+
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@node1:~$ uname -a
+Linux node1 5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+ubuntu@node1:~$ sudo apt update
+Hit:1 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:3 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [8628 kB]
+Get:6 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [1707 kB]
+Get:7 http://archive.ubuntu.com/ubuntu focal/universe Translation-en [5124 kB]
+Get:8 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [286 kB]
+Get:9 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [11.0 kB]
+Get:10 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [1169 kB]
+Get:11 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [166 kB]
+Get:12 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [717 kB]
+Get:13 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [131 kB]
+Get:14 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [14.8 kB]
+Get:15 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [22.2 kB]
+Get:16 http://security.ubuntu.com/ubuntu focal-security/multiverse Translation-en [5376 B]
+Get:17 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [508 B]
+Get:18 http://archive.ubuntu.com/ubuntu focal/universe amd64 c-n-f Metadata [265 kB]
+Get:19 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [144 kB]
+Get:20 http://archive.ubuntu.com/ubuntu focal/multiverse Translation-en [104 kB]
+Get:21 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 c-n-f Metadata [9136 B]
+Get:22 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [2077 kB]
+Get:23 http://archive.ubuntu.com/ubuntu focal-updates/main Translation-en [369 kB]
+Get:24 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 c-n-f Metadata [15.9 kB]
+Get:25 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [1256 kB]
+Get:26 http://archive.ubuntu.com/ubuntu focal-updates/restricted Translation-en [178 kB]
+Get:27 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [949 kB]
+Get:28 http://archive.ubuntu.com/ubuntu focal-updates/universe Translation-en [216 kB]
+Get:29 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [21.4 kB]
+Get:30 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [24.4 kB]
+Get:31 http://archive.ubuntu.com/ubuntu focal-updates/multiverse Translation-en [7336 B]
+Get:32 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [588 B]
+Get:33 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 Packages [45.6 kB]
+Get:34 http://archive.ubuntu.com/ubuntu focal-backports/main Translation-en [16.3 kB]
+Get:35 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 c-n-f Metadata [1420 B]
+Get:36 http://archive.ubuntu.com/ubuntu focal-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:37 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [23.9 kB]
+Get:38 http://archive.ubuntu.com/ubuntu focal-backports/universe Translation-en [16.0 kB]
+Get:39 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [860 B]
+Get:40 http://archive.ubuntu.com/ubuntu focal-backports/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 24.1 MB in 5s (5333 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+12 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node1:~$ ifconfig | grep inet
+
+Command 'ifconfig' not found, but can be installed with:
+
+sudo apt install net-tools
+
+ubuntu@node1:~$ sudo apt install net-tools
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  net-tools
+0 upgraded, 1 newly installed, 0 to remove and 12 not upgraded.
+Need to get 196 kB of archives.
+After this operation, 864 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal/main amd64 net-tools amd64 1.60+git20180626.aebd88e-1ubuntu1 [196 kB]
+Fetched 196 kB in 0s (749 kB/s)
+Selecting previously unselected package net-tools.
+(Reading database ... 63818 files and directories currently installed.)
+Preparing to unpack .../net-tools_1.60+git20180626.aebd88e-1ubuntu1_amd64.deb ...
+Unpacking net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Setting up net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node1:~$ ifconfig | grep inet
+        inet 10.26.45.13  netmask 255.255.255.0  broadcast 10.26.45.255
+        inet6 fe80::5054:ff:fe92:13b8  prefixlen 64  scopeid 0x20<link>
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv09:~$ multipass launch -c 8 -d 50G -m 8G -n node2
+Launched: node2
+ubuntu@wv09:~$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:22:12 UTC 2022
+
+  System load:  0.16              Processes:             186
+  Usage of /:   2.8% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.26.45.123
+  Swap usage:   0%
+
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@node2:~$ uname -a
+Linux node2 5.4.0-125-generic #141-Ubuntu SMP Wed Aug 10 13:42:03 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+ubuntu@node2:~$ sudo apt update
+Hit:1 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:3 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-backports InRelease [108 kB]
+Get:5 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [8628 kB]
+Get:6 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [1707 kB]
+Get:7 http://archive.ubuntu.com/ubuntu focal/universe Translation-en [5124 kB]
+Get:8 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [286 kB]
+Get:9 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [11.0 kB]
+Get:10 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [1169 kB]
+Get:11 http://archive.ubuntu.com/ubuntu focal/universe amd64 c-n-f Metadata [265 kB]
+Get:12 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [144 kB]
+Get:13 http://archive.ubuntu.com/ubuntu focal/multiverse Translation-en [104 kB]
+Get:14 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 c-n-f Metadata [9136 B]
+Get:15 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [2077 kB]
+Get:16 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [166 kB]
+Get:17 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [717 kB]
+Get:18 http://archive.ubuntu.com/ubuntu focal-updates/main Translation-en [369 kB]
+Get:19 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 c-n-f Metadata [15.9 kB]
+Get:20 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [1256 kB]
+Get:21 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [131 kB]
+Get:22 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [14.8 kB]
+Get:23 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [22.2 kB]
+Get:24 http://security.ubuntu.com/ubuntu focal-security/multiverse Translation-en [5376 B]
+Get:25 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [508 B]
+Get:26 http://archive.ubuntu.com/ubuntu focal-updates/restricted Translation-en [178 kB]
+Get:27 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [949 kB]
+Get:28 http://archive.ubuntu.com/ubuntu focal-updates/universe Translation-en [216 kB]
+Get:29 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [21.4 kB]
+Get:30 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [24.4 kB]
+Get:31 http://archive.ubuntu.com/ubuntu focal-updates/multiverse Translation-en [7336 B]
+Get:32 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [588 B]
+Get:33 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 Packages [45.6 kB]
+Get:34 http://archive.ubuntu.com/ubuntu focal-backports/main Translation-en [16.3 kB]
+Get:35 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 c-n-f Metadata [1420 B]
+Get:36 http://archive.ubuntu.com/ubuntu focal-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:37 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [23.9 kB]
+Get:38 http://archive.ubuntu.com/ubuntu focal-backports/universe Translation-en [16.0 kB]
+Get:39 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [860 B]
+Get:40 http://archive.ubuntu.com/ubuntu focal-backports/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 24.1 MB in 4s (6492 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+12 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node2:~$ sudo apt install net-tools
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  net-tools
+0 upgraded, 1 newly installed, 0 to remove and 12 not upgraded.
+Need to get 196 kB of archives.
+After this operation, 864 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal/main amd64 net-tools amd64 1.60+git20180626.aebd88e-1ubuntu1 [196 kB]
+Fetched 196 kB in 1s (303 kB/s)
+Selecting previously unselected package net-tools.
+(Reading database ... 63818 files and directories currently installed.)
+Preparing to unpack .../net-tools_1.60+git20180626.aebd88e-1ubuntu1_amd64.deb ...
+Unpacking net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Setting up net-tools (1.60+git20180626.aebd88e-1ubuntu1) ...
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node2:~$ ifconfig | grep inet
+        inet 10.26.45.123  netmask 255.255.255.0  broadcast 10.26.45.255
+        inet6 fe80::5054:ff:fe76:9cec  prefixlen 64  scopeid 0x20<link>
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv09:~$ ifconfig | grep inet
+        inet 147.75.55.235  netmask 255.255.255.254  broadcast 255.255.255.255
+        inet6 2604:1380:4641:3b00::17  prefixlen 127  scopeid 0x0<global>
+        inet6 fe80::faf2:1eff:fe80:62e0  prefixlen 64  scopeid 0x20<link>
+        inet 10.70.29.151  netmask 255.255.255.254  broadcast 255.255.255.255
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        inet 10.26.45.1  netmask 255.255.255.0  broadcast 10.26.45.255
+        inet6 fe80::5054:ff:fe49:5a84  prefixlen 64  scopeid 0x20<link>
+        inet6 fe80::f0fe:e4ff:fe04:dc36  prefixlen 64  scopeid 0x20<link>
+        inet6 fe80::33:d3ff:fe18:b29f  prefixlen 64  scopeid 0x20<link>
+ubuntu@wv09:~$ ping -c 1 10.26.45.13
+PING 10.26.45.13 (10.26.45.13) 56(84) bytes of data.
+64 bytes from 10.26.45.13: icmp_seq=1 ttl=64 time=0.230 ms
+
+--- 10.26.45.13 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.230/0.230/0.230/0.000 ms
+ubuntu@wv09:~$ 10.26.45.123
+10.26.45.123: command not found
+ubuntu@wv09:~$ ping 10.26.45.123
+PING 10.26.45.123 (10.26.45.123) 56(84) bytes of data.
+64 bytes from 10.26.45.123: icmp_seq=1 ttl=64 time=0.142 ms
+64 bytes from 10.26.45.123: icmp_seq=2 ttl=64 time=0.082 ms
+^C
+--- 10.26.45.123 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1004ms
+rtt min/avg/max/mdev = 0.082/0.112/0.142/0.030 ms
+ubuntu@wv09:~$ ping -c 110.26.45.123
+ping: invalid argument: '110.26.45.123'
+ubuntu@wv09:~$ ping -c 1 10.26.45.123
+PING 10.26.45.123 (10.26.45.123) 56(84) bytes of data.
+64 bytes from 10.26.45.123: icmp_seq=1 ttl=64 time=0.099 ms
+
+--- 10.26.45.123 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.099/0.099/0.099/0.000 ms
+ubuntu@wv09:~$ sudo vi /etc/hosts
+[sudo] password for ubuntu:
+ubuntu@wv09:~$ ping -c 1 node1
+PING node1 (10.26.45.13) 56(84) bytes of data.
+64 bytes from node1 (10.26.45.13): icmp_seq=1 ttl=64 time=0.127 ms
+
+--- node1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.127/0.127/0.127/0.000 ms
+ubuntu@wv09:~$ ping -c 1 node2
+PING node2 (10.26.45.123) 56(84) bytes of data.
+64 bytes from node2 (10.26.45.123): icmp_seq=1 ttl=64 time=0.139 ms
+
+--- node2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.139/0.139/0.139/0.000 ms
+ubuntu@wv09:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:30:49 UTC 2022
+
+  System load:  0.0               Processes:             169
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.26.45.13
+  Swap usage:   0%
+
+
+12 updates can be applied immediately.
+4 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:15:51 2022 from 10.26.45.1
+ubuntu@node1:~$ sudo vi /etc/hosts
+ubuntu@node1:~$ sudo cat /etc/hosts
+# Your system has configured 'manage_etc_hosts' as True.
+# As a result, if you wish for changes to this file to persist
+# then you will need to either
+# a.) make changes to the master file in /etc/cloud/templates/hosts.debian.tmpl
+# b.) change or remove the value of 'manage_etc_hosts' in
+#     /etc/cloud/cloud.cfg or cloud-config from user-data
+#
+127.0.1.1 node1 node1
+127.0.0.1 localhost
+10.26.45.1 wv09
+10.26.45.123 node2
+
+
+# The following lines are desirable for IPv6 capable hosts
+::1 localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv09:~$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:32:22 UTC 2022
+
+  System load:  0.0               Processes:             173
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.26.45.123
+  Swap usage:   0%
+
+
+12 updates can be applied immediately.
+4 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:22:12 2022 from 10.26.45.1
+ubuntu@node2:~$ sudo vi /etc/hosts
+ubuntu@node2:~$ ping -c 1 node1
+PING node1 (10.26.45.13) 56(84) bytes of data.
+64 bytes from node1 (10.26.45.13): icmp_seq=1 ttl=64 time=0.289 ms
+
+--- node1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.289/0.289/0.289/0.000 ms
+ubuntu@node2:~$ ping -c 1 wv09
+PING wv09 (10.26.45.1) 56(84) bytes of data.
+64 bytes from wv09 (10.26.45.1): icmp_seq=1 ttl=64 time=0.080 ms
+
+--- wv09 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.080/0.080/0.080/0.000 ms
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv09:~$ # STEP 2 from https://www.linuxtechi.com/install-kubernetes-on-ubuntu-22-04/
+ubuntu@wv09:~$ sudo swapoff -a
+ubuntu@wv09:~$ sudo cat /etc/fstab
+UUID=4c262a22-1007-4381-9183-2e1d3b71b3da       /       ext4    errors=remount-ro       0       1
+UUID=7a9eae24-082e-406d-aa31-81e8941bdfbd       none    swap    none    0       0
+
+ubuntu@wv09:~$ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+ubuntu@wv09:~$ sudo cat /etc/fstab
+UUID=4c262a22-1007-4381-9183-2e1d3b71b3da       /       ext4    errors=remount-ro       0       1
+UUID=7a9eae24-082e-406d-aa31-81e8941bdfbd       none    swap    none    0       0
+
+ubuntu@wv09:~$ sudo vi /etc/fstab
+ubuntu@wv09:~$ sudo tee /etc/modules-load.d/containerd.conf <<EOF
+> overlay
+> br_netfilter
+> EOF
+overlay
+br_netfilter
+ubuntu@wv09:~$ sudo modprobe overlay
+ubuntu@wv09:~$ sudo modprobe br_netfilter
+ubuntu@wv09:~$ sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+> net.bridge.bridge-nf-call-ip6tables = 1
+> net.bridge.bridge-nf-call-iptables = 1
+> net.ipv4.ip_forward = 1
+> EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+ubuntu@wv09:~$ sudo sysctl --system
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 65536
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+kernel.core_uses_pid = 1
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.default.accept_source_route = 0
+sysctl: setting key "net.ipv4.conf.all.accept_source_route": Invalid argument
+net.ipv4.conf.default.promote_secondaries = 1
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /usr/lib/sysctl.d/99-protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+net.core.rmem_default = 12582912
+net.core.wmem_default = 12582912
+net.core.rmem_max = 12582912
+net.core.wmem_max = 12582912
+net.ipv4.tcp_rmem = 10240 87380 12582912
+net.ipv4.tcp_wmem = 10240 87380 12582912
+net.ipv4.tcp_congestion_control = westwood
+* Applying /etc/sysctl.d/kubernetes.conf ...
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+* Applying /etc/sysctl.conf ...
+net.core.rmem_default = 12582912
+net.core.wmem_default = 12582912
+net.core.rmem_max = 12582912
+net.core.wmem_max = 12582912
+net.ipv4.tcp_rmem = 10240 87380 12582912
+net.ipv4.tcp_wmem = 10240 87380 12582912
+net.ipv4.tcp_congestion_control = westwood
+ubuntu@wv09:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:38:14 UTC 2022
+
+  System load:  0.0               Processes:             166
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.26.45.13
+  Swap usage:   0%
+
+
+12 updates can be applied immediately.
+4 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:30:50 2022 from 10.26.45.1
+ubuntu@node1:~$ sudo swapoff -a
+ubuntu@node1:~$ sudo cat /etc/fstab
+LABEL=cloudimg-rootfs   /        ext4   defaults        0 1
+LABEL=UEFI      /boot/efi       vfat    umask=0077      0 1
+ubuntu@node1:~$ # no swap
+ubuntu@node1:~$ sudo tee /etc/modules-load.d/containerd.conf <<EOF
+> overlay
+> br_netfilter
+> EOF
+overlay
+br_netfilter
+ubuntu@node1:~$ sudo modprobe overlay
+ubuntu@node1:~$ sudo modprobe br_netfilter
+ubuntu@node1:~$ sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+> net.bridge.bridge-nf-call-ip6tables = 1
+> net.bridge.bridge-nf-call-iptables = 1
+> net.ipv4.ip_forward = 1
+> EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+ubuntu@node1:~$ sudo sysctl --system
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-link-restrictions.conf ...
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 65536
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+net.ipv4.conf.default.promote_secondaries = 1
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.d/kubernetes.conf ...
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+* Applying /usr/lib/sysctl.d/protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.conf ...
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv09:~$ multipass shell node2\
+> ^C
+ubuntu@wv09:~$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:39:51 UTC 2022
+
+  System load:  0.0               Processes:             169
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.26.45.123
+  Swap usage:   0%
+
+
+12 updates can be applied immediately.
+4 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:32:22 2022 from 10.26.45.1
+ubuntu@node2:~$ sudo swapoff -a
+ubuntu@node2:~$ sudo cat /etc/fstab
+LABEL=cloudimg-rootfs   /        ext4   defaults        0 1
+LABEL=UEFI      /boot/efi       vfat    umask=0077      0 1
+ubuntu@node2:~$ # no swap
+ubuntu@node2:~$ sudo tee /etc/modules-load.d/containerd.conf <<EOF
+> overlay
+> br_netfilter
+> EOF
+overlay
+br_netfilter
+ubuntu@node2:~$ sudo modprobe overlay
+ubuntu@node2:~$ sudo modprobe br_netfilter
+ubuntu@node2:~$ sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+> net.bridge.bridge-nf-call-ip6tables = 1
+4.ip_forward = 1
+EOF> net.bridge.bridge-nf-call-iptables = 1
+> net.ipv4.ip_forward = 1
+> EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+ubuntu@node2:~$ sudo sysctl --system
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-link-restrictions.conf ...
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 65536
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+net.ipv4.conf.default.promote_secondaries = 1
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.d/kubernetes.conf ...
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+* Applying /usr/lib/sysctl.d/protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.conf ...
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv09:~$ # STEP 3 from https://www.linuxtechi.com/install-kubernetes-on-ubuntu-22-04/
+ubuntu@wv09:~$ sudo apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20211016).
+ca-certificates set to manually installed.
+curl is already the newest version (7.81.0-1ubuntu1.3).
+curl set to manually installed.
+software-properties-common is already the newest version (0.99.22.3).
+software-properties-common set to manually installed.
+apt-transport-https is already the newest version (2.4.7).
+The following NEW packages will be installed:
+  gnupg2
+0 upgraded, 1 newly installed, 0 to remove and 4 not upgraded.
+Need to get 5548 B of archives.
+After this operation, 52.2 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 gnupg2 all 2.2.27-3ubuntu2.1 [5548 B]
+Fetched 5548 B in 1s (8895 B/s)
+Selecting previously unselected package gnupg2.
+(Reading database ... 75031 files and directories currently installed.)
+Preparing to unpack .../gnupg2_2.2.27-3ubuntu2.1_all.deb ...
+Unpacking gnupg2 (2.2.27-3ubuntu2.1) ...
+Setting up gnupg2 (2.2.27-3ubuntu2.1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv09:~$ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
+ubuntu@wv09:~$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+Repository: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable'
+Description:
+Archive for codename: jammy components: stable
+More info: https://download.docker.com/linux/ubuntu
+Adding repository.
+Press [ENTER] to continue or Ctrl-c to cancel.
+Adding deb entry to /etc/apt/sources.list.d/archive_uri-https_download_docker_com_linux_ubuntu-jammy.list
+Adding disabled deb-src entry to /etc/apt/sources.list.d/archive_uri-https_download_docker_com_linux_ubuntu-jammy.list
+Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.9 kB]
+Get:2 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [6439 B]
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:4 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:6 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [295 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [544 kB]
+Get:9 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [69.1 kB]
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [274 kB]
+Get:11 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [42.3 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [129 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [8168 B]
+Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [306 kB]
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [47.5 kB]
+Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [254 kB]
+Get:17 http://archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [83.3 kB]
+Fetched 2431 kB in 1s (1712 kB/s)
+Reading package lists... Done
+ubuntu@wv09:~$ sudo apt update
+Hit:1 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+9 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@wv09:~$ sudo apt install -y containerd.io
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  containerd.io
+0 upgraded, 1 newly installed, 0 to remove and 9 not upgraded.
+Need to get 28.1 MB of archives.
+After this operation, 127 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu jammy/stable amd64 containerd.io amd64 1.6.8-1 [28.1 MB]
+Fetched 28.1 MB in 0s (85.0 MB/s)
+Selecting previously unselected package containerd.io.
+(Reading database ... 75037 files and directories currently installed.)
+Preparing to unpack .../containerd.io_1.6.8-1_amd64.deb ...
+Unpacking containerd.io (1.6.8-1) ...
+Setting up containerd.io (1.6.8-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv09:~$ containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+ubuntu@wv09:~$ sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+ubuntu@wv09:~$ sudo grep SystemdCgroup /etc/containerd/config.toml
+            SystemdCgroup = true
+ubuntu@wv09:~$ sudo systemctl restart containerd
+ubuntu@wv09:~$ sudo systemctl enable containerd
+ubuntu@wv09:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:45:57 UTC 2022
+
+  System load:  0.0               Processes:             170
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.26.45.13
+  Swap usage:   0%
+
+
+12 updates can be applied immediately.
+4 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:38:14 2022 from 10.26.45.1
+ubuntu@node1:~$ sudo apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+ca-certificates is already the newest version (20211016~20.04.1).
+ca-certificates set to manually installed.
+software-properties-common is already the newest version (0.99.9.8).
+software-properties-common set to manually installed.
+The following additional packages will be installed:
+  libcurl4
+The following NEW packages will be installed:
+  apt-transport-https gnupg2
+The following packages will be upgraded:
+  curl libcurl4
+2 upgraded, 2 newly installed, 0 to remove and 10 not upgraded.
+Need to get 403 kB of archives.
+After this operation, 213 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 apt-transport-https all 2.0.9 [1704 B]
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 curl amd64 7.68.0-1ubuntu2.13 [161 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libcurl4 amd64 7.68.0-1ubuntu2.13 [235 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 gnupg2 all 2.2.19-3ubuntu2.2 [5316 B]
+Fetched 403 kB in 1s (431 kB/s)
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 63867 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.0.9_all.deb ...
+Unpacking apt-transport-https (2.0.9) ...
+Preparing to unpack .../curl_7.68.0-1ubuntu2.13_amd64.deb ...
+Unpacking curl (7.68.0-1ubuntu2.13) over (7.68.0-1ubuntu2.12) ...
+Preparing to unpack .../libcurl4_7.68.0-1ubuntu2.13_amd64.deb ...
+Unpacking libcurl4:amd64 (7.68.0-1ubuntu2.13) over (7.68.0-1ubuntu2.12) ...
+Selecting previously unselected package gnupg2.
+Preparing to unpack .../gnupg2_2.2.19-3ubuntu2.2_all.deb ...
+Unpacking gnupg2 (2.2.19-3ubuntu2.2) ...
+Setting up gnupg2 (2.2.19-3ubuntu2.2) ...
+Setting up apt-transport-https (2.0.9) ...
+Setting up libcurl4:amd64 (7.68.0-1ubuntu2.13) ...
+Setting up curl (7.68.0-1ubuntu2.13) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+ubuntu@node1:~$ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
+ubuntu@node1:~$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+Get:1 https://download.docker.com/linux/ubuntu focal InRelease [57.7 kB]
+Get:2 https://download.docker.com/linux/ubuntu focal/stable amd64 Packages [17.9 kB]
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:4 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Fetched 75.6 kB in 0s (154 kB/s)
+Reading package lists... Done
+ubuntu@node1:~$ sudo apt update
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:2 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+10 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node1:~$ sudo apt install -y containerd.io
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  containerd.io
+0 upgraded, 1 newly installed, 0 to remove and 10 not upgraded.
+Need to get 28.1 MB of archives.
+After this operation, 127 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu focal/stable amd64 containerd.io amd64 1.6.8-1 [28.1 MB]
+Fetched 28.1 MB in 2s (16.7 MB/s)
+Selecting previously unselected package containerd.io.
+(Reading database ... 63877 files and directories currently installed.)
+Preparing to unpack .../containerd.io_1.6.8-1_amd64.deb ...
+Unpacking containerd.io (1.6.8-1) ...
+Setting up containerd.io (1.6.8-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node1:~$ containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+ubuntu@node1:~$ sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+ubuntu@node1:~$ sudo grep SystemdCgroup /etc/containerd/config.toml
+            SystemdCgroup = true
+ubuntu@node1:~$  sudo systemctl restart containerd
+ubuntu@node1:~$ sudo systemctl enable containerd
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv09:~$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:48:06 UTC 2022
+
+  System load:  0.0               Processes:             168
+  Usage of /:   3.1% of 48.27GB   Users logged in:       0
+  Memory usage: 3%                IPv4 address for ens3: 10.26.45.123
+  Swap usage:   0%
+
+
+12 updates can be applied immediately.
+4 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:39:52 2022 from 10.26.45.1
+ubuntu@node2:~$ sudo apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+ca-certificates is already the newest version (20211016~20.04.1).
+ca-certificates set to manually installed.
+software-properties-common is already the newest version (0.99.9.8).
+software-properties-common set to manually installed.
+The following additional packages will be installed:
+  libcurl4
+The following NEW packages will be installed:
+  apt-transport-https gnupg2
+The following packages will be upgraded:
+  curl libcurl4
+2 upgraded, 2 newly installed, 0 to remove and 10 not upgraded.
+Need to get 403 kB of archives.
+After this operation, 213 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 apt-transport-https all 2.0.9 [1704 B]
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 curl amd64 7.68.0-1ubuntu2.13 [161 kB]
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libcurl4 amd64 7.68.0-1ubuntu2.13 [235 kB]
+Get:4 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 gnupg2 all 2.2.19-3ubuntu2.2 [5316 B]
+Fetched 403 kB in 0s (871 kB/s)
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 63867 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.0.9_all.deb ...
+Unpacking apt-transport-https (2.0.9) ...
+Preparing to unpack .../curl_7.68.0-1ubuntu2.13_amd64.deb ...
+Unpacking curl (7.68.0-1ubuntu2.13) over (7.68.0-1ubuntu2.12) ...
+Preparing to unpack .../libcurl4_7.68.0-1ubuntu2.13_amd64.deb ...
+Unpacking libcurl4:amd64 (7.68.0-1ubuntu2.13) over (7.68.0-1ubuntu2.12) ...
+Selecting previously unselected package gnupg2.
+Preparing to unpack .../gnupg2_2.2.19-3ubuntu2.2_all.deb ...
+Unpacking gnupg2 (2.2.19-3ubuntu2.2) ...
+Setting up gnupg2 (2.2.19-3ubuntu2.2) ...
+Setting up apt-transport-https (2.0.9) ...
+Setting up libcurl4:amd64 (7.68.0-1ubuntu2.13) ...
+Setting up curl (7.68.0-1ubuntu2.13) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+ubuntu@node2:~$ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
+ubuntu@node2:~$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+Get:1 https://download.docker.com/linux/ubuntu focal InRelease [57.7 kB]
+Get:2 https://download.docker.com/linux/ubuntu focal/stable amd64 Packages [17.9 kB]
+Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Fetched 75.6 kB in 0s (154 kB/s)
+Reading package lists... Done
+ubuntu@node2:~$ sudo apt update
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:2 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+10 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node2:~$ sudo apt install -y containerd.io
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  containerd.io
+0 upgraded, 1 newly installed, 0 to remove and 10 not upgraded.
+Need to get 28.1 MB of archives.
+After this operation, 127 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu focal/stable amd64 containerd.io amd64 1.6.8-1 [28.1 MB]
+Fetched 28.1 MB in 2s (18.6 MB/s)
+Selecting previously unselected package containerd.io.
+(Reading database ... 63877 files and directories currently installed.)
+Preparing to unpack .../containerd.io_1.6.8-1_amd64.deb ...
+Unpacking containerd.io (1.6.8-1) ...
+Setting up containerd.io (1.6.8-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node2:~$  containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+ubuntu@node2:~$ sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+ubuntu@node2:~$ sudo systemctl restart containerd
+ubuntu@node2:~$ sudo systemctl enable containerd
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv09:~$ # STEP 4 https://www.linuxtechi.com/install-kubernetes-on-ubuntu-22-04/
+ubuntu@wv09:~$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+OK
+ubuntu@wv09:~$ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+Repository: 'deb http://apt.kubernetes.io/ kubernetes-xenial main'
+Description:
+Archive for codename: kubernetes-xenial components: main
+More info: http://apt.kubernetes.io/
+Adding repository.
+Press [ENTER] to continue or Ctrl-c to cancel.
+Adding deb entry to /etc/apt/sources.list.d/archive_uri-http_apt_kubernetes_io_-jammy.list
+Adding disabled deb-src entry to /etc/apt/sources.list.d/archive_uri-http_apt_kubernetes_io_-jammy.list
+Hit:2 https://download.docker.com/linux/ubuntu jammy InRelease
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [58.4 kB]
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:6 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:7 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Fetched 67.8 kB in 1s (124 kB/s)
+Reading package lists... Done
+W: http://apt.kubernetes.io/dists/kubernetes-xenial/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+ubuntu@wv09:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:51:59 UTC 2022
+
+  System load:  0.0               Processes:             181
+  Usage of /:   3.4% of 48.27GB   Users logged in:       0
+  Memory usage: 4%                IPv4 address for ens3: 10.26.45.13
+  Swap usage:   0%
+
+
+10 updates can be applied immediately.
+2 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:45:57 2022 from 10.26.45.1
+ubuntu@node1:~$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+OK
+ubuntu@node1:~$ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [58.4 kB]
+Hit:6 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:7 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Fetched 67.8 kB in 1s (112 kB/s)
+Reading package lists... Done
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv09:~$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:52:27 UTC 2022
+
+  System load:  0.0               Processes:             175
+  Usage of /:   3.4% of 48.27GB   Users logged in:       0
+  Memory usage: 4%                IPv4 address for ens3: 10.26.45.123
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+10 updates can be applied immediately.
+2 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:48:06 2022 from 10.26.45.1
+ubuntu@node2:~$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+OK
+ubuntu@node2:~$ sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [9383 B]
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:4 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Get:6 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [58.4 kB]
+Hit:7 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Fetched 67.8 kB in 0s (140 kB/s)
+Reading package lists... Done
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv09:~$ # STEP 5 https://www.linuxtechi.com/install-kubernetes-on-ubuntu-22-04/
+ubuntu@wv09:~$ sudo apt update
+Hit:2 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:1 https://packages.cloud.google.com/apt kubernetes-xenial InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+9 packages can be upgraded. Run 'apt list --upgradable' to see them.
+W: http://apt.kubernetes.io/dists/kubernetes-xenial/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+ubuntu@wv09:~$ sudo apt install -y kubelet kubeadm kubectl
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 9 not upgraded.
+Need to get 75.9 MB of archives.
+After this operation, 310 MB of additional disk space will be used.
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.24.2-00 [12.3 MB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 conntrack amd64 1:1.4.6-2build2 [33.5 kB]
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.8.7-00 [25.0 MB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 ebtables amd64 2.0.11-4build2 [84.9 kB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.25.0-00 [19.5 MB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 socat amd64 1.7.4.1-3ubuntu4 [349 kB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.25.0-00 [9500 kB]
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.25.0-00 [9213 kB]
+Fetched 75.9 MB in 1s (75.0 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 75053 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.6-2build2_amd64.deb ...
+Unpacking conntrack (1:1.4.6-2build2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.24.2-00_amd64.deb ...
+Unpacking cri-tools (1.24.2-00) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-4build2_amd64.deb ...
+Unpacking ebtables (2.0.11-4build2) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../3-kubernetes-cni_0.8.7-00_amd64.deb ...
+Unpacking kubernetes-cni (0.8.7-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../4-socat_1.7.4.1-3ubuntu4_amd64.deb ...
+Unpacking socat (1.7.4.1-3ubuntu4) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../5-kubelet_1.25.0-00_amd64.deb ...
+Unpacking kubelet (1.25.0-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../6-kubectl_1.25.0-00_amd64.deb ...
+Unpacking kubectl (1.25.0-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../7-kubeadm_1.25.0-00_amd64.deb ...
+Unpacking kubeadm (1.25.0-00) ...
+Setting up conntrack (1:1.4.6-2build2) ...
+Setting up kubectl (1.25.0-00) ...
+Setting up ebtables (2.0.11-4build2) ...
+Setting up socat (1.7.4.1-3ubuntu4) ...
+Setting up cri-tools (1.24.2-00) ...
+Setting up kubernetes-cni (0.8.7-00) ...
+Setting up kubelet (1.25.0-00) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+Setting up kubeadm (1.25.0-00) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv09:~$ sudo apt-mark hold kubelet kubeadm kubectl
+kubelet set on hold.
+kubeadm set on hold.
+kubectl set on hold.
+ubuntu@wv09:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:54:11 UTC 2022
+
+  System load:  0.0               Processes:             175
+  Usage of /:   3.4% of 48.27GB   Users logged in:       0
+  Memory usage: 4%                IPv4 address for ens3: 10.26.45.13
+  Swap usage:   0%
+
+
+10 updates can be applied immediately.
+2 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:52:00 2022 from 10.26.45.1
+ubuntu@node1:~$ sudo apt update
+Hit:2 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:1 https://packages.cloud.google.com/apt kubernetes-xenial InRelease
+Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+10 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node1:~$ sudo apt install -y kubelet kubeadm kubectl
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+Suggested packages:
+  nftables
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 10 not upgraded.
+Need to get 75.9 MB of archives.
+After this operation, 310 MB of additional disk space will be used.
+Get:5 http://archive.ubuntu.com/ubuntu focal/main amd64 conntrack amd64 1:1.4.5-2 [30.3 kB]
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.24.2-00 [12.3 MB]
+Get:7 http://archive.ubuntu.com/ubuntu focal/main amd64 ebtables amd64 2.0.11-3build1 [80.3 kB]
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.8.7-00 [25.0 MB]
+Get:8 http://archive.ubuntu.com/ubuntu focal/main amd64 socat amd64 1.7.3.3-2 [323 kB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.25.0-00 [19.5 MB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.25.0-00 [9500 kB]
+Get:6 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.25.0-00 [9213 kB]
+Fetched 75.9 MB in 1s (65.8 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 63893 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.5-2_amd64.deb ...
+Unpacking conntrack (1:1.4.5-2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.24.2-00_amd64.deb ...
+Unpacking cri-tools (1.24.2-00) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-3build1_amd64.deb ...
+Unpacking ebtables (2.0.11-3build1) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../3-kubernetes-cni_0.8.7-00_amd64.deb ...
+Unpacking kubernetes-cni (0.8.7-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../4-socat_1.7.3.3-2_amd64.deb ...
+Unpacking socat (1.7.3.3-2) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../5-kubelet_1.25.0-00_amd64.deb ...
+Unpacking kubelet (1.25.0-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../6-kubectl_1.25.0-00_amd64.deb ...
+Unpacking kubectl (1.25.0-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../7-kubeadm_1.25.0-00_amd64.deb ...
+Unpacking kubeadm (1.25.0-00) ...
+Setting up conntrack (1:1.4.5-2) ...
+Setting up kubectl (1.25.0-00) ...
+Setting up ebtables (2.0.11-3build1) ...
+Setting up socat (1.7.3.3-2) ...
+Setting up cri-tools (1.24.2-00) ...
+Setting up kubernetes-cni (0.8.7-00) ...
+Setting up kubelet (1.25.0-00) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+Setting up kubeadm (1.25.0-00) ...
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node1:~$ sudo apt-mark hold kubelet kubeadm kubectl
+kubelet set on hold.
+kubeadm set on hold.
+kubectl set on hold.
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv09:~$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 19:54:57 UTC 2022
+
+  System load:  0.0               Processes:             173
+  Usage of /:   3.4% of 48.27GB   Users logged in:       0
+  Memory usage: 4%                IPv4 address for ens3: 10.26.45.123
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+10 updates can be applied immediately.
+2 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:52:28 2022 from 10.26.45.1
+ubuntu@node2:~$ sudo apt update
+Hit:1 https://download.docker.com/linux/ubuntu focal InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:2 https://packages.cloud.google.com/apt kubernetes-xenial InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Hit:6 http://security.ubuntu.com/ubuntu focal-security InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+10 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@node2:~$ sudo apt install -y kubelet kubeadm kubectl
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools ebtables kubernetes-cni socat
+Suggested packages:
+  nftables
+The following NEW packages will be installed:
+  conntrack cri-tools ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 8 newly installed, 0 to remove and 10 not upgraded.
+Need to get 75.9 MB of archives.
+After this operation, 310 MB of additional disk space will be used.
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.24.2-00 [12.3 MB]
+Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 conntrack amd64 1:1.4.5-2 [30.3 kB]
+Get:7 http://archive.ubuntu.com/ubuntu focal/main amd64 ebtables amd64 2.0.11-3build1 [80.3 kB]
+Get:8 http://archive.ubuntu.com/ubuntu focal/main amd64 socat amd64 1.7.3.3-2 [323 kB]
+Get:2 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.8.7-00 [25.0 MB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.25.0-00 [19.5 MB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.25.0-00 [9500 kB]
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.25.0-00 [9213 kB]
+Fetched 75.9 MB in 2s (35.6 MB/s)
+Selecting previously unselected package conntrack.
+(Reading database ... 63893 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.5-2_amd64.deb ...
+Unpacking conntrack (1:1.4.5-2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.24.2-00_amd64.deb ...
+Unpacking cri-tools (1.24.2-00) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../2-ebtables_2.0.11-3build1_amd64.deb ...
+Unpacking ebtables (2.0.11-3build1) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../3-kubernetes-cni_0.8.7-00_amd64.deb ...
+Unpacking kubernetes-cni (0.8.7-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../4-socat_1.7.3.3-2_amd64.deb ...
+Unpacking socat (1.7.3.3-2) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../5-kubelet_1.25.0-00_amd64.deb ...
+Unpacking kubelet (1.25.0-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../6-kubectl_1.25.0-00_amd64.deb ...
+Unpacking kubectl (1.25.0-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../7-kubeadm_1.25.0-00_amd64.deb ...
+Unpacking kubeadm (1.25.0-00) ...
+Setting up conntrack (1:1.4.5-2) ...
+Setting up kubectl (1.25.0-00) ...
+Setting up ebtables (2.0.11-3build1) ...
+Setting up socat (1.7.3.3-2) ...
+Setting up cri-tools (1.24.2-00) ...
+Setting up kubernetes-cni (0.8.7-00) ...
+Setting up kubelet (1.25.0-00) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+Setting up kubeadm (1.25.0-00) ...
+Processing triggers for man-db (2.9.1-1) ...
+ubuntu@node2:~$ sudo apt-mark hold kubelet kubeadm kubectl
+kubelet set on hold.
+kubeadm set on hold.
+kubectl set on hold.
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv09:~$ # STEP 6 https://www.linuxtechi.com/install-kubernetes-on-ubuntu-22-04/
+ubuntu@wv09:~$  sudo kubeadm init --control-plane-endpoint=wv09
+[init] Using Kubernetes version: v1.25.0
+[preflight] Running pre-flight checks
+        [WARNING SystemVerification]: missing optional cgroups: blkio
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local wv09] and IPs [10.96.0.1 147.75.55.235]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [localhost wv09] and IPs [147.75.55.235 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [localhost wv09] and IPs [147.75.55.235 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+[apiclient] All control plane components are healthy after 5.501683 seconds
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+[upload-certs] Skipping phase. Please see --upload-certs
+[mark-control-plane] Marking the node wv09 as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+[mark-control-plane] Marking the node wv09 as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]
+[bootstrap-token] Using token: 1ptzre.6v9nnav6z3hl7zx2
+[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+You can now join any number of control-plane nodes by copying certificate authorities
+and service account keys on each node and then running the following as root:
+
+  kubeadm join wv09:6443 --token 1ptzre.6v9nnav6z3hl7zx2 \
+        --discovery-token-ca-cert-hash sha256:1befe9e71c14ec04c3a6a18fd926f69616bc90ee8bab111b9fa3762cda5b5029 \
+        --control-plane
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join wv09:6443 --token 1ptzre.6v9nnav6z3hl7zx2 \
+        --discovery-token-ca-cert-hash sha256:1befe9e71c14ec04c3a6a18fd926f69616bc90ee8bab111b9fa3762cda5b5029
+ubuntu@wv09:~$ mkdir -p $HOME/.kube
+ubuntu@wv09:~$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ubuntu@wv09:~$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+ubuntu@wv09:~$ kubectl cluster-info
+Kubernetes control plane is running at https://wv09:6443
+CoreDNS is running at https://wv09:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+ubuntu@wv09:~$ kubectl get nodes
+NAME   STATUS     ROLES           AGE     VERSION
+wv09   NotReady   control-plane   2m50s   v1.25.0
+ubuntu@wv09:~$ multipass shell node1
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 20:01:13 UTC 2022
+
+  System load:  0.0               Processes:             173
+  Usage of /:   4.0% of 48.27GB   Users logged in:       0
+  Memory usage: 4%                IPv4 address for ens3: 10.26.45.13
+  Swap usage:   0%
+
+
+10 updates can be applied immediately.
+2 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:54:11 2022 from 10.26.45.1
+ubuntu@node1:~$ kubeadm join wv09:6443 --token 1ptzre.6v9nnav6z3hl7zx2 --discovery-token-ca-cert-hash sha256:1befe9e71c14ec04c3a6a18fd926f69616bc90ee8bab111b9fa3762cda5b5029
+[preflight] Running pre-flight checks
+error execution phase preflight: [preflight] Some fatal errors occurred:
+        [ERROR IsPrivilegedUser]: user is not running as root
+[preflight] If you know what you are doing, you can make a check non-fatal with `--ignore-preflight-errors=...`
+To see the stack trace of this error execute with --v=5 or higher
+ubuntu@node1:~$ sudo kubeadm join wv09:6443 --token 1ptzre.6v9nnav6z3hl7zx2 --discovery-token-ca-cert-hash sha256:1befe9
+e71c14ec04c3a6a18fd926f69616bc90ee8bab111b9fa3762cda5b5029
+[preflight] Running pre-flight checks
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+
+ubuntu@node1:~$ exit
+logout
+ubuntu@wv09:~$ kubectl get nodes
+NAME    STATUS     ROLES           AGE     VERSION
+node1   NotReady   <none>          15s     v1.25.0
+wv09    NotReady   control-plane   4m38s   v1.25.0
+ubuntu@wv09:~$ multipass shell node2
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-125-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Sep  7 20:02:41 UTC 2022
+
+  System load:  0.03              Processes:             175
+  Usage of /:   4.0% of 48.27GB   Users logged in:       0
+  Memory usage: 4%                IPv4 address for ens3: 10.26.45.123
+  Swap usage:   0%
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+10 updates can be applied immediately.
+2 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '22.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Wed Sep  7 19:54:57 2022 from 10.26.45.1
+ubuntu@node2:~$ sudo kubeadm join wv09:6443 --token 1ptzre.6v9nnav6z3hl7zx2 --discovery-token-ca-cert-hash sha256:1befe9e71c14ec04c3a6a18fd926f69616bc90ee8bab111b9fa3762cda5b5029
+[preflight] Running pre-flight checks
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+
+ubuntu@node2:~$ exit
+logout
+ubuntu@wv09:~$ kubectl get nodes
+NAME    STATUS     ROLES           AGE     VERSION
+node1   NotReady   <none>          66s     v1.25.0
+node2   NotReady   <none>          8s      v1.25.0
+wv09    NotReady   control-plane   5m29s   v1.25.0
+ubuntu@wv09:~$ kubectl describe node
+Name:               node1
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node1
+                    kubernetes.io/os=linux
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 07 Sep 2022 20:02:09 +0000
+Taints:             node.kubernetes.io/not-ready:NoSchedule
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node1
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 07 Sep 2022 20:05:42 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Wed, 07 Sep 2022 20:02:29 +0000   Wed, 07 Sep 2022 20:02:08 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Wed, 07 Sep 2022 20:02:29 +0000   Wed, 07 Sep 2022 20:02:08 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Wed, 07 Sep 2022 20:02:29 +0000   Wed, 07 Sep 2022 20:02:08 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            False   Wed, 07 Sep 2022 20:02:29 +0000   Wed, 07 Sep 2022 20:02:08 +0000   KubeletNotReady              container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: cni plugin not initialized
+Addresses:
+  InternalIP:  10.26.45.13
+  Hostname:    node1
+Capacity:
+  cpu:                8
+  ephemeral-storage:  50620216Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             8147228Ki
+  pods:               110
+Allocatable:
+  cpu:                8
+  ephemeral-storage:  46651590989
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             8044828Ki
+  pods:               110
+System Info:
+  Machine ID:                 509cfd209ed04b74abd7617510cc82ee
+  System UUID:                509cfd209ed04b74abd7617510cc82ee
+  Boot ID:                    d2f2b7f8-118f-4825-ade8-f81c8308dc23
+  Kernel Version:             5.4.0-125-generic
+  OS Image:                   Ubuntu 20.04.4 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.8
+  Kubelet Version:            v1.25.0
+  Kube-Proxy Version:         v1.25.0
+Non-terminated Pods:          (1 in total)
+  Namespace                   Name                CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                ------------  ----------  ---------------  -------------  ---
+  kube-system                 kube-proxy-mtbft    0 (0%)        0 (0%)      0 (0%)           0 (0%)         3m37s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests  Limits
+  --------           --------  ------
+  cpu                0 (0%)    0 (0%)
+  memory             0 (0%)    0 (0%)
+  ephemeral-storage  0 (0%)    0 (0%)
+  hugepages-1Gi      0 (0%)    0 (0%)
+  hugepages-2Mi      0 (0%)    0 (0%)
+Events:
+  Type    Reason                   Age                    From             Message
+  ----    ------                   ----                   ----             -------
+  Normal  Starting                 3m29s                  kube-proxy
+  Normal  NodeHasSufficientMemory  3m38s (x8 over 3m50s)  kubelet          Node node1 status is now: NodeHasSufficientMemory
+  Normal  RegisteredNode           3m37s                  node-controller  Node node1 event: Registered Node node1 in Controller
+
+
+Name:               node2
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=node2
+                    kubernetes.io/os=linux
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 07 Sep 2022 20:03:07 +0000
+Taints:             node.kubernetes.io/not-ready:NoSchedule
+Unschedulable:      false
+Lease:
+  HolderIdentity:  node2
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 07 Sep 2022 20:05:40 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Wed, 07 Sep 2022 20:03:27 +0000   Wed, 07 Sep 2022 20:03:07 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Wed, 07 Sep 2022 20:03:27 +0000   Wed, 07 Sep 2022 20:03:07 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Wed, 07 Sep 2022 20:03:27 +0000   Wed, 07 Sep 2022 20:03:07 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            False   Wed, 07 Sep 2022 20:03:27 +0000   Wed, 07 Sep 2022 20:03:07 +0000   KubeletNotReady              container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: cni plugin not initialized
+Addresses:
+  InternalIP:  10.26.45.123
+  Hostname:    node2
+Capacity:
+  cpu:                8
+  ephemeral-storage:  50620216Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             8147236Ki
+  pods:               110
+Allocatable:
+  cpu:                8
+  ephemeral-storage:  46651590989
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             8044836Ki
+  pods:               110
+System Info:
+  Machine ID:                 ae465c9896ca404da4aa71538e0fcf78
+  System UUID:                ae465c9896ca404da4aa71538e0fcf78
+  Boot ID:                    ccddd94c-019c-4c39-9291-db5b66aa458b
+  Kernel Version:             5.4.0-125-generic
+  OS Image:                   Ubuntu 20.04.4 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.8
+  Kubelet Version:            v1.25.0
+  Kube-Proxy Version:         v1.25.0
+Non-terminated Pods:          (1 in total)
+  Namespace                   Name                CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                ------------  ----------  ---------------  -------------  ---
+  kube-system                 kube-proxy-5d68k    0 (0%)        0 (0%)      0 (0%)           0 (0%)         2m39s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests  Limits
+  --------           --------  ------
+  cpu                0 (0%)    0 (0%)
+  memory             0 (0%)    0 (0%)
+  ephemeral-storage  0 (0%)    0 (0%)
+  hugepages-1Gi      0 (0%)    0 (0%)
+  hugepages-2Mi      0 (0%)    0 (0%)
+Events:
+  Type    Reason                   Age                    From             Message
+  ----    ------                   ----                   ----             -------
+  Normal  Starting                 2m30s                  kube-proxy
+  Normal  NodeHasSufficientMemory  2m39s (x8 over 2m52s)  kubelet          Node node2 status is now: NodeHasSufficientMemory
+  Normal  RegisteredNode           2m37s                  node-controller  Node node2 event: Registered Node node2 in Controller
+
+
+Name:               wv09
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=wv09
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 07 Sep 2022 19:57:46 +0000
+Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+                    node.kubernetes.io/not-ready:NoSchedule
+Unschedulable:      false
+Lease:
+  HolderIdentity:  wv09
+  AcquireTime:     <unset>
+  RenewTime:       Wed, 07 Sep 2022 20:05:39 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Wed, 07 Sep 2022 20:02:55 +0000   Wed, 07 Sep 2022 19:57:44 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Wed, 07 Sep 2022 20:02:55 +0000   Wed, 07 Sep 2022 19:57:44 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Wed, 07 Sep 2022 20:02:55 +0000   Wed, 07 Sep 2022 19:57:44 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            False   Wed, 07 Sep 2022 20:02:55 +0000   Wed, 07 Sep 2022 19:57:44 +0000   KubeletNotReady              container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: cni plugin not initialized
+Addresses:
+  InternalIP:  147.75.55.235
+  Hostname:    wv09
+Capacity:
+  cpu:                48
+  ephemeral-storage:  228591256Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65435488Ki
+  pods:               110
+Allocatable:
+  cpu:                48
+  ephemeral-storage:  210669701181
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65333088Ki
+  pods:               110
+System Info:
+  Machine ID:                 f37f280afc3d44c3865ba78e703670f3
+  System UUID:                4c4c4544-0043-4c10-8036-c8c04f483133
+  Boot ID:                    91fbf62d-716b-4347-b9c8-d512abd0f76c
+  Kernel Version:             5.15.0-47-generic
+  OS Image:                   Ubuntu 22.04.1 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.8
+  Kubelet Version:            v1.25.0
+  Kube-Proxy Version:         v1.25.0
+Non-terminated Pods:          (5 in total)
+  Namespace                   Name                            CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                            ------------  ----------  ---------------  -------------  ---
+  kube-system                 etcd-wv09                       100m (0%)     0 (0%)      100Mi (0%)       0 (0%)         7m57s
+  kube-system                 kube-apiserver-wv09             250m (0%)     0 (0%)      0 (0%)           0 (0%)         7m59s
+  kube-system                 kube-controller-manager-wv09    200m (0%)     0 (0%)      0 (0%)           0 (0%)         7m59s
+  kube-system                 kube-proxy-9ch8z                0 (0%)        0 (0%)      0 (0%)           0 (0%)         7m51s
+  kube-system                 kube-scheduler-wv09             100m (0%)     0 (0%)      0 (0%)           0 (0%)         7m57s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                650m (1%)   0 (0%)
+  memory             100Mi (0%)  0 (0%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-1Gi      0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:
+  Type     Reason                   Age                  From             Message
+  ----     ------                   ----                 ----             -------
+  Normal   Starting                 7m49s                kube-proxy
+  Normal   NodeHasSufficientMemory  8m3s (x5 over 8m4s)  kubelet          Node wv09 status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    8m3s (x4 over 8m4s)  kubelet          Node wv09 status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     8m3s (x4 over 8m4s)  kubelet          Node wv09 status is now: NodeHasSufficientPID
+  Normal   Starting                 7m58s                kubelet          Starting kubelet.
+  Warning  InvalidDiskCapacity      7m58s                kubelet          invalid capacity 0 on image filesystem
+  Normal   NodeAllocatableEnforced  7m57s                kubelet          Updated Node Allocatable limit across pods
+  Normal   NodeHasSufficientMemory  7m57s                kubelet          Node wv09 status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    7m57s                kubelet          Node wv09 status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     7m57s                kubelet          Node wv09 status is now: NodeHasSufficientPID
+  Normal   RegisteredNode           7m52s                node-controller  Node wv09 event: Registered Node wv09 in Controller
+ubuntu@wv09:~$
+ubuntu@wv09:~$ curl https://projectcalico.docs.tigera.io/manifests/calico.yaml -O
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  229k  100  229k    0     0   720k      0 --:--:-- --:--:-- --:--:--  719k
+ubuntu@wv09:~$ kubectl apply -f calico.yaml
+poddisruptionbudget.policy/calico-kube-controllers created
+serviceaccount/calico-kube-controllers created
+serviceaccount/calico-node created
+configmap/calico-config created
+customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/bgppeers.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/blockaffinities.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/caliconodestatuses.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/clusterinformations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/globalnetworkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/globalnetworksets.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/hostendpoints.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamblocks.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamconfigs.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamhandles.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ippools.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipreservations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/kubecontrollersconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/networkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/networksets.crd.projectcalico.org created
+clusterrole.rbac.authorization.k8s.io/calico-kube-controllers created
+clusterrole.rbac.authorization.k8s.io/calico-node created
+clusterrolebinding.rbac.authorization.k8s.io/calico-kube-controllers created
+clusterrolebinding.rbac.authorization.k8s.io/calico-node created
+daemonset.apps/calico-node created
+deployment.apps/calico-kube-controllers created
+ubuntu@wv09:~$ kubectl get pods -A
+NAMESPACE     NAME                                       READY   STATUS              RESTARTS   AGE
+kube-system   calico-kube-controllers-58dbc876ff-ks5st   0/1     ContainerCreating   0          20s
+kube-system   calico-node-c9q7v                          0/1     Running             0          20s
+kube-system   calico-node-h6hfq                          0/1     PodInitializing     0          20s
+kube-system   calico-node-knf2g                          0/1     PodInitializing     0          20s
+kube-system   coredns-565d847f94-klmjh                   0/1     ContainerCreating   0          10m
+kube-system   coredns-565d847f94-kprhj                   0/1     ContainerCreating   0          10m
+kube-system   etcd-wv09                                  1/1     Running             0          10m
+kube-system   kube-apiserver-wv09                        1/1     Running             0          10m
+kube-system   kube-controller-manager-wv09               1/1     Running             0          10m
+kube-system   kube-proxy-5d68k                           1/1     Running             0          4m56s
+kube-system   kube-proxy-9ch8z                           1/1     Running             0          10m
+kube-system   kube-proxy-mtbft                           1/1     Running             0          5m54s
+kube-system   kube-scheduler-wv09                        1/1     Running             0          10m
+ubuntu@wv09:~$ kubectl get pods -A
+NAMESPACE     NAME                                       READY   STATUS    RESTARTS   AGE
+kube-system   calico-kube-controllers-58dbc876ff-ks5st   1/1     Running   0          42s
+kube-system   calico-node-c9q7v                          1/1     Running   0          42s
+kube-system   calico-node-h6hfq                          1/1     Running   0          42s
+kube-system   calico-node-knf2g                          1/1     Running   0          42s
+kube-system   coredns-565d847f94-klmjh                   1/1     Running   0          10m
+kube-system   coredns-565d847f94-kprhj                   1/1     Running   0          10m
+kube-system   etcd-wv09                                  1/1     Running   0          10m
+kube-system   kube-apiserver-wv09                        1/1     Running   0          10m
+kube-system   kube-controller-manager-wv09               1/1     Running   0          10m
+kube-system   kube-proxy-5d68k                           1/1     Running   0          5m18s
+kube-system   kube-proxy-9ch8z                           1/1     Running   0          10m
+kube-system   kube-proxy-mtbft                           1/1     Running   0          6m16s
+kube-system   kube-scheduler-wv09                        1/1     Running   0          10m
+ubuntu@wv09:~$ kubectl get nodes
+NAME    STATUS   ROLES           AGE     VERSION
+node1   Ready    <none>          6m30s   v1.25.0
+node2   Ready    <none>          5m32s   v1.25.0
+wv09    Ready    control-plane   10m     v1.25.0
+ubuntu@wv09:~$ ls
+calico.yaml  snap
+ubuntu@wv09:~$ git clone http://github.com/mike-moran-amd/my_python.git
+Cloning into 'my_python'...
+warning: redirecting to https://github.com/mike-moran-amd/my_python.git/
+remote: Enumerating objects: 754, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 754 (delta 0), reused 1 (delta 0), pack-reused 749
+Receiving objects: 100% (754/754), 738.52 KiB | 104.00 KiB/s, done.
+Resolving deltas: 100% (442/442), done.
+ubuntu@wv09:~$ git clone https://github.com/vmware/weathervane
+Cloning into 'weathervane'...
+remote: Enumerating objects: 19164, done.
+remote: Counting objects: 100% (1955/1955), done.
+remote: Compressing objects: 100% (639/639), done.
+remote: Total 19164 (delta 1014), reused 1892 (delta 968), pack-reused 17209
+Receiving objects: 100% (19164/19164), 64.64 MiB | 60.23 MiB/s, done.
+Resolving deltas: 100% (11710/11710), done.
+ubuntu@wv09:~$ alias sc="kubectl get sc -A"
+ubuntu@wv09:~$ sc
+No resources found
+ubuntu@wv09:~$ alias pv="kubectl get pv -A"
+ubuntu@wv09:~$ pv
+No resources found
+ubuntu@wv09:~$ alias pvc="kubectl get pvc -A"
+ubuntu@wv09:~$ pvc
+No resources found
+ubuntu@wv09:~$ cd my_python/my_python/k8s/weathervane/
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ ll
+total 76
+drwxrwxr-x 2 ubuntu ubuntu  4096 Sep  7 20:11 ./
+drwxrwxr-x 3 ubuntu ubuntu  4096 Sep  7 20:11 ../
+-rw-rw-r-- 1 ubuntu ubuntu     0 Sep  7 20:11 __init__.py
+-rw-rw-r-- 1 ubuntu ubuntu    89 Sep  7 20:11 alias
+-rw-rw-r-- 1 ubuntu ubuntu   196 Sep  7 20:11 create-storage-class.yaml
+-rw-rw-r-- 1 ubuntu ubuntu  1022 Sep  7 20:11 create_pvc.yaml
+-rw-rw-r-- 1 ubuntu ubuntu 26794 Sep  7 20:11 debugWeathervane.pl
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv01.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv02.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv03.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   273 Sep  7 20:11 pvc2.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   270 Sep  7 20:11 test-pvc.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   569 Sep  7 20:11 weathervane.config.k8s.quickstart
+-rw-rw-r-- 1 ubuntu ubuntu  1878 Sep  7 20:11 z
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ git pull
+warning: redirecting to https://github.com/mike-moran-amd/my_python.git/
+remote: Enumerating objects: 20, done.
+remote: Counting objects: 100% (20/20), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 14 (delta 8), reused 14 (delta 8), pack-reused 0
+Unpacking objects: 100% (14/14), 30.10 KiB | 2.15 MiB/s, done.
+From http://github.com/mike-moran-amd/my_python
+   3ce5e9a..3bfa1c9  master     -> origin/master
+Updating 3ce5e9a..3bfa1c9
+Fast-forward
+ my_python/data/mm74-context                              |  422 ++++++++++
+ my_python/data/wv05-context                              |  447 +++++++++++
+ my_python/data/wv06_fail_install_k8s                     |  212 +++++
+ my_python/data/wv07_step5                                | 2267 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ my_python/data/wv08_fail                                 |  194 +++++
+ my_python/data/wv09                                      |    2 +
+ my_python/k8s/__init__.py                                |   27 +-
+ my_python/k8s/weathervane/create_sc_WaitForFirstConsumer |    6 +
+ 8 files changed, 3574 insertions(+), 3 deletions(-)
+ create mode 100644 my_python/data/mm74-context
+ create mode 100644 my_python/data/wv05-context
+ create mode 100644 my_python/data/wv06_fail_install_k8s
+ create mode 100644 my_python/data/wv07_step5
+ create mode 100644 my_python/data/wv08_fail
+ create mode 100644 my_python/data/wv09
+ create mode 100644 my_python/k8s/weathervane/create_sc_WaitForFirstConsumer
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ kubectl apply -f create_sc_WaitForFirstConsumer
+storageclass.storage.k8s.io/local-storage created
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ sc
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  4s
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ sudo apt install mlocate
+[sudo] password for ubuntu:
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  liburing2 plocate
+The following NEW packages will be installed:
+  liburing2 mlocate plocate
+0 upgraded, 3 newly installed, 0 to remove and 9 not upgraded.
+Need to get 141 kB of archives.
+After this operation, 570 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 liburing2 amd64 2.1-2build1 [10.3 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy/main amd64 plocate amd64 1.1.15-1ubuntu2 [129 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/main amd64 mlocate all 1.1.15-1ubuntu2 [1670 B]
+Fetched 141 kB in 1s (195 kB/s)
+Selecting previously unselected package liburing2:amd64.
+(Reading database ... 75146 files and directories currently installed.)
+Preparing to unpack .../liburing2_2.1-2build1_amd64.deb ...
+Unpacking liburing2:amd64 (2.1-2build1) ...
+Selecting previously unselected package plocate.
+Preparing to unpack .../plocate_1.1.15-1ubuntu2_amd64.deb ...
+Unpacking plocate (1.1.15-1ubuntu2) ...
+Selecting previously unselected package mlocate.
+Preparing to unpack .../mlocate_1.1.15-1ubuntu2_all.deb ...
+Unpacking mlocate (1.1.15-1ubuntu2) ...
+Setting up liburing2:amd64 (2.1-2build1) ...
+Setting up plocate (1.1.15-1ubuntu2) ...
+update-alternatives: using /usr/bin/plocate to provide /usr/bin/locate (locate) in auto mode
+Adding group `plocate' (GID 120) ...
+Done.
+Initializing plocate database; this may take some time... done
+Created symlink /etc/systemd/system/timers.target.wants/plocate-updatedb.timer → /lib/systemd/system/plocate-updatedb.timer.
+Setting up mlocate (1.1.15-1ubuntu2) ...
+dpkg-statoverride: warning: no override present
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ locate Term/ReadKey.pm
+/usr/lib/x86_64-linux-gnu/perl5/5.34/Term/ReadKey.pm
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ sudo cpan Term::ReadKey
+Loading internal logger. Log::Log4perl recommended for better logging
+
+CPAN.pm requires configuration, but most of it can be done automatically.
+If you answer 'no' below, you will enter an interactive dialog for each
+configuration option instead.
+
+Would you like to configure as much as possible automatically? [yes] yes
+Fetching with HTTP::Tiny:
+http://www.cpan.org/authors/01mailrc.txt.gz
+Reading '/root/.cpan/sources/authors/01mailrc.txt.gz'
+............................................................................DONE
+Fetching with HTTP::Tiny:
+http://www.cpan.org/modules/02packages.details.txt.gz
+Reading '/root/.cpan/sources/modules/02packages.details.txt.gz'
+  Database was generated on Wed, 07 Sep 2022 18:55:40 GMT
+  HTTP::Date not available
+..............
+  New CPAN.pm version (v2.34) available.
+  [Currently running version is v2.28]
+  You might want to try
+    install CPAN
+    reload cpan
+  to both upgrade CPAN.pm and run the new version without leaving
+  the current session.
+
+
+..............................................................DONE
+Fetching with HTTP::Tiny:
+http://www.cpan.org/modules/03modlist.data.gz
+Reading '/root/.cpan/sources/modules/03modlist.data.gz'
+DONE
+Writing /root/.cpan/Metadata
+Term::ReadKey is up to date (2.38).
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ which unzip
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ sudo apt install unzip
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Suggested packages:
+  zip
+The following NEW packages will be installed:
+  unzip
+0 upgraded, 1 newly installed, 0 to remove and 9 not upgraded.
+Need to get 174 kB of archives.
+After this operation, 385 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 unzip amd64 6.0-26ubuntu3 [174 kB]
+Fetched 174 kB in 1s (227 kB/s)
+Selecting previously unselected package unzip.
+(Reading database ... 75170 files and directories currently installed.)
+Preparing to unpack .../unzip_6.0-26ubuntu3_amd64.deb ...
+Unpacking unzip (6.0-26ubuntu3) ...
+Setting up unzip (6.0-26ubuntu3) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ which unzip
+/usr/bin/unzip
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ which docker
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ sudo apt install podman-docker
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  buildah catatonit conmon containernetworking-plugins crun dconf-gsettings-backend dconf-service dns-root-data
+  dnsmasq-base docker-compose fuse-overlayfs glib-networking glib-networking-common glib-networking-services
+  golang-github-containernetworking-plugin-dnsname golang-github-containers-common golang-github-containers-image
+  gsettings-desktop-schemas libavahi-client3 libavahi-common-data libavahi-common3 libavahi-glib1 libdconf1
+  libostree-1-1 libproxy1v5 libslirp0 libsoup2.4-1 libsoup2.4-common libyajl2 podman python3-docker python3-dockerpty
+  python3-docopt python3-dotenv python3-texttable python3-websocket session-migration slirp4netns uidmap
+Suggested packages:
+  containers-storage
+Recommended packages:
+  docker.io
+The following NEW packages will be installed:
+  buildah catatonit conmon containernetworking-plugins crun dconf-gsettings-backend dconf-service dns-root-data
+  dnsmasq-base docker-compose fuse-overlayfs glib-networking glib-networking-common glib-networking-services
+  golang-github-containernetworking-plugin-dnsname golang-github-containers-common golang-github-containers-image
+  gsettings-desktop-schemas libavahi-client3 libavahi-common-data libavahi-common3 libavahi-glib1 libdconf1
+  libostree-1-1 libproxy1v5 libslirp0 libsoup2.4-1 libsoup2.4-common libyajl2 podman podman-docker python3-docker
+  python3-dockerpty python3-docopt python3-dotenv python3-texttable python3-websocket session-migration slirp4netns
+  uidmap
+0 upgraded, 40 newly installed, 0 to remove and 9 not upgraded.
+Need to get 26.5 MB of archives.
+After this operation, 116 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://archive.ubuntu.com/ubuntu jammy/universe amd64 uidmap amd64 1:4.8.1-2ubuntu2 [22.1 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy/universe amd64 golang-github-containers-image all 5.16.0-3 [29.3 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/universe amd64 golang-github-containers-common all 0.44.4+ds1-1 [28.1 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy/main amd64 libavahi-common-data amd64 0.8-5ubuntu5 [23.9 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy/main amd64 libavahi-common3 amd64 0.8-5ubuntu5 [23.7 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 libavahi-client3 amd64 0.8-5ubuntu5 [28.1 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 libavahi-glib1 amd64 0.8-5ubuntu5 [8294 B]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 libproxy1v5 amd64 0.4.17-2 [51.9 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy/main amd64 glib-networking-common all 2.72.0-1 [3718 B]
+Get:10 http://archive.ubuntu.com/ubuntu jammy/main amd64 glib-networking-services amd64 2.72.0-1 [9982 B]
+Get:11 http://archive.ubuntu.com/ubuntu jammy/main amd64 libdconf1 amd64 0.40.0-3 [40.5 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy/main amd64 dconf-service amd64 0.40.0-3 [28.5 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy/main amd64 dconf-gsettings-backend amd64 0.40.0-3 [22.8 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy/main amd64 session-migration amd64 0.3.6 [9774 B]
+Get:15 http://archive.ubuntu.com/ubuntu jammy/main amd64 gsettings-desktop-schemas all 42.0-1ubuntu1 [31.1 kB]
+Get:16 http://archive.ubuntu.com/ubuntu jammy/main amd64 glib-networking amd64 2.72.0-1 [69.8 kB]
+Get:17 http://archive.ubuntu.com/ubuntu jammy/main amd64 libsoup2.4-common all 2.74.2-3 [4008 B]
+Get:18 http://archive.ubuntu.com/ubuntu jammy/main amd64 libsoup2.4-1 amd64 2.74.2-3 [287 kB]
+Get:19 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libostree-1-1 amd64 2022.2-3 [333 kB]
+Get:20 http://archive.ubuntu.com/ubuntu jammy/universe amd64 buildah amd64 1.23.1+ds1-2 [6094 kB]
+Get:21 http://archive.ubuntu.com/ubuntu jammy/universe amd64 catatonit amd64 0.1.7-1 [307 kB]
+Get:22 http://archive.ubuntu.com/ubuntu jammy/universe amd64 conmon amd64 2.0.25+ds1-1.1 [35.1 kB]
+Get:23 http://archive.ubuntu.com/ubuntu jammy/universe amd64 containernetworking-plugins amd64 0.9.1+ds1-1 [6422 kB]
+Get:24 http://archive.ubuntu.com/ubuntu jammy/main amd64 libyajl2 amd64 2.1.0-3build2 [20.6 kB]
+Get:25 http://archive.ubuntu.com/ubuntu jammy/universe amd64 crun amd64 0.17+dfsg-1.1 [300 kB]
+Get:26 http://archive.ubuntu.com/ubuntu jammy/main amd64 dns-root-data all 2021011101 [5256 B]
+Get:27 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 dnsmasq-base amd64 2.86-1.1ubuntu0.1 [354 kB]
+Get:28 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-websocket all 1.2.3-1 [34.7 kB]
+Get:29 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-docker all 5.0.3-1 [89.3 kB]
+Get:30 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-dockerpty all 0.4.1-2 [11.1 kB]
+Get:31 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-docopt all 0.6.2-4 [26.9 kB]
+Get:32 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-dotenv all 0.19.2-1 [20.5 kB]
+Get:33 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-texttable all 1.6.4-1 [11.4 kB]
+Get:34 http://archive.ubuntu.com/ubuntu jammy/universe amd64 docker-compose all 1.29.2-1 [95.8 kB]
+Get:35 http://archive.ubuntu.com/ubuntu jammy/universe amd64 fuse-overlayfs amd64 1.7.1-1 [44.7 kB]
+Get:36 http://archive.ubuntu.com/ubuntu jammy/universe amd64 golang-github-containernetworking-plugin-dnsname amd64 1.3.1+ds1-2 [1083 kB]
+Get:37 http://archive.ubuntu.com/ubuntu jammy/main amd64 libslirp0 amd64 4.6.1-1build1 [61.5 kB]
+Get:38 http://archive.ubuntu.com/ubuntu jammy/universe amd64 podman amd64 3.4.4+ds1-1ubuntu1 [10.4 MB]
+Get:39 http://archive.ubuntu.com/ubuntu jammy/universe amd64 podman-docker amd64 3.4.4+ds1-1ubuntu1 [14.1 kB]
+Get:40 http://archive.ubuntu.com/ubuntu jammy/universe amd64 slirp4netns amd64 1.0.1-2 [28.2 kB]
+Fetched 26.5 MB in 2s (11.4 MB/s)
+Extracting templates from packages: 100%
+Selecting previously unselected package uidmap.
+(Reading database ... 75188 files and directories currently installed.)
+Preparing to unpack .../00-uidmap_1%3a4.8.1-2ubuntu2_amd64.deb ...
+Unpacking uidmap (1:4.8.1-2ubuntu2) ...
+Selecting previously unselected package golang-github-containers-image.
+Preparing to unpack .../01-golang-github-containers-image_5.16.0-3_all.deb ...
+Unpacking golang-github-containers-image (5.16.0-3) ...
+Selecting previously unselected package golang-github-containers-common.
+Preparing to unpack .../02-golang-github-containers-common_0.44.4+ds1-1_all.deb ...
+Unpacking golang-github-containers-common (0.44.4+ds1-1) ...
+Selecting previously unselected package libavahi-common-data:amd64.
+Preparing to unpack .../03-libavahi-common-data_0.8-5ubuntu5_amd64.deb ...
+Unpacking libavahi-common-data:amd64 (0.8-5ubuntu5) ...
+Selecting previously unselected package libavahi-common3:amd64.
+Preparing to unpack .../04-libavahi-common3_0.8-5ubuntu5_amd64.deb ...
+Unpacking libavahi-common3:amd64 (0.8-5ubuntu5) ...
+Selecting previously unselected package libavahi-client3:amd64.
+Preparing to unpack .../05-libavahi-client3_0.8-5ubuntu5_amd64.deb ...
+Unpacking libavahi-client3:amd64 (0.8-5ubuntu5) ...
+Selecting previously unselected package libavahi-glib1:amd64.
+Preparing to unpack .../06-libavahi-glib1_0.8-5ubuntu5_amd64.deb ...
+Unpacking libavahi-glib1:amd64 (0.8-5ubuntu5) ...
+Selecting previously unselected package libproxy1v5:amd64.
+Preparing to unpack .../07-libproxy1v5_0.4.17-2_amd64.deb ...
+Unpacking libproxy1v5:amd64 (0.4.17-2) ...
+Selecting previously unselected package glib-networking-common.
+Preparing to unpack .../08-glib-networking-common_2.72.0-1_all.deb ...
+Unpacking glib-networking-common (2.72.0-1) ...
+Selecting previously unselected package glib-networking-services.
+Preparing to unpack .../09-glib-networking-services_2.72.0-1_amd64.deb ...
+Unpacking glib-networking-services (2.72.0-1) ...
+Selecting previously unselected package libdconf1:amd64.
+Preparing to unpack .../10-libdconf1_0.40.0-3_amd64.deb ...
+Unpacking libdconf1:amd64 (0.40.0-3) ...
+Selecting previously unselected package dconf-service.
+Preparing to unpack .../11-dconf-service_0.40.0-3_amd64.deb ...
+Unpacking dconf-service (0.40.0-3) ...
+Selecting previously unselected package dconf-gsettings-backend:amd64.
+Preparing to unpack .../12-dconf-gsettings-backend_0.40.0-3_amd64.deb ...
+Unpacking dconf-gsettings-backend:amd64 (0.40.0-3) ...
+Selecting previously unselected package session-migration.
+Preparing to unpack .../13-session-migration_0.3.6_amd64.deb ...
+Unpacking session-migration (0.3.6) ...
+Selecting previously unselected package gsettings-desktop-schemas.
+Preparing to unpack .../14-gsettings-desktop-schemas_42.0-1ubuntu1_all.deb ...
+Unpacking gsettings-desktop-schemas (42.0-1ubuntu1) ...
+Selecting previously unselected package glib-networking:amd64.
+Preparing to unpack .../15-glib-networking_2.72.0-1_amd64.deb ...
+Unpacking glib-networking:amd64 (2.72.0-1) ...
+Selecting previously unselected package libsoup2.4-common.
+Preparing to unpack .../16-libsoup2.4-common_2.74.2-3_all.deb ...
+Unpacking libsoup2.4-common (2.74.2-3) ...
+Selecting previously unselected package libsoup2.4-1:amd64.
+Preparing to unpack .../17-libsoup2.4-1_2.74.2-3_amd64.deb ...
+Unpacking libsoup2.4-1:amd64 (2.74.2-3) ...
+Selecting previously unselected package libostree-1-1:amd64.
+Preparing to unpack .../18-libostree-1-1_2022.2-3_amd64.deb ...
+Unpacking libostree-1-1:amd64 (2022.2-3) ...
+Selecting previously unselected package buildah.
+Preparing to unpack .../19-buildah_1.23.1+ds1-2_amd64.deb ...
+Unpacking buildah (1.23.1+ds1-2) ...
+Selecting previously unselected package catatonit.
+Preparing to unpack .../20-catatonit_0.1.7-1_amd64.deb ...
+Unpacking catatonit (0.1.7-1) ...
+Selecting previously unselected package conmon.
+Preparing to unpack .../21-conmon_2.0.25+ds1-1.1_amd64.deb ...
+Unpacking conmon (2.0.25+ds1-1.1) ...
+Selecting previously unselected package containernetworking-plugins.
+Preparing to unpack .../22-containernetworking-plugins_0.9.1+ds1-1_amd64.deb ...
+Unpacking containernetworking-plugins (0.9.1+ds1-1) ...
+Selecting previously unselected package libyajl2:amd64.
+Preparing to unpack .../23-libyajl2_2.1.0-3build2_amd64.deb ...
+Unpacking libyajl2:amd64 (2.1.0-3build2) ...
+Selecting previously unselected package crun.
+Preparing to unpack .../24-crun_0.17+dfsg-1.1_amd64.deb ...
+Unpacking crun (0.17+dfsg-1.1) ...
+Selecting previously unselected package dns-root-data.
+Preparing to unpack .../25-dns-root-data_2021011101_all.deb ...
+Unpacking dns-root-data (2021011101) ...
+Selecting previously unselected package dnsmasq-base.
+Preparing to unpack .../26-dnsmasq-base_2.86-1.1ubuntu0.1_amd64.deb ...
+Unpacking dnsmasq-base (2.86-1.1ubuntu0.1) ...
+Selecting previously unselected package python3-websocket.
+Preparing to unpack .../27-python3-websocket_1.2.3-1_all.deb ...
+Unpacking python3-websocket (1.2.3-1) ...
+Selecting previously unselected package python3-docker.
+Preparing to unpack .../28-python3-docker_5.0.3-1_all.deb ...
+Unpacking python3-docker (5.0.3-1) ...
+Selecting previously unselected package python3-dockerpty.
+Preparing to unpack .../29-python3-dockerpty_0.4.1-2_all.deb ...
+Unpacking python3-dockerpty (0.4.1-2) ...
+Selecting previously unselected package python3-docopt.
+Preparing to unpack .../30-python3-docopt_0.6.2-4_all.deb ...
+Unpacking python3-docopt (0.6.2-4) ...
+Selecting previously unselected package python3-dotenv.
+Preparing to unpack .../31-python3-dotenv_0.19.2-1_all.deb ...
+Unpacking python3-dotenv (0.19.2-1) ...
+Selecting previously unselected package python3-texttable.
+Preparing to unpack .../32-python3-texttable_1.6.4-1_all.deb ...
+Unpacking python3-texttable (1.6.4-1) ...
+Selecting previously unselected package docker-compose.
+Preparing to unpack .../33-docker-compose_1.29.2-1_all.deb ...
+Unpacking docker-compose (1.29.2-1) ...
+Selecting previously unselected package fuse-overlayfs.
+Preparing to unpack .../34-fuse-overlayfs_1.7.1-1_amd64.deb ...
+Unpacking fuse-overlayfs (1.7.1-1) ...
+Selecting previously unselected package golang-github-containernetworking-plugin-dnsname.
+Preparing to unpack .../35-golang-github-containernetworking-plugin-dnsname_1.3.1+ds1-2_amd64.deb ...
+Unpacking golang-github-containernetworking-plugin-dnsname (1.3.1+ds1-2) ...
+Selecting previously unselected package libslirp0:amd64.
+Preparing to unpack .../36-libslirp0_4.6.1-1build1_amd64.deb ...
+Unpacking libslirp0:amd64 (4.6.1-1build1) ...
+Selecting previously unselected package podman.
+Preparing to unpack .../37-podman_3.4.4+ds1-1ubuntu1_amd64.deb ...
+Unpacking podman (3.4.4+ds1-1ubuntu1) ...
+Selecting previously unselected package podman-docker.
+Preparing to unpack .../38-podman-docker_3.4.4+ds1-1ubuntu1_amd64.deb ...
+Unpacking podman-docker (3.4.4+ds1-1ubuntu1) ...
+Selecting previously unselected package slirp4netns.
+Preparing to unpack .../39-slirp4netns_1.0.1-2_amd64.deb ...
+Unpacking slirp4netns (1.0.1-2) ...
+Setting up python3-dotenv (0.19.2-1) ...
+Setting up python3-texttable (1.6.4-1) ...
+Setting up session-migration (0.3.6) ...
+Created symlink /etc/systemd/user/graphical-session-pre.target.wants/session-migration.service → /usr/lib/systemd/user/session-migration.service.
+Setting up python3-docopt (0.6.2-4) ...
+Setting up libproxy1v5:amd64 (0.4.17-2) ...
+Setting up uidmap (1:4.8.1-2ubuntu2) ...
+Setting up libyajl2:amd64 (2.1.0-3build2) ...
+Setting up dnsmasq-base (2.86-1.1ubuntu0.1) ...
+Setting up dns-root-data (2021011101) ...
+Setting up libdconf1:amd64 (0.40.0-3) ...
+Setting up golang-github-containers-image (5.16.0-3) ...
+Setting up conmon (2.0.25+ds1-1.1) ...
+Setting up containernetworking-plugins (0.9.1+ds1-1) ...
+Setting up catatonit (0.1.7-1) ...
+Setting up libavahi-common-data:amd64 (0.8-5ubuntu5) ...
+Setting up golang-github-containernetworking-plugin-dnsname (1.3.1+ds1-2) ...
+Setting up libsoup2.4-common (2.74.2-3) ...
+Setting up libslirp0:amd64 (4.6.1-1build1) ...
+Setting up fuse-overlayfs (1.7.1-1) ...
+Setting up golang-github-containers-common (0.44.4+ds1-1) ...
+Setting up glib-networking-common (2.72.0-1) ...
+Setting up python3-websocket (1.2.3-1) ...
+Setting up python3-dockerpty (0.4.1-2) ...
+Setting up glib-networking-services (2.72.0-1) ...
+Setting up slirp4netns (1.0.1-2) ...
+Setting up crun (0.17+dfsg-1.1) ...
+Setting up python3-docker (5.0.3-1) ...
+Setting up libavahi-common3:amd64 (0.8-5ubuntu5) ...
+Setting up podman (3.4.4+ds1-1ubuntu1) ...
+Created symlink /etc/systemd/user/default.target.wants/podman.service → /usr/lib/systemd/user/podman.service.
+Created symlink /etc/systemd/user/sockets.target.wants/podman.socket → /usr/lib/systemd/user/podman.socket.
+Created symlink /etc/systemd/system/default.target.wants/podman.service → /lib/systemd/system/podman.service.
+Created symlink /etc/systemd/system/sockets.target.wants/podman.socket → /lib/systemd/system/podman.socket.
+Could not execute systemctl:  at /usr/bin/deb-systemd-invoke line 142.
+Created symlink /etc/systemd/system/default.target.wants/podman-auto-update.service → /lib/systemd/system/podman-auto-update.service.
+Created symlink /etc/systemd/system/timers.target.wants/podman-auto-update.timer → /lib/systemd/system/podman-auto-update.timer.
+Created symlink /etc/systemd/system/default.target.wants/podman-restart.service → /lib/systemd/system/podman-restart.service.
+Setting up dconf-service (0.40.0-3) ...
+Setting up libavahi-glib1:amd64 (0.8-5ubuntu5) ...
+Setting up podman-docker (3.4.4+ds1-1ubuntu1) ...
+Setting up libavahi-client3:amd64 (0.8-5ubuntu5) ...
+Setting up docker-compose (1.29.2-1) ...
+Setting up dconf-gsettings-backend:amd64 (0.40.0-3) ...
+Setting up gsettings-desktop-schemas (42.0-1ubuntu1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for dbus (1.12.20-2ubuntu4) ...
+Processing triggers for libglib2.0-0:amd64 (2.72.1-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+Setting up glib-networking:amd64 (2.72.0-1) ...
+Setting up libsoup2.4-1:amd64 (2.74.2-3) ...
+Setting up libostree-1-1:amd64 (2022.2-3) ...
+Setting up buildah (1.23.1+ds1-2) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+Scanning processes...
+Scanning processor microcode...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ which podman
+/usr/bin/podman
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ which docker
+/usr/bin/docker
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ ll /usr/bin/podman
+-rwxr-xr-x 1 root root 37522368 Jan 23  2022 /usr/bin/podman*
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ ll /usr/bin/docker
+-rwxr-xr-x 1 root root 163 Dec 26  2021 /usr/bin/docker*
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ which docker
+/usr/bin/docker
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ docker ps -a
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+CONTAINER ID  IMAGE       COMMAND     CREATED     STATUS      PORTS       NAMES
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ ls
+__init__.py                create_pvc.yaml                 pv01.yaml  pvc2.yaml                          z
+alias                      create_sc_WaitForFirstConsumer  pv02.yaml  test-pvc.yaml
+create-storage-class.yaml  debugWeathervane.pl             pv03.yaml  weathervane.config.k8s.quickstart
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ vi weathervane.config.k8s.quickstart
+
+[1]+  Stopped                 vi weathervane.config.k8s.quickstart
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$
+[1]+  Stopped                 vi weathervane.config.k8s.quickstart
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ cat ~/.kube/config
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeU1Ea3dOekU1TlRjek9Wb1hEVE15TURrd05ERTVOVGN6T1Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBSjcyCmhyQ1I5ck13Tm9TOUY4OGRtbm9WZ29vNk1GcTFkYmc4eWV1REVjZ3o4eW9zQ0g0aEp2VkYraUpLWlhZUlZHczQKdStUc0UzS3ZYRm5TcWpBdkVFTDVtR3d5T0dKTHdFYTZrNnBMYWZsK3hCcG9IZW9vZktIelR1eFdjZHlTdWtMdQpLVUhWWW9DcXlVMkFSZU95TEZQUE13RzlwNGw0MHlTVjkrR3JNUDNpbS81bkt1eUo1bndHVjVwNy9NMmpRZEo2Cm9aajNaWnJVZUVncnlqYjM5YzNtd3ROYnZnUUxoMG1jOGxPSVprdVNPWkorZnMvR0ZXVTN5elJYM1JWL05MbnMKbUtOalI4cVF5ZWI4ZUhNTmttamdaVHBTUW1WZFYrenhZeFl6SWI2bGloaGFnVHVMbExrdHVJYnNPd1AvTGJmbwpQOXpNSEtzN2VWbnJqcHBld09VQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZIWlgxeEFSeTNiVUFYTll3UkJtQ2FmWGxhRWlNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBRXhRVjljVGVNWVFuRTBYSGtOQwo4UkVrTkFGMjc4dkVheWR2MmJLT3U2TGs0aTgzM3J4OHZ2Z1NhdC9vLy8wSmxCbmhlK3BNamovVVAzQ3Q2Z3pHCkgzcWc4MllIbnR1eUxCeTgrVnk5OXBsakhBMzdqb3B2c2J1SWhZSVpmVnIvT3J4dTdBdFNXZmZsaCt4RHdEM2EKNDFSUmRqcU9tamlUTGJwRnhiZThBM1BackpSZVNRQmFzZ1ZHUGFQQVRGU0UvT01DYTRLT3hZdUs0bGlGZDFhdgp6SUxuSkpUVjlvWVBSWW13NlVqQVlQUmF5Um9HU2tVbEwxNW9uWW1CSDFubUo5TDZxc2xhZVdrd1VWUVNoZ1kxCjBOU3cveUJuOTdYZ1A0Y2VDbmo0R3RobDduODRsRVVpOHVINkFIc2hHY1pUMUhyKzNMalVPWjJtOWIyRDlsMmwKSjJZPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    server: https://wv09:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJVENDQWdtZ0F3SUJBZ0lJR2wxeXY3Wm82bVF3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TWpBNU1EY3hPVFUzTXpsYUZ3MHlNekE1TURjeE9UVTNOREZhTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXZlUVNSOXJnd2VNN0p5WHIKSGs3KzVzNCttZy9ESUhCRlA4bUxGT0E5dWU1WC9NVTFRSWlkNGxPWjFGLzNLczl5cTdrRnl4UEZEaGpFSjNCaQpZYUhGNGVOQ2d3SkFOaDFTRTYvWlpUcnZZZXJzMVFZUzRvZ3MzVzZzY1pidzFwTXpzaXZNRTlBSmJ0RWVRVDlYCmFYUWNVWGZBN1pEdFQyL09iYjB2Q1MwUkVTVkxZK0V1dzNZTllENWRuNnoxOC9nZjhKeUxBdUljUVlqaEhoRzcKZXlUYkNMMEtwcDFkVHFxR0dwYVIxZGxhV0RObGgwZmFHNUFaWDhKRVVEQjNxZldjVTREMWdxMFpKVnNTay9MdAprTUhDYkZ3STNpeS93VnhlZGY5Vi9kcVE4OS95M2YwdVRiKzE1aTBoUG1aQmhyYUI1V2VxYVB5bGtaYVRockNyCkJmU0Zid0lEQVFBQm8xWXdWREFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0RBWURWUjBUQVFIL0JBSXdBREFmQmdOVkhTTUVHREFXZ0JSMlY5Y1FFY3QyMUFGeldNRVFaZ21uMTVXaApJakFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBaXp5Mm1sd0RqbFFpZjJRNGYyRGdVdWRLVnNQZStNTk5OU0RwCmJPWmgxOHdRMXo5V20rdXBGUE8rTjdBS3g5REMrZ0x3TlNlZW5WZk9mN09CUklzY1U1bUkyTStoWkV5MFBQRUgKZG9SbURDUFVkYnVIOGpLSi9ncFdKd0w4SG9IakxEZzl2RUV4OUdoM1dVWXNNU1djQ1Bpd3k3WXVWQ21HQUE4dApENGhQbzZvSTRXM09yZjJ6STJIdHJEWStWYUZ0TTlLRnVFM1I2MVhiS0V4dFl5MVpoM1BadDg1cExMdnFNZ3NICjlIbVg3bll2L1BiSm05Uk04NkdBNDhia2lTcWltTkl6RUZaYTRvNWhjZmVoZTRHRHNqZjUyQ0Y3RmxxMU5scXUKTjROMWxVbFhMY2l6TzhYWkcyZ3JiVEZyL0xTM21HMmRUMC9VMFhlSTU2b1dMU2wxbEE9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBdmVRU1I5cmd3ZU03SnlYckhrNys1czQrbWcvRElIQkZQOG1MRk9BOXVlNVgvTVUxClFJaWQ0bE9aMUYvM0tzOXlxN2tGeXhQRkRoakVKM0JpWWFIRjRlTkNnd0pBTmgxU0U2L1paVHJ2WWVyczFRWVMKNG9nczNXNnNjWmJ3MXBNenNpdk1FOUFKYnRFZVFUOVhhWFFjVVhmQTdaRHRUMi9PYmIwdkNTMFJFU1ZMWStFdQp3M1lOWUQ1ZG42ejE4L2dmOEp5TEF1SWNRWWpoSGhHN2V5VGJDTDBLcHAxZFRxcUdHcGFSMWRsYVdETmxoMGZhCkc1QVpYOEpFVURCM3FmV2NVNEQxZ3EwWkpWc1NrL0x0a01IQ2JGd0kzaXkvd1Z4ZWRmOVYvZHFRODkveTNmMHUKVGIrMTVpMGhQbVpCaHJhQjVXZXFhUHlsa1phVGhyQ3JCZlNGYndJREFRQUJBb0lCQUZIUURjQS9vVTVuNUhoOQpjY3RoSlptemltMCtGVWZJbDAxZ1BEZ0dWUkhpaXE0eEdUeHduL1YvSjJ2RTNPem82L0xvaUlKeVJoaEl1MXB5CnBUQ0RUb3FBSzR2ZVVHUUFSZmlOYnhDYVQ4RFVRcTJWTEZYRmJlOEpXK3FrcWFjSlRPQ2ExaFpETDQwN005blEKdkl5R3BoekRoNi9USFN0NGRHdjdjbVIxc2tDOEhjckJrU3dqOE5zeXY4SEFQbkFkUEJHaXBCT2lsdFI4L2tIWApsU2JOYnVhRC81cmp5MVpicTlzWGlGWFdSTDgzbVY1QURhTkVDV0pXWm5yblpZNGIrZFVLSjBSd1h4YnV4czdWCjJwdXZMTjBCN2tlRlhCeFhZYVpTb00xMWdQZE1ZZWN3L2Nza1BweUdtWkFtSUY2VzBpK2ZQRmdUT09JdWxGNUgKTnpVYW5nRUNnWUVBODY0YjhFaXZrYWQ3cW4yMzk1Zk55K3Q0RUVXaDd1QncwRm5JNEdSUFc0ajdDYkxLaVpnRwo5OFBtMFJkSUp3U3hkN0VqYnVKSGUyVkNmM1FzRVN2S3RZekltTU52d0hyK1hUQ0p3dlRBNkFJY1JNdTg5VGJvClhnemQzakhXLzRXM2hkOHBvTjMyNjRDSmNHR3JjL2Z4UHNjMjR3MWMzRGc2clBVWlQ2aVAvaThDZ1lFQXgzM0kKTHFiNUl6UnVMSGt0R0ZLejlJR2VSOVozcllPNnVwTFdja3U0NTdveEk1aW9LSVVBQTN6OUhPdG5nZmtoVDg5UAp1SjcrY3A2UlBkM1FQdnhieWNwclhnZHlzcE1aVDV5ckh1cjVWMWxTNjdLRVczR0J3N2o4UkdoVnNDUGZsOTJMClgrd0RLWis1NXlDTXF3LytKL2dQOVdLcDVWNm9uYXF3MytDRFhNRUNnWUFDRitYUGk2Qk9mUVRYOHhxSWV2cGUKblJnNzg0MHZreWdFOGpDQ2xQb0ZqRWl6emFCbHpET0xIMWkxUlNEdWpPREZhWFVuZDdRcmdEUXhDaHR5emxDQQpmTVFnWTlWcTd1T09nMk03bElTdnVZenFubUZ5TGRXVE1VTWFySXp2UndQTGw1NHc3cGMzY0xROWplaytKc3dnCndPOWN4Zm1kUHJKcVYvU3V0WUQvS3dLQmdRREUyN3JQVHJaTHAxR1JVWUxPbmM0M1dqRjNjb3huRGJjV3BoQTQKZWNEZDZ6N1NnYkp2U2MvWm9WMmxUQ2U0ZXNBRW9lOXBvSHczWDRLMEtrOTEyRkk3cnlTRWhaVUo0MTcyMFFPTQpYeFB1dnBhMVFGU2NhRVpGZmlaeTJ3S3o3cktXaW1rZkh5ZC95NzhIOVhiYTE4MVdZOVJic2lFMTExTk5RME9ICnFXWDRBUUtCZ1FDajJnd25NUG1TOWw5SC9xcHVYWVNobFlGb3FSQ2xscGJYSjlPNkZoWHVLQXlZRUsrNTVGWlAKaUZJOSswcjhZam5kUDRVMlZHN2dKWlE1UzJhUTNKaElJamdTWVdDL004MDRGNmVGZ3gxNlFFdU4vNHZOS21wdgpoVG5VMnhoOG82RDllYXZnMklJZll6S09xQkhadUZpWmFDZ3Rwd05zVDZTNFFySXAya2dBd2c9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ ll
+total 92
+drwxrwxr-x 2 ubuntu ubuntu  4096 Sep  7 20:37 ./
+drwxrwxr-x 3 ubuntu ubuntu  4096 Sep  7 20:25 ../
+-rw-r--r-- 1 ubuntu ubuntu 12288 Sep  7 20:37 .weathervane.config.k8s.quickstart.swp
+-rw-rw-r-- 1 ubuntu ubuntu     0 Sep  7 20:11 __init__.py
+-rw-rw-r-- 1 ubuntu ubuntu    89 Sep  7 20:11 alias
+-rw-rw-r-- 1 ubuntu ubuntu   196 Sep  7 20:11 create-storage-class.yaml
+-rw-rw-r-- 1 ubuntu ubuntu  1022 Sep  7 20:11 create_pvc.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   163 Sep  7 20:25 create_sc_WaitForFirstConsumer
+-rw-rw-r-- 1 ubuntu ubuntu 26794 Sep  7 20:11 debugWeathervane.pl
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv01.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv02.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv03.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   273 Sep  7 20:11 pvc2.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   270 Sep  7 20:11 test-pvc.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   569 Sep  7 20:11 weathervane.config.k8s.quickstart
+-rw-rw-r-- 1 ubuntu ubuntu  1878 Sep  7 20:11 z
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ ~/weathervane/weathervane.pl --configFile=weathervane.config.k8s.quickstart
+Can't locate JSON.pm in @INC (you may need to install the JSON module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.34.0 /usr/local/share/perl/5.34.0 /usr/lib/x86_64-linux-gnu/perl5/5.34 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.34 /usr/share/perl/5.34 /usr/local/lib/site_perl) at /home/ubuntu//weathervane/weathervane.pl line 12.
+BEGIN failed--compilation aborted at /home/ubuntu//weathervane/weathervane.pl line 12.
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ fg
+vi weathervane.config.k8s.quickstart
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ vi weathervane.config.k8s.quickstart
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ git pull
+warning: redirecting to https://github.com/mike-moran-amd/my_python.git/
+remote: Enumerating objects: 15, done.
+remote: Counting objects: 100% (15/15), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 8 (delta 6), reused 8 (delta 6), pack-reused 0
+Unpacking objects: 100% (8/8), 14.01 KiB | 478.00 KiB/s, done.
+From http://github.com/mike-moran-amd/my_python
+   3bfa1c9..516903d  master     -> origin/master
+Updating 3bfa1c9..516903d
+Fast-forward
+ my_python/data/wv09                                         | 1977 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ my_python/k8s/weathervane/weathervane.config.k8s.quickstart |    2 +-
+ 2 files changed, 1978 insertions(+), 1 deletion(-)
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ !vi
+vi weathervane.config.k8s.quickstart
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ cp weathervane.config.k8s.quickstart ~/weathervane/.
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ cd ~/weathervane/
+ubuntu@wv09:/home/ubuntu/weathervane$ ls
+BRANCHING.md        README.md               configFiles        gradlew.bat        weathervane.config.k8s.micro
+Branches.md         auctionApp              dbLoader           runHarness         weathervane.config.k8s.quickstart
+CODE-OF-CONDUCT.md  auctionAppServerWarmer  doc                runWeathervane.pl  weathervane.config.k8s.small2
+CONTRIBUTING.md     auctionBidService       dockerImages       runmany.sh         weathervane.pl
+ISSUES.md           auctionWeb              gradle             settings.gradle    workloadConfiguration
+LICENSE.txt         build.gradle            gradle.properties  testing            workloadDriver
+Notice.txt          buildDockerImages.pl    gradlew            version.txt
+ubuntu@wv09:/home/ubuntu/weathervane$ ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+Weathervane
+Copyright (c) 2019 VMware, Inc. All Rights Reserved.
+
+This product is licensed to you under the BSD-2 license (the "License").  You may not use this product except in compliance with the BSD-2 License.
+
+This product may include a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the subcomponent's license, as noted in the LICENSE file.
+
+Do you accept these terms and conditions (yes/no)? yes
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+ubuntu@wv09:/home/ubuntu/weathervane$ cd
+ubuntu@wv09:/home/ubuntu$ cd my_python/my_python/k8s/weathervane/
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ ll
+total 80
+drwxrwxr-x 2 ubuntu ubuntu  4096 Sep  7 20:42 ./
+drwxrwxr-x 3 ubuntu ubuntu  4096 Sep  7 20:25 ../
+-rw-rw-r-- 1 ubuntu ubuntu     0 Sep  7 20:11 __init__.py
+-rw-rw-r-- 1 ubuntu ubuntu    89 Sep  7 20:11 alias
+-rw-rw-r-- 1 ubuntu ubuntu   196 Sep  7 20:11 create-storage-class.yaml
+-rw-rw-r-- 1 ubuntu ubuntu  1022 Sep  7 20:11 create_pvc.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   163 Sep  7 20:25 create_sc_WaitForFirstConsumer
+-rw-rw-r-- 1 ubuntu ubuntu 26794 Sep  7 20:11 debugWeathervane.pl
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv01.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv02.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv03.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   273 Sep  7 20:11 pvc2.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   270 Sep  7 20:11 test-pvc.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   566 Sep  7 20:42 weathervane.config.k8s.quickstart
+-rw-rw-r-- 1 ubuntu ubuntu  1878 Sep  7 20:11 z
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ jobs
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ . z
+Z_DIR=/tmp/220907204641
+Error from server (AlreadyExists): error when creating "create-storage-class.yaml": storageclasses.storage.k8s.io "local-storage" already exists
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  20m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Can't open file ./Notice.txt: No such file or directory
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  20m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ ll
+total 80
+drwxrwxr-x 2 ubuntu ubuntu  4096 Sep  7 20:42 ./
+drwxrwxr-x 3 ubuntu ubuntu  4096 Sep  7 20:25 ../
+-rw-rw-r-- 1 ubuntu ubuntu     0 Sep  7 20:11 __init__.py
+-rw-rw-r-- 1 ubuntu ubuntu    89 Sep  7 20:11 alias
+-rw-rw-r-- 1 ubuntu ubuntu   196 Sep  7 20:11 create-storage-class.yaml
+-rw-rw-r-- 1 ubuntu ubuntu  1022 Sep  7 20:11 create_pvc.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   163 Sep  7 20:25 create_sc_WaitForFirstConsumer
+-rw-rw-r-- 1 ubuntu ubuntu 26794 Sep  7 20:11 debugWeathervane.pl
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv01.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv02.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv03.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   273 Sep  7 20:11 pvc2.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   270 Sep  7 20:11 test-pvc.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   566 Sep  7 20:42 weathervane.config.k8s.quickstart
+-rw-rw-r-- 1 ubuntu ubuntu  1878 Sep  7 20:11 z
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ git pull
+warning: redirecting to https://github.com/mike-moran-amd/my_python.git/
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 5 (delta 4), reused 5 (delta 4), pack-reused 0
+Unpacking objects: 100% (5/5), 431 bytes | 431.00 KiB/s, done.
+From http://github.com/mike-moran-amd/my_python
+   516903d..7c69ab9  master     -> origin/master
+Updating 516903d..7c69ab9
+Fast-forward
+ my_python/k8s/weathervane/.accept-weathervane | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 my_python/k8s/weathervane/.accept-weathervane
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ ll
+total 80
+drwxrwxr-x 2 ubuntu ubuntu  4096 Sep  7 20:51 ./
+drwxrwxr-x 3 ubuntu ubuntu  4096 Sep  7 20:25 ../
+-rw-rw-r-- 1 ubuntu ubuntu     0 Sep  7 20:51 .accept-weathervane
+-rw-rw-r-- 1 ubuntu ubuntu     0 Sep  7 20:11 __init__.py
+-rw-rw-r-- 1 ubuntu ubuntu    89 Sep  7 20:11 alias
+-rw-rw-r-- 1 ubuntu ubuntu   196 Sep  7 20:11 create-storage-class.yaml
+-rw-rw-r-- 1 ubuntu ubuntu  1022 Sep  7 20:11 create_pvc.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   163 Sep  7 20:25 create_sc_WaitForFirstConsumer
+-rw-rw-r-- 1 ubuntu ubuntu 26794 Sep  7 20:11 debugWeathervane.pl
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv01.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv02.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   462 Sep  7 20:11 pv03.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   273 Sep  7 20:11 pvc2.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   270 Sep  7 20:11 test-pvc.yaml
+-rw-rw-r-- 1 ubuntu ubuntu   566 Sep  7 20:42 weathervane.config.k8s.quickstart
+-rw-rw-r-- 1 ubuntu ubuntu  1878 Sep  7 20:11 z
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ . z
+Z_DIR=/tmp/220907205202
+Error from server (AlreadyExists): error when creating "create-storage-class.yaml": storageclasses.storage.k8s.io "local-storage" already exists
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  25m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  26m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ vi z
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ . z
+Z_DIR=/tmp/220907205306
+Error from server (AlreadyExists): error when creating "create-storage-class.yaml": storageclasses.storage.k8s.io "local-storage" already exists
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  26m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+-bash: ./debugWeathervane.pl: Permission denied
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  26m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ chmod +c debugWeathervane.pl
+chmod: invalid mode: ‘+c’
+Try 'chmod --help' for more information.
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ chmod +x debugWeathervane.pl
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ . z
+Z_DIR=/tmp/220907205327
+Error from server (AlreadyExists): error when creating "create-storage-class.yaml": storageclasses.storage.k8s.io "local-storage" already exists
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  27m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  27m
+
+$ kubectl get pv --all-namespaces
+No resources found
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ 7sc
+Command '7sc' not found, did you mean:
+  command 'jsc' from deb libjavascriptcoregtk-4.0-bin (2.36.4-0ubuntu0.22.04.1)
+  command 'osc' from deb osc (0.169.1-1)
+  command 'psc' from deb sc (7.16-4ubuntu3)
+  command 'tsc' from deb node-typescript (4.5.4+ds1-1)
+  command 'sc' from deb sc (7.16-4ubuntu3)
+  command 'hsc' from deb hsc (1.0b-0ubuntu2)
+  command 'asc' from deb asc (2.6.1.0-8build1)
+  command 'gsc' from deb gambc (4.9.3-1.2)
+  command 'fsc' from deb scala (2.11.12-5)
+  command 'lsc' from deb livescript (1.6.1+dfsg-2)
+  command 'csc' from deb chicken-bin (5.2.0-2)
+Try: sudo apt install <deb name>
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ sc
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  31m
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ pv
+No resources found
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ kubectl apply -f pv01.yaml
+persistentvolume/weathervane-pv1 created
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ pv
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   40Gi       RWO            Retain           Available           local-storage            3s
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ . z
+Z_DIR=/tmp/220907205800
+Error from server (AlreadyExists): error when creating "create-storage-class.yaml": storageclasses.storage.k8s.io "local-storage" already exists
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  31m
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   40Gi       RWO            Retain           Available           local-storage            15s
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  32m
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   40Gi       RWO            Retain           Available           local-storage            36s
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ pv
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   40Gi       RWO            Retain           Available           local-storage            91s
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ sc
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  33m
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ kubectl apply -f pv02.yaml
+persistentvolume/weathervane-pv2 created
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ kubectl apply -f pv03.yaml
+persistentvolume/weathervane-pv3 created
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ . z
+Z_DIR=/tmp/220907205940
+Error from server (AlreadyExists): error when creating "create-storage-class.yaml": storageclasses.storage.k8s.io "local-storage" already exists
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  33m
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   40Gi       RWO            Retain           Available           local-storage            115s
+weathervane-pv2   40Gi       RWO            Retain           Available           local-storage            11s
+weathervane-pv3   40Gi       RWO            Retain           Available           local-storage            3s
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+
+BEGIN OF WEATHERVANE PERL SCRIPT OUTPUT
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+clusterName: kubernetes
+kubeconfigFileName /home/ubuntu/.kube/config
+kubeconfigContext kubernetes-admin@kubernetes
+cmd kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes delete pvc weathervane-test-claim 2>&1
+out: Error from server (NotFound): persistentvolumeclaims "weathervane-test-claim" not found
+
+cmd `echo "$pvcYamlStringCopy" | kubectl --kubeconfig=$kubeconfigFileName --context=$kubeconfigContext apply -f -`\nout: persistentvolumeclaim/weathervane-test-claim created
+
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+kubectl --kubeconfig=/home/ubuntu/.kube/config --context=kubernetes-admin@kubernetes get pvc weathervane-test-claim -o=jsonpath='{.status.phase}'
+Weathervane is unable to create a persistant volume using storage class local-storage in kubernetesCluster kubernetes.
+Check the configuration of your cluster to ensure that the storage class exists and can provision persistent volumes.
+
+END OF WEATHERVANE PERL SCRIPT OUTPUT
+
+$ kubectl get sc --all-namespaces
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  33m
+
+$ kubectl get pv --all-namespaces
+NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS    REASON   AGE
+weathervane-pv1   40Gi       RWO            Retain           Available           local-storage            2m16s
+weathervane-pv2   40Gi       RWO            Retain           Available           local-storage            32s
+weathervane-pv3   40Gi       RWO            Retain           Available           local-storage            24s
+
+$ kubectl get pvc --all-namespaces
+No resources found
+
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$ kubectl delete pvc weathervane-pv1
+Error from server (NotFound): persistentvolumeclaims "weathervane-pv1" not found
+ubuntu@wv09:/home/ubuntu/my_python/my_python/k8s/weathervane$
+
+    1  uname -a
+    2  sudo snap install multipass
+    3  multipass launch -c 8 -d 50G -m 8G -n node1
+    4* multipass shell node
+    5  multipass launch -c 8 -d 50G -m 8G -n node2
+    6  multipass shell node2
+    7  ifconfig | grep inet
+    8  ping -c 1 10.26.45.13
+    9  10.26.45.123
+   10  ping 10.26.45.123
+   11  ping -c 110.26.45.123
+   12  ping -c 1 10.26.45.123
+   13  sudo vi /etc/hosts
+   14  ping -c 1 node1
+   15  ping -c 1 node2
+   16  multipass shell node1
+   17  multipass shell node2
+   18  # STEP 2 from https://www.linuxtechi.com/install-kubernetes-on-ubuntu-22-04/
+   19  sudo swapoff -a
+   20  sudo cat /etc/fstab
+   21  sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+   22  sudo cat /etc/fstab
+   23  sudo vi /etc/fstab
+   24  sudo tee /etc/modules-load.d/containerd.conf <<EOF
+overlay
+br_netfilter
+EOF
+
+   25  sudo modprobe overlay
+   26  sudo modprobe br_netfilter
+   27  sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+
+   28  sudo sysctl --system
+   29  multipass shell node1
+   30  multipass shell node2\
+   31  multipass shell node2
+   32  # STEP 3 from https://www.linuxtechi.com/install-kubernetes-on-ubuntu-22-04/
+   33  sudo apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
+   34  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
+   35  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+   36  sudo apt update
+   37  sudo apt install -y containerd.io
+   38  containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+   39  sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+   40  sudo grep SystemdCgroup /etc/containerd/config.toml
+   41  sudo systemctl restart containerd
+   42  sudo systemctl enable containerd
+   43  multipass shell node1
+   44  multipass shell node2
+   45  # STEP 4 https://www.linuxtechi.com/install-kubernetes-on-ubuntu-22-04/
+   46  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+   47  sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+   48  multipass shell node1
+   49  multipass shell node2
+   50  # STEP 5 https://www.linuxtechi.com/install-kubernetes-on-ubuntu-22-04/
+   51  sudo apt update
+   52  sudo apt install -y kubelet kubeadm kubectl
+   53  sudo apt-mark hold kubelet kubeadm kubectl
+   54  multipass shell node1
+   55  multipass shell node2
+   56  # STEP 6 https://www.linuxtechi.com/install-kubernetes-on-ubuntu-22-04/
+   57  mkdir -p $HOME/.kube
+   58  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   59  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+   60  kubectl cluster-info
+   61  kubectl get nodes
+   62  multipass shell node1
+   63  kubectl get nodes
+   64  multipass shell node2
+   65  kubectl get nodes
+   66  kubectl describe node
+   67  curl https://projectcalico.docs.tigera.io/manifests/calico.yaml -O
+   68  kubectl apply -f calico.yaml
+   69  kubectl get pods -A
+   70  kubectl get nodes
+   71  ls
+   72  git clone http://github.com/mike-moran-amd/my_python.git
+   73  git clone https://github.com/vmware/weathervane
+   74  alias sc="kubectl get sc -A"
+   75  sc
+   76  alias pv="kubectl get pv -A"
+   77  pv
+   78  alias pvc="kubectl get pvc -A"
+   79  pvc
+   80  cd my_python/my_python/k8s/weathervane/
+   81  ll
+   82  git pull
+   83  kubectl apply -f create_sc_WaitForFirstConsumer
+   84  sc
+   85  sudo apt install mlocate
+   86  locate Term/ReadKey.pm
+   87  sudo cpan Term::ReadKey
+   88  which unzip
+   89  sudo apt install unzip
+   90  which unzip
+   91  which docker
+   92  sudo apt install podman-docker
+   93  which podman
+   94  which docker
+   95  ll /usr/bin/podman
+   96  ll /usr/bin/docker
+   97  which docker
+   98  docker ps -a
+   99  ls
+  100  vi weathervane.config.k8s.quickstart
+  101  cat ~/.kube/config
+  102  ll
+  103  ~/weathervane/weathervane.pl --configFile=weathervane.config.k8s.quickstart
+  104  fg
+  105  vi weathervane.config.k8s.quickstart
+  106  git pull
+  107  vi weathervane.config.k8s.quickstart
+  108  cp weathervane.config.k8s.quickstart ~/weathervane/.
+  109  cd ~/weathervane/
+  110  ls
+  111  ./runWeathervane.pl --configFile=weathervane.config.k8s.quickstart
+  112  cd
+  113  cd my_python/my_python/k8s/weathervane/
+  114  ll
+  115  jobs
+  116  . z
+  117  ll
+  118  git pull
+  119  ll
+  120  . z
+  121  vi z
+  122  . z
+  123  chmod +c debugWeathervane.pl
+  124  chmod +x debugWeathervane.pl
+  125  . z
+  126  7sc
+  127  sc
+  128  pv
+  129  kubectl apply -f pv01.yaml
+  130  pv
+  131  . z
+  132  pv
+  133  sc
+  134  kubectl apply -f pv02.yaml
+  135  kubectl apply -f pv03.yaml
+  136  . z
+  137  kubectl delete pvc weathervane-pv1
+  138  history
