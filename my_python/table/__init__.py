@@ -7,10 +7,10 @@ DOCTEST EXAMPLES:
 >>> t = Table([('row', 'col', 'val')])
 >>> list(t.tup_gen())
 [('row', 'col', 'val')]
->>> t.length
+>>> t.length()
 1
 
->>> t.width
+>>> t.width()
 1
 
 >>> list(t.tup_gen(title='mt'))
@@ -24,10 +24,10 @@ val
 mt  | col
 row | val
 
->>> mt.length
+>>> mt.length()
 2
 
->>> mt.width
+>>> mt.width()
 2
 
 >>> print(mt.pf(title='mmt'))
@@ -41,10 +41,10 @@ mmt |   0 |   1
   0 | mt  | col
   1 | row | val
 
->>> mmt.length
+>>> mmt.length()
 3
 
->>> mmt.width
+>>> mmt.width()
 3
 
 >>> a_frame_str = 'id       name    provider   state   directory                           ' + \
@@ -333,10 +333,8 @@ class Table:
             new_val = new_padding + val
             self.set_val(row, col, new_val)
 
-    @property
     def length(self):
         return len(list(self.row_gen()))
 
-    @property
     def width(self):
         return len(list(self.col_gen()))
