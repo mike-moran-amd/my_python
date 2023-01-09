@@ -66,7 +66,7 @@ DEFAULT_ROW_SEP + 'b25e420  default virtualbox running /Users/mfm/vagrant/centos
 '    5 | a4d9a67 | default | virtualbox | running | /Users/mfm/vagrant/centos  '
 '    6 | b25e420 | default | virtualbox | running | /Users/mfm/vagrant/centos8 '
 
->>> dynamic_table, static_table = ft.split_static()
+>>> dynamic_table, static_table = ft.split_dynamic_static()
 >>> dynamic_table.print_repr_lines('')
 '  | id      | directory                  '
 '1 | 2d9d7d5 | /Users/mfm/vagrant         '
@@ -103,14 +103,8 @@ from collections import OrderedDict
 DEFAULT_ROW_SEP = '\n'
 DEFAULT_COL_SEP = ' | '
 
-
 class Table:
-
     def __init__(self, tuple_list=()):
-        """
-        Create a new Table with the given tuple list
-        :param tuple_list: list(tuple(row, col, val)) - can be empty or sparse
-        """
         self.__od = OrderedDict()
         self.extend(tuple_list)
 
@@ -203,6 +197,17 @@ class Table:
         return row_separator.join(rows)
 
     @classmethod
+    def from_vars(cls, objects):
+        tups = []
+        row = -1
+        obj_list = objects if isinstance(objects, list) else [objects]
+        for obj in obj_list:
+            for col, val in vars(obj).items():
+                row += 1
+                tups.append((row, col, val))
+        return cls(tups)
+
+    @classmethod
     def from_frame(cls,
                    frame_str,
                    row_sep=DEFAULT_ROW_SEP):
@@ -271,7 +276,7 @@ class Table:
                 new_od[key] = val
         self.__od = new_od
 
-    def split_static(self, dynamic_table=None, static_table=None):
+    def split_dynamic_static(self, dynamic_table=None, static_table=None):
         # add to existing table if provided, or create new ones
         dynamic_table = dynamic_table or Table()
         static_table = static_table or Table()
@@ -306,7 +311,7 @@ class Table:
 
     def print_repr_lines(self, title=None, row_separator=DEFAULT_ROW_SEP, row_min=None, row_max=None):
         row_counter = -1
-        for line in self.pf(title=title, row_separator=DEFAULT_ROW_SEP).split(row_separator):
+        for line in self.pf(title=title, row_separator=row_separator).split(row_separator):
             row_counter += 1
             if row_min and row_counter < row_min:
                 continue

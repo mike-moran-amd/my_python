@@ -1,7 +1,7 @@
 # -- PYTHON PACKAGE REQUIREMENTS:
 # USE: pip install -r <THIS_FILE>
-fastapi
-pydantic
-pytest-mock
-requests
-uvicorn[standard]
+#fastapi
+pydantic==1.10.2
+pytest-mock==3.10.0
+requests==2.28.1
+uvicorn[standard]==0.20.0
