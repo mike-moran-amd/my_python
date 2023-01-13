@@ -103,6 +103,7 @@ from collections import OrderedDict
 DEFAULT_ROW_SEP = '\n'
 DEFAULT_COL_SEP = ' | '
 
+
 class Table:
     def __init__(self, tuple_list=()):
         self.__od = OrderedDict()
