@@ -17,7 +17,7 @@ def start_logging(logging_level=logging.INFO, logging_format=FORMAT, logging_dat
     >>> start_logging(logging_level=logging.NOTSET)  # log everything
 
     The output of the above command is sent to stderr so it is not printed above, but below is the output from stderr
-    Jan 13 2023 16:46:21 - DEBUG - 2577 - MainThread 4373798400 - root 36 - LOGGING STARTED
+    Jan 18 2023 15:33:59 | DEBUG | 6282 | MainThread 4566642176 | root 35 | LOGGING STARTED
 
     >>> FORMAT
     '%(asctime)s | %(levelname)s | %(process)d | %(threadName)s %(thread)d | %(name)s %(lineno)d | %(message)s'
@@ -27,9 +27,9 @@ def start_logging(logging_level=logging.INFO, logging_format=FORMAT, logging_dat
 
     """
     logging.basicConfig(
-        format = logging_format,
-        datefmt = logging_date_format,
-        level = logging_level,
+        format=logging_format,
+        datefmt=logging_date_format,
+        level=logging_level,
         force=force,
         )
     logging.log(logging.DEBUG, f'LOGGING STARTED')
