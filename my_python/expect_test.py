@@ -1,34 +1,37 @@
-from my_python import expect
+from my_python import expect, table
 from pexpect import exceptions
 
-TEST_CREDS = expect.Creds(hostname='HOSTNAME', username='USERNAME', password='PASSWORD')
+TEST_CREDS = expect.Creds(hostname='10.0.1.6', username='username', password='password')
 
 
 def test__pexpect_spawn_ssh__echo_text():
     echo_text = 'Hello world!'
-    child = TEST_CREDS.spawn_ssh(command=f'echo {echo_text}')
+    child, table_tups = TEST_CREDS.spawn_ssh(command=f'echo "{echo_text}"')
+    print(f'\n{table.Table(table_tups).pf("echo_text")}')
     result = child.read()
     child.close()
-    assert child.signalstatus is None
-    assert child.status == 0
-    assert result == f' \r\n{echo_text}\r\n'
+    assert child.signal_status() is None
+    assert child.status() == 0
+    assert result == f'{echo_text}'
     pass
 
 
 def test__pexpect_spawn_ssh__fails_mkdir_etc():
-    child = TEST_CREDS.spawn_ssh(command='mkdir /etc')
+    child, table_tups = TEST_CREDS.spawn_ssh(command='mkdir /etc')
+    print(f'\n{table.Table(table_tups).pf("echo_text")}')
     result = child.read()
     child.close()
-    assert child.signalstatus is None
-    assert child.status == 256
-    assert result == b' \r\nmkdir: cannot create directory \xe2\x80\x98/etc\xe2\x80\x99: File exists\r\n'
+    assert child.signal_status() is None
+    assert child.status() == 256
+    assert result == 'mkdir: cannot create directory ‘/etc’: File exists'
     pass
 
 
 def test__pexpect_spawn_ssh__timeout():
-    timeout = 3
+    timeout = 5
     try:
-        _ = TEST_CREDS.spawn_ssh(command=f'sleep {timeout}', timeout=timeout - 1)
+        _, table_tups = TEST_CREDS.spawn_ssh(command=f'sleep {timeout}', timeout=timeout - 1)
+        print(f'\n{table.Table(table_tups).pf("echo_text")}')
         raise RuntimeError('EXPECTED EXCEPTION')
     except exceptions.TIMEOUT:
         pass
