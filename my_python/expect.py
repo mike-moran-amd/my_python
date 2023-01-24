@@ -24,30 +24,31 @@ class Creds:
                   timeout=30,
                   expect_timeout=2,
                   ):
-        table_tuples = []
-
-        def append_table_tup(row):
-            table_tuples.append((row, 'before', child.before))
-            table_tuples.append((row, 'after', child.after))
 
         ssh_command = f'ssh {self.user_at_host()} {command}'
+        logging.debug(f'pexpect.spawn(command={repr(ssh_command)}, timeout={repr(timeout)}')
         child = pexpect.spawn(command=ssh_command, timeout=timeout)
-        append_table_tup(ssh_command)
+        logging.debug(f'child spawned')
+
+        logging.debug(f'BEFORE {repr(child.before)}')
+        logging.debug(f'AFTER  {repr(child.after)}')
 
         self_read = None
         try:
-            child.expect(pattern=expect_challenge, timeout=expect_timeout)
-            append_table_tup(expect_challenge)
+            ndx = child.expect(pattern=expect_challenge, timeout=expect_timeout)
+            logging.debug(f'EXPECT NDX: {ndx}')
+
+            logging.debug(f'BEFORE {repr(child.before)}')
+            logging.debug(f'AFTER  {repr(child.after)}')
 
             child.sendline(self.__password)
-            append_table_tup('PASSWORD SENT')
+            logging.debug('PASSWORD SENT')
 
-        except EOF:
-            append_table_tup('EOF')
+        except EOF as eof:
+            logging.debug(f'EXCEPT EOF {eof}')
             self_read = child.before.decode(encoding=self.__encoding).strip()
 
-        logging.log(logging.DEBUG, f'pexpect.spawn(command={repr(ssh_command)}, timeout={repr(timeout)}')
-        return Child(child, self_read=self_read, encoding=self.__encoding), table_tuples
+        return Child(child, self_read=self_read, encoding=self.__encoding)
 
 
 class Child:
@@ -58,12 +59,17 @@ class Child:
 
     def read(self, size=-1):
         if self.__self_read is not None:
+            # if the challenge is not received, everything in the child.before buffer is the result
             ret = self.__self_read
+            # disable this code path on next read()
             self.__self_read = None
             return ret
-
+        # return read() from child
         result_bytes = self.__spawn_child.read(size=size)
         return result_bytes.decode(encoding=self.__encoding).strip()
+
+    def sendline(self, s=''):
+        return self.__spawn_child.sendline(s=s)
 
     def close(self):
         self.__spawn_child.close()
