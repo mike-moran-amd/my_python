@@ -1,13 +1,13 @@
-from my_python import expect, table
+from my_python import expect
 from pexpect import exceptions
 
 TEST_CREDS = expect.Creds(hostname='10.0.1.6', username='username', password='password')
 
 
-def test__pexpect_spawn_ssh__echo_text():
+def test_pexpect_spawn_ssh__echo_text(caplog):
+    caplog.set_level(0)  # Everything
     echo_text = 'Hello world!'
-    child, table_tups = TEST_CREDS.spawn_ssh(command=f'echo "{echo_text}"')
-    print(f'\n{table.Table(table_tups).pf("echo_text")}')
+    child = TEST_CREDS.spawn_ssh(command=f'echo "{echo_text}"')
     result = child.read()
     child.close()
     assert child.signal_status() is None
@@ -16,9 +16,8 @@ def test__pexpect_spawn_ssh__echo_text():
     pass
 
 
-def test__pexpect_spawn_ssh__fails_mkdir_etc():
-    child, table_tups = TEST_CREDS.spawn_ssh(command='mkdir /etc')
-    print(f'\n{table.Table(table_tups).pf("echo_text")}')
+def test_pexpect_spawn_ssh__fails_mkdir_etc():
+    child = TEST_CREDS.spawn_ssh(command='mkdir /etc')
     result = child.read()
     child.close()
     assert child.signal_status() is None
@@ -27,11 +26,24 @@ def test__pexpect_spawn_ssh__fails_mkdir_etc():
     pass
 
 
-def test__pexpect_spawn_ssh__timeout():
+def test_pexpect_spawn_ssh__timeout():
     timeout = 5
     try:
-        _, table_tups = TEST_CREDS.spawn_ssh(command=f'sleep {timeout}', timeout=timeout - 1)
-        print(f'\n{table.Table(table_tups).pf("echo_text")}')
+        TEST_CREDS.spawn_ssh(command=f'sleep {timeout}', timeout=timeout - 1)
         raise RuntimeError('EXPECTED EXCEPTION')
     except exceptions.TIMEOUT:
         pass
+
+
+def test_pexpect_spawn__uname(caplog):
+    caplog.set_level(0)  # Everything
+    child = TEST_CREDS.pexpect_spawn(f'ssh {TEST_CREDS.user_at_host()} uname -a')
+    child.expect()
+    result = child.read()
+    child.close()
+    print('\ntest_pexpect_spawn__uname')
+    for log in caplog.messages:
+        print('\t' + log)
+    assert child.signal_status() is None
+    assert child.status() == 0
+    assert result == 'Linux test-ubuntu 5.4.0-136-generic #153-Ubuntu SMP Thu Nov 24 15:56:58 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux'  # noqa
