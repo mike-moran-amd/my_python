@@ -58,6 +58,14 @@ class Creds:
         logging.debug(f'PASSWORD SENT')
         return self.__password
 
+    def uname(self):
+        child = self.pexpect_spawn(f'ssh {self.user_at_host()} uname -a', timeout=3)
+        child.expect()
+        result = child.read()
+        child.close()
+        logging.debug(f'uname={repr(result)}')
+        return result
+
 
 class Child:
     def __init__(self, spawn_child, self_read=None, creds=None, encoding='utf-8'):

@@ -1,7 +1,7 @@
 from my_python import expect
 from pexpect import exceptions
 
-TEST_CREDS = expect.Creds(hostname='10.0.1.6', username='username', password='password')
+TEST_CREDS = expect.Creds(hostname='hostname', username='username', password='password')
 
 
 def test_pexpect_spawn_ssh__echo_text(caplog):
@@ -36,7 +36,7 @@ def test_pexpect_spawn_ssh__timeout():
 
 
 def test_pexpect_spawn__uname(caplog):
-    caplog.set_level(0)  # Everything
+    caplog.set_level(level=0)  # Everything
     child = TEST_CREDS.pexpect_spawn(f'ssh {TEST_CREDS.user_at_host()} uname -a')
     child.expect()
     result = child.read()
@@ -47,3 +47,16 @@ def test_pexpect_spawn__uname(caplog):
     assert child.signal_status() is None
     assert child.status() == 0
     assert result == 'Linux test-ubuntu 5.4.0-136-generic #153-Ubuntu SMP Thu Nov 24 15:56:58 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux'  # noqa
+
+
+def test_uname(caplog):
+    caplog.set_level(level=0)  # Everything
+    result = TEST_CREDS.uname()
+    print(f'\n{repr(result)}')
+    print_caplog(caplog)
+
+
+def print_caplog(x):
+    print('\nCAPLOG:')
+    for log in x.messages:
+        print('\t' + log)

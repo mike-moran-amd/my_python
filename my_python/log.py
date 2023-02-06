@@ -12,9 +12,9 @@ FORMAT = ' | '.join([
 DATE_FORMAT = '%b %d %Y %H:%M:%S'
 
 
-def start_logging(logging_level=logging.INFO, logging_format=FORMAT, logging_date_format=DATE_FORMAT, force=False):
+def start_logging(level=logging.INFO, format=FORMAT, datefmt=DATE_FORMAT, force=False, **kwargs):
     """
-    >>> start_logging(logging_level=logging.NOTSET)  # log everything
+    >>> start_logging(level=logging.DEBUG)  # log everything
 
     The output of the above command is sent to stderr so it is not printed above, but below is the output from stderr
     Jan 18 2023 15:33:59 | DEBUG | 6282 | MainThread 4566642176 | root 35 | LOGGING STARTED
@@ -27,9 +27,9 @@ def start_logging(logging_level=logging.INFO, logging_format=FORMAT, logging_dat
 
     """
     logging.basicConfig(
-        format=logging_format,
-        datefmt=logging_date_format,
-        level=logging_level,
+        format=format,
+        datefmt=datefmt,
+        level=level,
         force=force,
-        )
-    logging.log(logging.DEBUG, f'LOGGING STARTED')
+        **kwargs)
+    logging.debug(f'start_logging(level={level}, format={format}, datefmt={datefmt}, force={force}, kwargs={kwargs})')
