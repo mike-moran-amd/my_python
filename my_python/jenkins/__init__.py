@@ -3,6 +3,7 @@
 >>> JobTable2.from_text(data.text_from('Jenkins_root.htm')).print_repr_lines('jt')
 
 """
+import logging
 import os
 import re
 import requests
@@ -36,6 +37,56 @@ class JenkinsHost:
         url = self.__url + '/' + local_url
         text = get_response_text(url)
         return text
+
+    def install_jenkins_docker(self):
+        if not self.ssh('which docker'):
+            logging.error('DOCKER IS NOT INSTALLED')
+            return
+        self.ssh('docker network create jenkins')
+        # TODO I think with a name, below does not restart on reboot and will not "start" unless container removed.
+        self.ssh(
+            f'docker run --restart=on-failure --detach --privileged --network jenkins --network-alias docker --env DOCKER_TLS_CERTDIR=/certs --volume jenkins-docker-certs:/certs/client --volume /var/jenkins_home:/var/jenkins_home --publish 2376:2376 docker:dind --storage-driver overlay2')
+
+        jenkins_docker_version = '2.387.1'
+        build_number = 4
+        dockerfile_text = f'''
+FROM jenkins/jenkins:{jenkins_docker_version}
+USER root
+RUN apt-get update && apt-get install -y lsb-release
+RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
+  https://download.docker.com/linux/debian/gpg
+RUN echo "deb [arch=$(dpkg --print-architecture) \
+  signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
+  https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+RUN apt-get update && apt-get install -y docker-ce-cli
+RUN apt-get install -y python3-pip && pip3 install pexpect pytest-mock
+USER jenkins
+RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
+'''[1:]  # REF: https://www.jenkins.io/doc/book/installing/docker/
+
+        self.scp_text_file(dockerfile_text, 'Dockerfile')
+
+        self.ssh(f'docker build -t myjenkins-blueocean:{jenkins_docker_version}-{build_number} .', timeout=120)
+        # TODO sometimes this fails, check status code
+
+        cid = self.ssh(
+            f'docker run --name jenkins-blueocean --restart=on-failure --detach --network jenkins --env DOCKER_HOST=tcp://docker:2376 --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 --publish 8080:8080 --publish 50000:50000 --volume /var/jenkins_home:/var/jenkins_home --volume jenkins-docker-certs:/certs/client:ro -u $(id -u) myjenkins-blueocean:{jenkins_docker_version}-{build_number}')
+        logging.debug(f'CID: {cid}')
+        return cid
+
+        '''
+        log = self.ssh(f'docker logs {cid}')
+        ss = log.split('Please use the following password to proceed to installation:')
+        if len(ss) != 2:
+            logging.error(f'CAN NOT FIND AUTIMATICALLY-GENERATED PASSWORD IN DOCKER LOG, len(ss): {len(ss)}')
+
+        agpw = ss[1].lstrip().split('\n')[0].strip()
+        logging.debug(f'AUTIMATICALLY-GENERATED PASSWORD: {agpw}')
+        '''
+        # TODO browse to http://localhost:8080 to unlock it using an automatically-generated password
+        # TODO CLICK install suggested plugins
+        # TODO ENTER admin credentials
 
 
 class JobTable2(table.Table):
