@@ -4,7 +4,11 @@ from my_python import expect
 import pexpect
 import sys
 
-TEST_CREDS = expect.Creds(hostname='hostname', username='username', password='password')
+TEST_CREDS_DICT = {
+    'hostname': 'hostname',
+    'username': 'username',
+    'password': 'password',
+}
 
 
 def print_caplog(x):
@@ -13,7 +17,88 @@ def print_caplog(x):
         print('\t' + line)
 
 
+def test_new_school(caplog):
+    # using only expect.SpawnSSH methods, make it ssh to username@hostname, provide password, then run uname
+    spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
+    # wait for a prompt
+    banner = list(spawn.banner)
+    assert banner[0].startswith('Welcome to Ubuntu 20.04.5')
+
+    spawn.sendline('uname -a')
+    spawn.expect(spawn.prompt, timeout=1)
+    spawn.sendline('echo $?')
+    spawn.expect(spawn.prompt, timeout=1)
+    spawn.sendline('exit')
+    spawn.expect(pexpect.exceptions.EOF, timeout=1)
+    pass
+
+
+def repr_args(x):
+    if isinstance(x, str):
+        return x
+    if isinstance(x, tuple):
+        tup = x
+        new_args = []
+        for x in tup:
+            if isinstance(x, str):
+                new_args.append(repr(x))
+                continue
+            for arg in x:
+                if arg == pexpect.exceptions.TIMEOUT:
+                    new_args.append('pexpect.exceptions.TIMEOUT')
+                else:
+                    new_args.append(arg)
+        return ','.join([a for a in new_args])
+
+
+def my_repr(c):
+    if isinstance(c, pexpect.exceptions.TIMEOUT):
+        return 'pexpect.exceptions.TIMEOUT'
+    else:
+        return repr(c)
+
+
+def repr_kw(kw):
+    return ', '.join([f' {k}={my_repr(v)}' for k, v in kw.items()])
+
+
+def repr_args_kw(args, kw):
+    return f'{repr_args(args)},{repr_kw(kw)}'
+
+
+class PexpectSpawnWrapper:
+
+
+    def __init__(self, *args, meta_varname='spawn', **kw):
+        self.meta_varname = meta_varname
+        logging.debug('import pexpect')
+        # logging.debug(f"spawn = pexpect.spawn({','.join([repr(a) for a in args])},{', '.join([f' {k}={repr(v)}' for k,v in kwargs.items()])})")
+        logging.debug(f"{self.meta_varname} = pexpect.spawn({repr_args(args)},{repr_kw(kw)})")
+        self.spawn = pexpect.spawn('ssh username@hostname', timeout=-1)
+
+
+    @property
+    def before(self):
+        before = self.spawn.before
+        logging.debug(f'before: {before}')
+        return before
+
+    def expect(self, *args, **kw):
+        #logging.debug(f"ndx = spawn.expect({','.join([repr(a) for a in args])},{', '.join([f' {k}={repr(v)}' for k, v in kwargs.items()])})")
+        logging.debug(f"ndx = spawn.expect({repr_args_kw(args, kw)})")
+        ndx = self.spawn.expect(*args, **kw)
+        logging.debug(f'   ndx: {ndx}')
+        return ndx
+
+    def sendline(self, *args, **kwargs):
+        logging.debug(f'sendline: {args}  {kwargs}')
+        return self.spawn.sendline(*args, **kwargs)
+
+
 def test_old_school(caplog):
+    caplog.set_level(0)  # Everything
+    #spawn = PexpectSpawnWrapper('ssh username@hostname', timeout=-1)
+
     # using only pexpect commands in a script here, make it ssh to username@hostname, provide password, then run uname
     spawn = pexpect.spawn('ssh username@hostname', timeout=-1)
 
@@ -47,74 +132,4 @@ def test_old_school(caplog):
     spawn.sendline('exit')
     spawn.expect(pexpect.exceptions.EOF, timeout=1)
     assert spawn.before == b'echo $?\r\n0\r\nusername@u20045:~$ exit\r\nlogout\r\nConnection to hostname closed.\r\r\n'
-
-
-def test_creds_spawn_uname(caplog):
-    caplog.set_level(0)  # Everything
-    spawn = TEST_CREDS.spawn('uname -a')
-    spawn.expect(pattern=[expect.EOF], timeout=3)
-    print_caplog(caplog)
-    assert expect.EOF == spawn.match
-    assert 0 == spawn.get_status()
-    print('\n' + spawn.before)
-
-
-def test_creds_spawn_ssh(caplog):
-    caplog.set_level(0)  # Everything
-    spawn = TEST_CREDS.spawn_ssh()
-    spawn.sendline('echo Hello')
-    ndx = spawn.expect(pattern=[expect.TIMEOUT, 'echo Hello'],  timeout=3)
-    assert ndx == 1
-    assert 0 == spawn.get_status()
-
-
-def test_pexpect_spawn_ssh__echo_text(caplog):
-    caplog.set_level(0)  # Everything
-    echo_text = 'Hello world!'
-    child = TEST_CREDS.spawn_ssh(command=f'echo "{echo_text}"')
-    result = child.read()
-    child.close()
-    assert child.signal_status() is None
-    assert child.status() == 0
-    assert result == f'{echo_text}'
-    pass
-
-
-def test_pexpect_spawn_ssh__fails_mkdir_etc():
-    child = TEST_CREDS.spawn_ssh(command='mkdir /etc')
-    result = child.read()
-    child.close()
-    assert child.signal_status() is None
-    assert child.status() == 256
-    assert result == 'mkdir: cannot create directory ‘/etc’: File exists'
-    pass
-
-
-def test_pexpect_spawn_ssh__timeout():
-    timeout = 5
-    try:
-        TEST_CREDS.spawn_ssh(command=f'sleep {timeout}', timeout=timeout - 1)
-        raise RuntimeError('EXPECTED EXCEPTION')
-    except exceptions.TIMEOUT:
-        pass
-
-
-def test_pexpect_spawn__uname(caplog):
-    caplog.set_level(level=0)  # Everything
-    child = TEST_CREDS.pexpect_spawn(f'ssh {TEST_CREDS.user_at_host()} uname -a')
-    child.expect()
-    result = child.read()
-    child.close()
-    print('\ntest_pexpect_spawn__uname')
-    for log in caplog.messages:
-        print('\t' + log)
-    assert child.signal_status() is None
-    assert child.status() == 0
-    assert result == 'Linux test-ubuntu 5.4.0-136-generic #153-Ubuntu SMP Thu Nov 24 15:56:58 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux'  # noqa
-
-
-def test_uname(caplog):
-    caplog.set_level(level=0)  # Everything
-    result = TEST_CREDS.uname()
-    print(f'\n{repr(result)}')
     print_caplog(caplog)

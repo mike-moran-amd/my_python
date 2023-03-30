@@ -8,42 +8,10 @@ import pexpect
 DEFAULT_ENCODING = 'utf-8'
 EOF = pexpect.exceptions.EOF
 TIMEOUT = pexpect.exceptions.TIMEOUT
-
-
-class Creds:
-    def __init__(self, hostname=None, username=None, password=None, encoding=None):
-        self.hostname = hostname or socket.gethostname()
-        self.username = username or getpass.getuser()
-        self.password = password
-        self.encoding = encoding or 'utf-8'
-        self.ssh_password_required = None
-
-    def spawn(self, command, timeout=30):
-        logging.debug(f'SPAWN: {command}  timeout: {timeout}')
-        return Spawn(pexpect.spawn(command=command, timeout=timeout), creds=self)
-
-    def user_at_host(self) -> str:
-        return self.username + '@' + self.hostname
-
-    def get_password(self):
-        return self.password
-
-    def ssh_passsword_challenge(self):
-        return f"\r{self.username}@{self.hostname}'s password: "
-
-    def spawn_ssh(self, command='', timeout=-1):
-        ssh_command = f'ssh {self.user_at_host()} {command}'.strip()
-        spawn = self.spawn(ssh_command, timeout=timeout)
-        if self.ssh_password_required in [None, True]:
-            time.sleep(3)
-            ndx = spawn.expect(pattern=[TIMEOUT, self.ssh_passsword_challenge()],  timeout=1)
-            if ndx:
-                logging.debug('PASSWORD REQUIRED')
-                # self.ssh_password_required = True
-            else:
-                logging.debug('PASSWORD NOT REQUIRED')
-                # self.ssh_password_required = False
-        return spawn
+LOCAL_CREDS = {
+    'hostname': socket.gethostname(),
+    'username': getpass.getuser(),
+}
 
 
 class Spawn:
@@ -52,53 +20,69 @@ class Spawn:
         spawn = Spawn('/bin/bash -c "ls -l | grep LOG > logs.txt"')
         spawn.expect(pexpect.EOF)
     """
-    def __init__(self, pexpect_child, creds=None):
-        self.pexpect_child = pexpect_child
-        self.creds = creds
+    def __init__(self, command, timeout=30, **kw):
+        self.kw = dict(kw)
+        self.pexpect_spawn = pexpect.spawn(command=command, timeout=timeout)
 
-    def expect(self, pattern, timeout=-1, depth=2):
+    def expect(self, pattern, timeout=3):
         logging.debug(f'EXPECT: {pattern}  timeout: {timeout}')
-        counter = 0
-        while depth - counter > 0:
-            counter += 1
-            ndx = self.pexpect_child.expect(pattern=pattern, timeout=timeout)
-            logging.debug(f'  NDX: {ndx}')
-            if pattern[ndx] == self.creds.ssh_passsword_challenge():
-                logging.debug('GOT SSH PASSWORD CHALLENGE')
-                self.sendline(self.creds.get_password())
-                ndx = self.expect([TIMEOUT, '\r\n'], timeout=1)
-                continue
-            return ndx
-
-    @property
-    def before(self):
-        return self.pexpect_child.before.decode(encoding=self.creds.encoding)
-
-    @property
-    def after(self):
-        return self.pexpect_child
-
-    @property
-    def match(self):
-        # no decode, could be EOF or TIMEOUT
-        return self.pexpect_child.match
+        ndx = self.pexpect_spawn.expect(pattern=pattern, timeout=timeout)
+        logging.debug(f'   NDX: {ndx} --> {self.pexpect_spawn.match}')
+        return ndx
 
     def sendline(self, s=''):
         logging.debug(f'SENDLINE: {s}')
-        bytes_sent = self.pexpect_child.sendline(s=s)
+        bytes_sent = self.pexpect_spawn.sendline(s=s)
         if bytes_sent < len(s):
             # Only a limited number of bytes may be sent for each line in the default terminal mode
             logging.warning(f'ONLY {bytes_sent} BYTES SENT OF LENGTH: {len(s)}')
 
     def read(self, size=-1):
-        bytes_read = self.pexpect_child.read(size=size)
+        bytes_read = self.pexpect_spawn.read(size=size)
         logging.debug(f'READ {bytes_read} BYTES')
-        return bytes_read.decode(encoding=self.creds.encoding)
+        return bytes_read.decode(encoding='utf-8')
 
     def get_status(self):
-        self.pexpect_child.close()
-        return self.pexpect_child.status
-        # or?? self.pexpect_child.signalstatus
+        self.pexpect_spawn.close()
+        return self.pexpect_spawn.status
+        # or?? self.pexpect_spawn.signalstatus
+
+
+class SpawnSSH(Spawn):
+    def __init__(self, hostname, username, password, command='', timeout=30, prompt=None, banner=None, **kw):
+        super(SpawnSSH, self).__init__(
+            f'ssh {username}@{hostname} {command}'.strip(),
+            hostname=hostname,
+            username=username,
+            password=password,
+            timout=timeout,
+            **kw)
+        ndx = self.expect([f"\r{self.kw['username']}@{self.kw['hostname']}'s password: ", TIMEOUT], timeout=3)
+        if ndx == 0:
+            self.sendline(self.kw['password'])
+            self.expect('\r\n', timeout=1)
+        self.sendline()
+        self.expect(TIMEOUT, 1)
+        self.banner = list(self.get_before_lines())
+        self.prompt = prompt or self.banner[-1]
+        self.prompt = self.prompt.replace('$', '\\$')
+        pass
+
+    def get_before_lines(self):
+        try:
+            return self.pexpect_spawn.before.decode(encoding='utf-8').split('\r\n')
+        except AttributeError:
+            return list()
+
+    def run_command(self, command, timeout=30):
+        self.sendline(command)
+        self.expect(self.prompt, timeout=timeout)
+        return self.get_before_lines()
+
+    def result_error_from_command(self, command, timeout=30):
+        result_lines = self.run_command(command, timeout=timeout)
+        error_lines = self.run_command('echo $?', timeout=1)
+        return result_lines, error_lines
 
 
 class Ilo5Creds:
@@ -172,7 +156,7 @@ class Ilo5Spawn:
         self.spawn.sendline('show')
         self.spawn.expect(self.creds.prompt, timeout=3)
 
-        before_lines = self.lines()
+        # before_lines = self.lines()
 
         # TODO pass this URI in
         self.spawn.sendline('set oemhp_image=http://10.216.178.67/all_in_one.iso')
@@ -194,4 +178,3 @@ class Ilo5Spawn:
         self.spawn.expect(self.creds.prompt, timeout=3)
         time.sleep(15)
         return self.lines()
-
