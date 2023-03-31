@@ -26,9 +26,9 @@ class Spawn:
         self.pexpect_spawn = pexpect.spawn(*args, **kw)
 
     def expect(self, *args, **kw):
-        logging.debug(f"ndx = spawn.expect({repr_args_kw(args, kw)})")
+        #logging.debug(f"ndx = spawn.expect({repr_args_kw(args, kw)})")
         ndx = self.pexpect_spawn.expect(*args, **kw)
-        logging.debug(f'# ndx: {ndx}  --> {self.pexpect_spawn.match}')
+        logging.debug(f'ndx = spawn.expect({repr_args_kw(args, kw)})  # ndx: {ndx}  --> {self.pexpect_spawn.match}')
         return ndx
 
     def sendline(self, s=''):
@@ -70,7 +70,6 @@ class SpawnSSH(Spawn):
         if ndx == 0:
             self.sendline(self.password)
             self.expect('\r\n', timeout=1)
-        self.sendline()
         self.expect(TIMEOUT, 1)
         self.banner = list(self.get_before_lines())
         self.prompt = prompt or self.banner[-1]
@@ -86,12 +85,17 @@ class SpawnSSH(Spawn):
     def run_command(self, command, timeout=30):
         self.sendline(command)
         self.expect(self.prompt, timeout=timeout)
+        #self.expect(TIMEOUT, timeout=1)
+        self.expect(TIMEOUT, timeout=.1)
+
+
         return self.get_before_lines()
 
-    def result_error_from_command(self, command, timeout=30):
-        result_lines = self.run_command(command, timeout=timeout)
-        error_lines = self.run_command('echo $?', timeout=1)
-        return result_lines, error_lines
+    def command_lines(self, command, timeout=30):
+        return [
+            self.run_command(command, timeout=timeout),
+            self.run_command('echo $?', timeout=1),
+        ]
 
     def sendline(self, s=''):
         bytes_sent = super(SpawnSSH, self).sendline(s)

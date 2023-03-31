@@ -19,12 +19,36 @@ def print_caplog(x):
         print('\t' + line)
 
 
+def test_command_lines(caplog):
+    caplog.set_level(0)  # Everything
+    spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
+    banner = spawn.banner
+    print()
+    pprint.pprint(banner)
+    if not banner[0].startswith('Welcome to Ubuntu 20.04.5'):
+        pass
+
+    results = [
+        spawn.command_lines('uname -a'),
+        spawn.command_lines('uname -a'),
+        spawn.command_lines('uname -a'),
+    ]
+    assert results[0] == results[1]
+    assert results[1] == results[2]
+
+    spawn.sendline('exit')
+    spawn.expect(pexpect.exceptions.EOF, timeout=1)
+    print_caplog(caplog)
+
+
+
 def test_new_school(caplog):
     caplog.set_level(0)  # Everything
     # using only expect.SpawnSSH methods, make it ssh to username@hostname, provide password, then run uname
     spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
     # wait for a prompt
-    banner = list(spawn.banner)
+    banner = spawn.banner
+    print()
     pprint.pprint(banner)
     assert banner[0].startswith('Welcome to Ubuntu 20.04.5')
 
@@ -35,35 +59,6 @@ def test_new_school(caplog):
     spawn.sendline('exit')
     spawn.expect(pexpect.exceptions.EOF, timeout=1)
     print_caplog(caplog)
-
-
-class PexpectSpawnWrapper:
-
-
-    def __init__(self, *args, meta_varname='spawn', **kw):
-        self.meta_varname = meta_varname
-        logging.debug('import pexpect')
-        # logging.debug(f"spawn = pexpect.spawn({','.join([repr(a) for a in args])},{', '.join([f' {k}={repr(v)}' for k,v in kwargs.items()])})")
-        logging.debug(f"spawn = pexpect.spawn({repr_args(args)},{repr_kw(kw)})")
-        self.spawn = pexpect.spawn('ssh username@hostname', timeout=-1)
-
-
-    @property
-    def before(self):
-        before = self.spawn.before
-        logging.debug(f'before: {before}')
-        return before
-
-    def expect(self, *args, **kw):
-        #logging.debug(f"ndx = spawn.expect({','.join([repr(a) for a in args])},{', '.join([f' {k}={repr(v)}' for k, v in kwargs.items()])})")
-        logging.debug(f"ndx = spawn.expect({repr_args_kw(args, kw)})")
-        ndx = self.spawn.expect(*args, **kw)
-        logging.debug(f'   ndx: {ndx}')
-        return ndx
-
-    def sendline(self, *args, **kwargs):
-        logging.debug(f'sendline: {args}  {kwargs}')
-        return self.spawn.sendline(*args, **kwargs)
 
 
 def test_old_school(caplog):
