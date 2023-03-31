@@ -19,6 +19,29 @@ def print_caplog(x):
         print('\t' + line)
 
 
+def test_enable_passwordless_sudo(caplog):
+    caplog.set_level(0)  # Everything
+    hostname = TEST_CREDS_DICT['hostname']
+    username = TEST_CREDS_DICT['username']
+    password = TEST_CREDS_DICT['password']
+
+    spawn = expect.SpawnSSH(hostname=hostname, username=username, password=password)
+    spawn.sendline('sudo -S bash')
+    ndx = spawn.expect([f'password for {username}: ', expect.TIMEOUT], timeout=1)
+    if ndx == 0:
+        spawn.sendline(f'{password}')
+        spawn.expect(expect.TIMEOUT, timeout=2)
+    else:
+        pass
+    spawn.sendline(f'echo "{username}  ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers')
+    spawn.expect(expect.TIMEOUT, timeout=2)
+    spawn.sendline('exit')
+    spawn.expect(expect.TIMEOUT, timeout=2)
+    spawn.sendline('exit')
+    spawn.expect(expect.EOF, timeout=1)
+    print_caplog(caplog)
+
+
 def test_command_lines(caplog):
     caplog.set_level(0)  # Everything
     spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
@@ -39,7 +62,6 @@ def test_command_lines(caplog):
     spawn.sendline('exit')
     spawn.expect(pexpect.exceptions.EOF, timeout=1)
     print_caplog(caplog)
-
 
 
 def test_new_school(caplog):
