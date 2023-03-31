@@ -68,13 +68,8 @@ class PexpectSpawnWrapper:
 
 def test_old_school(caplog):
     caplog.set_level(0)  # Everything
-    #spawn = PexpectSpawnWrapper('ssh username@hostname', timeout=-1)
-
     # using only pexpect commands in a script here, make it ssh to username@hostname, provide password, then run uname
-    args = ('sh username@hostname')
-    kw = { 'timeout': -1}
-    logging.debug(f'spawn = pexpect.spawn({repr_args(args)},{repr_kw(kw)})')
-    spawn = pexpect.spawn(*args, **kw)
+    spawn = pexpect.spawn('ssh username@hostname')
 
     pattern = [
         f"\rusername@hostname's password: ",
