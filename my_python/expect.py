@@ -1,4 +1,5 @@
 import getpass
+from collections.abc import Iterable
 import logging
 import socket
 import time
@@ -20,46 +21,54 @@ class Spawn:
         spawn = Spawn('/bin/bash -c "ls -l | grep LOG > logs.txt"')
         spawn.expect(pexpect.EOF)
     """
-    def __init__(self, command, timeout=30, **kw):
-        self.kw = dict(kw)
-        self.pexpect_spawn = pexpect.spawn(command=command, timeout=timeout)
+    def __init__(self, *args, **kw):
+        logging.debug(f"spawn = pexpect.spawn({repr_args_kw(args, kw)})")
+        self.pexpect_spawn = pexpect.spawn(*args, **kw)
 
-    def expect(self, pattern, timeout=3):
-        logging.debug(f'EXPECT: {pattern}  timeout: {timeout}')
-        ndx = self.pexpect_spawn.expect(pattern=pattern, timeout=timeout)
-        logging.debug(f'   NDX: {ndx} --> {self.pexpect_spawn.match}')
+    def expect(self, *args, **kw):
+        logging.debug(f"ndx = spawn.expect({repr_args_kw(args, kw)})")
+        ndx = self.pexpect_spawn.expect(*args, **kw)
+        logging.debug(f'# ndx: {ndx}  --> {self.pexpect_spawn.match}')
         return ndx
 
     def sendline(self, s=''):
-        logging.debug(f'SENDLINE: {s}')
+        logging.debug(f'spawn.sendline({repr(s)})')
         bytes_sent = self.pexpect_spawn.sendline(s=s)
-        if bytes_sent < len(s):
-            # Only a limited number of bytes may be sent for each line in the default terminal mode
-            logging.warning(f'ONLY {bytes_sent} BYTES SENT OF LENGTH: {len(s)}')
+        # logging.debug(f'# bytes_sent: {bytes_sent}')
+        return bytes_sent
 
+    '''
     def read(self, size=-1):
         bytes_read = self.pexpect_spawn.read(size=size)
         logging.debug(f'READ {bytes_read} BYTES')
         return bytes_read.decode(encoding='utf-8')
+    '''
 
     def get_status(self):
         self.pexpect_spawn.close()
         return self.pexpect_spawn.status
         # or?? self.pexpect_spawn.signalstatus
 
+    @property
+    def before(self):
+        before = self.pexpect_spawn.before
+        logging.debug(f'# spawn.before: {before}')
+        return before
+
 
 class SpawnSSH(Spawn):
-    def __init__(self, hostname, username, password, command='', timeout=30, prompt=None, banner=None, **kw):
-        super(SpawnSSH, self).__init__(
-            f'ssh {username}@{hostname} {command}'.strip(),
-            hostname=hostname,
-            username=username,
-            password=password,
-            timout=timeout,
-            **kw)
-        ndx = self.expect([f"\r{self.kw['username']}@{self.kw['hostname']}'s password: ", TIMEOUT], timeout=3)
+    """
+    """
+    def __init__(self, hostname, username, password, command='', timeout=-1, prompt=None, banner=None, **kw):
+        super(SpawnSSH, self).__init__(f'ssh {username}@{hostname} {command}'.strip(), timeout=timeout, **kw)
+        self.hostname = hostname
+        self.username = username
+        self.password = password
+        self.banner = banner
+        self.prompt = prompt
+        ndx = self.expect([f"\r{self.username}@{self.hostname}'s password: ", TIMEOUT], timeout=3)
         if ndx == 0:
-            self.sendline(self.kw['password'])
+            self.sendline(self.password)
             self.expect('\r\n', timeout=1)
         self.sendline()
         self.expect(TIMEOUT, 1)
@@ -83,6 +92,12 @@ class SpawnSSH(Spawn):
         result_lines = self.run_command(command, timeout=timeout)
         error_lines = self.run_command('echo $?', timeout=1)
         return result_lines, error_lines
+
+    def sendline(self, s=''):
+        bytes_sent = super(SpawnSSH, self).sendline(s)
+        if bytes_sent < len(s):
+            # Only a limited number of bytes may be sent for each line in the default terminal mode
+            logging.warning(f'ONLY {bytes_sent} BYTES SENT OF LENGTH: {len(s)}')
 
 
 class Ilo5Creds:
@@ -178,3 +193,59 @@ class Ilo5Spawn:
         self.spawn.expect(self.creds.prompt, timeout=3)
         time.sleep(15)
         return self.lines()
+
+
+def repr_args(x):
+    if isinstance(x, str):
+        return repr(x)
+    elif isinstance(x, int):
+        return x
+    elif x == pexpect.exceptions.TIMEOUT:
+        return 'pexpect.exceptions.TIMEOUT'
+    elif x == pexpect.exceptions.EOF:
+        return 'pexpect.exceptions.EOF'
+    elif isinstance(x, tuple):
+        tup = x
+        new_args = []
+        for x in tup:
+            if x == pexpect.exceptions.TIMEOUT:
+                new_args.append('pexpect.exceptions.TIMEOUT')
+                continue
+            elif x == pexpect.exceptions.EOF:
+                new_args.append('pexpect.exceptions.EOF')
+                continue
+            elif isinstance(x, int):
+                new_args.append(x)
+                continue
+            elif isinstance(x, str):
+                new_args.append(repr(x))
+                continue
+            elif isinstance(x, Iterable):
+                for arg in x:
+                    if arg == pexpect.exceptions.TIMEOUT:
+                        new_args.append('pexpect.exceptions.TIMEOUT')
+                    elif arg == pexpect.exceptions.EOF:
+                        new_args.append('pexpect.exceptions.EOF')
+                    else:
+                        new_args.append(arg)
+            else:
+                raise ValueError(type(x))
+        return ', '.join([repr(a) for a in new_args])
+    else:
+        raise ValueError(x)
+
+
+def my_repr(c):
+    if isinstance(c, pexpect.exceptions.TIMEOUT):
+        return 'pexpect.exceptions.TIMEOUT'
+    else:
+        return repr(c)
+
+
+def repr_kw(kw):
+    return ', '.join([f' {k}={my_repr(v)}' for k, v in kw.items()])
+
+
+def repr_args_kw(args, kw):
+    return f'{repr_args(args)},{repr_kw(kw)}'
+

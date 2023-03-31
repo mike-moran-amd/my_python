@@ -1,5 +1,7 @@
 import io
 import logging
+import pprint
+
 from my_python import expect
 import pexpect
 import sys
@@ -18,10 +20,12 @@ def print_caplog(x):
 
 
 def test_new_school(caplog):
+    caplog.set_level(0)  # Everything
     # using only expect.SpawnSSH methods, make it ssh to username@hostname, provide password, then run uname
     spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
     # wait for a prompt
     banner = list(spawn.banner)
+    pprint.pprint(banner)
     assert banner[0].startswith('Welcome to Ubuntu 20.04.5')
 
     spawn.sendline('uname -a')
@@ -30,40 +34,7 @@ def test_new_school(caplog):
     spawn.expect(spawn.prompt, timeout=1)
     spawn.sendline('exit')
     spawn.expect(pexpect.exceptions.EOF, timeout=1)
-    pass
-
-
-def repr_args(x):
-    if isinstance(x, str):
-        return x
-    if isinstance(x, tuple):
-        tup = x
-        new_args = []
-        for x in tup:
-            if isinstance(x, str):
-                new_args.append(repr(x))
-                continue
-            for arg in x:
-                if arg == pexpect.exceptions.TIMEOUT:
-                    new_args.append('pexpect.exceptions.TIMEOUT')
-                else:
-                    new_args.append(arg)
-        return ','.join([a for a in new_args])
-
-
-def my_repr(c):
-    if isinstance(c, pexpect.exceptions.TIMEOUT):
-        return 'pexpect.exceptions.TIMEOUT'
-    else:
-        return repr(c)
-
-
-def repr_kw(kw):
-    return ', '.join([f' {k}={my_repr(v)}' for k, v in kw.items()])
-
-
-def repr_args_kw(args, kw):
-    return f'{repr_args(args)},{repr_kw(kw)}'
+    print_caplog(caplog)
 
 
 class PexpectSpawnWrapper:
@@ -73,7 +44,7 @@ class PexpectSpawnWrapper:
         self.meta_varname = meta_varname
         logging.debug('import pexpect')
         # logging.debug(f"spawn = pexpect.spawn({','.join([repr(a) for a in args])},{', '.join([f' {k}={repr(v)}' for k,v in kwargs.items()])})")
-        logging.debug(f"{self.meta_varname} = pexpect.spawn({repr_args(args)},{repr_kw(kw)})")
+        logging.debug(f"spawn = pexpect.spawn({repr_args(args)},{repr_kw(kw)})")
         self.spawn = pexpect.spawn('ssh username@hostname', timeout=-1)
 
 
@@ -100,7 +71,10 @@ def test_old_school(caplog):
     #spawn = PexpectSpawnWrapper('ssh username@hostname', timeout=-1)
 
     # using only pexpect commands in a script here, make it ssh to username@hostname, provide password, then run uname
-    spawn = pexpect.spawn('ssh username@hostname', timeout=-1)
+    args = ('sh username@hostname')
+    kw = { 'timeout': -1}
+    logging.debug(f'spawn = pexpect.spawn({repr_args(args)},{repr_kw(kw)})')
+    spawn = pexpect.spawn(*args, **kw)
 
     pattern = [
         f"\rusername@hostname's password: ",
