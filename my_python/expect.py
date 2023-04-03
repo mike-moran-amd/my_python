@@ -1,12 +1,13 @@
+#!python3
+# encoding=utf-8
 import getpass
 from collections.abc import Iterable
 import logging
+import pexpect
+import pprint
 import socket
 import time
 
-import pexpect
-
-DEFAULT_ENCODING = 'utf-8'
 EOF = pexpect.exceptions.EOF
 TIMEOUT = pexpect.exceptions.TIMEOUT
 LOCAL_CREDS = {
@@ -19,20 +20,21 @@ class Spawn:
     """
     If you need to PIPE, REDIRECT or replace $parameters, then you need to run bash:
         spawn = Spawn('/bin/bash -c "ls -l | grep LOG > logs.txt"')
-        spawn.expect(pexpect.EOF)
+        spawn.expect(EOF)
     """
+
     def __init__(self, *args, **kw):
         logging.debug(f"spawn = pexpect.spawn({repr_args_kw(args, kw)})")
         self.pexpect_spawn = pexpect.spawn(*args, **kw)
 
     def expect(self, *args, **kw):
-        #logging.debug(f"ndx = spawn.expect({repr_args_kw(args, kw)})")
+        logging.debug(f'ndx = spawn.expect({repr_args_kw(args, kw)})')
         ndx = self.pexpect_spawn.expect(*args, **kw)
-        logging.debug(f'ndx = spawn.expect({repr_args_kw(args, kw)})  # ndx: {ndx}  --> {self.pexpect_spawn.match}')
+        logging.debug(f'# {ndx} --> {self.pexpect_spawn.match}')
         return ndx
 
     def sendline(self, s=''):
-        logging.debug(f'spawn.sendline({repr(s)})')
+        logging.debug(f'spawn.sendline({repr_x(s)})')
         bytes_sent = self.pexpect_spawn.sendline(s=s)
         # logging.debug(f'# bytes_sent: {bytes_sent}')
         return bytes_sent
@@ -46,8 +48,9 @@ class Spawn:
 
     def get_status(self):
         self.pexpect_spawn.close()
-        return self.pexpect_spawn.status
-        # or?? self.pexpect_spawn.signalstatus
+        status = self.pexpect_spawn.status
+        # TODO ¿include self.pexpect_spawn.signalstatus?
+        logging.debug(f'# spawn.status: {status}')
 
     @property
     def before(self):
@@ -59,6 +62,7 @@ class Spawn:
 class SpawnSSH(Spawn):
     """
     """
+
     def __init__(self, hostname, username, password, command='', timeout=-1, prompt=None, banner=None, **kw):
         super(SpawnSSH, self).__init__(f'ssh {username}@{hostname} {command}'.strip(), timeout=timeout, **kw)
         self.hostname = hostname
@@ -85,9 +89,8 @@ class SpawnSSH(Spawn):
     def run_command(self, command, timeout=30):
         self.sendline(command)
         self.expect(self.prompt, timeout=timeout)
-        #self.expect(TIMEOUT, timeout=1)
+        # self.expect(TIMEOUT, timeout=1)
         self.expect(TIMEOUT, timeout=.1)
-
 
         return self.get_before_lines()
 
@@ -199,57 +202,36 @@ class Ilo5Spawn:
         return self.lines()
 
 
-def repr_args(x):
-    if isinstance(x, str):
-        return repr(x)
-    elif isinstance(x, int):
-        return x
-    elif x == pexpect.exceptions.TIMEOUT:
+def repr_x(x):
+    if x == TIMEOUT:
         return 'pexpect.exceptions.TIMEOUT'
-    elif x == pexpect.exceptions.EOF:
+    elif x == EOF:
         return 'pexpect.exceptions.EOF'
-    elif isinstance(x, tuple):
-        tup = x
-        new_args = []
-        for x in tup:
-            if x == pexpect.exceptions.TIMEOUT:
-                new_args.append('pexpect.exceptions.TIMEOUT')
-                continue
-            elif x == pexpect.exceptions.EOF:
-                new_args.append('pexpect.exceptions.EOF')
-                continue
-            elif isinstance(x, int):
-                new_args.append(x)
-                continue
-            elif isinstance(x, str):
-                new_args.append(repr(x))
-                continue
-            elif isinstance(x, Iterable):
-                for arg in x:
-                    if arg == pexpect.exceptions.TIMEOUT:
-                        new_args.append('pexpect.exceptions.TIMEOUT')
-                    elif arg == pexpect.exceptions.EOF:
-                        new_args.append('pexpect.exceptions.EOF')
-                    else:
-                        new_args.append(arg)
-            else:
-                raise ValueError(type(x))
-        return ', '.join([repr(a) for a in new_args])
+    elif isinstance(x, str):
+        # str is iterable, next elif goes to infinity without this
+        return pprint.pformat(x)
+    elif isinstance(x, Iterable):
+        return ', '.join([repr_x(i) for i in x])
     else:
-        raise ValueError(x)
-
-
-def my_repr(c):
-    if isinstance(c, pexpect.exceptions.TIMEOUT):
-        return 'pexpect.exceptions.TIMEOUT'
-    else:
-        return repr(c)
+        return pprint.pformat(x)
 
 
 def repr_kw(kw):
-    return ', '.join([f' {k}={my_repr(v)}' for k, v in kw.items()])
+    return ', '.join([f'{k}={repr_x(v)}' for k, v in kw.items()])
 
 
 def repr_args_kw(args, kw):
-    return f'{repr_args(args)},{repr_kw(kw)}'
+    #logging.debug(f'ARGS: {args}')
+    #logging.debug(f'KW: {kw}')
 
+    new_args = repr_x(args)
+    new_kw = repr_kw(kw)
+
+    #logging.debug(f'NEW ARGS: {new_args}')
+    #logging.debug(f'NEW KW: {new_kw}')
+
+    return f'{new_args}, {new_kw}'
+
+
+def pf(x):
+    return f'{pprint.pformat(x)}'

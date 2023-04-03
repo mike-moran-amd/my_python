@@ -1,10 +1,10 @@
-import io
+#import io
+#from collections.abc import Iterable
 import logging
 import pprint
-
-from my_python import expect
+from my_python import expect, table
 import pexpect
-import sys
+#import sys
 
 TEST_CREDS_DICT = {
     'hostname': 'hostname',
@@ -13,10 +13,38 @@ TEST_CREDS_DICT = {
 }
 
 
-def print_caplog(x):
-    print('\nCAPLOG:')
-    for line in x.messages:
-        print('\t' + line)
+def test_run_logged_line_with_expected_results(caplog):
+    caplog.set_level(0)  # Everything
+    spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
+    print_caplog(caplog, startswith='spawn = pexpect.spawn(')
+
+
+def test_repr_x(caplog):
+    caplog.set_level(0)  # Everything
+    args_expected_tups = [
+        (('ssh username@hostname',), 'ssh username@hostname'),
+        #('a string', '"a string"'),  # strings get double quoted
+        #("string with single 'quotes'", '"string with single \'quotes\'"'),  # single quotes are ignored
+        #('string with double "quotes"', 'string with double "quotes"'),  # embedded double quotes get escaped
+        #(('string in parens is not a tuple'), '"string in parens is not a tuple"'),  # noqa - Remove Rednundant Parens
+        #(('string in a tuple',), '"string in a tuple"'),  # the comma on the end forces a tuple of one thing
+    ]
+    table_tups = []
+    row = -1
+    for args, expected in args_expected_tups:
+        row += 1
+        table_tups.append((row, 'args', args))
+        repr_x = expect.repr_x(args)
+        table_tups.append((row, 'pf(args)', pprint.pformat(args)))
+        table_tups.append((row, 'pf(repr_x(args))', pprint.pformat(repr_x)))
+        table_tups.append((row, 'repr_x(args)', repr_x))
+        table_tups.append((row, 'TEST', 'pass' if expected == repr_x else 'FAIL'))
+        table_tups.append((row, 'expected', expected))
+        table_tups.append((row, 'RESULT', pprint.pformat(repr_x) == pprint.pformat(args)))
+    t = table.Table(table_tups)
+    print()
+    print(t.pf('row'))
+    print_caplog(caplog)
 
 
 def test_enable_passwordless_sudo(caplog):
@@ -113,9 +141,17 @@ def test_old_school(caplog):
 
     spawn.sendline('echo $?')
     spawn.expect(escaped_prompt, timeout=1)
-    assert spawn.before == b'uname -a\r\nLinux u20045 5.4.0-137-generic #154-Ubuntu SMP Thu Jan 5 17:03:22 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux'
+    assert spawn.before == b'uname -a\r\nLinux u20045 5.4.0-137-generic #154-Ubuntu SMP Thu Jan 5 17:03:22 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux'  # noqa
 
     spawn.sendline('exit')
     spawn.expect(pexpect.exceptions.EOF, timeout=1)
     assert spawn.before == b'echo $?\r\n0\r\nusername@u20045:~$ exit\r\nlogout\r\nConnection to hostname closed.\r\r\n'
     print_caplog(caplog)
+
+
+def print_caplog(x, startswith=''):
+    print('\nCAPLOG:')
+    for line in x.messages:
+        if startswith and not line.startswith(startswith):
+            continue
+        print('\t' + line)
