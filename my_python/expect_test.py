@@ -1,10 +1,7 @@
-#import io
-#from collections.abc import Iterable
 import logging
 import pprint
 from my_python import expect, table
 import pexpect
-#import sys
 
 TEST_CREDS_DICT = {
     'hostname': 'hostname',
@@ -15,7 +12,7 @@ TEST_CREDS_DICT = {
 
 def test_run_logged_line_with_expected_results(caplog):
     caplog.set_level(0)  # Everything
-    spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
+    _ = expect.SpawnSSH(**TEST_CREDS_DICT)
     print_caplog(caplog, startswith='spawn = pexpect.spawn(')
 
 
@@ -23,11 +20,11 @@ def test_repr_x(caplog):
     caplog.set_level(0)  # Everything
     args_expected_tups = [
         (('ssh username@hostname',), 'ssh username@hostname'),
-        #('a string', '"a string"'),  # strings get double quoted
-        #("string with single 'quotes'", '"string with single \'quotes\'"'),  # single quotes are ignored
-        #('string with double "quotes"', 'string with double "quotes"'),  # embedded double quotes get escaped
-        #(('string in parens is not a tuple'), '"string in parens is not a tuple"'),  # noqa - Remove Rednundant Parens
-        #(('string in a tuple',), '"string in a tuple"'),  # the comma on the end forces a tuple of one thing
+        # ('a string', '"a string"'),  # strings get double quoted
+        # ("string with single 'quotes'", '"string with single \'quotes\'"'),  # single quotes are ignored
+        # ('string with double "quotes"', 'string with double "quotes"'),  # embedded double quotes get escaped
+        # (('string in parens is not a tuple'), '"string in parens is not a tuple"'),  # noqa - Remove Rednundant Parens
+        # (('string in a tuple',), '"string in a tuple"'),  # the comma on the end forces a tuple of one thing
     ]
     table_tups = []
     row = -1
