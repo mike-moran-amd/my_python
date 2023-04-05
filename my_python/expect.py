@@ -24,8 +24,18 @@ class Spawn:
     """
 
     def __init__(self, *args, **kw):
-        logging.debug(f"spawn = pexpect.spawn({repr_args_kw(args, kw)})")
-        self.pexpect_spawn = pexpect.spawn(*args, **kw)
+        self.args = args
+        self.kw = kw
+        self.retry()  # actually the first try
+
+    def retry(self):
+        try:
+            # if there was an old spawn, close() it
+            self.pexpect_spawn.close()
+        except AttributeError:
+            pass
+        logging.debug(f"pexpect.spawn({repr_args_kw(self.args, self.kw)})")
+        self.pexpect_spawn = pexpect.spawn(*self.args, **self.kw)
 
     def expect(self, *args, **kw):
         logging.debug(f'ndx = spawn.expect({repr_args_kw(args, kw)})')
@@ -49,7 +59,6 @@ class Spawn:
     def get_status(self):
         self.pexpect_spawn.close()
         status = self.pexpect_spawn.status
-        # TODO ¿include self.pexpect_spawn.signalstatus?
         logging.debug(f'# spawn.status: {status}')
 
     @property
@@ -58,33 +67,113 @@ class Spawn:
         logging.debug(f'# spawn.before: {before}')
         return before
 
+    def get_before_lines(self):
+        try:
+            lines = self.pexpect_spawn.before.decode(encoding='utf-8').split('\r\n')
+            logging.debug(f'GET BEFORE LINES: \n{pprint.pformat(lines)}')
+            return lines
+        except AttributeError:
+            return list()
+
+
+class SpawnBash(Spawn):
+    def __init__(self, hostname, username, password=None, command='', timeout=-1, prompt=None, banner=None,
+                 send_sudo_password_limit=3):
+        super(SpawnBash, self).__init__(f'bash {command}'.strip(), timeout=timeout)
+        self.hostname = hostname
+        self.username = username
+        self.password = password
+        self.prompt = prompt
+        self.sudo_password_pattern = 'FIXME'  # TODO
+        expect_pattern_list = [
+            self.sudo_password_pattern,
+            TIMEOUT]
+        counter = 0
+        while counter < send_sudo_password_limit:
+            counter += 1
+            if counter > 1:
+                logging.debug(f'RETRY: {counter - 1}')
+            ndx = self.expect(expect_pattern_list, timeout=4)
+            if expect_pattern_list[ndx] == self.sudo_password_pattern:
+                if counter > send_sudo_password_limit:
+                    logging.error('INVALID PASSWORD')
+                    raise ValueError(counter)
+                self.sendline(self.password)
+                continue
+            if expect_pattern_list[ndx] == TIMEOUT:
+                logging.debug('BASH READY')
+                break
+        # end while
+        self.prompt = prompt or self.get_before_lines()[-1]
+        self.prompt = self.prompt.replace('$', '\\$')
+        self.expect(self.prompt, timeout=.1)
+        logging.debug(f'self.before: {self.before}')
+
 
 class SpawnSSH(Spawn):
     """
     """
 
-    def __init__(self, hostname, username, password, command='', timeout=-1, prompt=None, banner=None, **kw):
-        super(SpawnSSH, self).__init__(f'ssh {username}@{hostname} {command}'.strip(), timeout=timeout, **kw)
+    def handle_host_key_verification_failed(self):
+        ss = self.before.decode('utf-8').split('remove with:')
+        if len(ss) == 2:
+            keygen_command = ss[1].strip()
+            if keygen_command.startswith('ssh-keygen -f'):
+                keygen_command = keygen_command.split('\n')[0].strip()
+                logging.debug('REMOVING OLD KNOWN HOST')
+                bash_spawn = SpawnBash(**LOCAL_CREDS)
+                bash_spawn.sendline(keygen_command)
+                bash_spawn.expect(bash_spawn.prompt, timeout=1)
+                keygen_result = bash_spawn.get_before_lines()
+                logging.debug(f'KEYGEN RESULT: {keygen_result}')
+                bash_spawn.sendline('echo $?')
+                bash_spawn.expect(bash_spawn.prompt, timeout=1)
+                status_result = bash_spawn.get_before_lines()
+                logging.debug(f'KEYGEN STATUS: {status_result}')
+                bash_spawn.sendline('exit')
+                bash_spawn.expect(EOF, timeout=1)
+                assert status_result == '0'
+                # This fatal, and the command will need to be retried
+                logging.debug('RETRYING THE COMMAND')
+                self.retry()
+
+    def __init__(self, hostname, username, password, command='', timeout=-1, prompt=None, banner=None, counter_limit=3):
+        super(SpawnSSH, self).__init__(f'ssh {username}@{hostname} {command}'.strip(), timeout=timeout)
         self.hostname = hostname
         self.username = username
         self.password = password
         self.banner = banner
         self.prompt = prompt
-        ndx = self.expect([f"\r{self.username}@{self.hostname}'s password: ", TIMEOUT], timeout=3)
-        if ndx == 0:
-            self.sendline(self.password)
-            self.expect('\r\n', timeout=1)
-        self.expect(TIMEOUT, 1)
-        self.banner = list(self.get_before_lines())
-        self.prompt = prompt or self.banner[-1]
-        self.prompt = self.prompt.replace('$', '\\$')
-        pass
+        self.host_key_verification_failed_pattern = '\r\r\nHost key verification failed.\r\r\n'
+        self.ssh_user_at_host_password_pattern = f"\r{self.username}@{self.hostname}'s password: "
+        expect_pattern_list = [
+            self.host_key_verification_failed_pattern,
+            self.ssh_user_at_host_password_pattern,
+            TIMEOUT]
 
-    def get_before_lines(self):
-        try:
-            return self.pexpect_spawn.before.decode(encoding='utf-8').split('\r\n')
-        except AttributeError:
-            return list()
+        while counter < counter_limit:
+            counter += 1
+            if counter > 1:
+                logging.debug(f'RETRY: {counter - 1}')
+
+            ndx = self.expect(expect_pattern_list, timeout=3)
+
+            if expect_pattern_list[ndx] == self.host_key_verification_failed_pattern:
+                if counter != 1:
+                    logging.debug('WEIRD, THIS SHOULD HAVE BEEN FIXED LAST RETRY')
+                    raise RuntimeError('INFINITE HOST KEY VALIDATION ERROR?')
+                self.handle_host_key_verification_failed()
+                # above retries the spawn connection and replaces self.pexpect_spawn with new instance
+                continue
+            elif expect_pattern_list[ndx] == self.ssh_user_at_host_password_pattern:
+                self.sendline(self.password)
+                self.expect('\r\n', timeout=1)
+                continue
+            elif expect_pattern_list[ndx] == TIMEOUT:
+                self.banner = list(self.get_before_lines())
+                self.prompt = prompt or self.banner[-1]
+                self.prompt = self.prompt.replace('$', '\\$')
+                break
 
     def run_command(self, command, timeout=30):
         self.sendline(command)
@@ -221,14 +310,14 @@ def repr_kw(kw):
 
 
 def repr_args_kw(args, kw):
-    #logging.debug(f'ARGS: {args}')
-    #logging.debug(f'KW: {kw}')
+    # logging.debug(f'ARGS: {args}')
+    # logging.debug(f'KW: {kw}')
 
     new_args = repr_x(args)
     new_kw = repr_kw(kw)
 
-    #logging.debug(f'NEW ARGS: {new_args}')
-    #logging.debug(f'NEW KW: {new_kw}')
+    # logging.debug(f'NEW ARGS: {new_args}')
+    # logging.debug(f'NEW KW: {new_kw}')
 
     return f'{new_args}, {new_kw}'
 
