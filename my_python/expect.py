@@ -77,7 +77,14 @@ class Spawn:
 
 
 class SpawnBash(Spawn):
-    def __init__(self, hostname, username, password=None, command='', timeout=-1, prompt=None, banner=None,
+    def __init__(self,
+                 hostname=socket.gethostname(),
+                 username=getpass.getuser(),
+                 password=None,
+                 command='',
+                 timeout=-1,
+                 prompt=None,
+                 banner=None,
                  send_sudo_password_limit=3):
         super(SpawnBash, self).__init__(f'bash {command}'.strip(), timeout=timeout)
         self.hostname = hostname
@@ -96,7 +103,7 @@ class SpawnBash(Spawn):
             ndx = self.expect(expect_pattern_list, timeout=4)
             if expect_pattern_list[ndx] == self.sudo_password_pattern:
                 if counter > send_sudo_password_limit:
-                    logging.error('INVALID PASSWORD')
+                    logging.error('INVALID PASSWORD LIMIT EXCEEDED: {counter}')
                     raise ValueError(counter)
                 self.sendline(self.password)
                 continue
@@ -133,30 +140,41 @@ class SpawnSSH(Spawn):
                 bash_spawn.sendline('exit')
                 bash_spawn.expect(EOF, timeout=1)
                 assert status_result == '0'
-                # This fatal, and the command will need to be retried
+                # the command will need to be retried
                 logging.debug('RETRYING THE COMMAND')
                 self.retry()
 
-    def __init__(self, hostname, username, password, command='', timeout=-1, prompt=None, banner=None, counter_limit=3):
+    def __init__(self,
+                 hostname,
+                 username,
+                 password,
+                 command='',
+                 timeout=-1,
+                 prompt=None,
+                 banner_lines=None,
+                 counter_limit=3):
         super(SpawnSSH, self).__init__(f'ssh {username}@{hostname} {command}'.strip(), timeout=timeout)
         self.hostname = hostname
         self.username = username
         self.password = password
-        self.banner = banner
+        self.banner_lines = banner_lines
         self.prompt = prompt
         self.host_key_verification_failed_pattern = '\r\r\nHost key verification failed.\r\r\n'
         self.ssh_user_at_host_password_pattern = f"\r{self.username}@{self.hostname}'s password: "
+        self.authenticity_pattern = '\? '  # 'Are you sure you want to continue connecting (yes/no/[fingerprint])\\? '
         expect_pattern_list = [
             self.host_key_verification_failed_pattern,
+            self.authenticity_pattern,
             self.ssh_user_at_host_password_pattern,
             TIMEOUT]
 
+        counter = 0
         while counter < counter_limit:
             counter += 1
             if counter > 1:
                 logging.debug(f'RETRY: {counter - 1}')
 
-            ndx = self.expect(expect_pattern_list, timeout=3)
+            ndx = self.expect(expect_pattern_list, timeout=2)
 
             if expect_pattern_list[ndx] == self.host_key_verification_failed_pattern:
                 if counter != 1:
@@ -165,14 +183,19 @@ class SpawnSSH(Spawn):
                 self.handle_host_key_verification_failed()
                 # above retries the spawn connection and replaces self.pexpect_spawn with new instance
                 continue
+            elif expect_pattern_list[ndx] == self.authenticity_pattern:
+                self.sendline('yes')
+                self.expect('\r\n', timeout=1)
+                continue
             elif expect_pattern_list[ndx] == self.ssh_user_at_host_password_pattern:
                 self.sendline(self.password)
                 self.expect('\r\n', timeout=1)
                 continue
             elif expect_pattern_list[ndx] == TIMEOUT:
-                self.banner = list(self.get_before_lines())
-                self.prompt = prompt or self.banner[-1]
-                self.prompt = self.prompt.replace('$', '\\$')
+                self.banner_lines = banner_lines or self.get_before_lines()
+                self.prompt = prompt or self.banner_lines[-1].replace('$', '\\$')
+                self.expect(self.prompt, timeout=1)
+                logging.debug('SpawnSSH READY')
                 break
 
     def run_command(self, command, timeout=30):

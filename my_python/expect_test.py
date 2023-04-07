@@ -1,6 +1,6 @@
 import logging
 import pprint
-from my_python import expect, table
+from my_python import expect
 import pexpect
 
 TEST_CREDS_DICT = {
@@ -10,10 +10,39 @@ TEST_CREDS_DICT = {
 }
 
 
+def test_spawn_bash(caplog):
+    caplog.set_level(0)  # Everything
+    spawn = expect.SpawnBash(**expect.LOCAL_CREDS)
+    spawn.sendline('uname -a')
+    spawn.expect(spawn.prompt, timeout=1)
+    uname = spawn.get_before_lines()[1]
+    assert uname.startswith('Linux ')
+    assert uname.index('-Ubuntu') != -1
+    # assert spawn.get_before_lines()[1] == 'Linux mm 5.4.0-144-generic #161-Ubuntu SMP Fri Feb 3 14:49:04 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux'
+    spawn.sendline('whoami')
+    spawn.expect(spawn.prompt, timeout=1)
+    assert spawn.get_before_lines()[1] == TEST_CREDS_DICT["username"]
+    print_caplog(caplog)  # , startswith='self.before: ')
+    # TODO self.before ?= b'6.08s - pydevd: Sending message related to process being replaced timed-out after 5 seconds\r\n'
+
+
 def test_run_logged_line_with_expected_results(caplog):
     caplog.set_level(0)  # Everything
-    _ = expect.SpawnSSH(**TEST_CREDS_DICT)
-    print_caplog(caplog, startswith='spawn = pexpect.spawn(')
+    spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
+    lines = spawn.get_before_lines()
+
+    spawn.sendline('uname -a')
+    ndx = spawn.expect([spawn.prompt, expect.TIMEOUT], timeout=2)
+    lines = spawn.get_before_lines()
+
+    sudo_password_pattern = f' password for {TEST_CREDS_DICT["username"]}: '
+    spawn.sendline('sudo bash')
+    ndx = spawn.expect([sudo_password_pattern, expect.TIMEOUT], timeout=1)
+    if ndx == 0:
+        spawn.sendline(TEST_CREDS_DICT["password"])
+    lines = spawn.get_before_lines()
+
+    print_caplog(caplog)  # , startswith='spawn = pexpect.spawn(')
 
 
 def test_repr_x(caplog):
@@ -38,9 +67,9 @@ def test_repr_x(caplog):
         table_tups.append((row, 'TEST', 'pass' if expected == repr_x else 'FAIL'))
         table_tups.append((row, 'expected', expected))
         table_tups.append((row, 'RESULT', pprint.pformat(repr_x) == pprint.pformat(args)))
-    t = table.Table(table_tups)
+    # t = table.Table(table_tups)
     print()
-    print(t.pf('row'))
+    # print(t.pf('row'))
     print_caplog(caplog)
 
 
@@ -70,7 +99,7 @@ def test_enable_passwordless_sudo(caplog):
 def test_command_lines(caplog):
     caplog.set_level(0)  # Everything
     spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
-    banner = spawn.banner
+    banner = spawn.banner_lines
     print()
     pprint.pprint(banner)
     if not banner[0].startswith('Welcome to Ubuntu 20.04.5'):
@@ -94,7 +123,7 @@ def test_new_school(caplog):
     # using only expect.SpawnSSH methods, make it ssh to username@hostname, provide password, then run uname
     spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
     # wait for a prompt
-    banner = spawn.banner
+    banner = spawn.banner_lines
     print()
     pprint.pprint(banner)
     assert banner[0].startswith('Welcome to Ubuntu 20.04.5')
