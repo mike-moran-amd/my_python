@@ -26,15 +26,13 @@ class Spawn:
     def __init__(self, *args, **kw):
         self.args = args
         self.kw = kw
-        self.retry()  # actually the first try
+        self.pexpect_spawn = pexpect.spawn(*self.args, **self.kw)
 
     def retry(self):
-        try:
-            # if there was an old spawn, close() it
+        if self.pexpect_spawn is not None:
+            logging.debug('CLOSED')
             self.pexpect_spawn.close()
-        except AttributeError:
-            pass
-        logging.debug(f"pexpect.spawn({repr_args_kw(self.args, self.kw)})")
+        logging.debug(f'RETRY')
         self.pexpect_spawn = pexpect.spawn(*self.args, **self.kw)
 
     def expect(self, *args, **kw):
@@ -47,6 +45,9 @@ class Spawn:
         logging.debug(f'spawn.sendline({repr_x(s)})')
         bytes_sent = self.pexpect_spawn.sendline(s=s)
         # logging.debug(f'# bytes_sent: {bytes_sent}')
+        if bytes_sent < len(s):
+            # Only a limited number of bytes may be sent for each line in the default terminal mode
+            logging.warning(f'ONLY {bytes_sent} BYTES SENT OF LENGTH: {len(s)}')
         return bytes_sent
 
     '''
@@ -113,7 +114,7 @@ class SpawnBash(Spawn):
         # end while
         self.prompt = prompt or self.get_before_lines()[-1]
         self.prompt = self.prompt.replace('$', '\\$')
-        self.expect(self.prompt, timeout=.1)
+        self.expect(self.prompt, timeout=1)
         logging.debug(f'self.before: {self.before}')
 
 
@@ -180,8 +181,8 @@ class SpawnSSH(Spawn):
                 if counter != 1:
                     logging.debug('WEIRD, THIS SHOULD HAVE BEEN FIXED LAST RETRY')
                     raise RuntimeError('INFINITE HOST KEY VALIDATION ERROR?')
+                #  retry the spawn connection and replaces self.pexpect_spawn with new instance
                 self.handle_host_key_verification_failed()
-                # above retries the spawn connection and replaces self.pexpect_spawn with new instance
                 continue
             elif expect_pattern_list[ndx] == self.authenticity_pattern:
                 self.sendline('yes')
@@ -198,18 +199,25 @@ class SpawnSSH(Spawn):
                 logging.debug('SpawnSSH READY')
                 break
 
-    def run_command(self, command, timeout=30):
+    def result_from_command(self, command, timeout=1.0) -> str:
         self.sendline(command)
         self.expect(self.prompt, timeout=timeout)
-        # self.expect(TIMEOUT, timeout=1)
-        self.expect(TIMEOUT, timeout=.1)
+        lines = self.get_before_lines()
+        assert lines[0] == command
+        assert lines[-1] == ''
+        result = '\n'.join(lines[1:])
+        return result
 
-        return self.get_before_lines()
+    def result_status_from_command(self, command, timeout=30):
+        result = self.result_from_command(command, timeout=timeout)
+        status = self.result_from_command('echo $?', timeout=.1)
+        status = status.strip()
+        return result, status
 
     def command_lines(self, command, timeout=30):
         return [
-            self.run_command(command, timeout=timeout),
-            self.run_command('echo $?', timeout=1),
+            self.result_status_from_command(command, timeout=timeout),
+            self.result_status_from_command('echo $?', timeout=1),
         ]
 
     def sendline(self, s=''):
@@ -336,14 +344,17 @@ def repr_args_kw(args, kw):
     # logging.debug(f'ARGS: {args}')
     # logging.debug(f'KW: {kw}')
 
-    new_args = repr_x(args)
+    #new_args = repr_x(args)
+    new_args = pf(args)
     new_kw = repr_kw(kw)
 
     # logging.debug(f'NEW ARGS: {new_args}')
     # logging.debug(f'NEW KW: {new_kw}')
-
-    return f'{new_args}, {new_kw}'
+    result = f'{new_args}, {new_kw}'
+    result = result.replace("<class 'pexpect.exceptions.TIMEOUT'>", 'TIMEOUT')
+    result = result.replace("<class 'pexpect.exceptions.EOF'>", 'EOF')
+    return result
 
 
 def pf(x):
-    return f'{pprint.pformat(x)}'
+    return f'{pprint.pformat(x, compact=True, width=200)}'

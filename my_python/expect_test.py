@@ -1,13 +1,21 @@
 import logging
 import pprint
 from my_python import expect
-import pexpect
 
 TEST_CREDS_DICT = {
     'hostname': 'hostname',
     'username': 'username',
     'password': 'password',
 }
+
+
+def test_run_command(caplog):
+    caplog.set_level(0)  # Everything
+    spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
+    result, error = spawn.result_status_from_command('uname -a')
+    assert result == 'Linux u20045 5.4.0-137-generic #154-Ubuntu SMP Thu Jan 5 17:03:22 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux\n'  # noqa
+    assert error == '0'
+    print_caplog(caplog)  # , startswith='self.before: ')
 
 
 def test_spawn_bash(caplog):
@@ -96,48 +104,21 @@ def test_enable_passwordless_sudo(caplog):
     print_caplog(caplog)
 
 
-def test_command_lines(caplog):
-    caplog.set_level(0)  # Everything
-    spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
-    banner = spawn.banner_lines
-    print()
-    pprint.pprint(banner)
-    if not banner[0].startswith('Welcome to Ubuntu 20.04.5'):
-        pass
-
-    results = [
-        spawn.command_lines('uname -a'),
-        spawn.command_lines('uname -a'),
-        spawn.command_lines('uname -a'),
-    ]
-    assert results[0] == results[1]
-    assert results[1] == results[2]
-
-    spawn.sendline('exit')
-    spawn.expect(pexpect.exceptions.EOF, timeout=1)
-    print_caplog(caplog)
-
-
-def test_new_school(caplog):
+def test_expect_spawn_ssh(caplog):
     caplog.set_level(0)  # Everything
     # using only expect.SpawnSSH methods, make it ssh to username@hostname, provide password, then run uname
     spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
-    # wait for a prompt
-    banner = spawn.banner_lines
-    print()
-    pprint.pprint(banner)
-    assert banner[0].startswith('Welcome to Ubuntu 20.04.5')
-
     spawn.sendline('uname -a')
     spawn.expect(spawn.prompt, timeout=1)
     spawn.sendline('echo $?')
     spawn.expect(spawn.prompt, timeout=1)
     spawn.sendline('exit')
-    spawn.expect(pexpect.exceptions.EOF, timeout=1)
+    spawn.expect(expect.EOF, timeout=1)
     print_caplog(caplog)
 
 
-def test_old_school(caplog):
+def test_pexpect_spawn_ssh(caplog):
+    import pexpect
     caplog.set_level(0)  # Everything
     # using only pexpect commands in a script here, make it ssh to username@hostname, provide password, then run uname
     spawn = pexpect.spawn('ssh username@hostname')
