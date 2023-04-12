@@ -24,15 +24,16 @@ class Spawn:
     """
 
     def __init__(self, *args, **kw):
+        logging.debug(f'PEXPECT.SPAWN({repr_args_kw(args, kw)})')
         self.args = args
         self.kw = kw
         self.pexpect_spawn = pexpect.spawn(*self.args, **self.kw)
 
     def retry(self):
         if self.pexpect_spawn is not None:
-            logging.debug('CLOSED')
+            logging.debug('RETRY CLOSED OLD SPAWN')
             self.pexpect_spawn.close()
-        logging.debug(f'RETRY')
+        logging.debug(f'RETRY REPLACING OLD SPAWN  args={self.args}  kw={self.kw}')
         self.pexpect_spawn = pexpect.spawn(*self.args, **self.kw)
 
     def expect(self, *args, **kw):
@@ -44,7 +45,6 @@ class Spawn:
     def sendline(self, s=''):
         logging.debug(f'spawn.sendline({repr_x(s)})')
         bytes_sent = self.pexpect_spawn.sendline(s=s)
-        # logging.debug(f'# bytes_sent: {bytes_sent}')
         if bytes_sent < len(s):
             # Only a limited number of bytes may be sent for each line in the default terminal mode
             logging.warning(f'ONLY {bytes_sent} BYTES SENT OF LENGTH: {len(s)}')
@@ -71,7 +71,7 @@ class Spawn:
     def get_before_lines(self):
         try:
             lines = self.pexpect_spawn.before.decode(encoding='utf-8').split('\r\n')
-            logging.debug(f'GET BEFORE LINES: \n{pprint.pformat(lines)}')
+            logging.debug(f'GET BEFORE LINES: \n{pprint.pformat(lines, width=200)}\n')
             return lines
         except AttributeError:
             return list()
@@ -101,6 +101,7 @@ class SpawnBash(Spawn):
             counter += 1
             if counter > 1:
                 logging.debug(f'RETRY: {counter - 1}')
+            # TODO the sudo password could be expected for all overloaded expect(), maybe?
             ndx = self.expect(expect_pattern_list, timeout=4)
             if expect_pattern_list[ndx] == self.sudo_password_pattern:
                 if counter > send_sudo_password_limit:
@@ -124,9 +125,11 @@ class SpawnSSH(Spawn):
 
     def handle_host_key_verification_failed(self):
         ss = self.before.decode('utf-8').split('remove with:')
+        logging.debug(f'HANDLE HOSTKEY VERIFICATION: {ss}')
         if len(ss) == 2:
             keygen_command = ss[1].strip()
             if keygen_command.startswith('ssh-keygen -f'):
+                logging.debug(f'KEYGEN COMMAND: {keygen_command}')
                 keygen_command = keygen_command.split('\n')[0].strip()
                 logging.debug('REMOVING OLD KNOWN HOST')
                 bash_spawn = SpawnBash(**LOCAL_CREDS)
@@ -138,9 +141,14 @@ class SpawnSSH(Spawn):
                 bash_spawn.expect(bash_spawn.prompt, timeout=1)
                 status_result = bash_spawn.get_before_lines()
                 logging.debug(f'KEYGEN STATUS: {status_result}')
-                bash_spawn.sendline('exit')
-                bash_spawn.expect(EOF, timeout=1)
-                assert status_result == '0'
+                assert status_result == ['echo $?', '0', '']
+
+
+                # Instead of trying to exit gracefully (which is causing problems) just retry
+                #bash_spawn.sendline('exit')
+                #ndx = bash_spawn.expect([EOF, TIMEOUT], timeout=1)
+
+
                 # the command will need to be retried
                 logging.debug('RETRYING THE COMMAND')
                 self.retry()
@@ -153,7 +161,7 @@ class SpawnSSH(Spawn):
                  timeout=-1,
                  prompt=None,
                  banner_lines=None,
-                 counter_limit=3):
+                 counter_limit=4):
         super(SpawnSSH, self).__init__(f'ssh {username}@{hostname} {command}'.strip(), timeout=timeout)
         self.hostname = hostname
         self.username = username
@@ -197,7 +205,9 @@ class SpawnSSH(Spawn):
                 self.prompt = prompt or self.banner_lines[-1].replace('$', '\\$')
                 self.expect(self.prompt, timeout=1)
                 logging.debug('SpawnSSH READY')
-                break
+                return
+        logging.error(f'COUNTER_LIMIT: {counter_limit} EXCEEDED')
+        raise ValueError(counter_limit)
 
     def result_from_command(self, command, timeout=1.0) -> str:
         self.sendline(command)
@@ -207,6 +217,13 @@ class SpawnSSH(Spawn):
         assert lines[-1] == ''
         result = '\n'.join(lines[1:])
         return result
+
+    def status_from_command(self, command, timeout=1.0) -> str:
+        self.sendline(command)
+        self.expect(self.prompt, timeout=timeout)
+        status = self.result_from_command('echo $?', timeout=.1)
+        status = status.strip()
+        return status
 
     def result_status_from_command(self, command, timeout=30):
         result = self.result_from_command(command, timeout=timeout)
@@ -225,6 +242,19 @@ class SpawnSSH(Spawn):
         if bytes_sent < len(s):
             # Only a limited number of bytes may be sent for each line in the default terminal mode
             logging.warning(f'ONLY {bytes_sent} BYTES SENT OF LENGTH: {len(s)}')
+
+    def sudo_bash(self):
+        self.sendline('sudo bash')
+        self.expect('\r\n', timeout=1)
+        ndx = self.expect([f'password for {self.username}: ', TIMEOUT], timeout=1)
+        if ndx == 0:
+            self.sendline(self.password)
+            self.expect('\r\n', timeout=1)
+        ndx = self.expect(TIMEOUT, timeout=.1)
+        new_prompt = self.get_before_lines()[0]
+        self.expect(new_prompt, timeout=1)
+        logging.debug('SUDO BASH READY')
+        return new_prompt
 
 
 class Ilo5Creds:
