@@ -1,5 +1,6 @@
 #!python3
 # encoding=utf-8
+import datetime
 import getpass
 from collections.abc import Iterable
 import logging
@@ -14,6 +15,16 @@ LOCAL_CREDS = {
     'hostname': socket.gethostname(),
     'username': getpass.getuser(),
 }
+
+
+def escape_pattern(pattern_str: str) -> str:
+    retval = pattern_str
+    retval = retval.replace('?', '\\\\?')
+    retval = retval.replace('[', '\\\\[')
+    retval = retval.replace(']', '\\\\]')
+    retval = retval.replace('(', '\\\\(')
+    retval = retval.replace(')', '\\\\)')
+    return retval
 
 
 class Spawn:
@@ -38,8 +49,10 @@ class Spawn:
 
     def expect(self, *args, **kw):
         logging.debug(f'ndx = spawn.expect({repr_args_kw(args, kw)})')
+        then = datetime.datetime.now()
         ndx = self.pexpect_spawn.expect(*args, **kw)
-        logging.debug(f'# {ndx} --> {self.pexpect_spawn.match}')
+        td = datetime.datetime.now() - then
+        logging.debug(f'    = {ndx}  # {pf(self.pexpect_spawn.match)}  td={td}')
         return ndx
 
     def sendline(self, s=''):
@@ -61,6 +74,7 @@ class Spawn:
         self.pexpect_spawn.close()
         status = self.pexpect_spawn.status
         logging.debug(f'# spawn.status: {status}')
+        return status
 
     @property
     def before(self):
@@ -76,13 +90,85 @@ class Spawn:
         except AttributeError:
             return list()
 
+    def get_prompt(self):
+        self.expect(TIMEOUT, timeout=1)
+        lines = self.get_before_lines()
+        prompt = lines[-1]
+        prompt = prompt.replace('$', '\\S')
+        return prompt
+
+
+class CredSpawn(Spawn):
+    """
+    Provides credentials for Spawn expect() commands
+    """
+    def __init__(
+            self,
+            command,
+            hostname=socket.gethostname(),
+            username=getpass.getuser(),
+            password=None,
+            **kw):
+        kw['timeout'] = kw.get('timeout', -1)
+        super(CredSpawn, self).__init__(command, **kw)
+        self.hostname = hostname
+        self.username = username
+        self.password = password
+
+        if self.hostname != socket.gethostname():
+            self.handle_host_key_verification_failed()
+            self.handle_authenticity_of_host_challenge()
+            self.handle_ssh_username_at_hostname_password_challenge()
+            pass
+
+    def handle_host_key_verification_failed(self):
+        if 0 == self.expect(['\r\r\nHost key verification failed.\r\r\n', TIMEOUT], timeout=1):
+            logging.debug('handle_host_key_verification_failed')
+            keygen_command = f'ssh-keygen -R {self.hostname}'  # this default works, but offered methods may be better.
+            # Ubuntu sends the ssh-keygen command we need to remove the offending host, use it if present
+            ss = self.before.decode('utf-8').split('remove with:')
+            if len(ss) == 2:
+                s = ss[1].strip()
+                if s.startswith('ssh-keygen -f'):
+                    keygen_command = s.split('\n')[0].strip()
+                    logging.debug(f'KEYGEN COMMAND FROM EXPECT: {keygen_command}')
+
+            if keygen_command is None:
+                logging.debug('UNABLE TO DETERMINE SSH-KEYGEN COMMAND')
+                raise RuntimeError()
+
+            logging.debug('REMOVING OLD KNOWN HOST')
+            spawn = Spawn(keygen_command)
+            spawn.expect(EOF, timeout=1)
+            lines = spawn.get_before_lines()
+            status = spawn.get_status()
+            if status != 0:
+                logging.error(f'EXPECTED 0 == STATUS GOT: {status}')
+                raise ValueError(status)
+            self.retry()
+
+    def handle_authenticity_of_host_challenge(self):
+        pattern = escape_pattern('Are you sure you want to continue connecting (yes/no/[fingerprint])? ')
+        if 0 == self.expect([pattern, TIMEOUT], timeout=1):
+            logging.debug("handle_authenticity_of_host_challenge")
+            self.sendline('yes')
+
+    def handle_ssh_username_at_hostname_password_challenge(self):
+        if 0 == self.expect([f"{self.username}@{self.hostname}'s password: ", TIMEOUT], timeout=1):
+            logging.debug("handle_ssh_username_at_hostname_password_challenge")
+            self.sendline(self.password)
+
+    def sendline(self, s=''):
+        super(CredSpawn, self).sendline(s)
+        self.expect('\r\n', timeout=1)
+
 
 class SpawnBash(Spawn):
     def __init__(self,
+                 command='',
                  hostname=socket.gethostname(),
                  username=getpass.getuser(),
                  password=None,
-                 command='',
                  timeout=-1,
                  prompt=None,
                  banner=None,
@@ -94,7 +180,7 @@ class SpawnBash(Spawn):
         self.prompt = prompt
         self.sudo_password_pattern = 'FIXME'  # TODO
         expect_pattern_list = [
-            self.sudo_password_pattern,
+            #self.sudo_password_pattern,
             TIMEOUT]
         counter = 0
         while counter < send_sudo_password_limit:
@@ -387,4 +473,7 @@ def repr_args_kw(args, kw):
 
 
 def pf(x):
-    return f'{pprint.pformat(x, compact=True, width=200)}'
+    ret = f'{pprint.pformat(x, compact=True, width=200)}'
+    ret = ret.replace("<class 'pexpect.exceptions.TIMEOUT'>", 'TIMEOUT')
+    ret = ret.replace("<class 'pexpect.exceptions.EOF'>", 'EOF')
+    return ret

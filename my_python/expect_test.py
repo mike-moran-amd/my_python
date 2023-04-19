@@ -162,3 +162,14 @@ def print_caplog(x, startswith=''):
         if startswith and not line.startswith(startswith):
             continue
         print('\t' + line)
+
+
+def test_cred_spawn_ssh(caplog):
+    caplog.set_level(0)
+    spawn_ssh = expect.CredSpawn('ssh username@hostname', **TEST_CREDS_DICT)
+    prompt = spawn_ssh.get_prompt()
+    spawn_ssh.expect(prompt, timeout=1)
+    spawn_ssh.sendline('uname -a')
+    spawn_ssh.expect(prompt, timeout=1)
+    logging.debug('SpawnSSH READY')
+    print_caplog(caplog)
