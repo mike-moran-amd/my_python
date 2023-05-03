@@ -1,8 +1,6 @@
 #!python3
 # encoding=utf-8
-import datetime
 import getpass
-from collections.abc import Iterable
 import logging
 import pexpect
 import pprint
@@ -11,19 +9,29 @@ import time
 
 EOF = pexpect.exceptions.EOF
 TIMEOUT = pexpect.exceptions.TIMEOUT
+
+
+def pf(x, compact=True, width=200):
+    ret = f'{pprint.pformat(x, compact=compact, width=width)}'
+    ret = ret.replace("<class 'pexpect.exceptions.TIMEOUT'>", 'TIMEOUT')
+    ret = ret.replace("<class 'pexpect.exceptions.EOF'>", 'EOF')
+    return ret
+
+
 LOCAL_CREDS = {
     'hostname': socket.gethostname(),
     'username': getpass.getuser(),
 }
 
 
-def escape_pattern(pattern_str: str) -> str:
-    retval = pattern_str
-    retval = retval.replace('?', '\\\\?')
-    retval = retval.replace('[', '\\\\[')
-    retval = retval.replace(']', '\\\\]')
-    retval = retval.replace('(', '\\\\(')
-    retval = retval.replace(')', '\\\\)')
+def pattern_for_expect(pattern: str) -> str:
+    retval = pattern
+    # These symbols have special meanings in regular expression pattern matching and must be "escaped"
+    retval = retval.replace('?', '\\?')
+    retval = retval.replace('[', '\\[')
+    retval = retval.replace(']', '\\]')
+    retval = retval.replace('(', '\\(')
+    retval = retval.replace(')', '\\)')
     return retval
 
 
@@ -35,28 +43,39 @@ class Spawn:
     """
 
     def __init__(self, *args, **kw):
-        logging.debug(f'PEXPECT.SPAWN({repr_args_kw(args, kw)})')
         self.args = args
         self.kw = kw
+        self.pexpect_spawn = None
+        self.invoke()
+
+    def __repr__(self) -> str:
+        s = f"({pf(self.args)}, {', '.join([f'{k}={pf(v)}' for k, v in self.kw.items()])})"
+        return f'pexpect.spawn{s}'
+
+    def invoke(self):
+        logging.debug(f'SPAWN.INVOKE {self}')
         self.pexpect_spawn = pexpect.spawn(*self.args, **self.kw)
+
+    def close(self):
+        if self.pexpect_spawn is not None:
+            logging.debug(f'SPAWN.CLOSE {self}')
+            self.pexpect_spawn.close()
+            self.pexpect_spawn = None
 
     def retry(self):
-        if self.pexpect_spawn is not None:
-            logging.debug('RETRY CLOSED OLD SPAWN')
-            self.pexpect_spawn.close()
-        logging.debug(f'RETRY REPLACING OLD SPAWN  args={self.args}  kw={self.kw}')
-        self.pexpect_spawn = pexpect.spawn(*self.args, **self.kw)
+        logging.debug(f'SPAWN.RETRY {self}')
+        self.close()
+        self.invoke()
 
     def expect(self, *args, **kw):
-        logging.debug(f'ndx = spawn.expect({repr_args_kw(args, kw)})')
-        then = datetime.datetime.now()
+        s = f"({pf(args)}, {', '.join([f'{k}={pf(v)}' for k, v in kw.items()])})"
+        logging.debug(f'NDX = SPAWN.EXPECT{s}')
         ndx = self.pexpect_spawn.expect(*args, **kw)
-        td = datetime.datetime.now() - then
-        logging.debug(f'    = {ndx}  # {pf(self.pexpect_spawn.match)}  td={td}')
+        logging.debug(f'  {ndx} = {pf(self.pexpect_spawn.match)}')
         return ndx
 
     def sendline(self, s=''):
-        logging.debug(f'spawn.sendline({repr_x(s)})')
+        logging.debug(f'SPAWN.SENDLINE({pf(s)})')
         bytes_sent = self.pexpect_spawn.sendline(s=s)
         if bytes_sent < len(s):
             # Only a limited number of bytes may be sent for each line in the default terminal mode
@@ -73,14 +92,8 @@ class Spawn:
     def get_status(self):
         self.pexpect_spawn.close()
         status = self.pexpect_spawn.status
-        logging.debug(f'# spawn.status: {status}')
+        logging.debug(f'SPAWN.STATUS: {status}')
         return status
-
-    @property
-    def before(self):
-        before = self.pexpect_spawn.before
-        logging.debug(f'# spawn.before: {before}')
-        return before
 
     def get_before_lines(self):
         try:
@@ -90,12 +103,22 @@ class Spawn:
         except AttributeError:
             return list()
 
-    def get_prompt(self):
+    '''
+    @property
+    def before(self):
+        before = self.pexpect_spawn.before
+        logging.debug(f'# spawn.before: {before}')
+        return before
+    '''
+
+    def get_prompt(self) -> str:
         self.expect(TIMEOUT, timeout=1)
         lines = self.get_before_lines()
         prompt = lines[-1]
-        prompt = prompt.replace('$', '\\S')
-        return prompt
+        if not prompt:
+            logging.error(f'PROMPT IS INVALID - LINES: \n{pf(lines, compact=False)}\n')
+            raise ValueError(lines)
+        return pattern_for_expect(prompt)
 
 
 class CredSpawn(Spawn):
@@ -114,53 +137,64 @@ class CredSpawn(Spawn):
         self.hostname = hostname
         self.username = username
         self.password = password
+        # useful inspection attributes tailored for debugging and logging
+        self.before = ''
+        self.lls = []
 
         if self.hostname != socket.gethostname():
-            self.handle_host_key_verification_failed()
+            # expect these when invoking remote commands like "ssh"
+            self.check_host_key_verification_failed()
             self.handle_authenticity_of_host_challenge()
             self.handle_ssh_username_at_hostname_password_challenge()
             pass
 
-    def handle_host_key_verification_failed(self):
-        if 0 == self.expect(['\r\r\nHost key verification failed.\r\r\n', TIMEOUT], timeout=1):
-            logging.debug('handle_host_key_verification_failed')
-            keygen_command = f'ssh-keygen -R {self.hostname}'  # this default works, but offered methods may be better.
-            # Ubuntu sends the ssh-keygen command we need to remove the offending host, use it if present
-            ss = self.before.decode('utf-8').split('remove with:')
-            if len(ss) == 2:
-                s = ss[1].strip()
-                if s.startswith('ssh-keygen -f'):
-                    keygen_command = s.split('\n')[0].strip()
-                    logging.debug(f'KEYGEN COMMAND FROM EXPECT: {keygen_command}')
+    def check_host_key_verification_failed(self):
+        pattern = pattern_for_expect('\r\r\nHost key verification failed.\r\r\n')
+        if 1 == self.expect([pattern, TIMEOUT], timeout=1):
+            return
+        logging.debug('HOST KEY VERIFICATION FAILED')
+        keygen_command = f'ssh-keygen -R {self.hostname}'  # this default works, but offered methods may be better.
+        # Ubuntu sends the ssh-keygen command we need to remove the offending host key, use it if present
+        ss = self.before.split('remove with:')
+        if len(ss) == 2:
+            s = ss[1].strip()
+            if s.startswith('ssh-keygen -f'):
+                keygen_command = s.split('\n')[0].strip()
+                logging.debug(f'KEYGEN COMMAND FROM EXPECT: {keygen_command}')
 
-            if keygen_command is None:
-                logging.debug('UNABLE TO DETERMINE SSH-KEYGEN COMMAND')
-                raise RuntimeError()
+        if keygen_command is None:
+            logging.debug('UNABLE TO DETERMINE SSH-KEYGEN COMMAND')
+            raise RuntimeError()
 
-            logging.debug('REMOVING OLD KNOWN HOST')
-            spawn = Spawn(keygen_command)
-            spawn.expect(EOF, timeout=1)
-            lines = spawn.get_before_lines()
-            status = spawn.get_status()
-            if status != 0:
-                logging.error(f'EXPECTED 0 == STATUS GOT: {status}')
-                raise ValueError(status)
-            self.retry()
+        logging.debug('REMOVING OLD KNOWN HOST')
+        spawn = Spawn(keygen_command)
+        spawn.expect(EOF, timeout=1)
+        status = spawn.get_status()
+        if status != 0:
+            logging.error(f'EXPECTED 0 == STATUS GOT: {status}')
+            raise ValueError(status)
+        self.retry()
 
     def handle_authenticity_of_host_challenge(self):
-        pattern = escape_pattern('Are you sure you want to continue connecting (yes/no/[fingerprint])? ')
+        #pattern = pattern_for_expect('Are you sure you want to continue connecting (yes/no/[fingerprint])? ')
+        pattern = pattern_for_expect('continue connecting (yes/no/[fingerprint])? ')
         if 0 == self.expect([pattern, TIMEOUT], timeout=1):
             logging.debug("handle_authenticity_of_host_challenge")
             self.sendline('yes')
+            self.expect(['\r\n'], timeout=1)
 
     def handle_ssh_username_at_hostname_password_challenge(self):
-        if 0 == self.expect([f"{self.username}@{self.hostname}'s password: ", TIMEOUT], timeout=1):
+        pattern = f"{self.username}@{self.hostname}'s password: "
+        if 0 == self.expect([pattern, TIMEOUT], timeout=1):
             logging.debug("handle_ssh_username_at_hostname_password_challenge")
             self.sendline(self.password)
+            self.expect(['\r\n'], timeout=1)
 
-    def sendline(self, s=''):
-        super(CredSpawn, self).sendline(s)
-        self.expect('\r\n', timeout=1)
+    def expect(self, *args, **kw):
+        ndx = super(CredSpawn, self).expect(*args, **kw)
+        self.before = self.pexpect_spawn.before.decode(encoding='utf-8')
+        self.lls.append(self.before.split('\r\n'))
+        return ndx
 
 
 class SpawnBash(Spawn):
@@ -438,42 +472,3 @@ class Ilo5Spawn:
         return self.lines()
 
 
-def repr_x(x):
-    if x == TIMEOUT:
-        return 'pexpect.exceptions.TIMEOUT'
-    elif x == EOF:
-        return 'pexpect.exceptions.EOF'
-    elif isinstance(x, str):
-        # str is iterable, next elif goes to infinity without this
-        return pprint.pformat(x)
-    elif isinstance(x, Iterable):
-        return ', '.join([repr_x(i) for i in x])
-    else:
-        return pprint.pformat(x)
-
-
-def repr_kw(kw):
-    return ', '.join([f'{k}={repr_x(v)}' for k, v in kw.items()])
-
-
-def repr_args_kw(args, kw):
-    # logging.debug(f'ARGS: {args}')
-    # logging.debug(f'KW: {kw}')
-
-    #new_args = repr_x(args)
-    new_args = pf(args)
-    new_kw = repr_kw(kw)
-
-    # logging.debug(f'NEW ARGS: {new_args}')
-    # logging.debug(f'NEW KW: {new_kw}')
-    result = f'{new_args}, {new_kw}'
-    result = result.replace("<class 'pexpect.exceptions.TIMEOUT'>", 'TIMEOUT')
-    result = result.replace("<class 'pexpect.exceptions.EOF'>", 'EOF')
-    return result
-
-
-def pf(x):
-    ret = f'{pprint.pformat(x, compact=True, width=200)}'
-    ret = ret.replace("<class 'pexpect.exceptions.TIMEOUT'>", 'TIMEOUT')
-    ret = ret.replace("<class 'pexpect.exceptions.EOF'>", 'EOF')
-    return ret

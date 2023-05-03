@@ -1,5 +1,4 @@
 import logging
-import pprint
 from my_python import expect
 
 TEST_CREDS_DICT = {
@@ -13,7 +12,8 @@ def test_run_command(caplog):
     caplog.set_level(0)  # Everything
     spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
     result, error = spawn.result_status_from_command('uname -a')
-    assert result == 'Linux u20045 5.4.0-137-generic #154-Ubuntu SMP Thu Jan 5 17:03:22 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux\n'  # noqa
+    # assert result == 'Linux u20045 5.4.0-137-generic #154-Ubuntu SMP Thu Jan 5 17:03:22 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux\n'  # noqa
+    assert result == 'Linux u20045 5.4.0-146-generic #163-Ubuntu SMP Fri Mar 17 18:26:02 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux\n'  # noqa
     assert error == '0'
     print_caplog(caplog)  # , startswith='self.before: ')
 
@@ -51,34 +51,6 @@ def test_run_logged_line_with_expected_results(caplog):
     lines = spawn.get_before_lines()
 
     print_caplog(caplog)  # , startswith='spawn = pexpect.spawn(')
-
-
-def test_repr_x(caplog):
-    caplog.set_level(0)  # Everything
-    args_expected_tups = [
-        (('ssh username@hostname',), 'ssh username@hostname'),
-        # ('a string', '"a string"'),  # strings get double quoted
-        # ("string with single 'quotes'", '"string with single \'quotes\'"'),  # single quotes are ignored
-        # ('string with double "quotes"', 'string with double "quotes"'),  # embedded double quotes get escaped
-        # (('string in parens is not a tuple'), '"string in parens is not a tuple"'),  # noqa - Remove Rednundant Parens
-        # (('string in a tuple',), '"string in a tuple"'),  # the comma on the end forces a tuple of one thing
-    ]
-    table_tups = []
-    row = -1
-    for args, expected in args_expected_tups:
-        row += 1
-        table_tups.append((row, 'args', args))
-        repr_x = expect.repr_x(args)
-        table_tups.append((row, 'pf(args)', pprint.pformat(args)))
-        table_tups.append((row, 'pf(repr_x(args))', pprint.pformat(repr_x)))
-        table_tups.append((row, 'repr_x(args)', repr_x))
-        table_tups.append((row, 'TEST', 'pass' if expected == repr_x else 'FAIL'))
-        table_tups.append((row, 'expected', expected))
-        table_tups.append((row, 'RESULT', pprint.pformat(repr_x) == pprint.pformat(args)))
-    # t = table.Table(table_tups)
-    print()
-    # print(t.pf('row'))
-    print_caplog(caplog)
 
 
 def test_enable_passwordless_sudo(caplog):
@@ -164,12 +136,88 @@ def print_caplog(x, startswith=''):
         print('\t' + line)
 
 
+BEFORE = '''@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@       WARNING: POSSIBLE DNS SPOOFING DETECTED!          @
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+The ECDSA host key for hostname has changed,
+
+and the key for the corresponding IP address 10.0.1.10
+
+is unknown. This could either mean that
+
+DNS SPOOFING is happening or the IP address for the host
+
+and its host key have changed at the same time.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+
+It is also possible that a host key has just been changed.
+
+The fingerprint for the ECDSA key sent by the remote host is
+SHA256:qEUuq22o4TcnqUqVRhUKL/vhx8pSb1LSGZS/AudZxn4.
+
+Please contact your system administrator.
+
+Add correct host key in /Users/mfm/.ssh/known_hosts to get rid of this message.
+
+Offending ECDSA key in /Users/mfm/.ssh/known_hosts:1
+
+ECDSA host key for hostname has changed and you have requested strict checking.'''
+
+
 def test_cred_spawn_ssh(caplog):
     caplog.set_level(0)
-    spawn_ssh = expect.CredSpawn('ssh username@hostname', **TEST_CREDS_DICT)
+    spawn_ssh = expect.CredSpawn("ssh username@hostname", **TEST_CREDS_DICT)
+    # Here the prompt must be waiting for input...
+    spawn_ssh.expect([expect.TIMEOUT], timeout=1)
+    banner = spawn_ssh.get_before_lines()
+
+    # lines = spawn_ssh.get_before_lines()
     prompt = spawn_ssh.get_prompt()
     spawn_ssh.expect(prompt, timeout=1)
     spawn_ssh.sendline('uname -a')
     spawn_ssh.expect(prompt, timeout=1)
+    lines = spawn_ssh.get_before_lines()
+    assert lines == [
+        'uname -a',
+        'Linux u20045 5.4.0-146-generic #163-Ubuntu SMP Fri Mar 17 18:26:02 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux',
+        '']
     logging.debug('SpawnSSH READY')
+    print_caplog(caplog)
+
+
+def test_cred_spawn_bash(caplog):
+    caplog.set_level(0)
+    bash = expect.CredSpawn('bash', password=TEST_CREDS_DICT['password'])
+    prompt = bash.get_prompt()
+    bash.sendline('uname -a')
+    bash.expect(prompt, timeout=1)
+    bash.sendline('exit')
+    bash.expect(expect.EOF, timeout=1)
+    status = bash.get_status()
+    assert status == 0
+    print_caplog(caplog)
+
+
+def test_cred_spawn_bash_lscpu(caplog):
+    caplog.set_level(0)
+    bash = expect.CredSpawn('bash', password=TEST_CREDS_DICT['password'])
+    prompt = bash.get_prompt()
+    bash.sendline('lscpu')
+    bash.expect(prompt, timeout=1)
+    bash.sendline('exit')
+    bash.expect(expect.EOF, timeout=1)
+    status = bash.get_status()
+    assert status == 0
     print_caplog(caplog)
