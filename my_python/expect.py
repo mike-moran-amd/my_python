@@ -25,14 +25,36 @@ LOCAL_CREDS = {
 
 
 def pattern_for_expect(pattern: str) -> str:
-    retval = pattern
+    """
+    Escape regex characters for expect pattern strings.
+
+    >>> pattern_for_expect('abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789')
+    'abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789'
+
+    >>> pattern_for_expect('?')
+    '\\\\?'
+
+    >>> pattern_for_expect('[')
+    '\\\\['
+
+    >>> pattern_for_expect(']')
+    '\\\\]'
+
+    >>> pattern_for_expect('(')
+    '\\\\('
+
+    >>> pattern_for_expect(')')
+    '\\\\)'
+
+    """
+    result = pattern
     # These symbols have special meanings in regular expression pattern matching and must be "escaped"
-    retval = retval.replace('?', '\\?')
-    retval = retval.replace('[', '\\[')
-    retval = retval.replace(']', '\\]')
-    retval = retval.replace('(', '\\(')
-    retval = retval.replace(')', '\\)')
-    return retval
+    result = result.replace('?', '\\?')
+    result = result.replace('[', '\\[')
+    result = result.replace(']', '\\]')
+    result = result.replace('(', '\\(')
+    result = result.replace(')', '\\)')
+    return result
 
 
 class Spawn:
