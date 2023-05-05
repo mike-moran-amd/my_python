@@ -1,11 +1,50 @@
 import logging
 from my_python import expect
 
+HOSTNAME = 'hostname'
+USERNAME = 'username'
+PASSWORD = 'password'
+
 TEST_CREDS_DICT = {
-    'hostname': 'hostname',
-    'username': 'username',
-    'password': 'password',
+    'hostname': HOSTNAME,
+    'username': USERNAME,
+    'password': PASSWORD,
 }
+
+
+def print_caplog(x, startswith=''):
+    print('\nCAPLOG:')
+    for line in x.messages:
+        if startswith and not line.startswith(startswith):
+            continue
+        print(' '*4 + line)
+
+
+def test_spawn_uname(caplog):
+    caplog.set_level(0)  # capture all log messages
+    spawn = expect.Spawn('uname -a')
+    assert repr(spawn) == 'pexpect.spawn((\'uname -a\',), )'
+    spawn.expect(expect.EOF)
+    lines = spawn.get_before_lines()
+    assert len(lines) == 2
+    status = spawn.get_status()
+    assert status == 0
+    print_caplog(caplog)
+    ''' should look something like
+    SPAWN.INVOKE pexpect.spawn(('uname -a',), )
+    NDX = SPAWN.EXPECT((EOF,), )
+      0 = EOF
+    GET BEFORE LINES: ['Darwin Mikes-MacBook-Pro.local 20.6.0 Darwin Kernel Version 20.6.0: Tue Jun 21 20:50:28 PDT 2022; root:xnu-7195.141.32~1/RELEASE_X86_64 x86_64', '']
+    SPAWN.STATUS: 0
+    '''
+
+
+def test_expect_spawn_bash(caplog):
+    caplog.set_level(0)  # Everything
+    spawn = expect.Spawn('bash')
+    repr_spawn = repr(spawn)
+    assert repr_spawn == 'pexpect.spawn((\'bash\',), )'
+    print_caplog(caplog)
 
 
 def test_run_command(caplog):
@@ -127,13 +166,6 @@ def test_pexpect_spawn_ssh(caplog):
     assert spawn.before == b'echo $?\r\n0\r\nusername@u20045:~$ exit\r\nlogout\r\nConnection to hostname closed.\r\r\n'
     print_caplog(caplog)
 
-
-def print_caplog(x, startswith=''):
-    print('\nCAPLOG:')
-    for line in x.messages:
-        if startswith and not line.startswith(startswith):
-            continue
-        print('\t' + line)
 
 
 BEFORE = '''@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

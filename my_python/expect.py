@@ -59,9 +59,13 @@ def pattern_for_expect(pattern: str) -> str:
 
 class Spawn:
     """
+    Use Spawn() for simple commands that do not prompt for passwords or use redirection or pipes
+
     If you need to PIPE, REDIRECT or replace $parameters, then you need to run bash:
         spawn = Spawn('/bin/bash -c "ls -l | grep LOG > logs.txt"')
         spawn.expect(EOF)
+
+    For more complex needs consider using CredSpawn()
     """
 
     def __init__(self, *args, **kw):
@@ -120,7 +124,7 @@ class Spawn:
     def get_before_lines(self):
         try:
             lines = self.pexpect_spawn.before.decode(encoding='utf-8').split('\r\n')
-            logging.debug(f'GET BEFORE LINES: \n{pprint.pformat(lines, width=200)}\n')
+            logging.debug(f'GET BEFORE LINES: {pf(lines)}')
             return lines
         except AttributeError:
             return list()
