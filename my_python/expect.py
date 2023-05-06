@@ -95,9 +95,9 @@ class Spawn:
 
     def expect(self, *args, **kw):
         s = f"({pf(args)}, {', '.join([f'{k}={pf(v)}' for k, v in kw.items()])})"
-        logging.debug(f'NDX = SPAWN.EXPECT{s}')
+        logging.debug(f'SPAWN.NDX = SPAWN.EXPECT{s}')
         ndx = self.pexpect_spawn.expect(*args, **kw)
-        logging.debug(f'  {ndx} = {pf(self.pexpect_spawn.match)}')
+        logging.debug(f'SPAWN#  {ndx} = {pf(self.pexpect_spawn.match)}')
         return ndx
 
     def sendline(self, s=''):
@@ -124,7 +124,7 @@ class Spawn:
     def get_before_lines(self):
         try:
             lines = self.pexpect_spawn.before.decode(encoding='utf-8').split('\r\n')
-            logging.debug(f'GET BEFORE LINES: {pf(lines)}')
+            logging.debug(f'SPAWN.LINES({len(lines)}): {pf(lines)}')
             return lines
         except AttributeError:
             return list()

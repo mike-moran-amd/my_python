@@ -29,14 +29,15 @@ def test_spawn_uname(caplog):
     assert len(lines) == 2
     status = spawn.get_status()
     assert status == 0
-    print_caplog(caplog)
+    print_caplog(caplog, 'SPAWN')
     ''' should look something like
-    SPAWN.INVOKE pexpect.spawn(('uname -a',), )
-    NDX = SPAWN.EXPECT((EOF,), )
-      0 = EOF
-    GET BEFORE LINES: ['Darwin Mikes-MacBook-Pro.local 20.6.0 Darwin Kernel Version 20.6.0: Tue Jun 21 20:50:28 PDT 2022; root:xnu-7195.141.32~1/RELEASE_X86_64 x86_64', '']
-    SPAWN.STATUS: 0
-    '''
+    CAPLOG:
+        SPAWN.INVOKE pexpect.spawn(('uname -a',), )
+        SPAWN.NDX = SPAWN.EXPECT((EOF,), )
+        SPAWN#  0 = EOF
+        SPAWN.LINES(2): ['Darwin Mikes-MacBook-Pro.local 20.6.0 Darwin Kernel Version 20.6.0: Tue Jun 21 20:50:28 PDT 2022; root:xnu-7195.141.32~1/RELEASE_X86_64 x86_64', '']
+        SPAWN.STATUS: 0
+    ''' # noqa
 
 
 def test_expect_spawn_bash(caplog):
