@@ -59,15 +59,13 @@ def pattern_for_expect(pattern: str) -> str:
 
 class Spawn:
     """
-    Use Spawn() for simple commands that do not prompt for passwords or use redirection or pipes
+    Use Spawn() for simple commands that do not prompt for passwords or permission
 
     If you need to PIPE, REDIRECT or replace $parameters, then you need to run bash:
         spawn = Spawn('/bin/bash -c "ls -l | grep LOG > logs.txt"')
-        spawn.expect(EOF)
 
-    For more complex needs consider using CredSpawn()
+    For more complex needs use CredSpawn()
     """
-
     def __init__(self, *args, **kw):
         self.args = args
         self.kw = kw
@@ -149,7 +147,7 @@ class Spawn:
 
 class CredSpawn(Spawn):
     """
-    Provides credentials for Spawn expect() commands
+    Handle SSH negotiation by sending requested credentials and permission replies.
     """
     def __init__(
             self,
@@ -202,7 +200,6 @@ class CredSpawn(Spawn):
         self.retry()
 
     def handle_authenticity_of_host_challenge(self):
-        #pattern = pattern_for_expect('Are you sure you want to continue connecting (yes/no/[fingerprint])? ')
         pattern = pattern_for_expect('continue connecting (yes/no/[fingerprint])? ')
         if 0 == self.expect([pattern, TIMEOUT], timeout=1):
             logging.debug("handle_authenticity_of_host_challenge")

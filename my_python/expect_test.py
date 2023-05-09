@@ -20,6 +20,20 @@ def print_caplog(x, startswith=''):
         print(' '*4 + line)
 
 
+def test_spawn_pipe_redirect_example(caplog):
+    caplog.set_level(0)  # capture all log messages
+
+    spawn = expect.Spawn('bash -c "ls -l | grep LOG > /dev/null"')
+    spawn.expect(expect.EOF)
+    assert spawn.get_status() == 256  # nothing from grep return code
+
+    spawn = expect.Spawn('bash -c "ls -l | grep log > /dev/null"')
+    spawn.expect(expect.EOF)
+    assert spawn.get_status() == 0  # log.py matches
+
+    print_caplog(caplog)
+
+
 def test_spawn_uname(caplog):
     caplog.set_level(0)  # capture all log messages
     spawn = expect.Spawn('uname -a')
@@ -30,14 +44,6 @@ def test_spawn_uname(caplog):
     status = spawn.get_status()
     assert status == 0
     print_caplog(caplog, 'SPAWN')
-    ''' should look something like
-    CAPLOG:
-        SPAWN.INVOKE pexpect.spawn(('uname -a',), )
-        SPAWN.NDX = SPAWN.EXPECT((EOF,), )
-        SPAWN#  0 = EOF
-        SPAWN.LINES(2): ['Darwin Mikes-MacBook-Pro.local 20.6.0 Darwin Kernel Version 20.6.0: Tue Jun 21 20:50:28 PDT 2022; root:xnu-7195.141.32~1/RELEASE_X86_64 x86_64', '']
-        SPAWN.STATUS: 0
-    ''' # noqa
 
 
 def test_expect_spawn_bash(caplog):
