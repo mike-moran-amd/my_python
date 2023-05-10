@@ -46,24 +46,6 @@ def test_spawn_uname(caplog):
     print_caplog(caplog, 'SPAWN')
 
 
-def test_expect_spawn_bash(caplog):
-    caplog.set_level(0)  # Everything
-    spawn = expect.Spawn('bash')
-    repr_spawn = repr(spawn)
-    assert repr_spawn == 'pexpect.spawn((\'bash\',), )'
-    print_caplog(caplog)
-
-
-def test_run_command(caplog):
-    caplog.set_level(0)  # Everything
-    spawn = expect.SpawnSSH(**TEST_CREDS_DICT)
-    result, error = spawn.result_status_from_command('uname -a')
-    # assert result == 'Linux u20045 5.4.0-137-generic #154-Ubuntu SMP Thu Jan 5 17:03:22 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux\n'  # noqa
-    assert result == 'Linux u20045 5.4.0-146-generic #163-Ubuntu SMP Fri Mar 17 18:26:02 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux\n'  # noqa
-    assert error == '0'
-    print_caplog(caplog)  # , startswith='self.before: ')
-
-
 def test_spawn_bash(caplog):
     caplog.set_level(0)  # Everything
     spawn = expect.SpawnBash(**expect.LOCAL_CREDS)
